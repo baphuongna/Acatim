@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.Service.UserService;
 import com.acatim.acatimver1.model.User;
+import com.acatim.acatimver1.service.UserService;
 
 @Controller
 public class LoginController {
