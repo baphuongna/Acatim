@@ -45,7 +45,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="oi oi-menu"></span> Menu
       </button>
-
+<form th:action="@{/registration}" method="get">
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
@@ -55,9 +55,16 @@
           <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="event.html" class="nav-link">Events</a></li>
           <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Apply Now!</span></a></li>
+          
+          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>
+				
+    				<button type="Submit">Registration Now!</button>
+			
+			</span></a></li>
+			
         </ul>
       </div>
+      </form>
     </div>
   </nav>
     <!-- END nav -->
@@ -78,9 +85,7 @@
 			
 			
 			
-			<form th:action="@{/registration}" method="get">
-    <button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
-</form>
+			
 
 <div class="container">
     <form th:action="@{/login}" method="POST" class="form-signin">
