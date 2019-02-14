@@ -34,6 +34,41 @@ public class LoginController {
         return modelAndView;
     }
     
+    @RequestMapping(value={"/course"}, method = RequestMethod.GET)
+    public ModelAndView course(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("course");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value={"/teacher"}, method = RequestMethod.GET)
+    public ModelAndView teacher(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("teacher");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value={"/blog"}, method = RequestMethod.GET)
+    public ModelAndView blog(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("blog");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value={"/event"}, method = RequestMethod.GET)
+    public ModelAndView event(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("event");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value={"/contact"}, method = RequestMethod.GET)
+    public ModelAndView contact(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("contact");
+        return modelAndView;
+    }
+    
 	/*
 	 * @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET) public
 	 * ModelAndView login(){ ModelAndView modelAndView = new ModelAndView();
