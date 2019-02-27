@@ -10,7 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
 	
     <link rel="stylesheet" type="text/css" href="@{/css/open-iconic-bootstrap.min.css}">
     <link rel="stylesheet" href="css/animate.css">
@@ -39,7 +38,7 @@
     
   </head>
   <body>
-    <div th:insert="/menu :: menu"></div>
+   <div th:insert="/menu :: menu"></div>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/bg_1.jpg'); background-attachment:fixed;">
@@ -76,6 +75,7 @@
 							<button class="btn btn-lg btn-primary btn-block" name="Submit"
 								value="Login" type="Submit" th:text="Login"></button>
 						</form>
+						<a href="registration.html" th:href="@{/registration}">register</a>
 					</div>
 
 
