@@ -69,10 +69,10 @@ public class LoginController {
         return modelAndView;
     }
     
-    @RequestMapping(value={"/profile"}, method = RequestMethod.GET)
-    public ModelAndView profile(){
+    @RequestMapping(value={"/profileS"}, method = RequestMethod.GET)
+    public ModelAndView profileS(){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("profile");
+        modelAndView.setViewName("profileS");
         return modelAndView;
     }
     
