@@ -9,6 +9,5 @@ public class Acatimver1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Acatimver1Application.class, args);
 	}
-
 }
 

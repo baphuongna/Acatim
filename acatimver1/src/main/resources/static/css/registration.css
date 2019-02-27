@@ -1,5 +1,33 @@
+@import
+	url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css)
+	;
+
+@import
+	url(https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.3/css/mdb.min.css)
+	;
+
 .validation-message {
-    font-style: normal;
-    font-size: 12px;
-    color: #FF1C19;
+	font-style: normal;
+	font-size: 12px;
+}
+
+.col-lg-8 {
+	border: 2px solid;
+	margin-top: 20px;
+}
+
+.col-lg-6 h2 {
+	font-size: 50px;
+	font-weight: bold;
+	margin-left: 35px;
+	margin-bottom: 22px;
+}
+
+.glyphicon{
+	margin-right: 10px;
+}
+
+.btn-block {
+	font-size:10px !important;
+	width: 40% !important;
 }

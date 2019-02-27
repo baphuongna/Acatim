@@ -1,19 +1,20 @@
 .wrapper {
+	background-color:red;
     margin-top: 80px;
     margin-bottom: 20px;
 }
 
 .form-signin {
-    max-width: 420px;
+    max-height: 383px;
+    max-width: 370px;
     padding: 30px 38px 66px;
     margin: 0 auto;
-    background-color: #eee;
-    border: 3px dotted rgba(0,0,0,0.1);
 }
 
 .form-signin-heading {
+	font-size:27px;
     text-align:center;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
 }
 
 .form-control {
@@ -24,13 +25,11 @@
 }
 
 input[type="text"] {
+	border-radius:10px;
     margin-bottom: 0px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 
 input[type="password"] {
     margin-bottom: 20px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-radius:10px;
 }
