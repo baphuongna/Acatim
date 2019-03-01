@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org" 
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -46,8 +52,8 @@
 				<nav class="navbar padding-bottom-0 width-full nonShadow">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index.html"><i
-							class="flaticon-university"></i>Acatim <br>
-						<small>Find your knowledge</small></a>
+							class="flaticon-university"></i>Acatim <br> <small>Find
+								your knowledge</small></a>
 						<button class="navbar-toggler" type="button"
 							data-toggle="collapse" data-target="#ftco-nav"
 							aria-controls="ftco-nav" aria-expanded="false"
@@ -304,12 +310,15 @@
 									data-toggle="dropdown" role="button" aria-expanded="false">Tài
 										khoản cá nhân </a>
 									<ul class="dropdown-menu" role="menu">
-										<li><a href="profileS.html" th:href="@{/profileS}">Trang cá nhân</a></li>
+										<li><a href="profileS.html" th:href="@{/profileS}">Trang
+												cá nhân</a></li>
 										<li><a href="#">Thông tin cá nhân</a></li>
 										<li><a href="#">Cài đặt</a></li>
 										<li class="divider"></li>
 										<li><a href="#">Đăng xuất</a></li>
 									</ul></li>
+								<a href="#myModal" role="button" class="btn btn-primary"
+									data-toggle="modal">Registration</a>
 							</ul>
 						</div>
 						<!-- /.nav-collapse -->
