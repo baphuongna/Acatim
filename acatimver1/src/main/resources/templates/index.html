@@ -79,7 +79,7 @@
 
 
 					<!-- Show popup dialog -->
-
+	
 					<div th:insert="/registration :: registration" id="myModal"
 						class="modal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true"></div>
@@ -87,10 +87,10 @@
 					<!-- module login -->
 
 					<div class="container">
-						<form th:action="@{/login}" method="POST" class="form-signin">
+						<form th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
 							<h3 class="form-signin-heading" th:text="Welcome"></h3>
-							<br /> <input type="text" id="email" name="email"
-								th:placeholder="Email" class="form-control" /> <br /> <input
+							<br /> <input type="text" id="username" name="username"
+								th:placeholder="Username" class="form-control" /> <br /> <input
 								type="password" th:placeholder="Password" id="password"
 								name="password" class="form-control" /> <br />
 
