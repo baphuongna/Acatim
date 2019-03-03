@@ -67,7 +67,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/j_spring_security_check") // Submit URL
                 .loginPage("/index")//
                 .defaultSuccessUrl("/profileS")//
-                .failureUrl("/403Page?error=true")//
+                .failureUrl("/index?error=true")//
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.

@@ -18,13 +18,17 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "User", //
 uniqueConstraints = { //
-        @UniqueConstraint(name = "USER_UK", columnNames = {"User_Name", "email"}) })
+        @UniqueConstraint(name = "USER_UK", columnNames = {"user_name", "email"}) })
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     private int id;
+    
+    @Column(name = "user_name")
+    @NotEmpty(message = "*Please provide your user name")
+    private String userName;
     
     @Column(name = "full_name")
     @NotEmpty(message = "*Please provide your full name")
@@ -34,10 +38,7 @@ public class UserModel {
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
-    
-    @Column(name = "user_name")
-    @NotEmpty(message = "*Please provide your user name")
-    private String userName;
+   
     
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
@@ -55,7 +56,7 @@ public class UserModel {
     @Column(name = "address")
     @NotEmpty(message = "*Please provide your address")
     private String address;
-   
+    
     @Column(name = "active")
     private boolean active;
     

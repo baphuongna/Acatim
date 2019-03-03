@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "role", //
+@Table(name = "Role", //
 uniqueConstraints = { //
         @UniqueConstraint(name = "ROLE_UK", columnNames = "role_name") })
 public class Role {
