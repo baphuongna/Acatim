@@ -10,4 +10,3 @@ public class Acatimver1Application {
 		SpringApplication.run(Acatimver1Application.class, args);
 	}
 }
-

@@ -16,8 +16,6 @@
 <link
 	href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css"
 	rel="stylesheet" />
-
-
 </head>
 <style>
 </style>
@@ -142,7 +140,8 @@
 													placeholder="Confirm Password *" value="" />
 											</div>
 											<div class="form-group">
-												  <input type="text" class="form-control" name="term" id="search_term" placeholder="Search thriftstores" value="<% if (locals.term){ %><%=term %><% } %>">
+												   <input type="password" class="form-control"
+													placeholder="Confirm Password *" value="" />
 											</div>
 											<div class="form-group">
 												<input type="text" class="form-control"
@@ -161,16 +160,8 @@
 				</div>
 			</div>
 		</div>
-
-		<script>
-			function activePlacesSearch() {
-				var input = document.getElementById('search_term');
-				var autocomplete = new google.maps.places.Autocomplete(input);
-			}
-		</script>
 		<script src="js/registration.js"></script>
-		<script type="text/javascript"
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwJHjabk2R63DHa2g34IPVBqDxvy9xQgs &libraries=places&callback=activePlacesSearch"></script>
+		
 	</div>
 </body>
 </html>
