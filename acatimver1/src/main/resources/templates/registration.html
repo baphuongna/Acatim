@@ -37,8 +37,8 @@
 									id="home-tab" data-toggle="tab" href="#home"
 									onclick="changeTab(event, 'home')" role="tab"
 									aria-controls="home" aria-selected="true">Học sinh</a></li>
-								<li class="nav-item"><a class="nav-link"
-								 id="teacher-tab" data-toggle="tab" href="#teacher"
+								<li class="nav-item"><a class="nav-link" id="teacher-tab"
+									data-toggle="tab" href="#teacher"
 									onclick="changeTab(event, 'teacher')" role="tab"
 									aria-controls="teacher" aria-selected="false">Giáo viên</a></li>
 								<li class="nav-item"><a class="nav-link" id="profile-tab"
@@ -49,7 +49,7 @@
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade in active" id="home" role="tabpanel"
 									aria-labelledby="home-tab">
-									<h3 class="register-heading">Bạn là học sinh</h3>
+									<h3 class="register-heading">Bạn là Học Sinh</h3>
 									<div class="row register-form">
 										<div class="col-md-6">
 											<div class="form-group">
@@ -65,7 +65,7 @@
 													placeholder="Mật khẩu *" value="" />
 											</div>
 											<div class="form-group">
-												<input type="password" class="form-control"
+													<input type="password" class="form-control"
 													placeholder="Nhập lại mật khẩu *" value="" />
 											</div>
 											<div class="form-group">
@@ -90,23 +90,18 @@
 													placeholder="Số điện thoại" value="" />
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
-											</div>
-											<div class="form-group">
-												<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
+												<div class="autocomplete">
+													<input id="myInput" type="text" name="myCountry"
+														class="form-control" placeholder="Địa chỉ">
+												</div>
 											</div>
 											<div>
 												<input type="submit" class="btnRegister" value="Register" />
 											</div>
-
 										</div>
 									</div>
 								</div>
-								
-								
-									<div class="tab-pane fade in active" id="teacher" role="tabpanel"
+								<div class="tab-pane fade" id="teacher" role="tabpanel"
 									aria-labelledby="teacher-tab">
 									<h3 class="register-heading">Bạn là Giáo Viên</h3>
 									<div class="row register-form">
@@ -149,12 +144,10 @@
 													placeholder="Số điện thoại *" value="" />
 											</div>
 											<div class="form-group">
-											<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
-											</div>
-											<div class="form-group">
-												<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
+												<div class="autocomplete">
+													<input id="myInput1" type="text" name="myCountry"
+														class="form-control" placeholder="Địa chỉ">
+												</div>
 											</div>
 											<div>
 												<input type="submit" class="btnRegister" value="Register" />
@@ -163,8 +156,7 @@
 										</div>
 									</div>
 								</div>
-								
-						 <div class="tab-pane fade in active" id="profile" role="tabpanel"
+								<div class="tab-pane fade" id="profile" role="tabpanel"
 									aria-labelledby="profile-tab">
 									<h3 class="register-heading">Bạn là Trung Tâm</h3>
 									<div class="row register-form">
@@ -207,12 +199,10 @@
 													placeholder="Số điện thoại *" value="" />
 											</div>
 											<div class="form-group">
-											<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
-											</div>
-											<div class="form-group">
-												<input type="text" class="form-control"
-													placeholder="Địa chỉ" value="" />
+												<div class="autocomplete">
+													<input id="myInput2" type="text" name="myCountry"
+														class="form-control" placeholder="Địa chỉ">
+												</div>
 											</div>
 											<div>
 												<input type="submit" class="btnRegister" value="Register" />
