@@ -19,8 +19,8 @@ public class UserDAO {
  
     public UserModel findUserAccount(String userName) {
         try {
-            String sql = "Select e from User e " //
-                    + " Where e.user_name = :userName ";
+            String sql = "Select e from UserModel e " //
+                    + " Where e.userName = :userName ";
  
             Query query = entityManager.createQuery(sql, UserModel.class);
             query.setParameter("userName", userName);
