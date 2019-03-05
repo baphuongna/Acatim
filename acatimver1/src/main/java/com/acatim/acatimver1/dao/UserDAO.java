@@ -1,33 +1,36 @@
 package com.acatim.acatimver1.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.mapper.UserMapper;
 import com.acatim.acatimver1.model.UserModel;
 
 @Repository
 @Transactional
-public class UserDAO {
+public class UserDAO extends JdbcDaoSupport {
 
-    @Autowired
-    private EntityManager entityManager;
+	@Autowired
+    public UserDAO(DataSource dataSource) {
+        this.setDataSource(dataSource);
+    }
+
+	public UserModel findUserAccount(String userName) {
+            String sql = UserMapper.BASE_SQL + " where u.User_Name = ? ";
  
-    public UserModel findUserAccount(String userName) {
-        try {
-            String sql = "Select e from UserModel e " //
-                    + " Where e.userName = :userName ";
- 
-            Query query = entityManager.createQuery(sql, UserModel.class);
-            query.setParameter("userName", userName);
- 
-            return (UserModel) query.getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+            Object[] params = new Object[] { userName };
+            UserMapper mapper = new UserMapper();
+            try {
+            	UserModel userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+                return userInfo;
+            } catch (EmptyResultDataAccessException e) {
+                return null;
+            }
+
     }
 }
