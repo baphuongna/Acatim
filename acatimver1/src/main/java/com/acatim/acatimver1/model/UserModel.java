@@ -16,48 +16,35 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "User", //
-uniqueConstraints = { //
-        @UniqueConstraint(name = "USER_UK", columnNames = {"user_name", "email"}) })
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
     private int id;
     
-    @Column(name = "user_name")
     @NotEmpty(message = "*Please provide your user name")
     private String userName;
     
-    @Column(name = "full_name")
     @NotEmpty(message = "*Please provide your full name")
     private String fullName;
     
-    @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;
    
-    
-    @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*Please provide your password")
     private String password;
     
-    @Column(name = "create_date")
     @NotEmpty(message = "*Please provide your create date")
     private String createDate;
     
-    @Column(name = "phone")
     @NotEmpty(message = "*Please provide your phone")
     private String phone;
     
-    @Column(name = "address")
     @NotEmpty(message = "*Please provide your address")
     private String address;
     
-    @Column(name = "active")
     private boolean active;
     
 //    @ManyToMany(cascade = CascadeType.ALL)
