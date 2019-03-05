@@ -50,12 +50,12 @@ public class MainController {
         // Sau khi user login thanh cong se co principal
         String userName = principal.getName();
  
-       // System.out.println("User Name: " + userName);
+        System.out.println("User Name: " + userName);
  
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
  
         String userInfo = WebUtils.toString(loginedUser);
-       // model.addAttribute("userInfo", userInfo);
+        model.addAttribute("userInfo", userInfo);
  
         return "profileS";
     }
@@ -68,7 +68,7 @@ public class MainController {
  
             String userInfo = WebUtils.toString(loginedUser);
  
-           // model.addAttribute("userInfo", userInfo);
+            model.addAttribute("userInfo", userInfo);
  
             String message = "Hi " + principal.getName() //
                     + "<br> You do not have permission to access this page!";
