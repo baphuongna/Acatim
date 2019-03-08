@@ -19,12 +19,12 @@ public class RoleDAO  extends JdbcDaoSupport {
         this.setDataSource(dataSource);
     }
  
-    public List<String> getRoleNames(int i) {
+    public List<String> getRoleNames(String id) {
         String sql = "Select r.role_name " //
-                + " from User_Role ur, Role r " //
-                + " where ur.role_id = r.role_id and ur.user_id = ? ";
+                + " from User ur, Role r " //
+                + " where ur.role_id = r.role_id and ur.user_name = ? ";
  
-        Object[] params = new Object[] { i };
+        Object[] params = new Object[] { id };
  
         List<String> roles = this.getJdbcTemplate().queryForList(sql, params, String.class);
  

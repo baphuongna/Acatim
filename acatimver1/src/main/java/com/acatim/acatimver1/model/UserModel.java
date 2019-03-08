@@ -19,11 +19,10 @@ import javax.validation.constraints.NotEmpty;
 public class UserModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    
     @NotEmpty(message = "*Please provide your user name")
     private String userName;
+    
+    private int role_id;
     
     @NotEmpty(message = "*Please provide your full name")
     private String fullName;

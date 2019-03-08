@@ -14,8 +14,9 @@ public class UserMapper implements RowMapper<UserModel> {
 	@Override
 	public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-		int id = rs.getInt("user_id");
+		
 		String userName = rs.getString("user_name");
+		int roleId = rs.getInt("role_id");
 		String fullName = rs.getString("full_name");
 		String email = rs.getString("email");
 		String password = rs.getString("password");
@@ -24,6 +25,6 @@ public class UserMapper implements RowMapper<UserModel> {
 		String address = rs.getString("address");
 		boolean active = rs.getBoolean("active");
 		
-		return new UserModel(id, userName, fullName, email, password, createDate, phone, address, active);
+		return new UserModel(userName, roleId, fullName, email, password, createDate, phone, address, active);
 	}
 }
