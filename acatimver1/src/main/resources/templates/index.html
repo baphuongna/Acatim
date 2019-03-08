@@ -86,18 +86,23 @@
 
 					<!-- module login -->
 
-					<div class="container">
+					<div class="container" th:if="${#request.userPrincipal == null}">
 						<form th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
 							<h3 class="form-signin-heading" th:text="Welcome"></h3>
 							<br /> <input type="text" id="username" name="username"
 								th:placeholder="Username" class="form-control" /> <br /> <input
 								type="password" th:placeholder="Password" id="password"
 								name="password" class="form-control" /> <br />
-
+							
 							<div align="center" th:if="${param.error}">
 								<p style="font-size: 20; color: #FF1C19;">Email or Password
 									invalid, please verify</p>
 							</div>
+							<div style="display: flex; align-items: flex-start; left: 3px; top: -17px; position: relative;">
+							 <input type="checkbox" name="remember-me" style="display: flex; justify-content: flex-start;">
+							  <h6 style="position: relative; left: 7px; top: -6px;"> Remember Me? </h6>
+							  </div>
+							
 							<button class="btn btn-lg btn-primary btn-block" name="Submit"
 								value="Login" type="Submit" th:text="Login"></button>
 						</form>

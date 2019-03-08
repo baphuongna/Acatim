@@ -44,21 +44,21 @@ public class MainController {
 //        return "index";
 //    }
  
-    @RequestMapping(value = "/profileStudent", method = RequestMethod.GET)
-    public String userInfo(Model model, Principal principal) {
- 
-        // Sau khi user login thanh cong se co principal
-        String userName = principal.getName();
- 
-        System.out.println("User Name: " + userName);
- 
-        User loginedUser = (User) ((Authentication) principal).getPrincipal();
- 
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
- 
-        return "profileS";
-    }
+//    @RequestMapping(value = "/profileS", method = RequestMethod.GET)
+//    public String userInfo(Model model, Principal principal) {
+// 
+//        // Sau khi user login thanh cong se co principal
+//        String userName = principal.getName();
+// 
+//        System.out.println("User Name: " + userName);
+// 
+//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
+// 
+//        String userInfo = WebUtils.toString(loginedUser);
+//        model.addAttribute("userInfo", userInfo);
+// 
+//        return "profileS";
+//    }
  
     @RequestMapping(value = "/403", method = RequestMethod.GET)
     public String accessDenied(Model model, Principal principal) {
@@ -79,6 +79,18 @@ public class MainController {
         return "403Page";
     }
     
+    @RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
+    public String logoutSuccessfulPage(Model model) {
+    	model.addAttribute("title", "Logout");
+        return "index";
+    }
+    
+    @RequestMapping(value={"/profileS"}, method = RequestMethod.GET)
+    public ModelAndView profileS(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("profileS");
+        return modelAndView;
+    }
 
     @RequestMapping(value={"/about"}, method = RequestMethod.GET)
     public ModelAndView about(){

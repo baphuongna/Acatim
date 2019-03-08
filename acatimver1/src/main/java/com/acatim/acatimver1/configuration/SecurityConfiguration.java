@@ -51,8 +51,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
  
         // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-        http.authorizeRequests().antMatchers("/index").access("hasAnyRole('Student', 'Teacher','Study Center','Manager')");
- 
+        http.authorizeRequests().antMatchers("/profileS").access("hasAnyRole('Student', 'Teacher','Study Center','Manager')");
+        
+//        http.authorizeRequests().antMatchers("/profileS").access("hasRole('Student')");
         // Trang chỉ dành cho ADMIN
 //        http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
  
@@ -71,7 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")//
                 .passwordParameter("password")
                 // Cấu hình cho Logout Page.
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/index");
+                .and().logout().logoutUrl("/Logout").logoutSuccessUrl("/logoutSuccessful");
  
         // Cấu hình Remember Me.
         http.authorizeRequests().and() //
