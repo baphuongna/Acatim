@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.acatim.acatimver1.service.UserDetailsServiceImpl;
+import com.acatim.acatimver1.service.UserInfoServiceImpl;
 
 import javax.sql.DataSource;
 
@@ -22,6 +23,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
+    
+    @Autowired
+    private UserInfoServiceImpl userInfoService;
 
     @Autowired
     private DataSource dataSource;
@@ -47,16 +51,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	
     	// Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers("/", "/index", "/registration", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/", "/index").permitAll();
  
         // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-        http.authorizeRequests().antMatchers("/profileS").access("hasAnyRole('Student', 'Teacher','Study Center','Manager')");
-        
-//        http.authorizeRequests().antMatchers("/profileS").access("hasRole('Student')");
+	//        http.authorizeRequests().antMatchers("/profileS").access("hasAnyRole('Student', 'Teacher','Study Center','Manager')");
+	//        
+	//        http.authorizeRequests().antMatchers("/profileS").access("hasRole('Student')");
         // Trang chỉ dành cho ADMIN
 //        http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
- 
+        http.authorizeRequests().antMatchers("/profileS").hasAnyAuthority("Student","Teacher", "Study Center", "Manager");
         // Khi người dùng đã login, với vai trò XX.
         // Nhưng truy cập vào trang yêu cầu vai trò YY,
         // Ngoại lệ AccessDeniedException sẽ ném ra.

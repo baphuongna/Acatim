@@ -74,8 +74,8 @@
                     <div class="user-info">
                         <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                         <ul class="meta list list-unstyled">
-                            <li class="name">Rebecca Sanders
-                                <label class="label label-info">UX Designer</label>
+                            <li class="name"><span th:utext="${#request.userPrincipal.name}"></span>
+                                <label class="label label-info" th:if="${userInfo != null}" th:utext="${userInfo}"></label>
                             </li>
                             <li class="email"><a href="#">Rebecca.S@website.com</a></li>
                             <li class="activity">Last logged in: Today at 2:18pm</li>
