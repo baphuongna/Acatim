@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.rememberme.JdbcTokenRepos
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import com.acatim.acatimver1.service.UserDetailsServiceImpl;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
 
 import javax.sql.DataSource;
 
@@ -23,9 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
-    
-    @Autowired
-    private UserInfoServiceImpl userInfoService;
 
     @Autowired
     private DataSource dataSource;
