@@ -123,6 +123,23 @@ public class MainController {
         return modelAndView;
     }
     
+    
+    @RequestMapping(value={"/rating"}, method = RequestMethod.GET)
+    public ModelAndView rating(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("rating");
+        return modelAndView;
+    }
+    
+    @RequestMapping(value={"/registration"}, method = RequestMethod.GET)
+    public ModelAndView registration(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("registration");
+        return modelAndView;
+    }
+    
+    
+    
     @RequestMapping(value={"/blog"}, method = RequestMethod.GET)
     public ModelAndView blog(){
         ModelAndView modelAndView = new ModelAndView();
