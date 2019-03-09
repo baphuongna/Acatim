@@ -10,16 +10,27 @@ import com.acatim.acatimver1.model.StudyCenter;
 public class StudyCenterMapper implements RowMapper<StudyCenter>{
 
 	public static final String BASE_SQL //
-	= "Select * From StudyCenter sc ";
+	= "SELECT u.user_name, u.role_id, u.full_name, u.email, u.password, u.create_date, u.phone, u.address, u.phone, u.active, sc.description, sc.rate\r\n" + 
+			"FROM User u\r\n" + 
+			"INNER JOIN StudyCenter sc\r\n" + 
+			"ON u.user_name=sc.user_name";
 	
 	@Override
 	public StudyCenter mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
 		String userName = rs.getString("user_name");
+		int roleId = rs.getInt("role_id");
+		String fullName = rs.getString("full_name");
+		String email = rs.getString("email");
+		String password = rs.getString("password");
+		String createDate = rs.getString("create_date");
+		String phone = rs.getString("phone");
+		String address = rs.getString("address");
+		boolean active = rs.getBoolean("active");
 		String description = rs.getString("description");
 		float rate = rs.getFloat("rate");
 		
-		return new StudyCenter(userName, description, rate);
+		return new StudyCenter(userName, roleId, fullName, email, password, createDate, phone, address, active, description, rate);
 	}
 
 }

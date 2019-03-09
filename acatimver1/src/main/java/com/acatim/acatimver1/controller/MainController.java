@@ -61,13 +61,15 @@ public class MainController {
         System.out.println("User Name: " + userName);
         
         User loginedUser = (User) ((Authentication) principal).getPrincipal();
+        String roleName = WebUtils.toString(loginedUser);
+		 Object useInfo = userInfoService.loadUserByUsername(userName, roleName);
+		 
+		 model.addAttribute("useInfo", useInfo); 
+       
         
-        UserModel userModerl = userInfoService.loadUserByUsername(userName);
-        model.addAttribute("userModerl", userModerl);
-        String userInfo = WebUtils.toString(loginedUser);
-        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("roleName", roleName);
 
-        return "profileS";
+        return "profile";
     }
  
     @RequestMapping(value = "/403", method = RequestMethod.GET)

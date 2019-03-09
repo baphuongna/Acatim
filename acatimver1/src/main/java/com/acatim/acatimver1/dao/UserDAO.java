@@ -21,7 +21,7 @@ public class UserDAO extends JdbcDaoSupport {
     }
 
 	public UserModel findUserAccount(String userName) {
-            String sql = UserMapper.BASE_SQL + " where u.User_Name = ? ";
+            String sql = UserMapper.BASE_SQL + " where u.user_name = ? ";
  
             Object[] params = new Object[] { userName };
             UserMapper mapper = new UserMapper();
