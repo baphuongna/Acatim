@@ -162,5 +162,12 @@ public class MainController {
         modelAndView.setViewName("contact");
         return modelAndView;
     }
+    
+    @RequestMapping(value={"/ratingTeacher"}, method = RequestMethod.GET)
+    public ModelAndView ratingTeacher(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ratingTeacher");
+        return modelAndView;
+    }
    
 }

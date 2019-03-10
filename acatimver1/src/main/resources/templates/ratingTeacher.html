@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="css/ratingCenter.css">
 </head>
 <body>
-<div th:fragment="rating"></div>
+<div th:fragment="ratingTeacher"></div>
     <div class="container">
         <!-- Modal -->
         <div class="modal fade " style="top:60px;"id="myModal" role="dialog">
@@ -30,7 +30,7 @@
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle
                                 "></span></button>
-                        <h4 class="modal-title" style="font-weight:Bold;">Đánh giá của bạn về Trung tâm</h4>
+                        <h4 class="modal-title" style="font-weight:Bold;">Đánh giá của bạn về Giáo Viên</h4>
                     </div>
                     <div class="mobile_progress_bar">
                         <div class="text-left visible-xs" style="margin-bottom:40px;">
@@ -48,9 +48,9 @@
                                 </div>
                                 <div class="col-md-11">
                                     <h5>
-                                        Bạn cảm thấy thế nào về chất lược dạy học của Trung tâm?
+                                        Bạn cảm thấy trình độ chuyên môn của giáo viên như thế nào? 
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Teaching quality" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Knowledgeable" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
 								</div>
                             </div>
 							
@@ -60,9 +60,9 @@
                                 </div>
                                 <div class="col-md-11 hidden-xs">
                                     <h5>
-                                        Vị trí của Trung tâm có thuận tiện với bạn không?
+                                        Giáo viên truyền tải kiến thức cho bạn có rõ ràng,dễ hiểu không?
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Location" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Clarity Level" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
                                 </div>
                             </div>
                         </div>
@@ -73,9 +73,9 @@
                                 </div>
                                 <div class="col-md-11">
                                     <h5>
-                                        Bạn có hài lòng về chất lượng Internet ở Trung tâm không?
+                                        Sự giúp đỡ của giáo viên có hữu ích với bạn không?
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Internet" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Helpful Level" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
                                 </div>
                             </div>
 							
@@ -85,9 +85,9 @@
                                 </div>
                                 <div class="col-md-11 hidden-xs">
                                     <h5>
-                                        Việc học ở Trung tâm có thoải mái với bạn không?
+                                        Giáo viên sử dụng kiến thức ở trong sách giáo khoa có tốt không?
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red;" id="rating" class="rating" name="safety" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red;" id="rating" class="rating" name="textbook use" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
                                 </div>
                             </div>
                         </div>
@@ -98,9 +98,9 @@
                                 </div>
                                 <div class="col-md-11">
                                     <h5>
-                                        Bạn có cảm thấy hạnh phúc khi học ở Trung tâm?
+                                       Mức đồ khó của các bài kiểm tra có phù hợp với bạn không?
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Happiness" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="exam difficulty" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
                                 </div>
                             </div>
 							
@@ -110,39 +110,14 @@
                                 </div>
                                 <div class="col-md-11 hidden-xs">
                                     <h5>
-                                        Uy tín của Trung tâm có làm bạn tin tưởng không?
+                                        Bạn có dễ dàng trao đổi kiến thức với giáo viên hay không?
                                     </h5>
-                                    <span onclick="myFunction(this)" style="color:red;" id="rating" class="rating" name="Reputation" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
+                                    <span onclick="myFunction(this)" style="color:red;" id="rating" class="rating" name="easy level" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
                                 </div>
                             </div>
 
                         </div>
 						
-						  <div class="col-md-12">
-                            <div class="col-md-6">
-                                <div class="col-md-1 hidden-xs">
-                                    <h5>g.</h5>
-                                </div>
-                                <div class="col-md-11">
-                                    <h5>
-                                        Thái độ phục vụ của các nhân viên trong trung tâm có làm bạn hài lòng?
-                                    </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="Staff attitude" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
-                                </div>
-                            </div>
-							
-                            <div class="col-md-6">
-                                <div class="col-md-1 hidden-xs">
-                                    <h5>h.</h5>
-                                </div>
-                                <div class="col-md-11 hidden-xs">
-                                    <h5>
-                                        Chất lượng cơ sở vật chất của Trung tâm thì sao nhỉ?
-                                    </h5>
-                                    <span onclick="myFunction(this)" style="color:red" id="rating" class="rating" name="equipment quality" data-current-rating=0 data-icon-bad='fa fa-heart-o' data-icon-good='fa fa-heart'></span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="col-xs-12 col-lg-6 col-sm-12 col-md-6">
                                 <div class="form-group">
@@ -347,14 +322,12 @@ $.fn.magicRatingInit = function(config) {
 				
 				var sumFeedback=0;
 				var hash = {};
-				hash['Teaching quality'] = 0; 
-				hash['Location'] = 0;
-				hash['Internet'] = 0;
-				hash['safety'] = 0;
-				hash['Happiness'] = 0;
-				hash['Reputation'] = 0;
-				hash['Staff attitude'] = 0;
-				hash['equipment quality'] = 0;
+				hash['Knowledgeable'] = 0; 
+				hash['Clarity Level'] = 0;
+				hash['Helpful Level'] = 0;
+				hash['textbook use'] = 0;
+				hash['exam difficulty'] = 0;
+				hash['easy level'] = 0;
         // Init click handler
         magicRatingWidget.on("click", ".magic-rating-icon", function() {
             // Get rating
@@ -363,39 +336,29 @@ $.fn.magicRatingInit = function(config) {
 			var rating1=icon.data("rating");
             var rating = parseInt(rating1);
 			var nameIcon = widget.data("iconGood");
-			         if("Teaching quality" === nameOfIcon){
-					 hash['Teaching quality'] = rating;
+			         if("Knowledgeable" === nameOfIcon){
+					 hash['Knowledgeable'] = rating;
 					 }
-					 if("Location" === nameOfIcon){
-					 hash['Location'] = rating;
+					 if("Clarity Level" === nameOfIcon){
+					 hash['Clarity Level'] = rating;
 					 }
-					 if("Internet" === nameOfIcon){
-					 hash['Internet'] = rating;
+					 if("Helpful Level" === nameOfIcon){
+					 hash['Helpful Level'] = rating;
 					 }
-					 if("safety" === nameOfIcon){
-					 hash['safety'] = rating;
+					 if("textbook use" === nameOfIcon){
+					 hash['textbook use'] = rating;
 					 }
-					 if("Happiness" === nameOfIcon){
-					 hash['Happiness'] = rating;
+					 if("exam difficulty" === nameOfIcon){
+					 hash['exam difficulty'] = rating;
 					 }
-					 if("Reputation" === nameOfIcon){
-					 hash['Reputation'] = rating;
-					 }
-					 if("Staff attitude" === nameOfIcon){
-					 hash['Staff attitude'] = rating;
-					 }
-					 if("equipment quality" === nameOfIcon){
-					 hash['equipment quality'] = rating;
+					 if("easy level" === nameOfIcon){
+					 hash['easy level'] = rating;
 					 }
 				console.log(hash)
-				sumFeedback= hash['Teaching quality']+ hash['Location']+hash['Internet']+hash['safety']+hash['Happiness']+hash['Reputation']+hash['Staff attitude']+hash['equipment quality'];
+				sumFeedback= hash['Knowledgeable']+ hash['Clarity Level']+hash['Helpful Level']+hash['textbook use']+hash['exam difficulty']+hash['easy level'];
 					
-			 $('.progress-bar').css('width', sumFeedback * 2.5+'%');
-			 document.getElementById("demo").innerHTML = sumFeedback * 2.5 +'%';
-
-
-           
-            
+			 $('.progress-bar').css('width', (sumFeedback * 3.3)+ 1 +'%');
+			 document.getElementById("demo").innerHTML = (sumFeedback * 3.3)+ 1 +'%';            
             // Update rating
             widget.children().each(function() {
                 if ($(this).data("rating") <= rating) {
