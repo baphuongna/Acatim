@@ -1,5 +1,7 @@
 package com.acatim.acatimver1.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +35,13 @@ public class UserDAO extends JdbcDaoSupport {
             }
 
     }
+	
+	public List<UserModel> getRoleNames(String id) {
+		String sql = UserMapper.BASE_SQL;
+
+		UserMapper mapper = new UserMapper();
+		List<UserModel> userList = this.getJdbcTemplate().query(sql, mapper);
+
+		return userList;
+	}
 }
