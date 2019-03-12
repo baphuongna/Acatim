@@ -34,6 +34,7 @@ public class MainController {
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("listCourse", courseService.getAllCourse());
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
