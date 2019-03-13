@@ -317,7 +317,7 @@
 										<li class="divider"></li>
 										<li><a th:href="@{/Logout}">Đăng xuất</a></li>
 									</ul></li>
-								<a href="#myModal" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" data-toggle="modal">Registration</a>
+								<a href="registration.html" th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary">Registration</a>
 							</ul>
 						</div>
 						<!-- /.nav-collapse -->
