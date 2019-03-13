@@ -19,6 +19,8 @@ import com.acatim.acatimver1.service.UserDetailsServiceImpl;
 import com.acatim.acatimver1.service.UserInfoServiceImpl;
 import com.acatim.acatimver1.utils.WebUtils;
 
+import javassist.NotFoundException;
+
 @Controller
 public class MainController {
 
@@ -35,6 +37,14 @@ public class MainController {
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("listCourse", courseService.getAllCourse());
+		try {
+			modelAndView.addObject("numberOfTeacher", userInfoService.loadAllTeacher().size());
+			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllStudyCenter().size());
+			modelAndView.addObject("numberOfStudent", userInfoService.loadAllStudent().size());
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}

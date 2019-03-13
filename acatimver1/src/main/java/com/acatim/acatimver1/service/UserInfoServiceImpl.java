@@ -17,7 +17,12 @@ import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
 import com.acatim.acatimver1.model.Role;
+import com.acatim.acatimver1.model.Student;
+import com.acatim.acatimver1.model.StudyCenter;
+import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
+
+import javassist.NotFoundException;
 
 @Service
 public class UserInfoServiceImpl implements UserInfoService{
@@ -62,12 +67,30 @@ public class UserInfoServiceImpl implements UserInfoService{
 		if(roleName.equals("Student")) {
 			return this.StudentDAO.findInfoUserAccount(user.getUserName());
 		}else if(roleName.equals("Teacher")) {
-			return this.TeacherDAO.findInfoUserAccount(user.getUserName());
+			return this.TeacherDAO.getTeacherByAccount(user.getUserName());
 		}else if(roleName.equals("Study Center")) {
 			return this.StudyCenterDAO.findInfoUserAccount(user.getUserName());
 		}
 		
 		return user;
+	}
+
+	@Override
+	public List<Teacher> loadAllTeacher() throws NotFoundException {
+		// TODO Auto-generated method stub
+		return this.TeacherDAO.getAllTeacher();
+	}
+
+	@Override
+	public List<StudyCenter> loadAllStudyCenter() throws NotFoundException {
+		// TODO Auto-generated method stub
+		return this.StudyCenterDAO.getAllStudyCenter();
+	}
+
+	@Override
+	public List<Student> loadAllStudent() throws NotFoundException {
+		// TODO Auto-generated method stub
+		return this.StudentDAO.getAllStudent();
 	}
 	
 	

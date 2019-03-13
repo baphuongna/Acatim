@@ -1,5 +1,7 @@
 package com.acatim.acatimver1.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,19 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		StudyCenterMapper mapper = new StudyCenterMapper();
 		try {
 			StudyCenter userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
+	}
+	
+	public List<StudyCenter> getAllStudyCenter() {
+		String sql = StudyCenterMapper.BASE_SQL;
+
+		StudyCenterMapper mapper = new StudyCenterMapper();
+		try {
+			List<StudyCenter> userInfo = this.getJdbcTemplate().query(sql, mapper);
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

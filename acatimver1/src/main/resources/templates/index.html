@@ -67,12 +67,10 @@
 				class="row no-gutters slider-text align-items-center justify-content-center"
 				data-scrollax-parent="true">
 				<div class="col-md-5 ftco-animate text-left">
-					<h1 class="mb-4">Chào mừng bạn đến với Acatim</h1>
-					<p>Bạn không biết nên học ở đâu? bạn không tìm được một giáo
-						viên giỏi? bạn khó khăn trong việc tiếp thu kiến thức? Hãy để
-						chúng tôi giúp bạn!</p>
+					<h1 class="mb-4" th:text="${T(com.acatim.acatimver1.constants.Constants).chao_mung}"></h1>
+					<p th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text}"></p>
 					<p>
-						<a href="#" class="btn btn-primary px-4 py-3">Chơi luôn</a>
+						<a href="course.html" th:href="@{/course}" class="btn btn-primary px-4 py-3" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_tim_khoa_hoc}"></a>
 					</p>
 				</div>
 				<div class="col-md-7" style="text-align: right;">
@@ -95,18 +93,17 @@
 								name="password" class="form-control" /> <br />
 							
 							<div align="center" th:if="${param.error}">
-								<p style="font-size: 20; color: #FF1C19;">Email or Password
-									invalid, please verify</p>
+								<p style="font-size: 20; color: #FF1C19;" th:text="${T(com.acatim.acatimver1.constants.Constants).msg_login_invalid}"></p>
 							</div>
 							<div style="display: flex; align-items: flex-start; left: 3px; top: -17px; position: relative;">
 							 <input type="checkbox" name="remember-me" style="display: flex; justify-content: flex-start;">
-							  <h6 style="position: relative; left: 7px; top: -6px;"> Remember Me? </h6>
+							  <h6 style="position: relative; left: 7px; top: -6px;" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_remember_me}"></h6>
 							  </div>
 							
 							<button class="btn btn-lg btn-primary btn-block" name="Submit"
 								value="Login" type="Submit" th:text="Login"></button>
 						</form>
-						<a href="registration.html" th:href="@{/registration}">register</a>
+						<a href="registration.html" th:href="@{/registration}" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_register}"></a>
 					</div>
 
 					<!-- BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB -->
@@ -122,10 +119,7 @@
 					<img src="images/UIHere.png">
 				</div>
 				<div class="col-md-7">
-					<p style="font-size: 26px;">Chúng tôi giúp bạn giải đáp các câu
-						hỏi như: tìm gia sư ở đâu? học trung tâm nào tốt? giá cả như thế
-						nào? có đội ngũ chăm sóc bạn 24/24, giúp bạn thăng tiến trên con
-						đường học tập phía trước!</p>
+					<p style="font-size: 26px;" th:text="${T(com.acatim.acatimver1.constants.Constants).index_goal_description}"></p>
 				</div>
 			</div>
 		</div>
@@ -203,7 +197,7 @@
 							class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="10300">0</strong> <span>Lượng
+									<strong class="number" data-number="10">0</strong> <span>Lượng
 										truy cập</span>
 								</div>
 							</div>
@@ -212,7 +206,7 @@
 							class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="7896">0</strong> <span>Số
+									<strong class="number" th:data-number="${numberOfStudyCenter}">0</strong> <span>Số
 										lượng trung tâm</span>
 								</div>
 							</div>
@@ -221,7 +215,7 @@
 							class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="400">0</strong> <span>Số
+									<strong class="number" th:data-number="${numberOfTeacher}">0</strong> <span>Số
 										lượng giáo viên</span>
 								</div>
 							</div>
@@ -230,8 +224,7 @@
 							class="col-md-3 d-flex justify-content-center counter-wrap ftco-animate">
 							<div class="block-18 text-center">
 								<div class="text">
-									<strong class="number" data-number="200">0</strong> <span>Lượt
-										thích</span>
+									<strong class="number" th:data-number="${numberOfStudent}">0</strong> <span>Số lượng học sinh</span>
 								</div>
 							</div>
 						</div>
@@ -241,7 +234,7 @@
 		</div>
 	</section>
 
-	<section class="ftco-section testimony-section">
+	<!-- <section class="ftco-section testimony-section">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate text-center">
@@ -328,12 +321,12 @@
 			</div>
 		</div>
 	</section>
-
+ -->
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3">
 				<div class="col-md-7 heading-section ftco-animate text-center">
-					<h2 class="mb-4">Đội ngũ phát triển</h2>
+					<h2 class="mb-4">Đội ngũ sáng lập</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -487,15 +480,13 @@
 		</div>
 	</section>
 
-	<section class="ftco-section-parallax">
+	<!-- <section class="ftco-section-parallax">
 		<div class="parallax-img d-flex align-items-center">
 			<div class="container">
 				<div class="row d-flex justify-content-center">
 					<div
 						class="col-md-7 text-center heading-section heading-section-white ftco-animate">
 						<h2>Theo dõi bản tin của chúng tôi</h2>
-						<p>Xa xa, đằng sau những ngọn núi chữ, xa các quốc gia Vokalia
-							và Consonantia, có những văn bản mù quáng. Họ sống tách ra</p>
 						<div class="row d-flex justify-content-center mt-5">
 							<div class="col-md-8">
 								<form action="#" class="subscribe-form">
@@ -511,7 +502,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<div th:insert="/footer :: footer"></div>
 

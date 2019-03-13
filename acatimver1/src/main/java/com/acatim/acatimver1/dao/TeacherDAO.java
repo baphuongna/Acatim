@@ -1,5 +1,7 @@
 package com.acatim.acatimver1.dao;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +22,26 @@ public class TeacherDAO extends JdbcDaoSupport {
 		this.setDataSource(dataSource);
 	}
 
-	public Teacher findInfoUserAccount(String userName) {
+	public Teacher getTeacherByAccount(String userName) {
 		String sql = TeacherMapper.BASE_SQL + " where u.user_name = ? ";
 
 		Object[] params = new Object[] { userName };
 		TeacherMapper mapper = new TeacherMapper();
 		try {
 			Teacher userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
+	}
+	
+	public List<Teacher> getAllTeacher() {
+		String sql = TeacherMapper.BASE_SQL;
+
+		TeacherMapper mapper = new TeacherMapper();
+		try {
+			List<Teacher> userInfo = this.getJdbcTemplate().query(sql, mapper);
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
