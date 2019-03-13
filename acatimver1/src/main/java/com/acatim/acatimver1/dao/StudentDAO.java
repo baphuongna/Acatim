@@ -22,7 +22,7 @@ public class StudentDAO extends JdbcDaoSupport {
 	}
 
 	public Student findInfoUserAccount(String userName) {
-		String sql = StudentMapper.BASE_SQL + " where u.user_name = ? ";
+		String sql = StudentMapper.BASE_SQL + " where user_name = ? ";
 
 		Object[] params = new Object[] { userName };
 		StudentMapper mapper = new StudentMapper();
@@ -45,6 +45,11 @@ public class StudentDAO extends JdbcDaoSupport {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-
+	}
+	
+	public void updateTeacherInfo(Student student) {
+		String sql = "UPDATE Student SET DOB = ?, gender = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(),
+				student.getUserName());
 	}
 }

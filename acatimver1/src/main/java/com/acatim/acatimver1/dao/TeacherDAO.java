@@ -23,13 +23,13 @@ public class TeacherDAO extends JdbcDaoSupport {
 	}
 
 	public Teacher getTeacherByAccount(String userName) {
-		String sql = TeacherMapper.BASE_SQL + " where u.user_name = ? ";
+		String sql = TeacherMapper.BASE_SQL + " where user_name = ? ";
 
 		Object[] params = new Object[] { userName };
 		TeacherMapper mapper = new TeacherMapper();
 		try {
-			Teacher userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-			return userInfo;
+			Teacher teacher = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return teacher;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
@@ -47,5 +47,11 @@ public class TeacherDAO extends JdbcDaoSupport {
 			return null;
 		}
 
+	}
+	
+	public void updateTeacherInfo(Teacher teacher) {
+		String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ?, rate = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(), teacher.getRate(),
+				teacher.getUserName());
 	}
 }

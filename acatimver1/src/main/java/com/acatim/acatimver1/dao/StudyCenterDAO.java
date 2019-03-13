@@ -22,7 +22,7 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 	}
 
 	public StudyCenter findInfoUserAccount(String userName) {
-		String sql = StudyCenterMapper.BASE_SQL + " where u.user_name = ? ";
+		String sql = StudyCenterMapper.BASE_SQL + " where user_name = ? ";
 
 		Object[] params = new Object[] { userName };
 		StudyCenterMapper mapper = new StudyCenterMapper();
@@ -34,7 +34,7 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public List<StudyCenter> getAllStudyCenter() {
 		String sql = StudyCenterMapper.BASE_SQL;
 
@@ -46,5 +46,11 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 			return null;
 		}
 
+	}
+	
+	public void updateTeacherInfo(StudyCenter studyCenter) {
+		String sql = "UPDATE StudyCenter SET description = ?, rate = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getRate(),
+				studyCenter.getUserName());
 	}
 }
