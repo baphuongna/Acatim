@@ -21,7 +21,6 @@ public class UserModel {
 
     @Id
     @NotEmpty(message = "*Please provide your user name")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
     private String userName;
     
     private int role_id;
@@ -29,7 +28,6 @@ public class UserModel {
     @NotEmpty(message = "*Please provide your full name")
     private String fullName;
      
-    @Column(name = "email")   
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
     private String email;

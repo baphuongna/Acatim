@@ -39,6 +39,11 @@ body {
 	font-family: 'Raleway', sans-serif;
 }
 
+form-control{
+	margin-left: 15px;
+	width: 95%;
+}
+
 
 .validation-message {
     font-style: normal;
@@ -139,7 +144,6 @@ section {
 }
 .resume {
 	background: #f5f5f5;
-	padding: 100px 0;
 }
 h5.tittle {
 	font-size: 18px;
@@ -148,6 +152,14 @@ h5.tittle {
 	color: #333333;
 	letter-spacing: 1px;
 	border-bottom: 1px solid #e6e6e6;
+}
+
+h5,h6.tittle1 {
+	font-size: 18px;
+	padding: 20px;
+	margin: 0px;
+	color: #333333;
+	letter-spacing: 1px;
 }
 /*=======================================================
       TOP HEAD
@@ -1520,6 +1532,7 @@ h5.tittle {
 	float: left;
 	width: 20%;
 	text-align: center;
+	border-radius: 40px;
 }
 .isop-filter li a i {
 	margin-right: 8px;
