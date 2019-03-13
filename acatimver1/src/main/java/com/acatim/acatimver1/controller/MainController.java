@@ -83,8 +83,8 @@ public class MainController {
 		return "TestShowCourse";
 	}
 
-	@RequestMapping(value = "/profileS", method = RequestMethod.GET)
-	public String userInfo(Model model, Principal principal) {
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
@@ -92,13 +92,29 @@ public class MainController {
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
-		Object useInfo = userInfoService.loadUserByUsername(userName, roleName);
-
-		model.addAttribute("useInfo", useInfo);
-
-		model.addAttribute("roleName", roleName);
-
-		return "profile";
+		UserModel useInfo = userInfoService.loadUserByUsername(userName);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		 if (useInfo == null) {
+	            System.out.println("User not found! " + userName);
+	            modelAndView.setViewName("index");
+	            throw new NotFoundException("User " + userName + " was not found in the database");
+	           
+	    }else {
+	    	model.addAttribute("useInfo", useInfo);
+			model.addAttribute("roleName", roleName);
+			if(roleName.equals("Student")) {
+				model.addAttribute("studentInfo", userInfoService.loadStudentByUsername(userName));
+			}else if(roleName.equals("Teacher")) {
+				model.addAttribute("teacherInfo", userInfoService.loadStudyCenterByUsername(userName));
+			}else if(roleName.equals("Study Center")) {
+				model.addAttribute("studyCenterInfo", userInfoService.loadTeacherByUsername(userName));
+			}
+			modelAndView.setViewName("profile");
+	    }
+		
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -161,38 +177,38 @@ public class MainController {
 		return modelAndView;
 	}
 
-	 @RequestMapping(value="/registration", method = RequestMethod.GET)
-	    public ModelAndView registration(){
-	        ModelAndView modelAndView = new ModelAndView();
-	        UserModel user = new UserModel();
-	        modelAndView.addObject("user", user);
-	        modelAndView.setViewName("registration");
-	        return modelAndView;
-	    }
-
-	    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-	    public ModelAndView createNewUser(@Valid @ModelAttribute("user") UserModel data, BindingResult bindingResult) {
-	    	 System.out.println("11111112");
-	        ModelAndView modelAndView = new ModelAndView();
-	      //  Object userExists =  userInfoService.loadUserByUsername(user.getUserName(),"Student");
-		/*
-		 * if (userExists != null) { bindingResult .rejectValue("email", "error.user",
-		 * "There is already a user registered with the email provided"); }
-		 */
-	        
-	        if (bindingResult.hasErrors()) {
-	            modelAndView.setViewName("registration");
-	            System.out.println("1111111111");
-	        } else {
-	        	 System.out.println("55555555555");
-	           // userService.saveUser(user);
-	            modelAndView.addObject("successMessage", "User has been registered successfully");
-	          //  modelAndView.addObject("user", new User());
-	            modelAndView.setViewName("registration");
-
-	        }
-	        return modelAndView;
-	    }
+//	 @RequestMapping(value="/registration", method = RequestMethod.GET)
+//	    public ModelAndView registration(){
+//	        ModelAndView modelAndView = new ModelAndView();
+//	        UserModel user = new UserModel();
+//	        modelAndView.addObject("user", user);
+//	        modelAndView.setViewName("registration");
+//	        return modelAndView;
+//	    }
+//
+//	    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+//	    public ModelAndView createNewUser(@Valid @ModelAttribute("user") UserModel data, BindingResult bindingResult) {
+//	    	 System.out.println("11111112");
+//	        ModelAndView modelAndView = new ModelAndView();
+//	      //  Object userExists =  userInfoService.loadUserByUsername(user.getUserName(),"Student");
+//		/*
+//		 * if (userExists != null) { bindingResult .rejectValue("email", "error.user",
+//		 * "There is already a user registered with the email provided"); }
+//		 */
+//	        
+//	        if (bindingResult.hasErrors()) {
+//	            modelAndView.setViewName("registration");
+//	            System.out.println("1111111111");
+//	        } else {
+//	        	 System.out.println("55555555555");
+//	           // userService.saveUser(user);
+//	            modelAndView.addObject("successMessage", "User has been registered successfully");
+//	          //  modelAndView.addObject("user", new User());
+//	            modelAndView.setViewName("registration");
+//
+//	        }
+//	        return modelAndView;
+//	    }
 
 	@RequestMapping(value = { "/blog" }, method = RequestMethod.GET)
 	public ModelAndView blog() {
