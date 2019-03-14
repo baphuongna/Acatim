@@ -3,6 +3,7 @@ package com.acatim.acatimver1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.CategoriesDAO;
@@ -11,7 +12,7 @@ import com.acatim.acatimver1.model.Categories;
 @Service
 public class CategoriesServiceImpl {
 	
-	@Autowired
+//	@Autowired
 	private CategoriesDAO categoriesDAO;
 	
 	public List<Categories> getAllCategories(){
