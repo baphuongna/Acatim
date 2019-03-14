@@ -33,7 +33,7 @@ public class RatingServiceImpl {
 	}
 
 	public List<Rating> getAllRatingTeacherByRecieverName(String recieverName) {
-		return this.ratingDAO.getAllRatingStudyCenterByRecieverName(recieverName);
+		return this.ratingDAO.getAllRatingTeacherByRecieverName(recieverName);
 	}
 
 	public List<Rating> getAllRatingStudyCenterByRecieverName(String recieverName) {
