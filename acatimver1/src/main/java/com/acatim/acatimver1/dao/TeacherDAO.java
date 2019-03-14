@@ -46,7 +46,6 @@ public class TeacherDAO extends JdbcDaoSupport {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-
 	}
 	
 	public void updateTeacherInfo(Teacher teacher) {

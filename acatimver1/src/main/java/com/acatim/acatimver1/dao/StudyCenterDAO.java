@@ -48,7 +48,7 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 
 	}
 	
-	public void updateTeacherInfo(StudyCenter studyCenter) {
+	public void updateStudyCenterInfo(StudyCenter studyCenter) {
 		String sql = "UPDATE StudyCenter SET description = ?, rate = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getRate(),
 				studyCenter.getUserName());

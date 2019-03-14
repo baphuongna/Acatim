@@ -47,7 +47,7 @@ public class StudentDAO extends JdbcDaoSupport {
 		}
 	}
 	
-	public void updateTeacherInfo(Student student) {
+	public void updateStudentInfo(Student student) {
 		String sql = "UPDATE Student SET DOB = ?, gender = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(),
 				student.getUserName());

@@ -19,6 +19,9 @@ public interface UserInfoService {
 	void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
 	void addStudentInfo(Student student) throws NotFoundException;
 	void updateUserInfo(UserModel user) throws NotFoundException;
+	void updateTeacherInfo(Teacher teacher) throws NotFoundException;
+	void updateStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
+	void updateStudentInfo(Student student) throws NotFoundException;
 	void removeUser(String userName) throws NotFoundException;
 	void changePassword(String userName, String password) throws NotFoundException;
 	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
@@ -26,4 +29,5 @@ public interface UserInfoService {
 	List<Teacher> loadAllTeacher() throws NotFoundException;
 	List<StudyCenter> loadAllStudyCenter() throws NotFoundException;
 	List<Student> loadAllStudent() throws NotFoundException;
+	boolean checkUserExist(String userName)  throws NotFoundException;
 }

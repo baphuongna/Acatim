@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.CourseExtractor;
-import com.acatim.acatimver1.mapper.CourseMapper;
 import com.acatim.acatimver1.model.Course;
 
 @Repository
@@ -23,10 +22,24 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 
 	public List<Course> getAllCourse() {
-		String sql = "SELECT *\r\n" + "FROM Course\r\n"
+		String sql = "SELECT * FROM Course\r\n"
 				+ "INNER JOIN Subject ON Course.subject_id = Subject.subject_id;";
 
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
+		return courses;
+	}
+	
+	public List<Course> getCourseBySubjectId(String subjectId) {
+		String sql = "SELECT * FROM Course where subject_id = ?;";
+		Object[] params = new Object[] { subjectId };
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
+		return courses;
+	}
+	
+	public List<Course> getCourseByUserName(String userName) {
+		String sql = "SELECT * FROM Course where user_name = ?;";
+		Object[] params = new Object[] { userName };
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
 		return courses;
 	}
 
@@ -57,8 +70,9 @@ public class CourseDAO extends JdbcDaoSupport {
 				+ "SET subject_id = ?, user_name = ?, courseName = ?, courseDescription = ?, start_time = ?,\r\n"
 				+ "end_time = ?, start_date = ?, end_date = ?, price = ?, create_date = ?, update_date = ?\r\n"
 				+ "WHERE course_id = ?;";
-		CourseMapper mapper = new CourseMapper();
-		this.getJdbcTemplate().update(sql, course, mapper);
+		this.getJdbcTemplate().update(sql, course.getSubjectId(), course.getUserName(),
+				course.getCourseDescription(), course.getStartTime(), course.getEndTime(), course.getStartDate(),
+				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate() , course.getCourseId());
 	}
 
 	public void removeCourse(String courseId, boolean active) {

@@ -33,7 +33,19 @@ public class UserDAO extends JdbcDaoSupport {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
 
+	public boolean checkUserExist(String userName) {
+		String sql = UserMapper.BASE_SQL + " where u.user_name = ? ";
+
+		Object[] params = new Object[] { userName };
+		UserMapper mapper = new UserMapper();
+		UserModel userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+		if (userInfo != null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public List<UserModel> getRoleNames() {
@@ -47,16 +59,16 @@ public class UserDAO extends JdbcDaoSupport {
 
 	public List<UserModel> searchUserByName(String fullName) {
 		String sql = UserMapper.BASE_SQL + " WHERE full_name LIKE ?";
-		Object[] params = new Object[] {  "%" + fullName + "%" };
+		Object[] params = new Object[] { "%" + fullName + "%" };
 		UserMapper mapper = new UserMapper();
 		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
 
 		return user;
 	}
-	
+
 	public List<UserModel> searchUserByEmail(String email) {
 		String sql = UserMapper.BASE_SQL + " WHERE email LIKE ?";
-		Object[] params = new Object[] {  "%" + email + "%" };
+		Object[] params = new Object[] { "%" + email + "%" };
 		UserMapper mapper = new UserMapper();
 		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
 		return user;
