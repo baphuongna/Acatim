@@ -34,4 +34,8 @@ public class CourseServiceImpl {
 	public List<Course> searchCourseByCourseName(String courseName){
 		return this.courseDAO.searchCourseByCourseName(courseName);
 	}
+	
+	public List<Course> searchCourseBySubjectName(String subjectName){
+		return this.courseDAO.searchCourseBySubjectName(subjectName);
+	}
 }
