@@ -16,4 +16,21 @@ public class SubjectServiceImpl {
 	public List<Subject> getAllSubject(){
 		return this.subjectDAO.getAllSubject();
 	}
+	
+	public Subject getSubjectBySubjectId(String subjectId) {
+		return this.subjectDAO.getSubjectBySubjectId(subjectId);
+	}
+	
+	public void addCourse(Subject subject) {
+		this.subjectDAO.addCourse(subject);
+	}
+	
+	public void updateCourse(Subject subject) {
+		this.subjectDAO.updateCourse(subject);
+	}
+	
+	public void removeCourse(String subjectId) {
+		boolean active = false;
+		this.subjectDAO.removeCourse(subjectId, active);
+	}
 }
