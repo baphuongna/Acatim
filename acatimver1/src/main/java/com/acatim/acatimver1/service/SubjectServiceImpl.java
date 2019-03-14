@@ -17,6 +17,10 @@ public class SubjectServiceImpl {
 		return this.subjectDAO.getAllSubject();
 	}
 	
+	public List<Subject> getListSubject(){
+		return this.subjectDAO.getListSubject();
+	}
+	
 	public Subject getSubjectBySubjectId(String subjectId) {
 		return this.subjectDAO.getSubjectBySubjectId(subjectId);
 	}
@@ -32,5 +36,12 @@ public class SubjectServiceImpl {
 	public void removeCourse(String subjectId) {
 		boolean active = false;
 		this.subjectDAO.removeCourse(subjectId, active);
+	}
+	
+	public String genSubjectId() {
+		List<Subject> listSubject = this.subjectDAO.getListSubject();
+		int incNumber = listSubject.size() + 1;
+		String SubjectId = "sj" + incNumber;
+		return SubjectId;
 	}
 }

@@ -46,4 +46,11 @@ public class CourseServiceImpl {
 	public List<Course> getCourseByUserName(String userName){
 		return this.courseDAO.getCourseByUserName(userName);
 	}
+	
+	public String genCourseId() {
+		List<Course> listCourse = this.courseDAO.getListCourse();
+		int incNumber = listCourse.size() + 1;
+		String newCourseId = "cou" + incNumber;
+		return newCourseId;
+	}
 }

@@ -28,6 +28,13 @@ public class SubjectDAO extends JdbcDaoSupport {
 		List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectExtractor());
 		return subjects;
 	}
+	
+	public List<Subject> getListSubject() {
+		String sql = "SELECT * FROM Subject";
+		SubjectMapper mapper = new SubjectMapper();
+		List<Subject> subjects = this.getJdbcTemplate().query(sql, mapper);
+		return subjects;
+	}
 
 	public Subject getSubjectBySubjectId(String subjectId) {
 		String sql = "SELECT * FROM Subject Where subject_id = ?;";

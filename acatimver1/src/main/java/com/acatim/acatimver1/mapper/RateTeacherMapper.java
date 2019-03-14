@@ -22,8 +22,9 @@ public class RateTeacherMapper implements RowMapper<RateTeacher>{
 		float helpfulLevel = rs.getFloat("helpfulLevel");
 		float clarityLevel = rs.getFloat("clarityLevel");
 		float knowledgeable = rs.getFloat("knowledgeable");
+		String checkTeaNull = rs.getString("checkTeaNull");
 		
-		return new RateTeacher(rateId, easyLevel, examDifficulty, textbookUse, helpfulLevel, clarityLevel, knowledgeable);
+		return new RateTeacher(rateId, easyLevel, examDifficulty, textbookUse, helpfulLevel, clarityLevel, knowledgeable, checkTeaNull);
 	}
 
 }

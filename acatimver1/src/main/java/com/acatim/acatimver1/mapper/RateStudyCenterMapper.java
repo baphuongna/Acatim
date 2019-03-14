@@ -24,8 +24,8 @@ public class RateStudyCenterMapper implements RowMapper<RateStudyCenter>{
 		float internet = rs.getFloat("internet");
 		float location = rs.getFloat("location");
 		float teachingQuality = rs.getFloat("teachingQuality");
-		
-		return new RateStudyCenter(rateId, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality);
+		String checkSCNull = rs.getString("checkSCNull");
+		return new RateStudyCenter(rateId, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality, checkSCNull);
 	}
 
 }

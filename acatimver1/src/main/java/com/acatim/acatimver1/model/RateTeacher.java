@@ -23,4 +23,5 @@ public class RateTeacher {
 	private float helpfulLevel;
 	private float clarityLevel;
 	private float knowledgeable;
+	private String checkTeaNull;
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.CourseExtractor;
+import com.acatim.acatimver1.mapper.CourseMapper;
 import com.acatim.acatimver1.model.Course;
 
 @Repository
@@ -27,8 +28,14 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\r\n" +
 				"INNER JOIN User ON Course.user_name = User.user_name";
 
-
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
+		return courses;
+	}
+	
+	public List<Course> getListCourse() {
+		String sql = "SELECT * FROM Course";
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, mapper);
 		return courses;
 	}
 	

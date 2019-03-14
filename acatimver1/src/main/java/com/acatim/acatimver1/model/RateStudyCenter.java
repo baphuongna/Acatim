@@ -25,4 +25,5 @@ public class RateStudyCenter {
 	private float internet;
 	private float location;
 	private float teachingQuality;
+	private String checkSCNull;
 }
