@@ -17,4 +17,12 @@ public class CourseServiceImpl {
 	public List<Course> getAllCourse(){
 		return this.courseDAO.getAllCourse();
 	}
+	
+	public void addCourse(Course course) {
+		this.courseDAO.addCourse(course);
+	}
+	
+	public void updateCourse(Course course) {
+		this.courseDAO.updateCourse(course);
+	}
 }

@@ -64,6 +64,29 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public Student loadStudentByUsername(String username) throws NotFoundException {
 		return this.StudentDAO.findInfoUserAccount(username);
 	}
+
+	@Override
+	public void addUserInfo(UserModel user) throws NotFoundException {
+		this.UserDAO.addUser(user);
+		
+	}
+
+	@Override
+	public void addTeacherInfo(Teacher teacher) throws NotFoundException {
+		this.TeacherDAO.addTeacherInfo(teacher);
+		
+	}
+
+	@Override
+	public void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException {
+		this.StudyCenterDAO.addStudyCenterInfo(studyCenter);
+	}
+
+	@Override
+	public void addStudentInfo(Student student) throws NotFoundException {
+		this.StudentDAO.addStudentInfo(student);
+		
+	}
 	
 	
 }

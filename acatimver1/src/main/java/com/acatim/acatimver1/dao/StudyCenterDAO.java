@@ -53,4 +53,11 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getRate(),
 				studyCenter.getUserName());
 	}
+	
+	public void addStudyCenterInfo(StudyCenter studyCenter) {
+		String sql = "INSERT INTO StudyCenter (user_name, description, rate)\r\n" + 
+				"VALUES (?, ?, ?);";
+		StudyCenterMapper mapper = new StudyCenterMapper();
+		this.getJdbcTemplate().update(sql, studyCenter, mapper);
+	}
 }

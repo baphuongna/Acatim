@@ -14,6 +14,10 @@ public interface UserInfoService {
 	Teacher loadTeacherByUsername(String username) throws NotFoundException;
 	StudyCenter loadStudyCenterByUsername(String username) throws NotFoundException;
 	Student loadStudentByUsername(String username) throws NotFoundException;
+	void addUserInfo(UserModel user) throws NotFoundException;
+	void addTeacherInfo(Teacher teacher) throws NotFoundException;
+	void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
+	void addStudentInfo(Student student) throws NotFoundException;
 	List<Teacher> loadAllTeacher() throws NotFoundException;
 	List<StudyCenter> loadAllStudyCenter() throws NotFoundException;
 	List<Student> loadAllStudent() throws NotFoundException;

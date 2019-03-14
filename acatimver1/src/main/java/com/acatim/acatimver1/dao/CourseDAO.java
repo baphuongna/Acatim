@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.CourseExtractor;
+import com.acatim.acatimver1.mapper.CourseMapper;
 import com.acatim.acatimver1.model.Course;
 
 @Repository
@@ -31,5 +32,21 @@ public class CourseDAO extends JdbcDaoSupport{
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
 
 		return courses;
+	}
+	
+	public void addCourse(Course course) {
+		String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date)\r\n" + 
+				"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		CourseMapper mapper = new CourseMapper();
+		this.getJdbcTemplate().update(sql, course, mapper);
+	}
+	
+	public void updateCourse(Course course) {
+		String sql = "UPDATE Course\r\n" + 
+				"SET subject_id = ?, user_name = ?, courseName = ?, courseDescription = ?, start_time = ?,\r\n" + 
+				"end_time = ?, start_date = ?, end_date = ?, price = ?, create_date = ?, update_date = ?\r\n" + 
+				"WHERE course_id = ?;";
+		CourseMapper mapper = new CourseMapper();
+		this.getJdbcTemplate().update(sql, course, mapper);
 	}
 }

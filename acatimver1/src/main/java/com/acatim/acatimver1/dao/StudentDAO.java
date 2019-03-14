@@ -52,4 +52,11 @@ public class StudentDAO extends JdbcDaoSupport {
 		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(),
 				student.getUserName());
 	}
+	
+	public void addStudentInfo(Student student) {
+		String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + 
+				"VALUES (?, ?, ?);";
+		StudentMapper mapper = new StudentMapper();
+		this.getJdbcTemplate().update(sql, student, mapper);
+	}
 }
