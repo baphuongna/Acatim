@@ -87,6 +87,35 @@ public class UserInfoServiceImpl implements UserInfoService{
 		this.StudentDAO.addStudentInfo(student);
 		
 	}
+
+	@Override
+	public void updateUserInfo(UserModel user) throws NotFoundException {
+		this.UserDAO.updateUser(user);
+		
+	}
+
+	@Override
+	public void removeUser(String userName) throws NotFoundException {
+		boolean active = false;
+		this.UserDAO.removeUser(userName, active);
+		
+	}
+
+	@Override
+	public void changePassword(String userName, String password) throws NotFoundException {
+		this.UserDAO.changePassword(userName, password);
+		
+	}
+
+	@Override
+	public List<UserModel> searchUserByName(String fullName) throws NotFoundException {
+		return this.UserDAO.searchUserByName(fullName);
+	}
+
+	@Override
+	public List<UserModel> searchUserByEmail(String email) throws NotFoundException {
+		return this.UserDAO.searchUserByEmail(email);
+	}
 	
 	
 }

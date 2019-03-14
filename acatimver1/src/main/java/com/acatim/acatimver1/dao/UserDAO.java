@@ -46,22 +46,32 @@ public class UserDAO extends JdbcDaoSupport {
 		return userList;
 	}
 
-//	public List<UserModel> getAllUser() {
-//		String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id;";
-//		List<UserModel> user = this.getJdbcTemplate().query(sql, new UserExtractor());
-//
-//		return user;
-//	}
+	public List<UserModel> searchUserByName(String fullName) {
+		String sql = UserMapper.BASE_SQL + " WHERE full_name LIKE ?";
+		Object[] params = new Object[] {  "%" + fullName + "%" };
+		UserMapper mapper = new UserMapper();
+		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
+
+		return user;
+	}
+	
+	public List<UserModel> searchUserByEmail(String email) {
+		String sql = UserMapper.BASE_SQL + " WHERE email LIKE ?";
+		Object[] params = new Object[] {  "%" + email + "%" };
+		UserMapper mapper = new UserMapper();
+		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
+		return user;
+	}
 
 	public void addUser(UserModel user) {
 		String sql = "INSERT INTO User (user_name,role_id,full_name,email,password,create_date,phone,address,active) VALUES (?,?,?,?,?,?,?,?,?);";
-		UserMapper mapper = new UserMapper();
-		this.getJdbcTemplate().update(sql, user, mapper);
+		this.getJdbcTemplate().update(sql, user.getUserName(), user.getRole_id(), user.getFullName(), user.getEmail(),
+				user.getPassword(), user.getCreateDate(), user.getPhone(), user.getAddress(), user.isActive());
 	}
 
 	public void removeUser(String userName, boolean active) {
 		String sql = "UPDATE User SET active = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, userName, active);
+		this.getJdbcTemplate().update(sql, active, userName);
 	}
 
 	public void updateUser(UserModel user) {
@@ -72,6 +82,6 @@ public class UserDAO extends JdbcDaoSupport {
 
 	public void changePassword(String userName, String password) {
 		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, userName, password);
+		this.getJdbcTemplate().update(sql, password, userName);
 	}
 }

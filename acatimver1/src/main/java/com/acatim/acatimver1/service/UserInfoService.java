@@ -18,6 +18,11 @@ public interface UserInfoService {
 	void addTeacherInfo(Teacher teacher) throws NotFoundException;
 	void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
 	void addStudentInfo(Student student) throws NotFoundException;
+	void updateUserInfo(UserModel user) throws NotFoundException;
+	void removeUser(String userName) throws NotFoundException;
+	void changePassword(String userName, String password) throws NotFoundException;
+	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
+	List<UserModel> searchUserByEmail(String email)  throws NotFoundException;
 	List<Teacher> loadAllTeacher() throws NotFoundException;
 	List<StudyCenter> loadAllStudyCenter() throws NotFoundException;
 	List<Student> loadAllStudent() throws NotFoundException;
