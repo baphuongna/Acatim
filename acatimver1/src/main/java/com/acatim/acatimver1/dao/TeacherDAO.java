@@ -58,7 +58,6 @@ public class TeacherDAO extends JdbcDaoSupport {
 	public void addTeacherInfo(Teacher teacher) {
 		String sql = "INSERT INTO Teacher (user_name, DOB, gender, description, rate)\r\n" + 
 				"VALUES (?, ?, ?, ?, ?);";
-		TeacherMapper mapper = new TeacherMapper();
-		this.getJdbcTemplate().update(sql, teacher, mapper);
+		this.getJdbcTemplate().update(sql, teacher.getUserName(), teacher.getDob(), teacher.isGender(), teacher.getDescription(), teacher.getRate());
 	}
 }

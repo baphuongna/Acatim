@@ -56,7 +56,6 @@ public class StudentDAO extends JdbcDaoSupport {
 	public void addStudentInfo(Student student) {
 		String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + 
 				"VALUES (?, ?, ?);";
-		StudentMapper mapper = new StudentMapper();
-		this.getJdbcTemplate().update(sql, student, mapper);
+		this.getJdbcTemplate().update(sql, student.getUserName(), student.getDob(), student.isGender());
 	}
 }
