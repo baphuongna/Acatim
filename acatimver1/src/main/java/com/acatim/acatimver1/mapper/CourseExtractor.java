@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.Subject;
+import com.acatim.acatimver1.model.UserModel;
 
 public class CourseExtractor implements ResultSetExtractor<List<Course>> {
 
@@ -54,6 +55,21 @@ public class CourseExtractor implements ResultSetExtractor<List<Course>> {
 				boolean active = rs.getBoolean("active");
 				subject = new Subject(subjectId, categoryId, subjectName, createDate, updateDate, active);
 				course.setSubject(subject);
+			}
+			
+			String userName = rs.getString("user_name");
+			if (userName != null) {
+				UserModel userModel = new UserModel();
+				int roleId = rs.getInt("role_id");
+				String fullName = rs.getString("full_name");
+				String email = rs.getString("email");
+				String password = rs.getString("password");
+				String createDate = rs.getString("create_date");
+				String phone = rs.getString("phone");
+				String address = rs.getString("address");
+				boolean active = rs.getBoolean("active");
+				userModel = new UserModel(userName, roleId, fullName, email, password, createDate, phone, address, active);
+				course.setUserModel(userModel);
 			}
 		}
 		return new ArrayList<Course>(map.values());

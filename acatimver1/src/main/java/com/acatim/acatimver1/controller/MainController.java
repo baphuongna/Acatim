@@ -82,6 +82,12 @@ public class MainController {
 		model.addAttribute("courses", courseService.getAllCourse());
 		return "TestShowCourse";
 	}
+	
+	@RequestMapping("/course")
+	public String showAllCourseFull(Model model) {
+		model.addAttribute("courses", courseService.getAllCourse());
+		return "course";
+	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
@@ -156,12 +162,12 @@ public class MainController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = { "/course" }, method = RequestMethod.GET)
-	public ModelAndView course() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("course");
-		return modelAndView;
-	}
+//	@RequestMapping(value = { "/course" }, method = RequestMethod.GET)
+//	public ModelAndView course() {
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName("course");
+//		return modelAndView;
+//	}
 
 	@RequestMapping(value = { "/teacher" }, method = RequestMethod.GET)
 	public ModelAndView teacher() {

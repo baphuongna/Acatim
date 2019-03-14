@@ -42,6 +42,10 @@ public class Course {
 	@ManyToOne
 	@JoinColumn
 	private Subject subject;
+	
+	@ManyToOne
+	@JoinColumn
+	private UserModel userModel;
 
 	public Course() {
 		super();

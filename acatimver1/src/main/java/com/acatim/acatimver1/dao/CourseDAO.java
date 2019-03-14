@@ -22,8 +22,11 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 
 	public List<Course> getAllCourse() {
-		String sql = "SELECT * FROM Course\r\n"
-				+ "INNER JOIN Subject ON Course.subject_id = Subject.subject_id;";
+		String sql = "SELECT *\r\n" + 
+				"FROM Course\r\n" + 
+				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\r\n" +
+				"INNER JOIN User ON Course.user_name = User.user_name";
+
 
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
 		return courses;

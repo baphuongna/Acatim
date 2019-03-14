@@ -69,122 +69,26 @@
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 d-flex ftco-animate">
+				<div class="col-md-4 d-flex ftco-animate" th:each="course,wind : ${courses}">
 					<div class="course align-self-stretch">
 						<a href="#" class="img"
 							style="background-image: url(images/course-1.jpg)"></a>
 						<div class="text p-4">
-							<p class="category">
-								<span>English</span> <span class="price">$250</span>
+							<p class="category" >
+								<span th:text="${course.courseName}"></span> 
+								<span class="price">$<span class="price" th:text="${course.price}"></span></span>
 							</p>
 							<h3 class="mb-3">
-								<a href="#">English for Tommorow</a>
+								<a href="#" th:text="${course.courseName}"></a>
 							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
+							<p th:text="${course.courseDescription}"></p>
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-2.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span>Science</span> <span class="price">$250</span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#">Computer Engineering</a>
-							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-3.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span>Business</span> <span class="price">$250</span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#">Business Studies</a>
-							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-4.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span>English</span> <span class="price">$250</span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#">English for Tommorow</a>
-							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-5.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span>Science</span> <span class="price">$250</span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#">Computer Engineering</a>
-							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 d-flex ftco-animate">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-6.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span>Business</span> <span class="price">$250</span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#">Business Studies</a>
-							</h3>
-							<p>Even the all-powerful Pointing has no control about the
-								blind texts it is an almost unorthographic life One day however
-								a small line of blind text by the name</p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#detail-prod">Enroll now!</button>
+							 th:attr="data-target='#'+${course.courseId }"  onclick="doit()">Xem thêm ...</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row mt-5">
+			<!-- <div class="row mt-5">
 				<div class="col text-center">
 					<div class="block-27">
 						<ul>
@@ -198,7 +102,7 @@
 						</ul>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</section>
 
@@ -230,105 +134,76 @@
 	</section>
 
 	<!-- phần popup detail course -->
-
-	<div id="detail-prod" class="modal fade" tabindex="-1" role="dialog"
-		aria-labelledby="productGrid">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-				<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
-						khóa học</h4>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">
-
-					<div class="row">
-						<div class="col-md-4">
-							<img
-								src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-								class="img-responsive" alt="a">
-						</div>
-						<div class="col-md-8">
-							<h3 class="course-title">Khóa học ielts</h3>
-							<div class="rating">
-								<div class="stars">
-									<span class="fa fa-star checked"></span> <span
-										class="fa fa-star checked"></span> <span
-										class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-									<span class="fa fa-star"></span>
-								</div>
-								<span class="review-no">41 reviews</span></br> <span
-									class="review-no">Giáo viên: </span><a href="#">Trần Văn
-									Hiếu</a>
-							</div>
-							<p class="product-description">Nếu bạn đã hẹn được cô nàng/
-								anh chàng người nước ngoài tới buổi hẹn mà bạn đã mong chờ bấy
-								lâu, bạn sẽ chuẩn bị những gì? Thiết kế cho mình một buổi hẹn
-								tuyệt vời? Có một lời khuyên cho bạn rằng bạn nên trau dồi thật
-								nhiều vốn tiếng Anh của mình về tất cả các mặt "giải trí" để hai
-								bạn có thể thoải mái lựa chọn, cũng như trao đổi với nhau. Người
-								bạn kia chắc hẳn sẽ cảm thấy bạn là người khá tâm lý</p>
-							<h4 class="price">
-								Giá: <span>$180</span>
-							</h4>
-							<p class="vote">
-								<strong>91%</strong> người thích khóa học này<strong>(87
-									votes)</strong>
-							</p>
-							<h4 class="price">
-								Thời gian: từ <span>08/03/2019 </span> đến <span>
-									08/03/2019<span>
-							</h4>
-							<h4 class="price">
-								Thời gian bắt đầu học : <span>7h;9h;15h</span>
-							</h4>
-							<div class="action">
-								<button class="add-to-cart btn btn-success" type="button">add
-									to cart</button>
-								<button class="like btn btn-danger" type="button">
-									<span class="fa fa-heart"></span>
-								</button>
-							</div>
-						</div>
+	<div th:each="course,wind : ${courses}">
+		<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="productGrid">
+			<div class="modal-dialog modal-lg" role="document" >
+				<div class="modal-content">
+					<div class="modal-header">
+					<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+							khóa học</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
 					</div>
-					<!-- hết popup course detail -->
-
-
+					<div class="modal-body">
+	
+						<div class="row">
+							<div class="col-md-4">
+								<img
+									src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+									class="img-responsive" alt="a">
+							</div>
+							<div class="col-md-8">
+								<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
+								<div class="rating">
+									<div class="stars">
+										<span class="fa fa-star checked"></span> <span
+											class="fa fa-star checked"></span> <span
+											class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+										<span class="fa fa-star"></span>
+									</div>
+									<span class="review-no">41 reviews</span></br> <span
+										class="review-no">Giáo viên: </span><a href="#" th:text="${course.userModel.fullName}"></a>
+								</div>
+								<p class="product-description" th:text="${course.courseDescription}"></p>
+								<h4 class="price">
+									Giá: <span>$ <span th:text="${course.price}"></span></span>
+								</h4>
+								<p class="vote">
+									<strong>91%</strong> người thích khóa học này<strong>(87
+										votes)</strong>
+								</p>
+								<h4 class="price">
+									Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+								</h4>
+								<h4 class="price">
+									Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+								</h4>
+								<div class="action">
+									<button class="add-to-cart btn btn-success" type="button">Get Discount Code</button>
+									<!-- <button class="like btn btn-danger" type="button">
+										<span class="fa fa-heart"></span>
+									</button> -->
+								</div>
+							</div>
+						</div>
+						<!-- hết popup course detail -->
+	
+	
+					</div>
+					<div class="modal-footer">
+						<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
+	
+					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-
-				</div>
+				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	
-	
-	
-	
-	
-	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" id="ok" data-target="#myModal">Open</button>
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-
-
-
-
-
 
 	<!-- loader -->
 	<div id="ftco-loader" class="show fullscreen">
@@ -338,6 +213,18 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
+	<script type="text/javascript">
+	function doit(){
+		var description = document.getElementById('description').innerHTML;
+		var a =  document.querySelectorAll("#description");
+		var arr = new Array();
+		arr.push(a.innerHTML);
+		for (var i = 0; i< a.length;i++){
+			console.log(a[i].innerHTML);
+		}
+	}
+		
+	</script>
 
 
 	<script src="js/jquery.min.js"></script>
