@@ -28,4 +28,6 @@ public class Rating {
 	private float rate;
 	
 	private String comment;
+	
+	private boolean active;
 }

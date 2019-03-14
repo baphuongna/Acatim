@@ -21,8 +21,8 @@ public class DiscountCodeMapper implements RowMapper<DiscountCode>{
 		String createDate = rs.getString("create_date");
 		String expireDate = rs.getString("expire_date");
 		String status = rs.getString("status");
-		
-		return new DiscountCode(codeId, userName, courseId, createDate, expireDate, status);
+		boolean active = rs.getBoolean("active");
+		return new DiscountCode(codeId, userName, courseId, createDate, expireDate, status, active);
 	}
 
 }

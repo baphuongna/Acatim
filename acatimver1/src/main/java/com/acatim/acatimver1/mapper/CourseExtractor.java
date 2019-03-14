@@ -37,8 +37,9 @@ public class CourseExtractor implements ResultSetExtractor<List<Course>> {
 				float price = rs.getFloat("price");
 				String createDate = rs.getString("create_date");
 				String updateDate = rs.getString("update_date");
+				boolean active = rs.getBoolean("active");
 				course = new Course(courseId, subjectId, userName, courseName, courseDescription, startTime, endTime,
-						startDate, endDate, price, createDate, updateDate);
+						startDate, endDate, price, createDate, updateDate, active);
 				map.put(courseId, course);
 			}
 
@@ -50,7 +51,8 @@ public class CourseExtractor implements ResultSetExtractor<List<Course>> {
 				String subjectName = rs.getString("subject_name");
 				String createDate = rs.getString("create_date");
 				String updateDate = rs.getString("update_date");
-				subject = new Subject(subjectId, categoryId, subjectName, createDate, updateDate);
+				boolean active = rs.getBoolean("active");
+				subject = new Subject(subjectId, categoryId, subjectName, createDate, updateDate, active);
 				course.setSubject(subject);
 			}
 		}

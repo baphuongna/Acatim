@@ -37,13 +37,19 @@ public class Course {
 	
 	private String updateDate;
 	
+	private boolean active;
+	
 	@ManyToOne
 	@JoinColumn
 	private Subject subject;
 
+	public Course() {
+		super();
+	}
+
 	public Course(String courseId, String subjectId, String userName, String courseName, String courseDescription,
 			String startTime, String endTime, String startDate, String endDate, float price, String createDate,
-			String updateDate) {
+			String updateDate, boolean active) {
 		super();
 		this.courseId = courseId;
 		this.subjectId = subjectId;
@@ -57,10 +63,7 @@ public class Course {
 		this.price = price;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-	}
-
-	public Course() {
-		super();
+		this.active = active;
 	}
 	
 	

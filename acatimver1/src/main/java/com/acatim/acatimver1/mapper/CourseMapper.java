@@ -27,8 +27,9 @@ public class CourseMapper implements RowMapper<Course>{
 		float price = rs.getFloat("price");
 		String createDate = rs.getString("create_date");
 		String updateDate = rs.getString("update_date");
+		boolean active = rs.getBoolean("active");
 		
-		return new Course(courseId, subjectId, userName, courseName, courseDescription, startTime, endTime, startDate, endDate, price, createDate, updateDate);
+		return new Course(courseId, subjectId, userName, courseName, courseDescription, startTime, endTime, startDate, endDate, price, createDate, updateDate, active);
 	}
 
 }

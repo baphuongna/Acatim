@@ -26,4 +26,6 @@ public class DiscountCode {
 	private String expireDate;
 	
 	private String status;
+	
+	private boolean active;
 }

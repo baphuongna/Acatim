@@ -22,8 +22,9 @@ public class RatingMapper implements RowMapper<Rating>{
 		String updateDate = rs.getString("update_date");
 		float rate = rs.getFloat("rate");
 		String comment = rs.getString("comment");
+		boolean active = rs.getBoolean("active");
 		
-		return new Rating(rateId, userName, recieverName, createDate, updateDate, rate, comment);
+		return new Rating(rateId, userName, recieverName, createDate, updateDate, rate, comment, active);
 	}
 
 }

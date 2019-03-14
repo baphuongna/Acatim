@@ -25,4 +25,13 @@ public class CourseServiceImpl {
 	public void updateCourse(Course course) {
 		this.courseDAO.updateCourse(course);
 	}
+	
+	public void removeCourse(String courseId) {
+		boolean active = false;
+		this.courseDAO.removeCourse(courseId, active);
+	}
+	
+	public List<Course> searchCourseByCourseName(String courseName){
+		return this.courseDAO.searchCourseByCourseName(courseName);
+	}
 }

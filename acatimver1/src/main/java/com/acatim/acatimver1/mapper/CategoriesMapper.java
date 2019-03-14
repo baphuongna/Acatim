@@ -19,8 +19,9 @@ public class CategoriesMapper implements RowMapper<Categories>{
 		String categoryName = rs.getString("category_name");
 		String createDate = rs.getString("create_date");
 		String updateDate = rs.getString("update_date");
+		boolean active = rs.getBoolean("active");
 		
-		return new Categories(categoryId, categoryName, createDate, updateDate);
+		return new Categories(categoryId, categoryName, createDate, updateDate, active);
 	}
 
 }

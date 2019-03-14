@@ -20,8 +20,9 @@ public class SubjectMapper implements RowMapper<Subject>{
 		String subjectName = rs.getString("subject_name");
 		String createDate = rs.getString("create_date");
 		String updateDate = rs.getString("update_date");
+		boolean active = rs.getBoolean("active");
 		
-		return new Subject(subjectId, categoryId, subjectName, createDate, updateDate);
+		return new Subject(subjectId, categoryId, subjectName, createDate, updateDate, active);
 	}
 
 }

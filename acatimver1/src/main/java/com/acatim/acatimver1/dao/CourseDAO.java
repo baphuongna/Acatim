@@ -30,7 +30,13 @@ public class CourseDAO extends JdbcDaoSupport{
 
 
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
-
+		return courses;
+	}
+	
+	public List<Course> searchCourseByCourseName(String courseName) {
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Course.courseName LIKE ?;";
+		Object[] params = new Object[] {  "%" + courseName + "%" };
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
 		return courses;
 	}
 	
@@ -48,5 +54,10 @@ public class CourseDAO extends JdbcDaoSupport{
 				"WHERE course_id = ?;";
 		CourseMapper mapper = new CourseMapper();
 		this.getJdbcTemplate().update(sql, course, mapper);
+	}
+	
+	public void removeCourse(String courseId, boolean active) {
+		String sql = "UPDATE Course SET active = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, active, courseId);
 	}
 }

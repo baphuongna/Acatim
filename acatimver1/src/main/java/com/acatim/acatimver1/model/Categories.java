@@ -23,4 +23,6 @@ public class Categories {
 	
 	private String updateDate;
 	
+	private boolean active;
+	
 }
