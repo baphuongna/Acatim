@@ -42,6 +42,40 @@
 	font-size:13px;
 }
 
+
+
+
+
+.stars-outer {
+  position: relative;
+  display: inline-block;
+  font-size: 30px;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-outer::before {
+  content: '☆ ☆ ☆ ☆ ☆';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 1900;
+  color: #ccc;
+}
+
+.stars-inner::before {
+  content: '☆ ☆ ☆ ☆ ☆';
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  color: #f8ce0b;
+}
+
+
 /*!
  * bootstrap-star-rating v4.0.2
  * http://plugins.krajee.com/star-rating

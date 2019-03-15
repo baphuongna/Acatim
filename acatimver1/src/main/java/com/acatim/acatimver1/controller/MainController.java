@@ -149,6 +149,7 @@ public class MainController {
 				List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(userName);
 				System.out.println(ratings);
 				model.addAttribute("ratings", ratings);
+				model.addAttribute("courses", courseService.getCourseByUserName(userName));
 			}
 			modelAndView.setViewName("profile");
 	    }

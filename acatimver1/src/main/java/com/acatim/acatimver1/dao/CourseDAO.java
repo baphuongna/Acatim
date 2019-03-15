@@ -42,14 +42,16 @@ public class CourseDAO extends JdbcDaoSupport {
 	public List<Course> getCourseBySubjectId(String subjectId) {
 		String sql = "SELECT * FROM Course where subject_id = ?;";
 		Object[] params = new Object[] { subjectId };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
 		return courses;
 	}
 	
 	public List<Course> getCourseByUserName(String userName) {
 		String sql = "SELECT * FROM Course where user_name = ?;";
 		Object[] params = new Object[] { userName };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
 		return courses;
 	}
 
