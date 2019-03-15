@@ -33,7 +33,19 @@ public class UserDAO extends JdbcDaoSupport {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+	}
+	
+	public boolean checkUserExist(String userName) {
+		String sql = UserMapper.BASE_SQL;
 
+		UserMapper mapper = new UserMapper();
+		List<UserModel> userList = this.getJdbcTemplate().query(sql, mapper);
+		for(UserModel user : userList) {
+			if(user.getUserName().equals(userName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<UserModel> getRoleNames() {

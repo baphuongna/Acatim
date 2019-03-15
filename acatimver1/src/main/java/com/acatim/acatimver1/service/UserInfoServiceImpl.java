@@ -16,19 +16,19 @@ import com.acatim.acatimver1.model.UserModel;
 import javassist.NotFoundException;
 
 @Service
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserDAO UserDAO;
 
 	@Autowired
 	private StudentDAO StudentDAO;
-	
+
 	@Autowired
 	private StudyCenterDAO StudyCenterDAO;
-	
+
 	@Autowired
 	private TeacherDAO TeacherDAO;
-	
+
 	@Override
 	public UserModel loadUserByUsername(String username) throws NotFoundException {
 		UserModel user = this.UserDAO.findUserAccount(username);
@@ -68,13 +68,13 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Override
 	public void addUserInfo(UserModel user) throws NotFoundException {
 		this.UserDAO.addUser(user);
-		
+
 	}
 
 	@Override
 	public void addTeacherInfo(Teacher teacher) throws NotFoundException {
 		this.TeacherDAO.addTeacherInfo(teacher);
-		
+
 	}
 
 	@Override
@@ -85,26 +85,26 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Override
 	public void addStudentInfo(Student student) throws NotFoundException {
 		this.StudentDAO.addStudentInfo(student);
-		
+
 	}
 
 	@Override
 	public void updateUserInfo(UserModel user) throws NotFoundException {
 		this.UserDAO.updateUser(user);
-		
+
 	}
 
 	@Override
 	public void removeUser(String userName) throws NotFoundException {
 		boolean active = false;
 		this.UserDAO.removeUser(userName, active);
-		
+
 	}
 
 	@Override
 	public void changePassword(String userName, String password) throws NotFoundException {
 		this.UserDAO.changePassword(userName, password);
-		
+
 	}
 
 	@Override
@@ -117,28 +117,27 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return this.UserDAO.searchUserByEmail(email);
 	}
 
-	/*
-	 * @Override public boolean checkUserExist(String userName) throws
-	 * NotFoundException { return this.UserDAO.checkUserExist(userName); }
-	 */
+	@Override
+	public boolean checkUserExist(String userName) throws NotFoundException {
+		return this.UserDAO.checkUserExist(userName);
+	}
 
 	@Override
 	public void updateTeacherInfo(Teacher teacher) throws NotFoundException {
 		this.TeacherDAO.updateTeacherInfo(teacher);
-		
+
 	}
 
 	@Override
 	public void updateStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException {
 		this.StudyCenterDAO.updateStudyCenterInfo(studyCenter);
-		
+
 	}
 
 	@Override
 	public void updateStudentInfo(Student student) throws NotFoundException {
 		this.StudentDAO.updateStudentInfo(student);
-		
+
 	}
-	
-	
+
 }
