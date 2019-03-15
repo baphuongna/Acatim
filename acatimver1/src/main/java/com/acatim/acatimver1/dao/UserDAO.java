@@ -9,7 +9,10 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.acatim.acatimver1.model.ObjectUser;
+import com.acatim.acatimver1.model.Student;
+import com.acatim.acatimver1.model.StudyCenter;
+import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.mapper.UserMapper;
 import com.acatim.acatimver1.model.UserModel;
 

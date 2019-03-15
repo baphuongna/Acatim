@@ -3,17 +3,23 @@ package com.acatim.acatimver1.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import com.acatim.acatimver1.model.ObjectUser;
+import com.acatim.acatimver1.model.Student;
+import com.acatim.acatimver1.model.StudyCenter;
+import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.Rating;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.Teacher;
@@ -209,39 +215,64 @@ public class MainController {
 		modelAndView.setViewName("rating");
 		return modelAndView;
 	}
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
+	public ModelAndView registration() {
+		ModelAndView modelAndView = new ModelAndView();
+		UserModel user = new UserModel();
+		modelAndView.addObject("user", user);
+		modelAndView.setViewName("registration");
+		return modelAndView;
+	}
 
-//	 @RequestMapping(value="/registration", method = RequestMethod.GET)
-//	    public ModelAndView registration(){
-//	        ModelAndView modelAndView = new ModelAndView();
-//	        UserModel user = new UserModel();
-//	        modelAndView.addObject("user", user);
-//	        modelAndView.setViewName("registration");
-//	        return modelAndView;
-//	    }
-//
-//	    @RequestMapping(value = "/registration", method = RequestMethod.POST)
-//	    public ModelAndView createNewUser(@Valid @ModelAttribute("user") UserModel data, BindingResult bindingResult) {
-//	    	 System.out.println("11111112");
-//	        ModelAndView modelAndView = new ModelAndView();
-//	      //  Object userExists =  userInfoService.loadUserByUsername(user.getUserName(),"Student");
-//		/*
-//		 * if (userExists != null) { bindingResult .rejectValue("email", "error.user",
-//		 * "There is already a user registered with the email provided"); }
-//		 */
-//	        
-//	        if (bindingResult.hasErrors()) {
-//	            modelAndView.setViewName("registration");
-//	            System.out.println("1111111111");
-//	        } else {
-//	        	 System.out.println("55555555555");
-//	           // userService.saveUser(user);
-//	            modelAndView.addObject("successMessage", "User has been registered successfully");
-//	          //  modelAndView.addObject("user", new User());
-//	            modelAndView.setViewName("registration");
-//
-//	        }
-//	        return modelAndView;
-//	    }
+	@RequestMapping(value = "/registration", method = RequestMethod.POST)
+	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) {
+		System.out.println("11111112");
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("bbbb" + data);
+		// Object userExists =
+		// userInfoService.loadUserByUsername(user.getUserName(),"Student");
+		/*
+		 * if (userExists != null) { bindingResult .rejectValue("email", "error.user",
+		 * "There is already a user registered with the email provided"); }
+		 */
+
+		if (bindingResult.hasErrors()) {
+			modelAndView.addObject("successMessage","Bạn đã nhập sai một số thông tin,vui long kiểm tra lại");
+			modelAndView.setViewName("registration");
+		} else {
+			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công");
+			System.out.println("thanh công");
+			try {
+				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
+						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
+						data.isActive());
+				if (data.getRole_id() == 1) {
+					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
+					userInfoService.addUserInfo(user);
+					userInfoService.addStudentInfo(newStudent);
+				}
+				if (data.getRole_id() == 2) {
+					Teacher newTeacher = new Teacher(data.getUserName(), data.getDob(), data.isGender(),
+							data.getDescription(), 1);
+					userInfoService.addUserInfo(user);
+					userInfoService.addTeacherInfo(newTeacher);
+				}
+				if (data.getRole_id() == 3) {
+					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(),1);
+					userInfoService.addUserInfo(user);
+					userInfoService.addStudyCenterInfo(newStudyCenter);
+				}
+			} catch (NotFoundException e) {
+				System.out.println("error regitration");
+				e.printStackTrace();
+			}
+			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công");
+			// modelAndView.addObject("user", new User());
+			modelAndView.setViewName("registration");
+
+		}
+		return modelAndView;
+	}
 
 	@RequestMapping(value = { "/blog" }, method = RequestMethod.GET)
 	public ModelAndView blog() {
