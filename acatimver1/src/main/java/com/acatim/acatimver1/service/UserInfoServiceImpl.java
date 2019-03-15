@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.StudentDAO;
@@ -67,6 +68,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public void addUserInfo(UserModel user) throws NotFoundException {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		this.UserDAO.addUser(user);
 
 	}
