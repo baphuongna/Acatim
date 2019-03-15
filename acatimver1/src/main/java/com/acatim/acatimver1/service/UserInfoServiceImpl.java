@@ -117,10 +117,10 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return this.UserDAO.searchUserByEmail(email);
 	}
 
-	@Override
-	public boolean checkUserExist(String userName) throws NotFoundException {
-		return this.UserDAO.checkUserExist(userName);
-	}
+	/*
+	 * @Override public boolean checkUserExist(String userName) throws
+	 * NotFoundException { return this.UserDAO.checkUserExist(userName); }
+	 */
 
 	@Override
 	public void updateTeacherInfo(Teacher teacher) throws NotFoundException {
