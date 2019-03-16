@@ -83,7 +83,7 @@
 							</h3>
 							<p th:text="${course.courseDescription}"></p>
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-							 th:attr="data-target='#'+${course.courseId }"  onclick="doit()">Xem thêm ...</button>
+							 th:attr="data-target='#'+${course.courseId }">Xem thêm ...</button>
 						</div>
 					</div>
 				</div>
@@ -183,6 +183,7 @@
 								</h4>
 								<div class="action">
 									<button class="add-to-cart btn btn-success" type="button">Get Discount Code</button>
+									<p class="noteLogin">Bạn chưa đăng nhập ...</p>
 									<!-- <button class="like btn btn-danger" type="button">
 										<span class="fa fa-heart"></span>
 									</button> -->
@@ -213,18 +214,6 @@
 			<circle class="path" cx="24" cy="24" r="22" fill="none"
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
-	<script type="text/javascript">
-	function doit(){
-		var description = document.getElementById('description').innerHTML;
-		var a =  document.querySelectorAll("#description");
-		var arr = new Array();
-		arr.push(a.innerHTML);
-		for (var i = 0; i< a.length;i++){
-			console.log(a[i].innerHTML);
-		}
-	}
-		
-	</script>
 
 
 	<script src="js/jquery.min.js"></script>

@@ -317,7 +317,8 @@
 										<li class="divider"></li>
 										<li><a th:href="@{/Logout}">Đăng xuất</a></li>
 									</ul></li>
-								<a href="registration.html" th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary">Registration</a>
+								<a href="registration.html" th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
+								<a href="loginPage.html" th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
 							</ul>
 						</div>
 						<!-- /.nav-collapse -->

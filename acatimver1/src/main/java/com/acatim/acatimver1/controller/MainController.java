@@ -93,6 +93,11 @@ public class MainController {
 		return "TestShowCourse";
 	}
 	
+	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+	public String loginForm() {
+		return "loginPage";
+	}
+	
 	@RequestMapping("/course")
 	public String showAllCourseFull(Model model) {
 		model.addAttribute("courses", courseService.getAllCourse());
