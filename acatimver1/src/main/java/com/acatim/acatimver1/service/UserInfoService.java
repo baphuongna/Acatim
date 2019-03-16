@@ -32,5 +32,6 @@ public interface UserInfoService {
 	List<UserModel> loadAllUserTeacher() throws NotFoundException;
 	List<UserModel> loadAllUserStudyCenter() throws NotFoundException;
 	List<UserModel> loadAllUserStudent() throws NotFoundException;
-	boolean checkUserExist(String userName)  throws NotFoundException;
+	boolean checkUserExist(String userName) throws NotFoundException;
+	String getRoleName(String userName) throws NotFoundException;
 }

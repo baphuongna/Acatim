@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.acatim.acatimver1.dao.RoleDAO;
 import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
@@ -20,6 +21,9 @@ import javassist.NotFoundException;
 public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserDAO UserDAO;
+	
+	@Autowired
+	private RoleDAO RoleDAO;
 
 	@Autowired
 	private StudentDAO StudentDAO;
@@ -156,6 +160,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public void updateStudentInfo(Student student) throws NotFoundException {
 		this.StudentDAO.updateStudentInfo(student);
 
+	}
+
+	@Override
+	public String getRoleName(String userName) throws NotFoundException {
+		return this.RoleDAO.getRoleNameByUserName(userName);
 	}
 
 }

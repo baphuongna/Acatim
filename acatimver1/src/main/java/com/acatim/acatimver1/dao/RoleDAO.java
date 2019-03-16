@@ -34,19 +34,19 @@ public class RoleDAO extends JdbcDaoSupport {
 		return roles;
 	}
 
-//	public Role findRoleAccount(String userName) {
-//		String sql = "Select r.role_name " //
-//				+ " from User ur, Role r " //
-//				+ " where ur.role_id = r.role_id and ur.user_name = ? ";
-//
-//		Object[] params = new Object[] { userName };
-//		RoleMapper mapper = new RoleMapper();
-//		try {
-//			Role roleInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-//			return roleInfo;
-//		} catch (EmptyResultDataAccessException e) {
-//			return null;
-//		}
-//
-//	}
+	public String getRoleNameByUserName(String userName) {
+		String sql = "Select r.role_name, r.role_id " //
+				+ " from User ur, Role r " //
+				+ " where ur.role_id = r.role_id and ur.user_name = ?;";
+
+		Object[] params = new Object[] { userName };
+		RoleMapper mapper = new RoleMapper();
+		try {
+			Role roleInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return roleInfo.getRoleName();
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
+	}
 }

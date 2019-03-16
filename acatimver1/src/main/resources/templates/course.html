@@ -165,7 +165,7 @@
 										<span class="fa fa-star"></span>
 									</div>
 									<span class="review-no">41 reviews</span></br> <span
-										class="review-no">Giáo viên: </span><a href="#" th:text="${course.userModel.fullName}"></a>
+										class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
 								</div>
 								<p class="product-description" th:text="${course.courseDescription}"></p>
 								<h4 class="price">
