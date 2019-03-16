@@ -242,8 +242,10 @@
 
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<input type="date" name="dob" placeholder="Ngày Sinh của bạn"
-															class="form-control" />
+														<input type="date" th:field="*{dob}" placeholder="Ngày Sinh của bạn"
+															class="form-control" /><label
+															th:if="${#fields.hasErrors('dob')}"
+															th:errors="*{dob}" class="validation-message"></label>
 													</div>
 												</div>
 		

@@ -1,6 +1,9 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -149,7 +152,6 @@ public class MainController {
 				List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(userName);
 				System.out.println(ratings);
 				model.addAttribute("ratings", ratings);
-				model.addAttribute("courses", courseService.getCourseByUserName(userName));
 			}
 			modelAndView.setViewName("profile");
 	    }
@@ -226,24 +228,24 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) {
+	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) throws NotFoundException {
 		System.out.println("11111112");
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("bbbb" + data);
-		// Object userExists =
-		// userInfoService.loadUserByUsername(user.getUserName(),"Student");
-		/*
-		 * if (userExists != null) { bindingResult .rejectValue("email", "error.user",
-		 * "There is already a user registered with the email provided"); }
-		 */
-
+		 boolean userExists = userInfoService.checkUserExist(data.getUserName());
+		  if (userExists == true) { 
+			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại,vui lòng nhập một địa chỉ email khác"); 
+		  }
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("successMessage","Bạn đã nhập sai một số thông tin,vui long kiểm tra lại");
 			modelAndView.setViewName("registration");
 		} else {
-			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công");
-			System.out.println("thanh công");
 			try {
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date date = new Date();
+				String dateCurent=(String)dateFormat.format(date);
+				System.out.println("hhhh  "+dateCurent);
+				data.setCreateDate(dateCurent);
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
 						data.isActive());
@@ -251,17 +253,20 @@ public class MainController {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudentInfo(newStudent);
+					System.out.println("học sinh thanh cong");
 				}
 				if (data.getRole_id() == 2) {
 					Teacher newTeacher = new Teacher(data.getUserName(), data.getDob(), data.isGender(),
 							data.getDescription(), 1);
 					userInfoService.addUserInfo(user);
 					userInfoService.addTeacherInfo(newTeacher);
+					System.out.println("giáo vien thanh cong");
 				}
 				if (data.getRole_id() == 3) {
 					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(),1);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudyCenterInfo(newStudyCenter);
+					System.out.println("trung tam thanh cong");
 				}
 			} catch (NotFoundException e) {
 				System.out.println("error regitration");
