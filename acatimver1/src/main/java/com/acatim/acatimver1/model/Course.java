@@ -46,10 +46,6 @@ public class Course {
 	@ManyToOne
 	@JoinColumn
 	private UserModel userModel;
-	
-	@ManyToOne
-	@JoinColumn
-	private DiscountCode discountCode;
 
 	public Course() {
 		super();

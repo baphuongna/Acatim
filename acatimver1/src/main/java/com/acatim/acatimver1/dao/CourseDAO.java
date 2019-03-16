@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.CourseExtractor;
 import com.acatim.acatimver1.mapper.CourseMapper;
+import com.acatim.acatimver1.mapper.DiscountCodeMapper;
 import com.acatim.acatimver1.model.Course;
 
 @Repository
@@ -28,13 +29,6 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\r\n" +
 				"INNER JOIN User ON Course.user_name = User.user_name";
 
-		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
-		return courses;
-	}
-	
-	public List<Course> getDiscountCode() {
-		String sql = "SELECT *\r\n" + 
-				"FROM DiscountCode";
 		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
 		return courses;
 	}

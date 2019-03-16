@@ -18,10 +18,6 @@ public class CourseServiceImpl {
 		return this.courseDAO.getAllCourse();
 	}
 	
-	public List<Course> getDiscountCode() {
-		return this.courseDAO.getDiscountCode();
-	}
-	
 	public void addCourse(Course course) {
 		this.courseDAO.addCourse(course);
 	}
