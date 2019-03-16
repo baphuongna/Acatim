@@ -215,7 +215,7 @@
 
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<input type="text" th:field="*{password}"
+														<input type="password" th:field="*{password}"
 															placeholder="Mật khẩu" class="form-control" /> <label
 															th:if="${#fields.hasErrors('password')}"
 															th:errors="*{password}" class="validation-message"></label>
@@ -242,10 +242,8 @@
 
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<input type="date" th:field="*{dob}" placeholder="Ngày Sinh của bạn"
-															class="form-control" /><label
-															th:if="${#fields.hasErrors('dob')}"
-															th:errors="*{dob}" class="validation-message"></label>
+														<input type="date" placeholder="Ngày Sinh của bạn" name="dob" required="required"
+															class="form-control" />
 													</div>
 												</div>
 		
@@ -259,10 +257,17 @@
 												
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<textarea style="height: 120px; width: 100%;" id="description" name="description"
-															placeholder="     Mô tả về bạn"></textarea>
+														<textarea style="height: 120px; width: 100%;" id="description" oninput='textwrite()'
+															placeholder="Mô tả về bạn" required="required" ></textarea>
 													</div>
 												</div>
+												
+												<div class="form-group row">
+													<div class="col-sm-12">
+														<input id="descriptionSubmit" name="description" style="display:none;"></input>
+													</div>
+												</div>
+												
 												<div class="form-group row">
 													<label for="inputGender" class="col-sm-3 col-form-label" id="inputLabel"><h6
 															class="tittle1">Giới tính</h6> </a></label>
@@ -275,7 +280,7 @@
 													</div>
 												</div>
 												<div class="form-actions">
-													<button type="submit" class="btn btn-primary btn-lg"
+													<button type="submit" class="btn btn-primary btn-lg" onclick="get()"
 														style="float: right">Đăng kí</button>
 												</div>
 											</form>
@@ -426,14 +431,17 @@
 				document.getElementById("inputLabel").style.display = "none";
 				document.getElementById("description").style.display = "block";
 			}
-		}
-		
-		
-		 
+		}	 
 	</script>
 	
- 
+	<script>
+	function textwrite(){
+    	thetext = document.getElementById("description").value;  
+      var myLineBreak = thetext.replace(/\r\n|\r|\n/g,"</br>");
 
+      document.getElementById('descriptionSubmit').value = myLineBreak;
+    }
+	</script>
 
 </body>
 </html>
