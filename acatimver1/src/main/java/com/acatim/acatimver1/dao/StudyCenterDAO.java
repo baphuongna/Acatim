@@ -10,8 +10,10 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.mapper.StudyCenterExtractor;
 import com.acatim.acatimver1.mapper.StudyCenterMapper;
 import com.acatim.acatimver1.model.StudyCenter;
+import com.acatim.acatimver1.model.UserModel;
 
 @Repository
 @Transactional
@@ -35,6 +37,18 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 
 	}
 
+	public List<UserModel> getAllUserStudyCenter() {
+		String sql = "SELECT * FROM User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
+
+		try {
+			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new StudyCenterExtractor());
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
+	}
+	
 	public List<StudyCenter> getAllStudyCenter() {
 		String sql = StudyCenterMapper.BASE_SQL;
 

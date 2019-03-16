@@ -15,7 +15,7 @@ public class CategoriesMapper implements RowMapper<Categories>{
 	@Override
 	public Categories mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-		int categoryId = rs.getInt("categoryId");
+		int categoryId = rs.getInt("category_id");
 		String categoryName = rs.getString("category_name");
 		String createDate = rs.getString("create_date");
 		String updateDate = rs.getString("update_date");

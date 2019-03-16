@@ -50,6 +50,21 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public List<Student> loadAllStudent() throws NotFoundException {
 		return this.StudentDAO.getAllStudent();
 	}
+	
+	@Override
+	public List<UserModel> loadAllUserTeacher() throws NotFoundException {
+		return this.TeacherDAO.getAllUserTeacher();
+	}
+
+	@Override
+	public List<UserModel> loadAllUserStudyCenter() throws NotFoundException {
+		return this.StudyCenterDAO.getAllUserStudyCenter();
+	}
+
+	@Override
+	public List<UserModel> loadAllUserStudent() throws NotFoundException {
+		return this.StudentDAO.getAllUserStudent();
+	}
 
 	@Override
 	public Teacher loadTeacherByUsername(String username) throws NotFoundException {

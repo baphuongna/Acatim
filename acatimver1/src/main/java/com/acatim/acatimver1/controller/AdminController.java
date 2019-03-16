@@ -1,132 +1,56 @@
 package com.acatim.acatimver1.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acatim.acatimver1.service.CategoriesServiceImpl;
+import com.acatim.acatimver1.service.CourseServiceImpl;
+import com.acatim.acatimver1.service.SubjectServiceImpl;
+import com.acatim.acatimver1.service.UserInfoServiceImpl;
+
+import javassist.NotFoundException;
+
 @Controller
 @RequestMapping(value = {"/admin"})
 public class AdminController {
 	
+	@Autowired
+	private UserInfoServiceImpl userInfoService;
+
+	@Autowired
+	private CourseServiceImpl courseService;
+
+	@Autowired
+	private SubjectServiceImpl subjectService;
+	
+	@Autowired
+	private CategoriesServiceImpl categoriesService;
+	
 	@RequestMapping(value = { "/", "/index"}, method = RequestMethod.GET)
 	public ModelAndView indexAdmin() {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		try {
+			modelAndView.addObject("allStudent", userInfoService.loadAllStudent().size());
+			modelAndView.addObject("allStudyCenter", userInfoService.loadAllStudyCenter().size());
+			modelAndView.addObject("allTeacher", userInfoService.loadAllTeacher().size());
+			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
+			modelAndView.addObject("allSubject", subjectService.getAllSubject().size());
+			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
+			
+			
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		modelAndView.setViewName("admin/index");
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = {"all-students"}, method = RequestMethod.GET)
-	public ModelAndView allStudents() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-students");
-		return modelAndView;
-	}
-	
-	@RequestMapping(value = {"add-student"}, method = RequestMethod.GET)
-	public ModelAndView addStudent() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-student");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-student"}, method = RequestMethod.GET)
-	public ModelAndView editStudent() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-student");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"student-profile"}, method = RequestMethod.GET)
-	public ModelAndView studentProfile() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/student-profile");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"all-teachers"}, method = RequestMethod.GET)
-	public ModelAndView allTeachers() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-teachers");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"add-teacher"}, method = RequestMethod.GET)
-	public ModelAndView addTeacher() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-teacher");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-teacher"}, method = RequestMethod.GET)
-	public ModelAndView editTeacher() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-teacher");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"teacher-profile"}, method = RequestMethod.GET)
-	public ModelAndView teacherProfile() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/teacher-profile");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"all-study-centers"}, method = RequestMethod.GET)
-	public ModelAndView allStudyCenters() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-study-centers");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"add-study-centers"}, method = RequestMethod.GET)
-	public ModelAndView addStudyCenters() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-study-centers");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-study-centers"}, method = RequestMethod.GET)
-	public ModelAndView editStudyCenters() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-study-centers");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"study-centers-profile"}, method = RequestMethod.GET)
-	public ModelAndView studyCentersProfile() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/study-centers-profile");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"all-courses"}, method = RequestMethod.GET)
-	public ModelAndView allCourses() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-courses");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"add-course"}, method = RequestMethod.GET)
-	public ModelAndView addCourse() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-course");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-course"}, method = RequestMethod.GET)
-	public ModelAndView editCourse() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-course");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"course-info"}, method = RequestMethod.GET)
-	public ModelAndView courseInfo() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/course-info");
-		return modelAndView;
-	}
 
 	@RequestMapping(value = {"all-subjects"}, method = RequestMethod.GET)
 	public ModelAndView allSubjects() {

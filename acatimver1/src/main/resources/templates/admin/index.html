@@ -117,24 +117,24 @@
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="analytics-sparkle-line reso-mg-b-30">
                             <div class="analytics-content">
-                                <h5>Computer Technologies</h5>
-                                <h2>$<span class="counter">5000</span> 
+                                <h5>Số lượng học sinh</h5>
+                                <h2><span class="counter" th:utext="${allStudent}">5000</span> 
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="analytics-sparkle-line reso-mg-b-30">
                             <div class="analytics-content">
-                                <h5>Accounting Technologies</h5>
-                                <h2>$<span class="counter">3000</span> 
+                                <h5>Số lượng trung tâm</h5>
+                                <h2><span class="counter" th:utext="${allStudyCenter}">3000</span> 
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
                             <div class="analytics-content">
-                                <h5>Electrical Engineering</h5>
-                                <h2>$<span class="counter">2000</span> 
+                                <h5>Số lượng giáo viên</h5>
+                                <h2><span class="counter" th:utext="${allTeacher}">2000</span> 
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                         <div class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30">
                             <div class="analytics-content">
                                 <h5>Chemical Engineering</h5>
-                                <h2>$<span class="counter">3500</span> 
+                                <h2>$<span class="counter" th:utext="${allStudent}">3500</span> 
                             </div>
                         </div>
                     </div>
@@ -154,24 +154,24 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
-                            <h3 class="box-title">Total Visit</h3>
+                            <h3 class="box-title">Số Thể Loại</h3>
                             <ul class="list-inline two-part-sp">
                                 <li>
                                     <div id="sparklinedash"></div>
                                 </li>
-                                <li class="text-right sp-cn-r"> <span class="counter text-success">1500</span></li>
+                                <li class="text-right sp-cn-r"> <span class="counter text-success" th:utext="${allCategories}">1500</span></li>
                             </ul>
                         </div>
                     </div>
 					
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
-                            <h3 class="box-title">Page Views</h3>
+                            <h3 class="box-title">Số lượng Môn Học </h3>
                             <ul class="list-inline two-part-sp">
                                 <li>
                                     <div id="sparklinedash2"></div>
                                 </li>
-                                <li class="text-right graph-two-ctn"><span class="counter text-purple">3000</span></li>
+                                <li class="text-right graph-two-ctn"><span class="counter text-purple" th:utext="${allSubject}">3000</span></li>
                             </ul>
                         </div>
                     </div>
@@ -179,12 +179,12 @@
 					
 					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                         <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
-                            <h3 class="box-title">Unique Visitor</h3>
+                            <h3 class="box-title">Số lượng Khóa Học</h3>
                             <ul class="list-inline two-part-sp">
                                 <li>
                                     <div id="sparklinedash3"></div>
                                 </li>
-                                <li class="text-right graph-three-ctn"> <span class="counter text-info">5000</span></li>
+                                <li class="text-right graph-three-ctn"> <span class="counter text-info" th:utext="${allCourse}">5000</span></li>
                             </ul>
                         </div>
 
@@ -197,7 +197,7 @@
                                 <li>
                                     <div id="sparklinedash4"></div>
                                 </li>
-                                <li class="text-right graph-four-ctn"><span class="text-danger"><span class="counter">18</span>%</span>
+                                <li class="text-right graph-four-ctn"><span class="text-danger"><span class="counter" th:utext="${allStudent}">18</span>%</span>
                                 </li>
                             </ul>
                         </div>
