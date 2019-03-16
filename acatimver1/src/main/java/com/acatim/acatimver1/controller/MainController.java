@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acatim.acatimver1.model.StudyCenter;
+import com.acatim.acatimver1.model.Teacher;
+import com.acatim.acatimver1.model.UserModel;
 import com.acatim.acatimver1.service.CourseServiceImpl;
 import com.acatim.acatimver1.service.SubjectServiceImpl;
 import com.acatim.acatimver1.service.UserInfoServiceImpl;
@@ -147,6 +151,54 @@ public class MainController {
 	@RequestMapping(value = { "/teacher" }, method = RequestMethod.GET)
 	public ModelAndView teacher() {
 		ModelAndView modelAndView = new ModelAndView();
+		List<Teacher> listTeacher = null;
+		List<StudyCenter> listStudyCenter = null;
+		
+		try {
+			//get teacher
+			listTeacher = this.userInfoService.loadAllTeacher();
+			if(listTeacher != null && listTeacher.size() > 0) {
+				for (Teacher teacher : listTeacher) {
+					// get user
+					UserModel user = null;
+					user = this.userInfoService.loadUserByUsername(teacher.getUserName());
+					teacher.setUser(user);
+					
+					//split description
+					if(teacher.getDescription().length() > 50) {
+						teacher.setDescription(teacher.getDescription().substring(0, 50) + " ...");
+					}
+					if(teacher.getDescription().contains("</br>")) {
+						String[] splitDes = teacher.getDescription().split("</br>");
+						teacher.setDescription(splitDes[0]+ " ...");
+					}
+				}
+			}
+			//get study center
+			listStudyCenter = this.userInfoService.loadAllStudyCenter();
+			if(listStudyCenter != null && listStudyCenter.size() > 0) {
+				for (StudyCenter studyCenter : listStudyCenter) {
+					//get Study Center
+					UserModel user = null;
+					user = this.userInfoService.loadUserByUsername(studyCenter.getUserName());
+					studyCenter.setUser(user);
+					
+					//split description
+					if(studyCenter.getDescription().length() > 50) {
+						studyCenter.setDescription(studyCenter.getDescription().substring(0, 50)+ " ...");
+					}
+					if(studyCenter.getDescription().contains("</br>")) {
+						String[] splitDes = studyCenter.getDescription().split("</br>");
+						studyCenter.setDescription(splitDes[0]+ " ...");
+					}
+				}
+			}
+			
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("listTeacher", listTeacher);
+		modelAndView.addObject("listStudyCenter", listStudyCenter);
 		modelAndView.setViewName("teacher");
 		return modelAndView;
 	}

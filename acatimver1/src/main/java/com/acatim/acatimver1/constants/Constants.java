@@ -18,4 +18,9 @@ public class Constants {
 	
 	//message
 	public static final String msg_login_invalid = "Tên đăng nhập hoặc mật khẩu không đúng";
+	
+	//Roll
+	public static final String role_teacher = "Giáo Viên";
+	public static final String role_student = "Học viên";
+	public static final String role_study_center = "Trung Tâm";
 }
