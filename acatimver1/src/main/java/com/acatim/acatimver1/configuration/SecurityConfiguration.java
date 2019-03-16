@@ -51,7 +51,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
  
         // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.
-	//        http.authorizeRequests().antMatchers("/profileS").access("hasAnyRole('Student', 'Teacher','Study Center','Manager')");
+        
+        http.authorizeRequests().antMatchers("/admin/*").hasAnyAuthority("Admin","Manager");
 	//        
 	//        http.authorizeRequests().antMatchers("/profileS").access("hasRole('Student')");
         // Trang chỉ dành cho ADMIN
@@ -79,37 +80,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //
                 .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
     	
-    	
-//    	
-//        http.
-//                authorizeRequests()
-//                .antMatchers("/").permitAll()
-//                .antMatchers("/index").permitAll()
-//                .antMatchers("/registration").permitAll()
-//                .antMatchers("/about").permitAll()
-//                .antMatchers("/course").permitAll()
-//                .antMatchers("/teacher").permitAll()
-//                .antMatchers("/blog").permitAll()
-//                .antMatchers("/event").permitAll()
-//                .antMatchers("/contact").permitAll()
-//                .antMatchers("/profileS").permitAll()
-//                .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-//                .authenticated().and().csrf().disable().formLogin()
-//                .loginPage("/index").failureUrl("/index?error=true")
-//                .defaultSuccessUrl("/about")
-//                .usernameParameter("email")
-//                .passwordParameter("password")
-//                .and().logout()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/").and().exceptionHandling()
-//                .accessDeniedPage("/access-denied");
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**", "/img/**");
     }
     
     @Bean

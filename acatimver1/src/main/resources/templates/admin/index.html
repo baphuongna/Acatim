@@ -1,0 +1,607 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dashboard | Acatim - Acatim Admin Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="admin/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/owl.carousel.css">
+    <link rel="stylesheet" href="admin/css/owl.theme.css">
+    <link rel="stylesheet" href="admin/css/owl.transitions.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/normalize.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/main.css" >
+    <!-- educate icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/morrisadmin/js/morris.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="admin/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="admin/css/calendar/fullcalendar.print.min.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="admin/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body>
+    <!-- Start Left menu area -->
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a href="admin/index.html"><h1>Acatim</h1></a>
+                <strong><a href="index.html"><img src="admin/img/logo/logosn.png" alt="" /></a></strong>
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a class="has-arrow" href="index.html">
+								   <span class="educate-icon educate-home icon-wrap"></span>
+								   <span class="mini-click-non">Education</span>
+								</a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="Dashboard" href="index.html"><span class="mini-sub-pro">Dashboard </span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Professors</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Professors" href="admin/all-professors.html" th:href="@{/admin/all-professors}"><span class="mini-sub-pro">All Professors</span></a></li>
+                                <li><a title="Add Professor" href="add-professor.html"><span class="mini-sub-pro">Add Professor</span></a></li>
+                                <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Edit Professor</span></a></li>
+                                <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Professor Profile</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Students</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Students" href="all-students.html"><span class="mini-sub-pro">All Students</span></a></li>
+                                <li><a title="Add Students" href="add-student.html"><span class="mini-sub-pro">Add Student</span></a></li>
+                                <li><a title="Edit Students" href="edit-student.html"><span class="mini-sub-pro">Edit Student</span></a></li>
+                                <li><a title="Students Profile" href="student-profile.html"><span class="mini-sub-pro">Student Profile</span></a></li>
+                            </ul>
+                        </li>
+						 <li>
+                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Teacher</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Students" href="all-teacher.html"><span class="mini-sub-pro">All Teacher</span></a></li>
+                                <li><a title="Add Students" href="add-teacher.html"><span class="mini-sub-pro">Add Teacher</span></a></li>
+                                <li><a title="Edit Students" href="edit-teacher.html"><span class="mini-sub-pro">Edit Teacher</span></a></li>
+                                <li><a title="Students Profile" href="teacher-profile.html"><span class="mini-sub-pro">Teacher Profile</span></a></li>
+                            </ul>
+                        </li>
+						 <li>
+                            <a class="has-arrow" href="all-students.html" aria-expanded="false"><span class="educate-icon educate-student icon-wrap"></span> <span class="mini-click-non">Study Center</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Students" href="all-study-centers.html"><span class="mini-sub-pro">All Study Center</span></a></li>
+                                <li><a title="Add Students" href="add-study-centers.html"><span class="mini-sub-pro">Add Study Center</span></a></li>
+                                <li><a title="Edit Students" href="edit-study-centers.html"><span class="mini-sub-pro">Edit Study Center</span></a></li>
+                                <li><a title="Students Profile" href="study-centers-profile.html"><span class="mini-sub-pro">Study Center Profile</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Courses</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Courses" href="all-courses.html"><span class="mini-sub-pro">All Courses</span></a></li>
+                                <li><a title="Add Courses" href="add-course.html"><span class="mini-sub-pro">Add Course</span></a></li>
+                                <li><a title="Edit Courses" href="edit-course.html"><span class="mini-sub-pro">Edit Course</span></a></li>
+                                <li><a title="Courses Profile" href="course-info.html"><span class="mini-sub-pro">Courses Info</span></a></li>
+                            </ul>
+                        </li>
+						 <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Subject</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Courses" href="all-subjects.html"><span class="mini-sub-pro">All Subject</span></a></li>
+                                <li><a title="Add Courses" href="add-subject.html"><span class="mini-sub-pro">Add Subject</span></a></li>
+                                <li><a title="Edit Courses" href="edit-subject.html"><span class="mini-sub-pro">Edit Subject</span></a></li>
+                                <li><a title="Courses Profile" href="subject-info.html"><span class="mini-sub-pro">Subject Info</span></a></li>
+                            </ul>
+                        </li>
+						 <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Categories</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Courses" href="all-categories.html"><span class="mini-sub-pro">All Categories</span></a></li>
+                                <li><a title="Add Courses" href="add-category.html"><span class="mini-sub-pro">Add Categories</span></a></li>
+                                <li><a title="Edit Courses" href="edit-category.html"><span class="mini-sub-pro">Edit Categories</span></a></li>
+                                <li><a title="Courses Profile" href="category-info.html"><span class="mini-sub-pro">Categories Info</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Library</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Library" href="library-assets.html"><span class="mini-sub-pro">Library Assets</span></a></li>
+                                <li><a title="Add Library" href="add-library-assets.html"><span class="mini-sub-pro">Add Library Asset</span></a></li>
+                                <li><a title="Edit Library" href="edit-library-assets.html"><span class="mini-sub-pro">Edit Library Asset</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-courses.html" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Departments</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Departments List" href="departments.html"><span class="mini-sub-pro">Departments List</span></a></li>
+                                <li><a title="Add Departments" href="add-department.html"><span class="mini-sub-pro">Add Departments</span></a></li>
+                                <li><a title="Edit Departments" href="edit-department.html"><span class="mini-sub-pro">Edit Departments</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="Data Table" href="data-table.html"><span class="mini-sub-pro">Data Table</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
+                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Basic Form Elements" href="basic-form-element.html"><span class="mini-sub-pro">Bc Form Elements</span></a></li>
+                                <li><a title="Advance Form Elements" href="advance-form-element.html"><span class="mini-sub-pro">Ad Form Elements</span></a></li>
+                                <li><a title="Password Meter" href="password-meter.html"><span class="mini-sub-pro">Password Meter</span></a></li>
+                                <li><a title="Multi Upload" href="multi-upload.html"><span class="mini-sub-pro">Multi Upload</span></a></li>
+                                <li><a title="Text Editor" href="tinymc.html"><span class="mini-sub-pro">Text Editor</span></a></li>
+                                <li><a title="Dual List Box" href="dual-list-box.html"><span class="mini-sub-pro">Dual List Box</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="mailbox.html" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">App views</span></a>
+                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Notifications" href="notifications.html"><span class="mini-sub-pro">Notifications</span></a></li>
+                                <li><a title="Alerts" href="alerts.html"><span class="mini-sub-pro">Alerts</span></a></li>
+                                <li><a title="Modals" href="modals.html"><span class="mini-sub-pro">Modals</span></a></li>
+                                <li><a title="Buttons" href="buttons.html"><span class="mini-sub-pro">Buttons</span></a></li>
+                                <li><a title="Tabs" href="tabs.html"><span class="mini-sub-pro">Tabs</span></a></li>
+                                <li><a title="Accordion" href="accordion.html"><span class="mini-sub-pro">Accordion</span></a></li>
+                            </ul>
+                        </li>
+                        <li id="removable">
+                            <a class="has-arrow" href="#" aria-expanded="false"><span class="educate-icon educate-pages icon-wrap"></span> <span class="mini-click-non">Pages</span></a>
+                            <ul class="submenu-angle page-mini-nb-dp" aria-expanded="false">
+                                <li><a title="Login" href="login.html"><span class="mini-sub-pro">Login</span></a></li>
+                                <li><a title="Register" href="register.html"><span class="mini-sub-pro">Register</span></a></li>
+                                <li><a title="Password Recovery" href="password-recovery.html"><span class="mini-sub-pro">Password Recovery</span></a></li>
+                                <li><a title="404 Page" href="404.html"><span class="mini-sub-pro">404 Page</span></a></li>
+                                <li><a title="500 Page" href="500.html"><span class="mini-sub-pro">500 Page</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="admin/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+													<i class="educate-icon educate-nav"></i>
+												</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+															<img src="admin/img/product/pro4.jpg" alt="" />
+															<span class="admin-name">Prof.Anderson</span>
+															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+														</a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
+                                                        </li>
+                                                        <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>My Profile</a>
+                                                        </li>
+                                                        <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>User Billing</a>
+                                                        </li>
+                                                        <li><a href="#"><span class="edu-icon edu-settings author-log-ic"></span>Settings</a>
+                                                        </li>
+                                                        <li><a href="#"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="breadcome-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="breadcome-list">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <div class="breadcome-heading">
+                                            <form role="search" class="sr-input-func">
+                                                <input type="text" placeholder="Search..." class="search-int form-control">
+                                                <a href="#"><i class="fa fa-search"></i></a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                        <ul class="breadcome-menu">
+                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            </li>
+                                            <li><span class="bread-blod">Dashboard</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="analytics-sparkle-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>Computer Technologies</h5>
+                                <h2>$<span class="counter">5000</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30">
+                            <div class="analytics-content">
+                                <h5>Accounting Technologies</h5>
+                                <h2>$<span class="counter">3000</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
+                            <div class="analytics-content">
+                                <h5>Electrical Engineering</h5>
+                                <h2>$<span class="counter">2000</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                        <div class="analytics-sparkle-line table-mg-t-pro dk-res-t-pro-30">
+                            <div class="analytics-content">
+                                <h5>Chemical Engineering</h5>
+                                <h2>$<span class="counter">3500</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-sales-area mg-tb-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Total Visit</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash"></div>
+                                </li>
+                                <li class="text-right sp-cn-r"> <span class="counter text-success">1500</span></li>
+                            </ul>
+                        </div>
+                    </div>
+					
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Page Views</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash2"></div>
+                                </li>
+                                <li class="text-right graph-two-ctn"><span class="counter text-purple">3000</span></li>
+                            </ul>
+                        </div>
+                    </div>
+					
+					
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs mg-b-10 res-mg-b-30 tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Unique Visitor</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash3"></div>
+                                </li>
+                                <li class="text-right graph-three-ctn"> <span class="counter text-info">5000</span></li>
+                            </ul>
+                        </div>
+
+                    </div>
+					
+					<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                        <div class="white-box analytics-info-cs table-dis-n-pro tb-sm-res-d-n dk-res-t-d-n">
+                            <h3 class="box-title">Bounce Rate</h3>
+                            <ul class="list-inline two-part-sp">
+                                <li>
+                                    <div id="sparklinedash4"></div>
+                                </li>
+                                <li class="text-right graph-four-ctn"><span class="text-danger"><span class="counter">18</span>%</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="library-book-area mg-t-30">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="single-review-st-item res-mg-t-30 table-mg-t-pro-n">
+                            <div class="single-review-st-hd">
+                                <h2>Reviews</h2>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/1.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Sarah Graves</h3>
+                                    <p>Highly recommend</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/2.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Garbease sha</h3>
+                                    <p>Awesome Pro</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/3.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Gobetro pro</h3>
+                                    <p>Great Website</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/4.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Siam Graves</h3>
+                                    <p>That's Good</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/5.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Sarah Graves</h3>
+                                    <p>Highly recommend</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                            <div class="single-review-st-text">
+                                <img src="admin/img/notification/6.jpg" alt="">
+                                <div class="review-ctn-hf">
+                                    <h3>Julsha Grav</h3>
+                                    <p>Sei Hoise bro</p>
+                                </div>
+                                <div class="review-item-rating">
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star"></i>
+                                    <i class="educate-icon educate-star-half"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="single-product-item res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="single-product-image">
+                                <a href="#"><img src="admin/img/product/book-4.jpg" alt=""></a>
+                            </div>
+                            <div class="single-product-text edu-pro-tx">
+                                <h4><a href="#">Title Demo Here</a></h4>
+                                <h5>Lorem ipsum dolor sit amet, this is a consec tetur adipisicing elit</h5>
+                                <div class="product-price">
+                                    <h3>$45</h3>
+                                </div>
+                                <div class="product-buttons">
+                                    <button type="button" class="button-default cart-btn">Read More</button>
+                                    <button type="button" class="button-default"><i class="fa fa-heart"></i></button>
+                                    <button type="button" class="button-default"><i class="fa fa-share"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="courses-inner res-mg-t-30 table-mg-t-pro-n tb-sm-res-d-n dk-res-t-d-n">
+                            <div class="courses-title">
+                                <a href="#"><img src="admin/img/courses/1.jpg" alt="" /></a>
+                                <h2>Apps Development</h2>
+                            </div>
+                            <div class="courses-alaltic">
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-clock"></i></span> 1 Year</span>
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-heart"></i></span> 50</span>
+                                <span class="cr-ic-r"><span class="course-icon"><i class="fa fa-dollar"></i></span> 500</span>
+                            </div>
+                            <div class="course-des">
+                                <p><span><i class="fa fa-clock"></i></span> <b>Duration:</b> 6 Months</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Professor:</b> Jane Doe</p>
+                                <p><span><i class="fa fa-clock"></i></span> <b>Students:</b> 100+</p>
+                            </div>
+                            <div class="product-buttons">
+                                <button type="button" class="button-default cart-btn">Read More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2019. All rights reserved. Template by <a href="https://colorlib.com/wp/templates/">Acatim</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jquery
+		============================================ -->
+    <script src="admin/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="admin/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="admin/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="admin/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="admin/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="admin/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="admin/js/jquery.scrollUp.min.js"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="admin/js/counterup/jquery.counterup.min.js"></script>
+    <script src="admin/js/counterup/waypoints.min.js"></script>
+    <script src="admin/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="admin/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="admin/js/metisMenu/metisMenu.min.js"></script>
+    <script src="admin/js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+		============================================ -->
+    <script src="admin/js/morrisadmin/js/raphael-min.js"></script>
+    <script src="admin/js/morrisadmin/js/morris.js"></script>
+    <script src="admin/js/morrisadmin/js/morris-active.js"></script>
+    <!-- morrisjs JS
+		============================================ -->
+    <script src="admin/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="admin/js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="admin/js/sparkline/sparkline-active.js"></script>
+    <!-- calendar JS
+		============================================ -->
+    <script src="admin/js/calendar/moment.min.js"></script>
+    <script src="admin/js/calendar/fullcalendar.min.js"></script>
+    <script src="admin/js/calendar/fullcalendar-active.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="admin/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="admin/js/main.js"></script>
+    <!-- tawk chat JS
+		============================================ -->
+    <script src="admin/js/tawk-chat.js"></script>
+</body>
+
+</html>
