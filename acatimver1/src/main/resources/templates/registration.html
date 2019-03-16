@@ -158,9 +158,9 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 														<select th:field="*{role_id}"
 															class="form-control form-control-sm" name="role_id"
 															onchange="myStudent()" id="inputRoll">
-															<option value="2">Teacher</option>
-															<option value="1">Student</option>
-															<option value="3">Trung tâm</option>
+															<option value="2">Giáo Viên</option>
+															<option value="1">Học Sinh</option>
+															<option value="3">Trung Tâm</option>
 														</select>
 													</div>
 												</div>
@@ -220,7 +220,7 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<div id="locationField">
 															<input id="autocomplete"
-																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()"
+																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()" required=""
 																type="text" class="form-control" name="address" />
 														</div>
 													</div>
@@ -229,7 +229,7 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="date"
-															placeholder="Ngày sinh của bạn&emsp;&emsp;	" name="dob"
+															placeholder="Ngày sinh của bạn&emsp;&emsp;" name="dob"
 															required="" class="form-control" />
 													</div>
 												</div>
@@ -238,7 +238,7 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<input style="display: none;" type="text" name="role_id"
-															value="0" /> </label>
+															value="2" /> </label>
 													</div>
 												</div>
 
@@ -247,7 +247,7 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 														<textarea
 															style="height: 120px; width: 100%; border-radius: 10px;"
 															id="description" oninput='textwrite()'
-															placeholder="Mô tả về bạn" required="required"></textarea>
+															placeholder="Mô tả về bạn"></textarea>
 													</div>
 												</div>
 
@@ -272,7 +272,7 @@ input[type="date"]:focus::before, input[type="date"]:valid::before {
 												</div>
 												<div class="form-actions">
 													<button type="submit" class="btn btn-primary btn-lg"
-														onclick="get()" style="float: right">Đăng kí</button>
+														style="float: right">Đăng kí</button>
 												</div>
 											</form>
 

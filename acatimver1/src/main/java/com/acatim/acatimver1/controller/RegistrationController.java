@@ -42,6 +42,7 @@ public class RegistrationController {
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("error   "+ data);
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
 		  if (userExists == true) { 
 			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác"); 
@@ -54,13 +55,16 @@ public class RegistrationController {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date date = new Date();
 				String dateCurent=(String)dateFormat.format(date);
-				System.out.println("hhhh  "+dateCurent);
+				System.out.println("hhhhhieu  "+dateCurent);
 				data.setCreateDate(dateCurent);
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
 						data.isActive());
+				System.out.println("hhhhhieu");
+				System.out.println("hhhhhieu  "+user);
 				if (data.getRole_id() == 1) {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
+					System.out.println("student"+newStudent);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudentInfo(newStudent);
 					System.out.println("học sinh thanh cong");
