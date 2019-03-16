@@ -32,6 +32,13 @@ public class CourseDAO extends JdbcDaoSupport {
 		return courses;
 	}
 	
+	public List<Course> getDiscountCode() {
+		String sql = "SELECT *\r\n" + 
+				"FROM DiscountCode";
+		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
+		return courses;
+	}
+	
 	public List<Course> getListCourse() {
 		String sql = "SELECT * FROM Course";
 		CourseMapper mapper = new CourseMapper();

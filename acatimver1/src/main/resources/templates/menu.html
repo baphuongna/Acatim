@@ -18,7 +18,7 @@
 	<div th:fragment="menu">
 
 		<nav
-			class="navbar navbar-expand-lg navbar-dark ftco_navbar  ftco-navbar-light nonShadow"
+			class="navbar navbar-expand-lg ftco_navbar  ftco-navbar-light nonShadow"
 			id="ftco-navbar">
 			<!-- <div class="container">
       <a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>Genius <br><small>University</small></a>
@@ -52,7 +52,7 @@
 			<div class="container">
 				<nav class="navbar padding-bottom-0 width-full nonShadow">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index.html"><i
+						<a class="navbar-brand" th:href="@{/index}"><i
 							class="flaticon-university"></i>Acatim <br> <small>Find
 								your knowledge</small></a>
 						<button class="navbar-toggler" type="button"

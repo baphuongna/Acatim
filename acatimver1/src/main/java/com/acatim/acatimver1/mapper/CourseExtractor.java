@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.acatim.acatimver1.model.Course;
+import com.acatim.acatimver1.model.DiscountCode;
 import com.acatim.acatimver1.model.Subject;
 import com.acatim.acatimver1.model.UserModel;
 
@@ -70,6 +71,19 @@ public class CourseExtractor implements ResultSetExtractor<List<Course>> {
 				boolean active = rs.getBoolean("active");
 				userModel = new UserModel(userName, roleId, fullName, email, password, createDate, phone, address, active);
 				course.setUserModel(userModel);
+			}
+			
+			String codeId = rs.getString("code_id");
+			if (codeId != null) {
+				DiscountCode discountCode = new DiscountCode();
+				String userNameDiscount = rs.getString("user_name");
+				String courseIdDiscount = rs.getString("course_id");
+				String createDate = rs.getString("create_date");
+				String expireDate = rs.getString("expire_date");
+				String status = rs.getString("status");
+				boolean active = rs.getBoolean("active");
+				discountCode = new DiscountCode(codeId, userNameDiscount, courseIdDiscount, createDate, expireDate, status, active);
+				course.setDiscountCode(discountCode);
 			}
 		}
 		return new ArrayList<Course>(map.values());
