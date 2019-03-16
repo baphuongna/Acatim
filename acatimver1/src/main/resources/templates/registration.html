@@ -59,15 +59,7 @@
 <!-- JavaScripts -->
 <script src="js/vendors/modernizr.js"></script>
 </head>
-<style>
-.validation-message {
-	font-style: normal;
-	font-size: 12px;
-	color: #FF1C19;
-}
-</style>
 <body onload="myStudent()">
-
 	<!-- Page Wrapper -->
 	<div id="wrap">
 
@@ -84,28 +76,27 @@
 					<div class="row">
 						<!-- Sidebar -->
 						<div class="col-md-4">
-							<div class="side-bar">
+							<div class="side-bar" style="border-top: 1px solid #DDDD">
 
 								<!-- Professional Details -->
-								<h5 class="tittle">Professional Details</h5>
-								<img src="images/avatar.jpg" class="img-responsive" alt="">
+								<h5 class="tittle">Hãy cùng gia nhập Acatim</h5>
+								<img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="img-responsive" alt="">
 
 
 
 								<!-- Social Profiles -->
-								<h5 class="tittle">Social Profiles</h5>
+								<h5 class="tittle">Tìm chúng tôi ở </h5>
 								<div class="social-icon bor-btm padding-25">
 									<ul>
-										<li><a href="#."> <i class="fa fa-facebook"></i></a></li>
+										<li><a href="#."> <i class="fa fa-facebook active"></i></a></li>
 										<li><a href="#."> <i class="fa fa-google"></i></a></li>
 										<li><a href="#."> <i class="fa fa-twitter"></i></a></li>
-										<li><a href="#."> <i class="fa fa-linkedin"></i></a></li>
 										<li><a href="#."> <i class="fa fa-skype"></i></a></li>
 									</ul>
 								</div>
 
 								<!-- Contact Me -->
-								<h5 class="tittle">Contact Me</h5>
+								<h5 class="tittle">Liên hệ với chúng tôi</h5>
 								<div class="contact padding-25">
 									<!-- Success Msg -->
 									<div id="contact_message" class="success-msg">
@@ -158,36 +149,36 @@
 
 
 												 
-												<h2><span style="color:red;font-size: 19px; font-family: serif;" class="result" th:utext="${successMessage}"></span></h2>
+					<h2><span style="color:red;font-size: 19px; font-family: serif; margin-left: 20px;" class="result" th:utext="${successMessage}"></span></h2>
 
 										<!-- Blog -->
 										<section class="about-me padding-top-10">
 											<form autocomplete="off" action="#"
 												th:action="@{/registration}" th:object="${user}"
 												method="post" class="form-horizontal" role="user">
-												
-												
-											
-												
 												<div class="form-group row">
-													<label for="inputRoll" class="col-sm-3 col-form-label"><h6 class="tittle1">Mời Bạn Chọn</h6></label>
-													<div class="col-sm-3">
-														<select th:field="*{role_id}" class="form-control form-control-sm" name="role_id" onchange="myStudent()" id="inputRoll" >
+													<label for="inputRoll" class="col-sm-2 col-form-label"
+														style="margin-left: 30px;"><h6
+															style="text-align: center;">Bạn là</h6></label>
+													<div class="col-sm-9">
+														<select th:field="*{role_id}"
+															class="form-control form-control-sm" name="role_id"
+															onchange="myStudent()" id="inputRoll">
 															<option value="2">Teacher</option>
 															<option value="1">Student</option>
 															<option value="3">Trung tâm</option>
 														</select>
 													</div>
 												</div>
-												 
-											 <div class="form-group row">
+
+												<div class="form-group row">
 													<div class="col-sm-12">
 														<input type="text" style="display:none;" name="createDate" value="2019-03-29" />
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11">
 														<input type="text" th:field="*{userName}"
 															placeholder="Tên" class="form-control" /> <label
 															th:if="${#fields.hasErrors('userName')}"
@@ -196,7 +187,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="text" th:field="*{fullName}"
 															placeholder="Họ và Tên" class="form-control" /> <label
 															th:if="${#fields.hasErrors('fullName')}"
@@ -205,7 +196,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="text" th:field="*{email}" placeholder="Email"
 															class="form-control" /> <label
 															th:if="${#fields.hasErrors('email')}"
@@ -214,7 +205,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="password" th:field="*{password}"
 															placeholder="Mật khẩu" class="form-control" /> <label
 															th:if="${#fields.hasErrors('password')}"
@@ -223,7 +214,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="text" th:field="*{phone}"
 															placeholder="Số điện thoại" class="form-control" /> <label
 															th:if="${#fields.hasErrors('phone')}"
@@ -231,7 +222,7 @@
 													</div>
 												</div>
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<div id="locationField">
 															<input id="autocomplete"
 																placeholder="Địa chỉ (có gợi ý) " onFocus="geolocate()"
@@ -241,7 +232,7 @@
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="date" placeholder="Ngày Sinh của bạn" name="dob" required="required"
 															class="form-control" />
 													</div>
@@ -249,16 +240,16 @@
 		
 												<!-- AANNNNNNNN -->
 												<div class="form-group row">
-													<div class="col-sm-12">
+													<div class="col-sm-11" style="margin-left: 30px;">
 														<input style="display: none;" type="text" name="role_id"
 															value="0" /> </label>
 													</div>
 												</div>
 												
 												<div class="form-group row">
-													<div class="col-sm-12">
-														<textarea style="height: 120px; width: 100%;" id="description" oninput='textwrite()'
-															placeholder="Mô tả về bạn" required="required" ></textarea>
+													<div class="col-sm-11" style="margin-left: 30px;">
+														<textarea style="height: 120px; width: 100%;border-radius: 10px;" id="description" oninput='textwrite()'
+															placeholder="Mô tả về bạn" required="required"></textarea>
 													</div>
 												</div>
 												
@@ -269,7 +260,7 @@
 												</div>
 												
 												<div class="form-group row">
-													<label for="inputGender" class="col-sm-3 col-form-label" id="inputLabel"><h6
+													<label for="inputGender" style="margin-left: 30px;" class="col-sm-3 col-form-label" id="inputLabel"><h6
 															class="tittle1">Giới tính</h6> </a></label>
 													<div class="col-sm-3">
 														<select class="form-control form-control-sm"
