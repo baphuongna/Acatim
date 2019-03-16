@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = {"/admin"})
 public class AdminController {
 	
-	@RequestMapping(value = { "/", "index"}, method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/index"}, method = RequestMethod.GET)
 	public ModelAndView indexAdmin() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/index");
