@@ -10,11 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class AdminController {
 	
 	@RequestMapping(value = { "/", "index"}, method = RequestMethod.GET)
-	public ModelAndView blog() {
+	public ModelAndView indexAdmin() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/index");
 		return modelAndView;
 	}
 	
-	
+	@RequestMapping(value = {"tinymc"}, method = RequestMethod.GET)
+	public ModelAndView textEditer() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("admin/tinymc");
+		return modelAndView;
+	}
 }
