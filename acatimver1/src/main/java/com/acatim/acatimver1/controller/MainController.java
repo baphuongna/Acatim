@@ -96,11 +96,6 @@ public class MainController {
 		return "TestShowCourse";
 	}
 	
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginForm() {
-		return "loginPage";
-	}
-	
 	@RequestMapping("/course")
 	public String showAllCourseFull(Model model) {
 		model.addAttribute("courses", courseService.getAllCourse());
@@ -237,8 +232,6 @@ public class MainController {
 		System.out.println("11111112");
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println("bbbb" + data);
-		
-		
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
 		  if (userExists == true) { 
 			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại,vui lòng nhập một địa chỉ email khác"); 
