@@ -57,14 +57,18 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 
 	public List<Course> searchCourseByCourseName(String courseName) {
-		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Course.courseName LIKE ?;";
+		String sql = "SELECT * FROM Course \n" + 
+				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
+				"INNER JOIN User ON Course.user_name = User.user_name where Course.courseName LIKE ?;";
 		Object[] params = new Object[] { "%" + courseName + "%" };
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
 		return courses;
 	}
 
 	public List<Course> searchCourseBySubjectName(String subjectName) {
-		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.subject_name LIKE ?;";
+		String sql = "SELECT * FROM Course \n" + 
+				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
+				"INNER JOIN User ON Course.user_name = User.user_name where Subject.subject_name LIKE ?;";
 		Object[] params = new Object[] { "%" + subjectName + "%" };
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
 		return courses;
