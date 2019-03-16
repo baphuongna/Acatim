@@ -51,6 +51,11 @@ form-control{
     color: #FF1C19;
 }
 
+.note{
+	font-size: 15px;
+    font-family: sans-serif;
+}
+
 
 /*=======================================================
       WRAPPER

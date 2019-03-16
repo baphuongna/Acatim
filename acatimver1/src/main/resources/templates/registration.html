@@ -59,6 +59,24 @@
 <!-- JavaScripts -->
 <script src="js/vendors/modernizr.js"></script>
 </head>
+<style>
+input[type="date"]::before {
+	color: #999999;
+	content: attr(placeholder);
+}
+
+input[type="date"] {
+	color: #ffffff;
+}
+
+input[type="date"]:focus, input[type="date"]:valid {
+	color: #666666;
+}
+
+input[type="date"]:focus::before, input[type="date"]:valid::before {
+	content: "" !important;
+}
+</style>
 <body onload="myStudent()">
 	<!-- Page Wrapper -->
 	<div id="wrap">
@@ -80,12 +98,14 @@
 
 								<!-- Professional Details -->
 								<h5 class="tittle">Hãy cùng gia nhập Acatim</h5>
-								<img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="img-responsive" alt="">
+								<img
+									src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+									class="img-responsive" alt="">
 
 
 
 								<!-- Social Profiles -->
-								<h5 class="tittle">Tìm chúng tôi ở </h5>
+								<h5 class="tittle">Tìm chúng tôi ở</h5>
 								<div class="social-icon bor-btm padding-25">
 									<ul>
 										<li><a href="#."> <i class="fa fa-facebook active"></i></a></li>
@@ -96,60 +116,34 @@
 								</div>
 
 								<!-- Contact Me -->
-								<h5 class="tittle">Liên hệ với chúng tôi</h5>
+								<h5 class="tittle">Lưu ý khi đăng kí</h5>
 								<div class="contact padding-25">
-									<!-- Success Msg -->
-									<div id="contact_message" class="success-msg">
-										<i class="fa fa-paper-plane-o"></i>Thank You. Your Message has
-										been Submitted
+									<div class="note">
+										<p>
+											* Mời bạn chọn loại người dùng trước khi điển các thông tin khác. </br> </br>
+											* Mật khẩu bao gồm cả chữ và số,có độ dài ít nhất là 6 kí tự.</br></br>
+											* Số điện thoại có độ dài tối đa là 11 số.</br></br>
+											* Mọi thắc mắc cũng như ý kiến đóng góp xin bạn gửi về <a href=".#" style="color: blue;">Đây</a>
+										</p>
 									</div>
 
-									<!-- FORM -->
-									<form role="form" id="contact_form" class="contact-form"
-										method="post" onSubmit="return false">
-										<ul class="row">
-											<li class="col-sm-12"><label> <input type="text"
-													class="form-control" name="email" id="email"
-													placeholder="Email">
-											</label></li>
-											<li class="col-sm-12"><label> <input type="text"
-													class="form-control" name="company" id="company"
-													placeholder="Subject">
-											</label></li>
-											<li class="col-sm-12"><label> <textarea
-														class="form-control" name="message" id="message" rows="5"
-														placeholder="Message"></textarea>
-											</label></li>
-											<li class="col-sm-12">
-												<button type="submit" value="submit" id="btn_submit"
-													onClick="proceed();">Send Message</button>
-											</li>
-										</ul>
-									</form>
+
 								</div>
 							</div>
 						</div>
-
 						<!-- MAIN CONTENT -->
 						<div class="col-md-8">
-
-							<!-- NAV LINKS -->
-							 
-							<!-- NAV LINKS END -->
-
-
-
 							<div class="tab-content">
-
 								<!-- ABOUT ME -->
 								<div role="tabpanel" class="tab-pane fade in active"
 									id="about-me">
 									<div class="inside-sec">
-										<!-- BIO AND SKILLS -->
-
-
-												 
-					<h2><span style="color:red;font-size: 19px; font-family: serif; margin-left: 20px;" class="result" th:utext="${successMessage}"></span></h2>
+													<h3 style="text-align: center;font-family: initial;">Form Đăng kí</h3>
+										  <h2>
+											<span
+												style="color: red; font-size: 19px; font-family: serif; margin-left: 20px;"
+												class="result" th:utext="${successMessage}"></span>
+										  </h2>
 
 										<!-- Blog -->
 										<section class="about-me padding-top-10">
@@ -173,10 +167,11 @@
 
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<input type="text" style="display:none;" name="createDate" value="2019-03-29" />
+														<input type="text" style="display: none;"
+															name="createDate" value="2019-03-29" />
 													</div>
 												</div>
-												
+
 												<div class="form-group row">
 													<div class="col-sm-11">
 														<input type="text" th:field="*{userName}"
@@ -225,7 +220,7 @@
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<div id="locationField">
 															<input id="autocomplete"
-																placeholder="Địa chỉ (có gợi ý) " onFocus="geolocate()"
+																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()"
 																type="text" class="form-control" name="address" />
 														</div>
 													</div>
@@ -233,11 +228,12 @@
 
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
-														<input type="date" placeholder="Ngày Sinh của bạn" name="dob" required="required"
-															class="form-control" />
+														<input type="date"
+															placeholder="Ngày sinh của bạn&emsp;&emsp;	" name="dob"
+															required="" class="form-control" />
 													</div>
 												</div>
-		
+
 												<!-- AANNNNNNNN -->
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
@@ -245,34 +241,38 @@
 															value="0" /> </label>
 													</div>
 												</div>
-												
+
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
-														<textarea style="height: 120px; width: 100%;border-radius: 10px;" id="description" oninput='textwrite()'
+														<textarea
+															style="height: 120px; width: 100%; border-radius: 10px;"
+															id="description" oninput='textwrite()'
 															placeholder="Mô tả về bạn" required="required"></textarea>
 													</div>
 												</div>
-												
+
 												<div class="form-group row">
 													<div class="col-sm-12">
-														<input id="descriptionSubmit" name="description" style="display:none;"></input>
+														<input id="descriptionSubmit" name="description"
+															style="display: none;"></input>
 													</div>
 												</div>
-												
+
 												<div class="form-group row">
-													<label for="inputGender" style="margin-left: 30px;" class="col-sm-3 col-form-label" id="inputLabel"><h6
+													<label for="inputGender" style="margin-left: 30px;"
+														class="col-sm-3 col-form-label" id="inputLabel"><h6
 															class="tittle1">Giới tính</h6> </a></label>
 													<div class="col-sm-3">
 														<select class="form-control form-control-sm"
 															id="inputGender" name="gender">
-															<option value="true">Male</option>
-															<option value="false">Female</option>
+															<option value="true">Nam</option>
+															<option value="false">Nữ</option>
 														</select>
 													</div>
 												</div>
 												<div class="form-actions">
-													<button type="submit" class="btn btn-primary btn-lg" onclick="get()"
-														style="float: right">Đăng kí</button>
+													<button type="submit" class="btn btn-primary btn-lg"
+														onclick="get()" style="float: right">Đăng kí</button>
 												</div>
 											</form>
 
@@ -402,36 +402,36 @@
 
 	<script>
 		function myStudent() {
-			 var x = document.getElementById("inputRoll").value;
-			console.log(x+"hieu")
-			if(x==1){
+			var x = document.getElementById("inputRoll").value;
+			console.log(x + "hieu")
+			if (x == 1) {
 				console.log("hieu  hs")
 				document.getElementById("description").style.display = "none";
 				document.getElementById("inputGender").style.display = "block";
 				document.getElementById("inputLabel").style.display = "block";
 			}
-			if(x==2){
+			if (x == 2) {
 				console.log("hieu  gv")
 				document.getElementById("description").style.display = "block";
 				document.getElementById("inputGender").style.display = "block";
 				document.getElementById("inputLabel").style.display = "block";
 			}
-			if(x==3){
+			if (x == 3) {
 				console.log("hieu  tt")
 				document.getElementById("inputGender").style.display = "none";
 				document.getElementById("inputLabel").style.display = "none";
 				document.getElementById("description").style.display = "block";
 			}
-		}	 
+		}
 	</script>
-	
-	<script>
-	function textwrite(){
-    	thetext = document.getElementById("description").value;  
-      var myLineBreak = thetext.replace(/\r\n|\r|\n/g,"</br>");
 
-      document.getElementById('descriptionSubmit').value = myLineBreak;
-    }
+	<script>
+		function textwrite() {
+			thetext = document.getElementById("description").value;
+			var myLineBreak = thetext.replace(/\r\n|\r|\n/g, "</br>");
+
+			document.getElementById('descriptionSubmit').value = myLineBreak;
+		}
 	</script>
 
 </body>
