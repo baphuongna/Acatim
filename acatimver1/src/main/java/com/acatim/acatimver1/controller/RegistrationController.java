@@ -48,7 +48,7 @@ public class RegistrationController {
 			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác"); 
 		  }
 		if (bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage","Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
+			modelAndView.addObject("erorrMessage","Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
 			modelAndView.setViewName("registration");
 		} else {
 			try {
