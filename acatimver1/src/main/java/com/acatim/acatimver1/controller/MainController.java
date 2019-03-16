@@ -101,6 +101,11 @@ public class MainController {
 		model.addAttribute("courses", courseService.getAllCourse());
 		return "course";
 	}
+	
+	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+	public String loginForm() {
+		return "loginPage";
+	}
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
