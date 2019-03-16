@@ -26,32 +26,32 @@ import lombok.Setter;
 public class ObjectUser {
 	
 	@Id
-    @NotEmpty(message = "*Please provide your user name")
+    @NotEmpty(message = "*Tên của bạn không được để trống")
     private String userName;
     
     private int role_id;
     
-    @NotEmpty(message = "*Please provide your full name")
+    @NotEmpty(message = "*Họ và Tên không được để trống")
     private String fullName;
      
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+    @Email(message = "*Địa chỉ email chưa đúng")
+    @NotEmpty(message = "*Email không được để trống")
     private String email;
    
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5")
+    @NotEmpty(message = "*Mật khẩu không được để trống")
     private String password;
     
     private String createDate;
     
-    @Digits(fraction = 0, integer = 10, message ="Please provide number")
-    @NotEmpty(message = "*Please provide your phone")
+    @Digits(fraction = 0, integer = 11, message ="Số điện thoại có độ dài tối đa là 11")
+    @NotEmpty(message = "*Số điện thoại không được bỏ trống")
     private String phone;
     
-    @NotEmpty(message = "*Please provide your address")
+    @NotEmpty(message = "*Địa chỉ không được bỏ trống")
     private String address;
     
-    @NotEmpty(message = "*Hãy cho chúng tôi biết ngày sinh của bạn")
+    @NotEmpty(message = "*Ngày sinh của bạn không được bỏ trống")
     private String dob;
     
     private boolean gender;

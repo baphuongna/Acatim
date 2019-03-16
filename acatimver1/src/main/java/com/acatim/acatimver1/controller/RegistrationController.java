@@ -41,15 +41,13 @@ public class RegistrationController {
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) throws NotFoundException {
-		System.out.println("11111112");
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("bbbb" + data);
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
 		  if (userExists == true) { 
-			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại,vui lòng nhập một địa chỉ email khác"); 
+			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác"); 
 		  }
 		if (bindingResult.hasErrors()) {
-			modelAndView.addObject("successMessage","Bạn đã nhập sai một số thông tin,vui long kiểm tra lại");
+			modelAndView.addObject("successMessage","Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
 			modelAndView.setViewName("registration");
 		} else {
 			try {
@@ -84,8 +82,7 @@ public class RegistrationController {
 				System.out.println("error regitration");
 				e.printStackTrace();
 			}
-			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công");
-			// modelAndView.addObject("user", new User());
+			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công tài khoản");
 			modelAndView.setViewName("registration");
 
 		}

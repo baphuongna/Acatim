@@ -51,6 +51,11 @@ form-control{
     color: #FF1C19;
 }
 
+.note{
+	font-size: 15px;
+    font-family: sans-serif;
+}
+
 
 /*=======================================================
       WRAPPER
@@ -66,7 +71,7 @@ form-control{
 h1, h2, h3, h4, h5, h6 {
 	color: #262626;
 	font-weight: bold;
-	text-transform: uppercase;
+	/* text-transform: uppercase; */
 	font-family: 'Raleway', sans-serif;
 }
 h1 {
@@ -145,7 +150,7 @@ section {
 .resume {
 	background: #f5f5f5;
 }
-h5.tittle {
+.tittle {
 	font-size: 18px;
 	padding: 20px;
 	margin: 0px;
@@ -154,13 +159,11 @@ h5.tittle {
 	border-bottom: 1px solid #e6e6e6;
 }
 
-h5,h6.tittle1 {
-	font-size: 18px;
-	padding: 20px;
-	margin: 0px;
-	color: #333333;
-	letter-spacing: 1px;
+.col-sm-11{
+	margin-left: 30px;
 }
+
+
 /*=======================================================
       TOP HEAD
 ========================================================*/
@@ -399,6 +402,7 @@ h5,h6.tittle1 {
 	width: 100%;
 	display: inline-block;
 	background: #fff;
+	border: 1px solid #DDDD;
 }
 .bio-info p {
 	line-height: 24px;
