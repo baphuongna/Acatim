@@ -30,12 +30,12 @@ public class ContactController {
 	public ModelAndView createNewUser(@Valid @ModelAttribute("user") Contact data, BindingResult bindingResult)
 			throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("data   " + data);
 		try {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
 			String dateCurent = (String) dateFormat.format(date);
 			data.setCreateDate(dateCurent);
+			data.setActive(false); 
 			contactService.addContactInfo(data);
 			System.out.println("gửi tin nhắn thành công");
 		} catch (NotFoundException e) {

@@ -15,7 +15,7 @@ import lombok.Setter;
 @Entity
 public class Contact {
 	@Id
-	private String userName;
+	private String name;
 	
 	private String email;
 	

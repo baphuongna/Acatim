@@ -19,8 +19,8 @@ public class ContactDAO extends JdbcDaoSupport {
 	}
 	
 	public void addContact(Contact contact) {
-		String sql = "INSERT INTO Contact (user_name, email, title, message, create_Date, isActive)\r\n" + 
+		String sql = "INSERT INTO Contact (name, email, title, message, create_date, isActive)\r\n" + 
 				"VALUES (?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, contact.getUserName(), contact.getEmail(), contact.getTitle(),contact.getMessage(),contact.getCreateDate(),contact.isActive());
+		this.getJdbcTemplate().update(sql, contact.getName(), contact.getEmail(), contact.getTitle(),contact.getMessage(),contact.getCreateDate(),contact.isActive());
 	}
 }
