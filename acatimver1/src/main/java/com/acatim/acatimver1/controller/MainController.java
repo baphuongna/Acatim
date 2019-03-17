@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acatim.acatimver1.model.DiscountCode;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
@@ -92,6 +93,8 @@ public class MainController {
 	
 	@RequestMapping("/course")
 	public String showAllCourseFull(Model model) {
+		DiscountCode codeInfo = new DiscountCode();
+		model.addAttribute("codeInfo", codeInfo);
 		model.addAttribute("courses", courseService.getAllCourse());
 		return "course";
 	}

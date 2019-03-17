@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     	
     	
     	// Các trang không yêu cầu login
-        http.authorizeRequests().antMatchers("/", "/index", "/rating","/ratingTeacher", "/test","registration", "/loginPage", "/profileDetail").permitAll();
+        http.authorizeRequests().antMatchers("/", "/index", "/rating","/ratingTeacher", "/test","registration", "/loginPage", "/profileDetail", "/courseDiscountCode").permitAll();
  
         // Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
         // Nếu chưa login, nó sẽ redirect tới trang /login.

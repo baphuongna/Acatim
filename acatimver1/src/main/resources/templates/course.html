@@ -132,78 +132,83 @@
 			</div>
 		</div>
 	</section>
-
 	<!-- phần popup detail course -->
 	<div th:each="course,wind : ${courses}">
-		<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
-			aria-labelledby="productGrid">
-			<div class="modal-dialog modal-lg" role="document" >
-				<div class="modal-content">
-					<div class="modal-header">
-					<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
-							khóa học</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					<div class="modal-body">
-	
-						<div class="row">
-							<div class="col-md-4">
-								<img
-									src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-									class="img-responsive" alt="a">
-							</div>
-							<div class="col-md-8">
-								<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
-								<div class="rating">
-									<div class="stars">
-										<span class="fa fa-star checked"></span> <span
-											class="fa fa-star checked"></span> <span
-											class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-										<span class="fa fa-star"></span>
-									</div>
-									<span class="review-no">41 reviews</span></br> <span
-										class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
-								</div>
-								<p class="product-description" th:text="${course.courseDescription}"></p>
-								<h4 class="price">
-									Giá: <span>$ <span th:text="${course.price}"></span></span>
-								</h4>
-								<p class="vote">
-									<strong>91%</strong> người thích khóa học này<strong>(87
-										votes)</strong>
-								</p>
-								<h4 class="price">
-									Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
-								</h4>
-								<h4 class="price">
-									Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
-								</h4>
-								<div class="action">
-									<button th:if="${#request.userPrincipal == null}" class="add-to-cart btn btn-success" style="float: left;margin-right: 14px;opacity: 0.5;pointer-events: none;"  type="button">Lấy mã giảm giá</button>
-									<button th:if="${#request.userPrincipal != null}" class="add-to-cart btn btn-success" type="button">Lấy mã giảm giá</button>
-									<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}">Bạn chưa đăng nhập ...</p>
-									<!-- <button class="like btn btn-danger" type="button">
-										<span class="fa fa-heart"></span>
-									</button> -->
-								</div>
-							</div>
+		<form th:action="@{/courseDiscountCode}" th:object="${codeInfo}" method="post">
+			<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="productGrid">
+				<div class="modal-dialog modal-lg" role="document" >
+					<div class="modal-content">
+						<div class="modal-header">
+						<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+								khóa học</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
 						</div>
-						<!-- hết popup course detail -->
-	
-	
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-4">
+									<img
+										src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+										class="img-responsive" alt="a">
+								</div>
+								<div class="col-md-8">
+									<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
+									<div class="rating">
+										<div class="stars">
+											<span class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+											<span class="fa fa-star"></span>
+										</div>
+										<span class="review-no">41 reviews</span></br> <span
+											class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
+									</div>
+									<p class="product-description" th:text="${course.courseDescription}"></p>
+									<h4 class="price">
+										Giá: <span>$ <span th:text="${course.price}"></span></span>
+									</h4>
+									<p class="vote">
+										<strong>91%</strong> người thích khóa học này<strong>(87
+											votes)</strong>
+									</p>
+									<h4 class="price">
+										Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+									</h4>
+									<h4 class="price">
+										Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+									</h4>
+									
+									<div class="action">
+										<button th:if="${#request.userPrincipal == null}" class="add-to-cart btn btn-success" style="float: left;margin-right: 14px;opacity: 0.5; pointer-events: none;"  type="button">Lấy mã giảm giá</button>
+										<button th:if="${#request.userPrincipal != null}" class="add-to-cart btn btn-success buttonGetCode" type="button" onclick="makeid();">Lấy mã giảm giá</button>
+										<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}">Bạn chưa đăng nhập ...</p>
+										<p th:field="*{codeId}" class="codeDiscount" style="font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold;"></p>
+										<!-- <input type="text" th:field="*{codeId}"
+															placeholder="Code" /> -->
+										<!-- <button class="like btn btn-danger" type="button">
+											<span class="fa fa-heart"></span>
+										</button> -->
+									</div>
+								</div>
+							</div>
+							<!-- hết popup course detail -->
+		
+		
+						</div>
+						<div class="modal-footer">
+							<button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="remove();">Close</button>
+		
+						</div>
 					</div>
-					<div class="modal-footer">
-						<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-	
-					</div>
+					<!-- /.modal-content -->
 				</div>
-				<!-- /.modal-content -->
+				<!-- /.modal-dialog -->
 			</div>
-			<!-- /.modal-dialog -->
-		</div>
+		</form>
+		
 	</div>
 	<!-- /.modal -->
 
@@ -216,6 +221,32 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
+	<script type="text/javascript">
+		function makeid() {
+			var text = "";
+			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			for (var i = 0; i < 15; i++){
+				text += possible.charAt(Math.floor(Math.random() * possible.length));
+			}
+			console.log(text);
+			
+			const paragraphs = document.querySelectorAll('.codeDiscount');
+			paragraphs.forEach(p => p.innerHTML = text);
+			
+			const btnGetCode = document.querySelectorAll('.buttonGetCode');
+			btnGetCode.forEach(p => p.style.pointerEvents = "none");
+			btnGetCode.forEach(p => p.style.opacity = "0.5");
+		}
+		
+		function remove(){
+			const paragraphs = document.querySelectorAll('.codeDiscount');
+			paragraphs.forEach(p => p.innerHTML = '');
+			
+			const btnGetCode = document.querySelectorAll('.buttonGetCode');
+			btnGetCode.forEach(p => p.style.pointerEvents = "all");
+			btnGetCode.forEach(p => p.style.opacity = "1");
+		}
+	</script>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-migrate-3.0.1.min.js"></script>
