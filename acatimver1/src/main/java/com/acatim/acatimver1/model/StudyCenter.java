@@ -21,17 +21,6 @@ public class StudyCenter{
 	
 	private float rate;
 	
-	@ManyToOne
-	@JoinColumn
-	private UserModel user;
-
-	public StudyCenter(String userName, String description, float rate) {
-		super();
-		this.userName = userName;
-		this.description = description;
-		this.rate = rate;
-	}
-	
 	
 
 }

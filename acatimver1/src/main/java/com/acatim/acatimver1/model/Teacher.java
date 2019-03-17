@@ -25,19 +25,6 @@ public class Teacher{
 	
 	private float rate;
 	
-	@ManyToOne
-	@JoinColumn
-	private UserModel user;
-
-	public Teacher(String userName, String dob, boolean gender, String description, float rate) {
-		super();
-		this.userName = userName;
-		this.dob = dob;
-		this.gender = gender;
-		this.description = description;
-		this.rate = rate;
-	}
-	
 	
 
 }

@@ -65,7 +65,7 @@
         			<div class="d-flex mb-4">
         				<div class="img" style="background-image: url(images/person_1.jpg);"></div>
         				<div class="info ml-4">
-        					<h3><a th:href="@{/profileDetail(userName=${teacher.user.userName})}" th:text="${teacher.user.fullName}"></a></h3>
+        					<h3><a th:href="@{/profileDetail(userName=${teacher.userName})}" th:text="${teacher.fullName}"></a></h3>
         					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></span>
         					<p class="ftco-social d-flex">
 		                <a href="#" class="d-flex justify-content-center align-items-center"><span class="icon-twitter"></span></a>
@@ -75,7 +75,7 @@
         				</div>
         			</div>
         			<div class="text">
-        				<p th:utext="${#strings.replace(teacher.description,'\n','&lt;/br&gt;')}"></p>
+        				<p th:utext="${#strings.replace(teacher.teacher.description,'\n','&lt;/br&gt;')}"></p>
         			</div>
         		</div>
         	</div>
@@ -96,7 +96,7 @@
         			<div class="d-flex mb-4">
         				<div class="img" style="background-image: url(images/person_1.jpg);"></div>
         				<div class="info ml-4">
-        					<h3><a th:href="@{/profileDetail(userName=${studyCenter.user.userName})}" th:text="${studyCenter.user.fullName}"></a></h3>
+        					<h3><a th:href="@{/profileDetail(userName=${studyCenter.userName})}" th:text="${studyCenter.fullName}"></a></h3>
         					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></span>
         					<p class="ftco-social d-flex">
 		                <a href="#" class="d-flex justify-content-center align-items-center"><span class="icon-twitter"></span></a>
@@ -106,7 +106,7 @@
         				</div>
         			</div>
         			<div class="text">
-        				<p th:utext="${#strings.replace(studyCenter.description,'\n','&lt;/br&gt;')}"></p>
+        				<p th:utext="${studyCenter.studyCenter.description}"></p>
         			</div>
         		</div>
         	</div>

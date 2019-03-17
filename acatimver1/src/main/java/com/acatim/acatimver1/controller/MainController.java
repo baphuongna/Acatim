@@ -151,45 +151,37 @@ public class MainController {
 	@RequestMapping(value = { "/teacher" }, method = RequestMethod.GET)
 	public ModelAndView teacher() {
 		ModelAndView modelAndView = new ModelAndView();
-		List<Teacher> listTeacher = null;
-		List<StudyCenter> listStudyCenter = null;
+		List<UserModel> listTeacher = null;
+		List<UserModel> listStudyCenter = null;
 		
 		try {
 			//get teacher
-			listTeacher = this.userInfoService.loadAllTeacher();
+			listTeacher = this.userInfoService.loadAllUserTeacher();
 			if(listTeacher != null && listTeacher.size() > 0) {
-				for (Teacher teacher : listTeacher) {
-					// get user
-					UserModel user = null;
-					user = this.userInfoService.loadUserByUsername(teacher.getUserName());
-					teacher.setUser(user);
+				for (UserModel teacher : listTeacher) {
 					
 					//split description
-					if(teacher.getDescription().length() > 50) {
-						teacher.setDescription(teacher.getDescription().substring(0, 50) + " ...");
+					if(teacher.getTeacher().getDescription().length() > 40) {
+						teacher.getTeacher().setDescription(teacher.getTeacher().getDescription().substring(0, 40) + " ...");
 					}
-					if(teacher.getDescription().contains("</br>")) {
-						String[] splitDes = teacher.getDescription().split("</br>");
-						teacher.setDescription(splitDes[0]+ " ...");
+					if(teacher.getTeacher().getDescription().contains("</br>")) {
+						String[] splitDes = teacher.getTeacher().getDescription().split("</br>");
+						teacher.getTeacher().setDescription(splitDes[0]+ " ...");
 					}
 				}
 			}
 			//get study center
-			listStudyCenter = this.userInfoService.loadAllStudyCenter();
+			listStudyCenter = this.userInfoService.loadAllUserStudyCenter();
 			if(listStudyCenter != null && listStudyCenter.size() > 0) {
-				for (StudyCenter studyCenter : listStudyCenter) {
-					//get Study Center
-					UserModel user = null;
-					user = this.userInfoService.loadUserByUsername(studyCenter.getUserName());
-					studyCenter.setUser(user);
+				for (UserModel studyCenter : listStudyCenter) {
 					
 					//split description
-					if(studyCenter.getDescription().length() > 50) {
-						studyCenter.setDescription(studyCenter.getDescription().substring(0, 50)+ " ...");
+					if(studyCenter.getStudyCenter().getDescription().length() > 40) {
+						studyCenter.getStudyCenter().setDescription(studyCenter.getStudyCenter().getDescription().substring(0, 40)+ " ...");
 					}
-					if(studyCenter.getDescription().contains("</br>")) {
-						String[] splitDes = studyCenter.getDescription().split("</br>");
-						studyCenter.setDescription(splitDes[0]+ " ...");
+					if(studyCenter.getStudyCenter().getDescription().contains("</br>")) {
+						String[] splitDes = studyCenter.getStudyCenter().getDescription().split("</br>");
+						studyCenter.getStudyCenter().setDescription(splitDes[0]+ " ...");
 					}
 				}
 			}
