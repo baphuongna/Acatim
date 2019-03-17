@@ -2920,19 +2920,4 @@ blockquote {
 
 /* css placeholder data */
 
-input[type="date"]::before {
-	color: #999999;
-	content: attr(placeholder);
-}
 
-input[type="date"] {
-	color: #ffffff;
-}
-
-input[type="date"]:focus, input[type="date"]:valid {
-	color: #666666;
-}
-
-input[type="date"]:focus::before, input[type="date"]:valid::before {
-	content: "" !important;
-}

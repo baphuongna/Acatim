@@ -98,18 +98,21 @@ function myStudent() {
 		document.getElementById("description").style.display = "none";
 		document.getElementById("inputGender").style.display = "block";
 		document.getElementById("inputLabel").style.display = "block";
+		document.getElementById("dob1").style.display = "block";
 	}
 	if (x == 2) {
 		console.log("hieu  gv")
 		document.getElementById("description").style.display = "block";
 		document.getElementById("inputGender").style.display = "block";
 		document.getElementById("inputLabel").style.display = "block";
+		document.getElementById("dob1").style.display = "block";
 	}
 	if (x == 3) {
 		console.log("hieu  tt")
 		document.getElementById("inputGender").style.display = "none";
 		document.getElementById("inputLabel").style.display = "none";
 		document.getElementById("description").style.display = "block";
+		document.getElementById("dob1").style.display = "none";
 	}
 }
 

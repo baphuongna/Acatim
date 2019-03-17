@@ -60,7 +60,22 @@
 <script src="js/vendors/modernizr.js"></script>
 </head>
 <style>
+input[type="date"]::before {
+	color: #999999;
+	content: attr(placeholder);
+}
 
+input[type="date"] {
+	color: #ffffff;
+}
+
+input[type="date"]:focus, input[type="date"]:valid {
+	color: #666666;
+}
+
+input[type="date"]:focus::before, input[type="date"]:valid::before {
+	content: "" !important;
+}
 </style>
 <body onload="myStudent()">
 	<!-- Page Wrapper -->
@@ -219,9 +234,9 @@
 												</div>
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
-														<input type="date"
-															placeholder="Ngày sinh của bạn&emsp;&emsp;" name="dob"
-															required="" class="form-control" />
+														<input type="date" 
+															placeholder="Ngày sinh của bạn&emsp;&emsp;" name="dob" id="dob1"
+															class="form-control" />
 													</div>
 												</div>
 												<div class="form-group row">

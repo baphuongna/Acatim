@@ -51,7 +51,6 @@ public class ObjectUser {
     @NotEmpty(message = "*Địa chỉ không được bỏ trống")
     private String address;
     
-    @NotEmpty(message = "*Ngày sinh của bạn không được bỏ trống")
     private String dob;
     
     private boolean gender;
