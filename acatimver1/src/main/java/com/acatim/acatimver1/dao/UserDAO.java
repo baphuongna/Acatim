@@ -36,6 +36,19 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 	
+	public UserModel findUserAccountByEmail(String email) {
+		String sql = UserMapper.BASE_SQL + " where u.email = ? ";
+
+		Object[] params = new Object[] { email };
+		UserMapper mapper = new UserMapper();
+		try {
+			UserModel userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public boolean checkUserExist(String userName) {
 		String sql = UserMapper.BASE_SQL;
 
@@ -87,8 +100,8 @@ public class UserDAO extends JdbcDaoSupport {
 	}
 
 	public void updateUser(UserModel user) {
-		String sql = "UPDATE User SET full_name = ?, email = ?, create_date = ?, phone = ?, address = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getCreateDate(), user.getPhone(),
+		String sql = "UPDATE User SET full_name = ?, email = ?, phone = ?, address = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getPhone(),
 				user.getAddress(), user.getUserName());
 	}
 

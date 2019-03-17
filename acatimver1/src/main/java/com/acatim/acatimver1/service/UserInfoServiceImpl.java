@@ -40,6 +40,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserModel user = this.UserDAO.findUserAccount(username);
 		return user;
 	}
+	
+	@Override
+	public UserModel loadUserbyEmail(String email) throws NotFoundException {
+		UserModel user = this.UserDAO.findUserAccountByEmail(email);
+		return user;
+	}
 
 	@Override
 	public List<Teacher> loadAllTeacher() throws NotFoundException {
@@ -121,7 +127,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public void removeUser(String userName) throws NotFoundException {
 		boolean active = false;
 		this.UserDAO.removeUser(userName, active);
-
+	}
+	
+	@Override
+	public void unlockUser(String userName) throws NotFoundException {
+		boolean active = true;
+		this.UserDAO.removeUser(userName, active);
+		
 	}
 
 	@Override

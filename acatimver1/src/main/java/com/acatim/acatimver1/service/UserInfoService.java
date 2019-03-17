@@ -11,6 +11,7 @@ import javassist.NotFoundException;
 
 public interface UserInfoService {
 	UserModel loadUserByUsername(String username) throws NotFoundException;
+	UserModel loadUserbyEmail(String email) throws NotFoundException;
 	Teacher loadTeacherByUsername(String username) throws NotFoundException;
 	StudyCenter loadStudyCenterByUsername(String username) throws NotFoundException;
 	Student loadStudentByUsername(String username) throws NotFoundException;
@@ -23,6 +24,7 @@ public interface UserInfoService {
 	void updateStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
 	void updateStudentInfo(Student student) throws NotFoundException;
 	void removeUser(String userName) throws NotFoundException;
+	void unlockUser(String userName) throws NotFoundException;
 	void changePassword(String userName, String password) throws NotFoundException;
 	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
 	List<UserModel> searchUserByEmail(String email)  throws NotFoundException;
