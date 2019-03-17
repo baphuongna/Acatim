@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.UserMapper;
+import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.UserModel;
 
 @Repository
@@ -95,4 +96,5 @@ public class UserDAO extends JdbcDaoSupport {
 		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, password, userName);
 	}
+
 }
