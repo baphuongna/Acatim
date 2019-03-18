@@ -27,7 +27,7 @@ public class StudenValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		StudentForm studentForm = new StudentForm();
+		StudentForm studentForm = (StudentForm) target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty.studentForm.userName");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fullName", "NotEmpty.studentForm.fullName");
