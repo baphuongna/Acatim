@@ -32,7 +32,7 @@ public class DiscountCodeDAO extends JdbcDaoSupport {
 				+ "(code_id, user_name, course_id, create_date, expire_date, status, active)\r\n"
 				+ "VALUES (? ,? ,? ,? ,? ,? ,? );";
 		this.getJdbcTemplate().update(sql, discountCode.getCodeId(), discountCode.getUserName(),
-				discountCode.getCodeId(), discountCode.getCreateDate(), discountCode.getExpireDate(),
+				discountCode.getCourseId(), discountCode.getCreateDate(), discountCode.getExpireDate(),
 				discountCode.getStatus(), discountCode.isActive());
 	}
 

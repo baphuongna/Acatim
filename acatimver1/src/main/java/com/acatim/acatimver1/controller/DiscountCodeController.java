@@ -3,6 +3,10 @@ package com.acatim.acatimver1.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +21,7 @@ import com.acatim.acatimver1.service.UserInfoServiceImpl;
 
 import javassist.NotFoundException;
 
+import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.DiscountCode;
 import com.acatim.acatimver1.model.ObjectUser;
 import com.acatim.acatimver1.service.DiscountCodeServiceImpl;;
@@ -29,12 +34,21 @@ public class DiscountCodeController {
 	private DiscountCodeServiceImpl discountCodeService;
 	
 	@RequestMapping(value = "/courseDiscountCode", method = RequestMethod.POST)
-	public ModelAndView addNewDiscountCode(@Valid @ModelAttribute("codeInfo") DiscountCode code) throws NotFoundException {
-		System.out.println("Phong");
+	public ModelAndView createNewUser(@Valid @ModelAttribute("codeInfo") DiscountCode code, BindingResult bindingResult)
+			throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("phonggggg       " + code);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String dateCurent = (String) dateFormat.format(date);
+		code.setCreateDate(dateCurent);
+		code.setExpireDate(dateCurent);
+		code.setActive(true); 
+		code.setStatus("actived"); 
+		
 		DiscountCode discountCode = new DiscountCode(code.getCodeId(), code.getUserName(), code.getCourseId(), code.getCreateDate(), code.getExpireDate(), code.getStatus(), code.isActive());
-		//discountCodeService.addDiscountCode(discountCode);
+		discountCodeService.addDiscountCode(discountCode);
+		System.out.println(code);
 		modelAndView.setViewName("course");
 		return modelAndView;
 	}

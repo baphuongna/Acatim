@@ -17,6 +17,7 @@ import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
 import com.acatim.acatimver1.service.CourseServiceImpl;
+import com.acatim.acatimver1.service.DiscountCodeServiceImpl;
 import com.acatim.acatimver1.service.SubjectServiceImpl;
 import com.acatim.acatimver1.service.UserInfoServiceImpl;
 import com.acatim.acatimver1.utils.WebUtils;
@@ -35,6 +36,9 @@ public class MainController {
 
 	@Autowired
 	private SubjectServiceImpl subjectService;
+	
+	@Autowired
+	private DiscountCodeServiceImpl discountCodeServiceImpl;
 
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index(Principal principal) {
@@ -91,11 +95,10 @@ public class MainController {
 		return "TestShowCourse";
 	}
 	
-	@RequestMapping("/course")
+	@RequestMapping(value = "/course" , method = RequestMethod.GET)
 	public String showAllCourseFull(Model model) {
-		DiscountCode codeInfo = new DiscountCode();
-		model.addAttribute("codeInfo", codeInfo);
 		model.addAttribute("courses", courseService.getAllCourse());
+		model.addAttribute("discountCode", discountCodeServiceImpl.getAllDiscountCode());
 		return "course";
 	}
 	

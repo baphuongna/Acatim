@@ -134,7 +134,7 @@
 	</section>
 	<!-- phần popup detail course -->
 	<div th:each="course,wind : ${courses}">
-		<form th:action="@{/courseDiscountCode}" th:object="${codeInfo}" method="post">
+		<form autocomplete="off" th:action="@{/courseDiscountCode}" th:object="${codeInfo}" method="POST">
 			<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
 				aria-labelledby="productGrid">
 				<div class="modal-dialog modal-lg" role="document" >
@@ -185,7 +185,14 @@
 										<button th:if="${#request.userPrincipal == null}" class="add-to-cart btn btn-success" style="float: left;margin-right: 14px;opacity: 0.5; pointer-events: none;"  type="button">Lấy mã giảm giá</button>
 										<button th:if="${#request.userPrincipal != null}" class="add-to-cart btn btn-success buttonGetCode" type="button" onclick="makeid();">Lấy mã giảm giá</button>
 										<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}">Bạn chưa đăng nhập ...</p>
-										<p th:field="*{codeId}" class="codeDiscount" style="font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold;"></p>
+										<input name="codeId" class="codeDiscount" style="border: 1px solid; display: none; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
+										
+										<div th:each="discountCodes : ${discountCode}">
+											<input th:if="${#request.userPrincipal != null and discountCodes.courseId == course.courseId and discountCodes.userName == #request.userPrincipal.name}" th:value="${discountCodes.codeId}" style="border: 1px solid; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
+										</div>
+										
+										<input th:if="${#request.userPrincipal != null}" th:value="${#request.userPrincipal.name}" type="text" name="userName" style="display: none;"/>
+										<input th:value="${course.courseId}" type="text" name="courseId" style="display: none;"/>
 										<!-- <input type="text" th:field="*{codeId}"
 															placeholder="Code" /> -->
 										<!-- <button class="like btn btn-danger" type="button">
@@ -195,12 +202,10 @@
 								</div>
 							</div>
 							<!-- hết popup course detail -->
-		
-		
 						</div>
 						<div class="modal-footer">
 							<button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="remove();">Close</button>
-		
+							<input type="submit" value="Gửi" class="btn btn-primary py-3 px-5">
 						</div>
 					</div>
 					<!-- /.modal-content -->
@@ -231,7 +236,8 @@
 			console.log(text);
 			
 			const paragraphs = document.querySelectorAll('.codeDiscount');
-			paragraphs.forEach(p => p.innerHTML = text);
+			paragraphs.forEach(p => p.style.display = "block");
+			paragraphs.forEach(p => p.value = text);
 			
 			const btnGetCode = document.querySelectorAll('.buttonGetCode');
 			btnGetCode.forEach(p => p.style.pointerEvents = "none");
@@ -240,7 +246,7 @@
 		
 		function remove(){
 			const paragraphs = document.querySelectorAll('.codeDiscount');
-			paragraphs.forEach(p => p.innerHTML = '');
+			paragraphs.forEach(p => p.style.display = "none");
 			
 			const btnGetCode = document.querySelectorAll('.buttonGetCode');
 			btnGetCode.forEach(p => p.style.pointerEvents = "all");
