@@ -123,8 +123,6 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="product-payment-inner-st">
 						<h4>Thêm Học Sinh</h4>
-						<div th:if="${errorMessage != null}"
-           th:utext="${errorMessage}" class="error">...</div>
 						<br>
 							<form th:action="@{addNewStudent}" th:object="${studentForm}"
 								method="POST">

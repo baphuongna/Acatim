@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
+	
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -95,5 +95,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         db.setDataSource(dataSource);
         return db;
     }
-
+    
 }

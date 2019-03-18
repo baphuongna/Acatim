@@ -89,14 +89,17 @@ public class ManagerStudentController {
 	}
 
 	@RequestMapping(value = { "/addNewStudent" }, method = RequestMethod.POST)
-	public ModelAndView addNewStudent(@Valid @ModelAttribute("studentForm") @Validated StudentForm studentForm,
-			BindingResult result, final RedirectAttributes redirectAttributes) {
+	public ModelAndView addNewStudent(@Valid @ModelAttribute("studentForm") StudentForm studentForm,
+			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentForm);
+		boolean userExists = userInfoService.checkUserExist(studentForm.getUserName());
+		if (userExists == true) {
+			result.rejectValue("userName", "error.user",
+					"Tên Tài khoản này đã tồn tại, vui lòng nhập một địa chỉ Tên Tài khoản khác");
+		}
 		if (result.hasErrors()) {
-			modelAndView.addObject("studentForm", new StudentForm());
-			modelAndView.addObject("errorMessage", "Error: ");
-			modelAndView.setViewName("redirect:/admin/add-student");
+			modelAndView.setViewName("admin/add-student");
 			return modelAndView;
 		}
 
@@ -121,7 +124,7 @@ public class ManagerStudentController {
 			return modelAndView;
 		}
 		redirectAttributes.addFlashAttribute("flashUser", user);
-		
+
 		modelAndView.setViewName("redirect:/admin/all-students");
 		return modelAndView;
 	}
