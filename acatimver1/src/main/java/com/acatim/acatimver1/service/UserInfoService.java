@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -36,4 +37,5 @@ public interface UserInfoService {
 	List<UserModel> loadAllUserStudent() throws NotFoundException;
 	boolean checkUserExist(String userName) throws NotFoundException;
 	String getRoleName(String userName) throws NotFoundException;
+	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
 }

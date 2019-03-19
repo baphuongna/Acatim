@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.controller;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -47,9 +48,12 @@ public class ManagerStudentController {
 	}
 
 	@RequestMapping(value = { "studentUpdate" }, method = RequestMethod.POST)
-	public ModelAndView updateStudent(@ModelAttribute("appUserForm") @Validated StudentForm studentForm) {
+	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentForm);
+		
+		
+		
 		modelAndView.setViewName("redirect:/admin/all-students");
 		return modelAndView;
 	}
@@ -60,7 +64,6 @@ public class ManagerStudentController {
 		try {
 			userInfoService.removeUser(userName);
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("redirect:/admin/all-students");
@@ -73,7 +76,6 @@ public class ManagerStudentController {
 		try {
 			userInfoService.unlockUser(userName);
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("redirect:/admin/all-students");
@@ -96,8 +98,17 @@ public class ManagerStudentController {
 		boolean userExists = userInfoService.checkUserExist(studentForm.getUserName());
 		if (userExists == true) {
 			result.rejectValue("userName", "error.user",
-					"Tên Tài khoản này đã tồn tại, vui lòng nhập một địa chỉ Tên Tài khoản khác");
+					"Tên Tài khoản này đã tồn tại, vui lòng nhập một Tên Tài khoản khác !");
 		}
+		
+		UserModel checkEmail = userInfoService.loadUserbyEmail(studentForm.getEmail());
+		
+		if (checkEmail != null) {
+			result.rejectValue("email", "error.email",
+					"Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+		}
+		
+		
 		if (result.hasErrors()) {
 			modelAndView.setViewName("admin/add-student");
 			return modelAndView;
@@ -108,15 +119,16 @@ public class ManagerStudentController {
 		Timestamp currentDate = new Timestamp(time);
 
 		UserModel user = new UserModel(studentForm.getUserName(), studentForm.getRole_id(), studentForm.getFullName(),
-				studentForm.getEmail(), studentForm.getPassword(), currentDate + "", studentForm.getPhone(),
+				studentForm.getEmail(), studentForm.getPassword(), currentDate + "", studentForm.getPhoneNo(),
 				studentForm.getAddress(), true);
-
+		
 		Student studentInfo = new Student(studentForm.getUserName(), studentForm.getDob(), studentForm.isGender());
 		System.out.println(user);
 		System.out.println(studentInfo);
 		try {
-//			userInfoService.addUserInfo(user);
-//			userInfoService.addStudentInfo(studentInfo);
+			userInfoService.addUserInfo(user);
+			userInfoService.addStudentInfo(studentInfo);
+			System.out.println("Success");
 		} catch (Exception e) {
 			modelAndView.addObject("studentForm", new StudentForm());
 			modelAndView.addObject("errorMessage", "Error: " + e.getMessage());
@@ -130,8 +142,17 @@ public class ManagerStudentController {
 	}
 
 	@RequestMapping(value = { "edit-student" }, method = RequestMethod.GET)
-	public ModelAndView editStudent() {
+	public ModelAndView editStudent(@RequestParam("userName") String userName) {
 		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.addObject("studentForm", new StudentForm());
+		try {
+			StudentForm student = userInfoService.getUserStudentByUserName(userName);
+			
+			modelAndView.addObject("studentForm", student);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		modelAndView.setViewName("admin/edit-student");
 		return modelAndView;
 	}

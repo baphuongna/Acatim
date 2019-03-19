@@ -10,7 +10,9 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.mapper.StudentExtractor;
+import com.acatim.acatimver1.mapper.StudentFormMapper;
 import com.acatim.acatimver1.mapper.StudentMapper;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.UserModel;
@@ -42,6 +44,19 @@ public class StudentDAO extends JdbcDaoSupport {
 		try {
 			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new StudentExtractor());
 			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public StudentForm getUserStudentByUserName(String userName) {
+		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name Where User.user_name = ?;";
+		Object[] params = new Object[] { userName };
+		StudentFormMapper mapper = new StudentFormMapper();
+		try {
+			
+			StudentForm student = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return student;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

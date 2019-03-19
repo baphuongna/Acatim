@@ -3,7 +3,7 @@
  
 	// Datepickers
 		$('#start').datepicker({
-			dateFormat: 'dd.mm.yy',
+			dateFormat: 'yy-mm-dd',
 			prevText: '<i class="fa fa-chevron-left"></i>',
 			nextText: '<i class="fa fa-chevron-right"></i>',
 			onSelect: function( selectedDate )
@@ -12,7 +12,7 @@
 			}
 		});
 		$('#finish').datepicker({
-			dateFormat: 'dd.mm.yy',
+			dateFormat: 'yy-mm-dd',
 			prevText: '<i class="fa fa-chevron-left"></i>',
 			nextText: '<i class="fa fa-chevron-right"></i>',
 			onSelect: function( selectedDate )

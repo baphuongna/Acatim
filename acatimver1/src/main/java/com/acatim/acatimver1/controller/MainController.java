@@ -118,8 +118,8 @@ public class MainController {
 
 			model.addAttribute("userInfo", userInfo);
 
-			String message = "Hi " + principal.getName() //
-					+ "<br> You do not have permission to access this page!";
+			String message = "Xin Chào " + principal.getName() //
+					+ "<br> Bạn không được quyền vào trang này !";
 			model.addAttribute("message", message);
 
 		}

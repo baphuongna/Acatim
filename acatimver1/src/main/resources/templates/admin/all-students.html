@@ -151,11 +151,12 @@
 										<td th:text="${student.phone}"></td>
 										<td th:text="${student.address}"></td>
 										<td th:text="${student.student.dob}"></td>
-										<td th:text="${student.student.gender ? 'Male' : 'Female'}"></td>
-										<td th:text="${student.active  ? 'Active' : 'Blocked'}"></td>
+										<td th:text="${student.student.gender ? 'Nam' : 'Nữ'}"></td>
+										<!-- <td th:text="${student.active  ? 'Active' : 'Blocked'}"></td> -->
+										<td th:if="${student.active == true}" style="color: green;"><b>Active</b></td>
+										<td th:if="${student.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
-											<button type="button" class="btn btn-primary" data-toggle="modal"
-							 								th:attr="data-target='#'+${student.userName}">Chi Tiết</button>
+										<a th:href="@{/admin/edit-student(userName=${student.userName})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${student.active == true}"
 							 								th:attr="data-target='#'+${student.userName}+'1'">Khóa</button>
 							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${student.active == false}"
@@ -218,91 +219,6 @@
                                 </div>
                             </div>
                         </div>
-        <!-- phần popup detail course -->
-	<div th:each="student : ${allStudent}">
-		<div th:id="${student.userName}" class="modal fade" tabindex="-1" role="dialog"
-			aria-labelledby="productGrid">
-			<div class="modal-dialog modal-lg" role="document" >
-				<div class="modal-content">
-					<div class="modal-header">
-					<h4 class="modal-title1" id="productGrid">Thông tin chi tiết</h4>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-						<div class="modal-body">
-							<form th:action="@{studentUpdate}" th:object="${studentForm}" method="POST" 
-								class="dropzone dropzone-custom needsclick add-professors"
-								id="demo1-upload">
-								<div class="row">
-									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<b>User Name : <b th:text="${student.userName}"></b></b>
-										<div class="form-group">
-											<input type="text" class="form-control" th:field="*{userName}"
-												placeholder="Tên Tài Khoản" th:value="${student.userName}">
-											<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">..</span>
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control"
-												placeholder="Họ và Tên" th:value="${student.fullName}">
-											<span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">..</span>
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Email"
-												th:value="${student.email}" ></input>
-											<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-										</div>
-										<div class="form-group">
-											<input type="number" class="form-control" 
-												placeholder="Số điện thoại" th:value="${student.phone}">
-											<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" placeholder="Địa chỉ"
-												th:value="${student.address}">
-											<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
-										</div>
-										<div class="form-group">
-											<input type="text" class="form-control"
-												placeholder="Ngày Sinh" th:value="${student.student.dob}">
-											<span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}">..</span>
-										</div>
-										<div class="form-group">
-											<select class="form-control" th:field="*{gender}">
-												<option  th:text="${student.student.gender  ? 'Male' : 'Female'}" value="true">Male</option>
-												<option th:text="${student.student.gender  ? 'Female' : 'Male'}" value="true">Female</option>
-											</select>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="payment-adress">
-											<button type="submit"
-												class="btn btn-primary waves-effect waves-light">Cập nhật thông tin</button>
-										</div>
-									</div>
-								</div>
-							</form>
-							<!-- hết popup course detail -->
-
-
-						</div>
-						<div class="modal-footer">
-						<button type="button" data-dismiss="modal" class="btn btn-primary">Close</button>
-	
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-	</div>
-	<!-- /.modal -->
-        
-        
-        
         
         <div class="footer-copyright-area">
             <div class="container-fluid">

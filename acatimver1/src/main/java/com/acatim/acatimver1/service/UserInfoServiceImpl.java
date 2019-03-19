@@ -10,7 +10,7 @@ import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
-import com.acatim.acatimver1.model.Contact;
+import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -178,6 +178,11 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public String getRoleName(String userName) throws NotFoundException {
 		return this.RoleDAO.getRoleNameByUserName(userName);
+	}
+
+	@Override
+	public StudentForm getUserStudentByUserName(String userName) throws NotFoundException {
+		return this.StudentDAO.getUserStudentByUserName(userName);
 	}
 	
 }
