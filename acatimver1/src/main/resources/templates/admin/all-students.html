@@ -74,6 +74,9 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/css/responsive.css">
+        <!-- chosen CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/css/chosen/bootstrap-chosen.css">
     <!-- modernizr JS
 		============================================ -->
     <script src="admin/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -88,7 +91,6 @@
     <div class="all-content-wrapper">
 
         <div class="header-advance-area">
-                    
             <!-- Start right menu area -->
             <div th:insert="admin/menuRight :: menu"></div>
             <!-- End right menu area -->
@@ -99,15 +101,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcome-list">
                                 <div class="row">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                        <div class="breadcome-heading">
-                                            <form role="search" class="sr-input-func">
-                                                <input type="text" placeholder="Search..." class="search-int form-control">
-                                                <a href="#"><i class="fa fa-search"></i></a>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
@@ -124,7 +118,48 @@
         </div>
         <div class="data-table-area mg-b-15">
             <div class="container-fluid">
-                <div class="row">
+				<form th:action="@{all-students}" th:object="${searchValue}" method="POST">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div >
+								<div class="row">
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											
+										</div>
+									</div>
+									<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
+										<div class="breadcome-heading">
+											<span><b>Tìm Kiếm Theo</b></span>
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="chosen-select-single mg-b-20">
+											<select class="chosen-select" th:field="*{value}">
+												<option value="userName">Tên Tài khoản</option>
+												<option value="fullName">Họ Và Tên</option>
+												<option value="email">Email</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											<input type="text" th:field="*{search}" placeholder="Tìm Kiếm" style="width: 100%"
+												class="search-int form-control">
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											<button type="submit"
+												class="btn btn-primary waves-effect waves-light">Tìm Kiếm</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
                             <h4>Danh Sách Học Sinh</h4>
@@ -167,12 +202,25 @@
                             </div>
                             <div class="custom-pagination">
                                 <nav aria-label="Page navigation example">
-                                    <ul class="pagination">
-                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    <ul class="pagination" >
+                                    	<li class="page-item" >
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/all-students(page=${first})}">Trang Đầu</a>
+                                        	<a th:if="${currentPage == first}" class="page-link" >Trang Cuối</a>
+                                        </li>
+                                    	<li class="page-item"  th:if="${hasPrevious == true}">
+                                        	<a class="page-link" th:href="@{/admin/all-students(page=${previous})}" >Trang trước</a>
+                                        </li>
+                                        <li class="page-item" th:each="totalPage : ${totalPages}">
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/all-students(page=${totalPage})}" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
+                                        </li>
+                                        <li class="page-item"  th:if="${hasNext == true}">
+                                        	<a class="page-link" th:href="@{/admin/all-students(page=${next})}">Trang Sau</a>
+                                        </li>
+                                        <li class="page-item">
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/all-students(page=${last})}">Trang Cuối</a>
+                                        	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
+                                        </li>
                                     </ul>
                                 </nav>
                             </div>
@@ -294,6 +342,10 @@
     <script src="admin/js/calendar/moment.min.js"></script>
     <script src="admin/js/calendar/fullcalendar.min.js"></script>
     <script src="admin/js/calendar/fullcalendar-active.js"></script>
+        <!-- chosen JS
+		============================================ -->
+    <script src="admin/js/chosen/chosen.jquery.js"></script>
+    <script src="admin/js/chosen/chosen-active.js"></script>
     <!-- plugins JS
 		============================================ -->
     <script src="admin/js/plugins.js"></script>

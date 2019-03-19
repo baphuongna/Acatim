@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -183,6 +184,26 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public StudentForm getUserStudentByUserName(String userName) throws NotFoundException {
 		return this.StudentDAO.getUserStudentByUserName(userName);
+	}
+
+	@Override
+	public List<UserModel> getStudentPageable(Pageable pageable) throws NotFoundException {
+		return this.StudentDAO.getStudentPageable(pageable);
+	}
+
+	@Override
+	public List<UserModel> searchStudentByUserName(Pageable pageable, String userName) throws NotFoundException {
+		return this.StudentDAO.searchStudentByUserName(pageable, userName);
+	}
+
+	@Override
+	public List<UserModel> searchStudentByEmail(Pageable pageable, String email) throws NotFoundException {
+		return this.StudentDAO.searchStudentByEmail(pageable, email);
+	}
+
+	@Override
+	public List<UserModel> searchStudentByFullName(Pageable pageable, String fullName) throws NotFoundException {
+		return this.StudentDAO.searchStudentByFullName(pageable, fullName);
 	}
 	
 }

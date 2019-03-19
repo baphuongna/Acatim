@@ -1,6 +1,9 @@
 package com.acatim.acatimver1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +36,8 @@ public class AdminController {
 	public ModelAndView indexAdmin() {
 		ModelAndView modelAndView = new ModelAndView();
 		
+		
+		
 		try {
 			modelAndView.addObject("allStudent", userInfoService.loadAllStudent().size());
 			modelAndView.addObject("allStudyCenter", userInfoService.loadAllStudyCenter().size());
@@ -40,7 +45,7 @@ public class AdminController {
 			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
 			modelAndView.addObject("allSubject", subjectService.getAllSubject().size());
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
-			
+
 			
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block

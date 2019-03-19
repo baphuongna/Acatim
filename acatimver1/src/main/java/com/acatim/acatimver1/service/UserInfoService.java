@@ -2,6 +2,8 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
@@ -38,4 +40,9 @@ public interface UserInfoService {
 	boolean checkUserExist(String userName) throws NotFoundException;
 	String getRoleName(String userName) throws NotFoundException;
 	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
+	
+	List<UserModel> getStudentPageable(Pageable pageable) throws NotFoundException;
+	List<UserModel> searchStudentByUserName(Pageable pageable, String userName) throws NotFoundException;
+	List<UserModel> searchStudentByEmail(Pageable pageable, String email) throws NotFoundException;
+	List<UserModel> searchStudentByFullName(Pageable pageable, String fullName) throws NotFoundException;
 }
