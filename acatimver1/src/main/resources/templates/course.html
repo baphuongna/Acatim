@@ -66,6 +66,21 @@
 		</div>
 	</div>
 
+	<form autocomplete="off" th:action="@{/course}" th:object="${search}" method="POST">
+		<select th:field="*{courseId}">
+			<option value=""> -- </option>
+			<option th:each="course : ${courses}"
+                            th:value="${course.courseId}"
+                            th:utext="${course.courseName}"/>                         
+         </select>
+         <input name="submit" type="submit" value="submit" />
+	</form>
+
+
+	
+
+
+
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row">
@@ -83,7 +98,7 @@
 							</h3>
 							<p th:text="${course.courseDescription}"></p>
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-							 th:attr="data-target='#'+${course.courseId }">Xem thêm ...</button>
+							 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm ...</button>
 						</div>
 					</div>
 				</div>
@@ -188,7 +203,7 @@
 										<input name="codeId" class="codeDiscount" style="border: 1px solid; display: none; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
 										
 										<div th:each="discountCodes : ${discountCode}">
-											<input th:if="${#request.userPrincipal != null and discountCodes.courseId == course.courseId and discountCodes.userName == #request.userPrincipal.name}" th:value="${discountCodes.codeId}" style="border: 1px solid; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
+											<input class="showCodeDiscount" th:if="${#request.userPrincipal != null and discountCodes.courseId == course.courseId and discountCodes.userName == #request.userPrincipal.name}" th:value="${discountCodes.codeId}" style="border: 1px solid; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
 										</div>
 										
 										<input th:if="${#request.userPrincipal != null}" th:value="${#request.userPrincipal.name}" type="text" name="userName" style="display: none;"/>
@@ -227,6 +242,43 @@
 	</div>
 
 	<script type="text/javascript">
+		
+		function checkCode(){
+			var showCodeDiscount = document.querySelectorAll('.showCodeDiscount');
+			
+			showCodeDiscount.forEach(function(p){
+				if (p.value != null) {
+					const btnGetCode = document.querySelectorAll('.buttonGetCode');
+					btnGetCode.forEach(p => p.style.pointerEvents = "none");
+					btnGetCode.forEach(p => p.style.opacity = "0.5");
+					console.log(p.value);
+				} else {
+					const btnGetCode = document.querySelectorAll('.buttonGetCode');
+					btnGetCode.forEach(p => p.style.pointerEvents = "all");
+					btnGetCode.forEach(p => p.style.opacity = "1");
+					console.log("bang NULLL!!!");
+				}
+			});
+			
+			/* myArray.forEach(function(element) {
+		        if (element !== myArray[0]) {
+		            passing = false;
+		        }
+		    });
+			
+			if (showCodeDiscount != null) {
+				const btnGetCode = document.querySelectorAll('.buttonGetCode');
+				btnGetCode.forEach(p => p.style.pointerEvents = "none");
+				btnGetCode.forEach(p => p.style.opacity = "0.5");
+				console.log("khac NULLL!!!");
+			} else {
+				const btnGetCode = document.querySelectorAll('.buttonGetCode');
+				btnGetCode.forEach(p => p.style.pointerEvents = "all");
+				btnGetCode.forEach(p => p.style.opacity = "1");
+				console.log("bang NULLL!!!");
+			} */
+		}
+		
 		function makeid() {
 			var text = "";
 			var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

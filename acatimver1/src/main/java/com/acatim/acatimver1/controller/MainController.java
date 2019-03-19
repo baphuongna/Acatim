@@ -3,15 +3,20 @@ package com.acatim.acatimver1.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.DiscountCode;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -98,9 +103,25 @@ public class MainController {
 	@RequestMapping(value = "/course" , method = RequestMethod.GET)
 	public String showAllCourseFull(Model model) {
 		model.addAttribute("courses", courseService.getAllCourse());
+		Course search = new Course();
+		model.addAttribute("search",search);
+		
 		model.addAttribute("discountCode", discountCodeServiceImpl.getAllDiscountCode());
 		return "course";
 	}
+	
+
+	@RequestMapping(value = "/course", method = RequestMethod.POST)
+	public ModelAndView createNewUser(@Valid @ModelAttribute("search") Course khanh, BindingResult bindingResult)
+			throws NotFoundException {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		courseService.searchCourseByCourseName(khanh.getCourseName());
+		modelAndView.setViewName("course");
+		return modelAndView;
+	}
+
+
 	
 	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
 	public String loginForm() {
