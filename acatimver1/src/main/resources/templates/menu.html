@@ -3,12 +3,9 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -16,82 +13,55 @@
 </head>
 <body>
 	<div th:fragment="menu">
-
-		<nav
-			class="navbar navbar-expand-lg ftco_navbar  ftco-navbar-light nonShadow"
-			id="ftco-navbar">
-			<!-- <div class="container">
-      <a class="navbar-brand" href="index.html"><i class="flaticon-university"></i>Genius <br><small>University</small></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
-<form th:action="@{/registration}" method="get">
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active"><a href="index.html" th:href="@{/}" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.html" th:href="@{/about}" class="nav-link">About</a></li>
-          <li class="nav-item">
-          <a href="course.html" th:href="@{/course}" class="nav-link" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Courses</a>
-          
-          </li>
-          <li class="nav-item"><a href="teacher.html" th:href="@{/teacher}" class="nav-link">Teacher</a></li>
-          <li class="nav-item"><a href="blog.html" th:href="@{/blog}" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="event.html" th:href="@{/event}" class="nav-link">Events</a></li>
-          <li class="nav-item"><a href="contact.html" th:href="@{/contact}" class="nav-link">Contact</a></li>
-          
-          <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>
-				
-    				<button type="Submit">Registration Now!</button>
-			
-			</span></a></li>
-			
-        </ul>
-      </div>
-      </form>
-    </div> -->
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner">
 			<div class="container">
-				<nav class="navbar padding-bottom-0 width-full nonShadow">
-					<div class="navbar-header">
-						<a class="navbar-brand" th:href="@{/index}"><i
-							class="flaticon-university"></i>Acatim <br> <small>Find
-								your knowledge</small></a>
-						<button class="navbar-toggler" type="button"
-							data-toggle="collapse" data-target="#ftco-nav"
-							aria-controls="ftco-nav" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="oi oi-menu"></span> Menu
-						</button>
+				<!-- Brand -->
+				<a class="navbar-brand" href="#"><span>Acatim</span> Fpt
+					University</a>
+
+				<!-- Toggler/collapsibe Button -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Navbar links -->
+				<form th:action="@{/registration}" method="get">
+					<div class="collapse navbar-collapse" id="collapsibleNavbar">
+						<ul class="navbar-nav ml-auto">
+							<li class="nav-item"><a class="nav-link" href="index.html"
+								th:href="@{/}">Trang chủ</a></li>
+							<li class="nav-item"><a class="nav-link" href="course.html"
+								th:href="@{/course}">Môn học</a></li>
+							<li class="nav-item"><a class="nav-link" href="teacher.html"
+								th:href="@{/teacher}">Giáo viên/Trung tâm</a></li>
+							<li class="nav-item"><a class="nav-link" href="contact.html"
+								th:href="@{/contact}">Liên Hệ</a></li>
+						</ul>
+						<ul class="navbar-nav ml-auto navbar-right">
+							<li class="nav-item dropdown"
+								th:if="${#request.userPrincipal != null}"><a
+								class="nav-link dropdown-toggle" href="#" id="navbardrop"
+								data-toggle="dropdown" th:utext="${#request.userPrincipal.name}">
+							</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" href="admin/index.html"
+										th:if="${userRole == 'Manager' || userRole == 'Admin'}"
+										th:href="@{/admin/}">Trang Quản lý Web</a> <a
+										class="dropdown-item" href="profile.html"
+										th:href="@{/profile}">Trang cá nhân </a> <a
+										class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
+								</div></li>
+							<a href="registration.html" th:href="@{/registration}"
+								th:if="${#request.userPrincipal == null}" role="button"
+								class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
+							<a href="loginPage.html" th:href="@{/loginPage}"
+								th:if="${#request.userPrincipal == null}" role="button"
+								class="btn btn-primary"
+								style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
+						</ul>
 					</div>
-					<form th:action="@{/registration}" method="get">
-						<div class="collapse navbar-collapse js-navbar-collapse">
-							<ul class="nav navbar-nav" style="margin-right: 15px;">
-								<li><a href="index.html" th:href="@{/}">Trang chủ</a></li>
-								<li class="dropdown mega-dropdown"><a href="course.html" th:href="@{/course}">Môn học</a></li>
-								<li class="dropdown mega-dropdown"><a href="teacher.html"
-									th:href="@{/teacher}">Giáo viên/Trung Tâm</span></a>
-								</li>
-								<li><a href="contact.html" th:href="@{/contact}">Liên
-										Hệ </a></li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li th:if="${#request.userPrincipal != null}" class="dropdown"><a href="#" class="dropdown-toggle"
-									data-toggle="dropdown" role="button" aria-expanded="false"><span th:utext="${#request.userPrincipal.name}"></span> </a>
-									<ul class="dropdown-menu" role="menu">
-									<li><a href="admin/index.html" th:if="${userRole == 'Manager' || userRole == 'Admin'}" th:href="@{/admin/}">Trang Quản lý Web</a></li>
-										<li><a href="profile.html" th:href="@{/profile}">Trang
-												cá nhân </a></li>
-										<li><a href="#">Thông tin cá nhân</a></li>
-										<li><a href="#">Cài đặt</a></li>
-										<li class="divider"></li>
-										<li><a th:href="@{/Logout}">Đăng xuất</a></li>
-									</ul></li>
-								<a href="registration.html" th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
-								<a href="loginPage.html" th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
-							</ul>
-						</div>
-						<!-- /.nav-collapse -->
-					</form>
-				</nav>
+				</form>
 			</div>
 		</nav>
 	</div>

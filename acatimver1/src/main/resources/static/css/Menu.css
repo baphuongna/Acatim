@@ -1,79 +1,147 @@
-@charset "ISO-8859-1";
-
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
-body {
-	font-family: 'Open Sans', 'sans-serif';
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1|Kaushan+Script|Libre+Baskerville|Lobster');
+.body{
+	font-family: 'Gothic A1', sans-serif;
+	font-size:16px;
+	}
+	p{
+	color:#6c6c6f;
+	font-size:1em;
+	}
+	h1,h2,h3,h4,h5,h6{color:#323233;text-transform:uppercase;}
+.navbar-brand  span{
+	color: blue;
+	font-size:25px;font-weight:700;letter-spacing:0.1em;
+    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+}
+.navbar-brand {
+	color: #fed136 !important;
+	font-size:25px;
+    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+	font-weight:700;
+	letter-spacing:0.1em;
 }
 
-.mega-dropdown {
-	position: static !important;
+.navbar-nav .nav-item .nav-link{
+	padding: 1.1em 1em!important;
+	font-size: 120%;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: blue;
+   font-family: 'Gothic A1', sans-serif;
+}
+.navbar-nav .nav-item .nav-link:hover{color:#fed136;}
+.navbar-expand-md .navbar-nav .dropdown-menu{
+	border-top:3px solid #fed136;
+}
+.dropdown-item:hover{color:#fed136;}
+nav{-webkit-transition: padding-top .3s,padding-bottom .3s;
+    -moz-transition: padding-top .3s,padding-bottom .3s;
+    transition: padding-top .3s,padding-bottom .3s;
+    border: none;
+	}
+	
+ .shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white;
+    position: fixed !important;
 }
 
-.mega-dropdown-menu {
-	padding: 20px 0px;
-	width: 100%;
-	box-shadow: none;
-	-webkit-box-shadow: none;
+.navbar-nav .show>.nav-link {
+	color: #fed136 !important;
 }
 
-.mega-dropdown-menu>li>ul {
-	padding: 0;
-	margin: 0;
+.banner{
+	background-image:url('http://www.hd-freewallpapers.com/latest-wallpapers/abstract-website-backgrounds.jpg');
+	text-align: center;
+    color: blue;
+   
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.banner-text{
+	padding:200px 0 150px 0;
+}
+.banner-heading{
+	font-family: 'Lobster', cursive;
+	font-size: 75px;
+    font-weight: 700;
+    line-height: 100px;
+    margin-bottom: 30px;
+	color:blue;
+}
+.banner-sub-heading{
+	font-family: 'Libre Baskerville', serif;
+	font-size: 30px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 50px;
+	color:blue;
 }
 
-.mega-dropdown-menu>li>ul>li {
-	list-style: none;
+.btn-banner{
+	padding:5px 20px;
+	border-radius:10px;
+	font-weight:700;
+	line-height:1.5;
+	text-align:center;
+	color:blue;
+	text-transform:uppercase;
+}
+.text-intro{
+	width:90%;
+	margin:auto;
+	text-align:center;
+	padding-top:30px;
 }
 
-.mega-dropdown-menu>li>ul>li>a {
-	display: block;
-	color: #222;
-	padding: 3px 5px;
+
+/* mobile view */
+@media (max-width:500px)
+{
+	.navbar-nav{
+		background-color:#000;
+		border-top:3px solid #fed136;
+		color:blue;
+		z-index:1;
+		margin-top:5px;
+		}
+	.navbar-nav .nav-item .nav-link{
+	padding: 0.7em 1em!important;
+	font-size: 100%;
+    font-weight: 500;
+    }
+	.banner-text{
+	padding:150px 0 150px 0;
+}
+.banner-heading{
+	font-size: 30px;
+    line-height: 30px;
+    margin-bottom: 20px;
+}
+.banner-sub-heading{
+	font-size: 10px;
+    font-weight: 200;
+    line-height: 10px;
+    margin-bottom: 40px;
 }
 
-.mega-dropdown-menu>li ul>li>a:hover, .mega-dropdown-menu>li ul>li>a:focus
-	{
-	text-decoration: none;
 }
 
-.mega-dropdown-menu .dropdown-header {
-	font-size: 18px;
-	color: #ff3546;
-	padding: 5px 60px 5px 5px;
-	line-height: 30px;
+@media (max-width:768px){
+	.banner-text{
+	padding:150px 0 150px 0;
 }
-
-.carousel-control {
-	width: 30px;
-	height: 30px;
-	top: -35px;
+	.banner-sub-heading{
+	font-size: 23px;
+    font-weight: 200;
+    line-height: 23px;
+    margin-bottom: 40px;
 }
-
-.left.carousel-control {
-	right: 30px;
-	left: inherit;
 }
-
-.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right
-	{
-	font-size: 12px;
-	background-color: #fff;
-	line-height: 30px;
-	text-shadow: none;
-	color: #333;
-	border: 1px solid #ddd;
-}
-
-.padding-bottom-0 {
-	padding-bottom: 0px !important;
-}
-
-.margin-bottom-15 {
-	margin-bottom: 15px !important;
-}
-
-.width-full {
-	width: 100%;
-	s
-}
+ 
