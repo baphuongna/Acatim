@@ -6,12 +6,13 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.mapper.UserExtractor;
 import com.acatim.acatimver1.mapper.UserMapper;
-import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.UserModel;
 
 @Repository
@@ -62,13 +63,111 @@ public class UserDAO extends JdbcDaoSupport {
 		return false;
 	}
 
-	public List<UserModel> getRoleNames() {
-		String sql = UserMapper.BASE_SQL;
+	public List<UserModel> getAllUsers(String roleId) {
+		try {
+			if(roleId.trim().length() == 0) {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 ;";
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new UserExtractor());
+				return userInfo;
+			}else {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 and User.role_id = ?;";
+				Object[] params = new Object[] {roleId};
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}
+			
+			
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<UserModel> getAllUsersPageable(Pageable pageable,String roleId) {
+		
+		try {
+			
+			if(roleId.trim().length() == 0) {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 LIMIT ?, ?;";
+				Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}else {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
+				Object[] params = new Object[] {roleId, pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) {
+		
+		try {
+			
+			if(roleId.trim().length() == 0) {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+userName+"%", pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}else{
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+userName+"%", roleId, pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}
 
-		UserMapper mapper = new UserMapper();
-		List<UserModel> userList = this.getJdbcTemplate().query(sql, mapper);
-
-		return userList;
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) {
+		
+		try {
+			
+			if(roleId.trim().length() == 0) {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+email+"%", pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}else {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+email+"%", roleId, pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}
+			
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	public List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) {
+		
+		try {
+			
+			if(roleId.trim().length() == 0) {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+fullName+"%", pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}else {
+				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
+				Object[] params = new Object[] { "%"+fullName+"%", roleId, pageable.getOffset(), pageable.getPageSize() };
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				return userInfo;
+			}
+			
+			
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
 	}
 
 	public List<UserModel> searchUserByName(String fullName) {

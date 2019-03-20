@@ -118,7 +118,7 @@
         </div>
         <div class="data-table-area mg-b-15">
             <div class="container-fluid">
-				<form th:action="@{all-students}" th:object="${searchValue}" method="POST">
+				<form th:action="@{allUser}" th:object="${searchValue}" method="POST">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div >
@@ -139,6 +139,16 @@
 												<option value="userName">Tên Tài khoản</option>
 												<option value="fullName">Họ Và Tên</option>
 												<option value="email">Email</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="chosen-select-single mg-b-20">
+											<select class="chosen-select" th:field="*{roleId}">
+												<option value="">-Chọn Loại Người Dùng-</option>
+												<option value="1">Học Sinh</option>
+												<option value="2">Giáo Viên</option>
+												<option value=3>Trung Tâm</option>
 											</select>
 										</div>
 									</div>
@@ -164,7 +174,13 @@
                         <div class="product-status-wrap drp-lst">
                             <h4>Danh Sách Học Sinh</h4>
                             <div class="add-product">
-                                <a th:href="@{/admin/add-student}">Thêm Học Sinh</a>
+                                <a th:href="@{/admin/addStudent}">Thêm Học Sinh</a>
+                            </div>
+                            <div class="add-product">
+                                <a th:href="@{/admin/addTeacher}">Thêm Giáo Viên</a>
+                            </div>
+                            <div class="add-product">
+                                <a th:href="@{/admin/addStudyCenter}">Thêm Trung Tâm</a>
                             </div>
                             <div class="asset-inner">
                                 <table>
@@ -174,28 +190,31 @@
 										<th>Email</th>
 										<th>Số Điện Thoại</th>
 										<th>Địa chỉ</th>
-										<th>Ngày Sinh</th>
-										<th>Giới Tính</th>
+										<th>Ngày Tạo</th>
+										<th>Loại Người Dùng</th>
 										<th>Trạng thái</th>
 										<th></th>
 									</tr>
-									<tr th:each="student : ${allStudent}">
-										<td th:text="${student.userName}"></td>
-										<td th:text="${student.fullName}"></td>
-										<td th:text="${student.email}"></td>
-										<td th:text="${student.phone}"></td>
-										<td th:text="${student.address}"></td>
-										<td th:text="${student.student.dob}"></td>
-										<td th:text="${student.student.gender ? 'Nam' : 'Nữ'}"></td>
-										<!-- <td th:text="${student.active  ? 'Active' : 'Blocked'}"></td> -->
-										<td th:if="${student.active == true}" style="color: green;"><b>Active</b></td>
-										<td th:if="${student.active == false}" style="color: red;" ><b>Blocked</b></td>
+									<tr th:each="user : ${allUser}">
+										<td th:text="${user.userName}"></td>
+										<td th:text="${user.fullName}"></td>
+										<td th:text="${user.email}"></td>
+										<td th:text="${user.phone}"></td>
+										<td th:text="${user.address}"></td>
+										<td th:text="${user.createDate}"></td>
+										
+										<td th:if="${user.role_id == 1}" th:text="${user.role.roleName}"></td>
+										<td th:if="${user.role_id == 2}" th:text="${user.role.roleName}"></td>
+										<td th:if="${user.role_id == 3}" th:text="${user.role.roleName}"></td>
+										
+										<td th:if="${user.active == true}" style="color: green;"><b>Active</b></td>
+										<td th:if="${user.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
-										<a th:href="@{/admin/edit-student(userName=${student.userName})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
-							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${student.active == true}"
-							 								th:attr="data-target='#'+${student.userName}+'1'">Khóa</button>
-							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${student.active == false}"
-							 								th:attr="data-target='#'+${student.userName}+'2'">Mở Khóa</button>
+										<a th:href="@{/admin/editUser(userName=${user.userName})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
+							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${user.active == true}"
+							 								th:attr="data-target='#'+${user.userName}+'1'">Khóa</button>
+							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${user.active == false}"
+							 								th:attr="data-target='#'+${user.userName}+'2'">Mở Khóa</button>
 										</td>
 									</tr>
 								</table>
@@ -204,21 +223,21 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination" >
                                     	<li class="page-item" >
-                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/all-students(page=${first})}">Trang Đầu</a>
-                                        	<a th:if="${currentPage == first}" class="page-link" >Trang Cuối</a>
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/allUser(page=${first})}">Trang Đầu</a>
+                                        	<a th:if="${currentPage == first}" class="page-link" >Trang Đầu</a>
                                         </li>
                                     	<li class="page-item"  th:if="${hasPrevious == true}">
-                                        	<a class="page-link" th:href="@{/admin/all-students(page=${previous})}" >Trang trước</a>
+                                        	<a class="page-link" th:href="@{/admin/allUser(page=${previous})}" >Trang trước</a>
                                         </li>
                                         <li class="page-item" th:each="totalPage : ${totalPages}">
-                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/all-students(page=${totalPage})}" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/allUser(page=${totalPage})}" th:text="${totalPage}">1</a>
                                         	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
                                         </li>
                                         <li class="page-item"  th:if="${hasNext == true}">
-                                        	<a class="page-link" th:href="@{/admin/all-students(page=${next})}">Trang Sau</a>
+                                        	<a class="page-link" th:href="@{/admin/allUser(page=${next})}">Trang Sau</a>
                                         </li>
                                         <li class="page-item">
-                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/all-students(page=${last})}">Trang Cuối</a>
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/allUser(page=${last})}">Trang Cuối</a>
                                         	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
                                         </li>
                                     </ul>
@@ -230,7 +249,7 @@
             </div>
         </div>
         
-        <div th:id="${student.userName}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="student : ${allStudent}">
+        <div th:id="${user.userName}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="user : ${allUser}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-close-area modal-close-df">
@@ -243,13 +262,13 @@
                                     </div>
                                     <div class="modal-footer danger-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/blockStudent(userName=${student.userName})}">Đúng</a>
+                                        <a th:href="@{/admin/blockUser(userName=${user.userName})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-        <div th:id="${student.userName}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="student : ${allStudent}">
+        <div th:id="${user.userName}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="user : ${allUser}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-close-area modal-close-df">
@@ -262,7 +281,7 @@
                                     </div>
                                     <div class="modal-footer warning-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/unlockStudent(userName=${student.userName})}">Đúng</a>
+                                        <a th:href="@{/admin/unlockUser(userName=${user.userName})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>

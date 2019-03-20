@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 import com.acatim.acatimver1.form.StudentForm;
+import com.acatim.acatimver1.form.StudyCenterForm;
+import com.acatim.acatimver1.form.TeacherForm;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -39,10 +41,16 @@ public interface UserInfoService {
 	List<UserModel> loadAllUserStudent() throws NotFoundException;
 	boolean checkUserExist(String userName) throws NotFoundException;
 	String getRoleName(String userName) throws NotFoundException;
-	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
 	
-	List<UserModel> getStudentPageable(Pageable pageable) throws NotFoundException;
-	List<UserModel> searchStudentByUserName(Pageable pageable, String userName) throws NotFoundException;
-	List<UserModel> searchStudentByEmail(Pageable pageable, String email) throws NotFoundException;
-	List<UserModel> searchStudentByFullName(Pageable pageable, String fullName) throws NotFoundException;
+	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
+	TeacherForm getUserTeacherByUserName(String userName) throws NotFoundException;
+	StudyCenterForm getUserStudyCenterByUserName(String userName) throws NotFoundException;
+	
+	List<UserModel> getAllUsers(String roleId) throws NotFoundException;
+	List<UserModel> getAllUsersPageable(Pageable pageable, String roleId) throws NotFoundException;
+	List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) throws NotFoundException;
+	List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException;
+	List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException;
+	
+	
 }

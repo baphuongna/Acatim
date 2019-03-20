@@ -6,17 +6,22 @@ import lombok.Data;
 public class SearchValue {
 	private String value;
 	
+	private String roleId;
+	
 	private String search;
 
 	public SearchValue() {
 		super();
 	}
 
-	public SearchValue(String value, String search) {
+	public SearchValue(String value, String roleId, String search) {
 		super();
 		this.value = value;
+		this.roleId = roleId;
 		this.search = search;
 	}
+	
+	
 	
 	
 }

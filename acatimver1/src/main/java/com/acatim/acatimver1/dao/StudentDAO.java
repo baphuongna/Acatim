@@ -6,7 +6,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,50 +43,6 @@ public class StudentDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name;";
 		try {
 			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new StudentExtractor());
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-	
-	public List<UserModel> getStudentPageable(Pageable pageable) {
-		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name LIMIT ?, ?;";
-		Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
-		try {
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new StudentExtractor());
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-	
-	public List<UserModel> searchStudentByUserName(Pageable pageable, String userName) {
-		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name Where User.user_name LIKE ? LIMIT ?, ?;";
-		Object[] params = new Object[] { "%"+userName+"%", pageable.getOffset(), pageable.getPageSize() };
-		try {
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new StudentExtractor());
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-	
-	public List<UserModel> searchStudentByEmail(Pageable pageable, String email) {
-		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name Where User.email LIKE ? LIMIT ?, ?;";
-		Object[] params = new Object[] { "%"+email+"%", pageable.getOffset(), pageable.getPageSize() };
-		try {
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new StudentExtractor());
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-	
-	public List<UserModel> searchStudentByFullName(Pageable pageable, String fullName) {
-		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name Where User.full_name LIKE ? LIMIT ?, ?;";
-		Object[] params = new Object[] { "%"+fullName+"%", pageable.getOffset(), pageable.getPageSize() };
-		try {
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new StudentExtractor());
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

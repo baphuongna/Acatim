@@ -125,17 +125,16 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
-                            <form th:action="@{studentUpdate}" th:object="${studentForm}" method="POST">
+                            <form th:action="@{userStudyCenter}" th:object="${studyCenterForm}" method="POST">
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
 										<div class="form-group-inner">
 											<div class="row">
 												<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
 													<b><span>Tên Tài Khoản :</span></b>
 												</div>
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-													<b><span th:field="*{userName}" th:text="${studentForm.userName}"></span></b>
+													<b><span th:field="*{userName}" th:text="${studyCenterForm.userName}"></span></b>
 													<input type="hidden" class="form-control" th:field="*{userName}" >
 												</div>
 											</div>
@@ -196,26 +195,22 @@
 										<div class="form-group-inner">
 											<div class="row">
 												<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-													<label class="login2">Ngày Sinh</label>
+													<label class="login2">Mô Tả Thêm</label>
 												</div>
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-													<input type="text" class="form-control" th:field="*{dob}"
-														placeholder="Ngày Sinh">
-													<span th:if="${#fields.hasErrors('dob')}"
-														th:errors="*{dob}">..</span>
+													<textarea name="description" th:field="*{description}"
+														placeholder="Description"
+														style="width: 100%; height: 100px;"></textarea>
 												</div>
 											</div>
 										</div>
 										<div class="form-group-inner">
 											<div class="row">
 												<div class="col-lg-1 col-md-1 col-sm-1 col-xs-12">
-													<label class="login2">Giới tính</label>
+													<b><span>Đánh Giá :</span></b>
 												</div>
 												<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-													<select class="form-control" th:field="*{gender}">
-														<option value="true">Nam</option>
-														<option value="false">Nữ</option>
-													</select>
+													<b><span th:field="*{rate}" th:text="${studyCenterForm.rate}"></span> / 5.0</b>
 												</div>
 											</div>
 										</div>

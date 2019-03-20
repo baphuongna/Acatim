@@ -3,7 +3,6 @@ package com.acatim.acatimver1.model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -57,6 +56,10 @@ public class UserModel {
     @OneToOne
     @JoinColumn
     private StudyCenter studyCenter;
+    
+    @OneToOne
+    @JoinColumn
+    private Role role;
 
 	public UserModel(@NotEmpty(message = "*Please provide your user name") String userName, int role_id,
 			@NotEmpty(message = "*Please provide your full name") String fullName,
