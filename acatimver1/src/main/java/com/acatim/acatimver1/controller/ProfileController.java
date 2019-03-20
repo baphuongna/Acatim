@@ -43,17 +43,16 @@ public class ProfileController {
 	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
-
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
 		System.out.println("User Name: " + userName);
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 		
 		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(roleName);
 		String gender = null;
 		 if (useInfo == null) {
 	            System.out.println("User not found! " + userName);

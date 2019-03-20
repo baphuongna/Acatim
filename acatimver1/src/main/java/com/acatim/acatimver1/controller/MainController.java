@@ -69,6 +69,8 @@ public class MainController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
+	
+	
 
 //    @RequestMapping(value = "/admin", method = RequestMethod.GET)
 //    public String adminPage(Model model, Principal principal) {
