@@ -198,7 +198,10 @@
 									
 									<div class="action">
 										<button th:if="${#request.userPrincipal == null}" class="add-to-cart btn btn-success" style="float: left;margin-right: 14px;opacity: 0.5; pointer-events: none;"  type="button">Lấy mã giảm giá</button>
-										<button th:if="${#request.userPrincipal != null}" class="add-to-cart btn btn-success buttonGetCode" type="button" onclick="makeid();">Lấy mã giảm giá</button>
+										
+										
+										<button th:if="${#request.userPrincipal != null }" class="add-to-cart btn btn-success buttonGetCode" type="button" onclick="makeid();">Lấy mã giảm giá</button>
+										
 										<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}">Bạn chưa đăng nhập ...</p>
 										<input name="codeId" class="codeDiscount" style="border: 1px solid; display: none; font-size: 20px; margin-left: 35px; margin-top: 10px; font-weight: bold; text-align: center; border-radius: 10px; pointer-events: none"/>
 										
@@ -243,7 +246,7 @@
 
 	<script type="text/javascript">
 		
-		function checkCode(){
+		/* function checkCode(){
 			var showCodeDiscount = document.querySelectorAll('.showCodeDiscount');
 			
 			showCodeDiscount.forEach(function(p){
@@ -277,7 +280,7 @@
 				btnGetCode.forEach(p => p.style.opacity = "1");
 				console.log("bang NULLL!!!");
 			} */
-		}
+		/*} */
 		
 		function makeid() {
 			var text = "";
