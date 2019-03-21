@@ -41,12 +41,13 @@ public class ManagerUserController {
 	private PageableService pageableService;
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
-	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page) {
+	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
+			@RequestParam(required = false, name = "roleId") String roleId) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (page == null) {
 			page = 1 + "";
 		}
-
+		
 		try {
 			int currentPage = Integer.parseInt(page);
 
@@ -57,8 +58,8 @@ public class ManagerUserController {
 			@SuppressWarnings("deprecation")
 			Pageable pageable = new PageRequest(currentPage - 1, 8);
 
-			int total = userInfoService.getAllUsers("").size();
-			
+			int total = userInfoService.getAllUsers(roleId).size();
+
 			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
@@ -70,8 +71,9 @@ public class ManagerUserController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageable, ""));
+			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageable, roleId));
 			SearchValue searchValue = new SearchValue();
+			searchValue.setRoleId(roleId);
 			modelAndView.addObject("searchValue", searchValue);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
@@ -103,22 +105,25 @@ public class ManagerUserController {
 
 			if (search.getSearch().trim().length() == 0) {
 				total = userInfoService.getAllUsers(search.getRoleId()).size();
-				System.out.println(total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
+				System.out.println(
+						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
 				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageable, search.getRoleId()));
 			} else {
 				List<UserModel> listUser = null;
 				if (search.getValue().equals("userName")) {
-					listUser = userInfoService.searchAllUsersByUserName(pageable, search.getSearch(), search.getRoleId());
+					listUser = userInfoService.searchAllUsersByUserName(pageable, search.getSearch(),
+							search.getRoleId());
 					total = listUser.size();
-					modelAndView.addObject("allUser",listUser);
+					modelAndView.addObject("allUser", listUser);
 				} else if (search.getValue().equals("fullName")) {
-					listUser = userInfoService.searchAllUsersByFullName(pageable, search.getSearch(), search.getRoleId());
+					listUser = userInfoService.searchAllUsersByFullName(pageable, search.getSearch(),
+							search.getRoleId());
 					total = listUser.size();
-					modelAndView.addObject("allUser",listUser);
+					modelAndView.addObject("allUser", listUser);
 				} else if (search.getValue().equals("email")) {
 					listUser = userInfoService.searchAllUsersByEmail(pageable, search.getSearch(), search.getRoleId());
 					total = listUser.size();
-					modelAndView.addObject("allUser",listUser);
+					modelAndView.addObject("allUser", listUser);
 				}
 			}
 
@@ -141,7 +146,7 @@ public class ManagerUserController {
 		modelAndView.setViewName("admin/allUser");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "blockUser" }, method = RequestMethod.GET)
 	public ModelAndView blockStudent(@RequestParam("userName") String userName) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -192,8 +197,7 @@ public class ManagerUserController {
 
 	@RequestMapping(value = { "/addStudent" }, method = RequestMethod.POST)
 	public ModelAndView addNewStudent(@Valid @ModelAttribute("studentForm") StudentForm studentForm,
-			BindingResult result,
-			final RedirectAttributes redirectAttributes) throws NotFoundException {
+			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentForm);
@@ -350,32 +354,32 @@ public class ManagerUserController {
 	@RequestMapping(value = { "editUser" }, method = RequestMethod.GET)
 	public ModelAndView editStudent(@RequestParam("userName") String userName) {
 		ModelAndView modelAndView = new ModelAndView();
-		
+
 		try {
 			UserModel user = userInfoService.loadUserByUsername(userName);
-			
-			if(user.getRole_id() == 1) {
+
+			if (user.getRole_id() == 1) {
 				StudentForm student = userInfoService.getUserStudentByUserName(userName);
 				modelAndView.addObject("studentForm", student);
 				modelAndView.setViewName("admin/editStudent");
-			}else if(user.getRole_id() == 2) {
+			} else if (user.getRole_id() == 2) {
 				TeacherForm teacher = userInfoService.getUserTeacherByUserName(userName);
 				modelAndView.addObject("teacherForm", teacher);
 				modelAndView.setViewName("admin/editTeacher");
-			}else if(user.getRole_id() == 3) {
+			} else if (user.getRole_id() == 3) {
 				StudyCenterForm studyCenter = userInfoService.getUserStudyCenterByUserName(userName);
 				modelAndView.addObject("studyCenterForm", studyCenter);
 				modelAndView.setViewName("admin/editStudyCenter");
 			}
-			
+
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "userStudent" }, method = RequestMethod.POST)
 	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -404,7 +408,7 @@ public class ManagerUserController {
 		modelAndView.setViewName("redirect:/admin/allUser");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "userTeacher" }, method = RequestMethod.POST)
 	public ModelAndView updateTeacher(@ModelAttribute("teacherForm") @Validated TeacherForm teacherForm) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -418,7 +422,8 @@ public class ManagerUserController {
 					teacherForm.getFullName(), teacherForm.getEmail(), teacherForm.getPassword(),
 					currentTeacher.getCreateDate(), teacherForm.getPhoneNo(), teacherForm.getAddress(), true);
 
-			Teacher teacher = new Teacher(teacherForm.getUserName(), teacherForm.getDob(), teacherForm.isGender(), teacherForm.getDescription(), currentTeacher.getRate());
+			Teacher teacher = new Teacher(teacherForm.getUserName(), teacherForm.getDob(), teacherForm.isGender(),
+					teacherForm.getDescription(), currentTeacher.getRate());
 
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateTeacherInfo(teacher);
@@ -433,9 +438,10 @@ public class ManagerUserController {
 		modelAndView.setViewName("redirect:/admin/allUser");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "userStudyCenter" }, method = RequestMethod.POST)
-	public ModelAndView updateStudyCenter(@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm) {
+	public ModelAndView updateStudyCenter(
+			@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studyCenterForm);
 
@@ -447,7 +453,8 @@ public class ManagerUserController {
 					studyCenterForm.getFullName(), studyCenterForm.getEmail(), studyCenterForm.getPassword(),
 					currentSt.getCreateDate(), studyCenterForm.getPhoneNo(), studyCenterForm.getAddress(), true);
 
-			StudyCenter studyCenter = new StudyCenter(studyCenterForm.getUserName(), studyCenterForm.getDescription(), currentSt.getRate());
+			StudyCenter studyCenter = new StudyCenter(studyCenterForm.getUserName(), studyCenterForm.getDescription(),
+					currentSt.getRate());
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateStudyCenterInfo(studyCenter);
 
@@ -461,7 +468,7 @@ public class ManagerUserController {
 		modelAndView.setViewName("redirect:/admin/allUser");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = { "student-profile" }, method = RequestMethod.GET)
 	public ModelAndView studentProfile() {
 		ModelAndView modelAndView = new ModelAndView();

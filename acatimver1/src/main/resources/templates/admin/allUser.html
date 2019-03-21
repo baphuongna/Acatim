@@ -223,21 +223,21 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination" >
                                     	<li class="page-item" >
-                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/allUser(page=${first})}">Trang Đầu</a>
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/allUser(page=${first}, roleId=${searchValue.roleId})}">Trang Đầu</a>
                                         	<a th:if="${currentPage == first}" class="page-link" >Trang Đầu</a>
                                         </li>
                                     	<li class="page-item"  th:if="${hasPrevious == true}">
-                                        	<a class="page-link" th:href="@{/admin/allUser(page=${previous})}" >Trang trước</a>
+                                        	<a class="page-link" th:href="@{/admin/allUser(page=${previous}, roleId=${searchValue.roleId})}" >Trang trước</a>
                                         </li>
                                         <li class="page-item" th:each="totalPage : ${totalPages}">
-                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/allUser(page=${totalPage})}" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/allUser(page=${totalPage}, roleId=${searchValue.roleId})}" th:text="${totalPage}">1</a>
                                         	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
                                         </li>
                                         <li class="page-item"  th:if="${hasNext == true}">
-                                        	<a class="page-link" th:href="@{/admin/allUser(page=${next})}">Trang Sau</a>
+                                        	<a class="page-link" th:href="@{/admin/allUser(page=${next}, roleId=${searchValue.roleId})}">Trang Sau</a>
                                         </li>
                                         <li class="page-item">
-                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/allUser(page=${last})}">Trang Cuối</a>
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/allUser(page=${last}, roleId=${searchValue.roleId})}">Trang Cuối</a>
                                         	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
                                         </li>
                                     </ul>

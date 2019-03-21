@@ -65,7 +65,7 @@ public class UserDAO extends JdbcDaoSupport {
 
 	public List<UserModel> getAllUsers(String roleId) {
 		try {
-			if(roleId.trim().length() == 0) {
+			if(roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 ;";
 				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new UserExtractor());
 				return userInfo;
@@ -87,7 +87,7 @@ public class UserDAO extends JdbcDaoSupport {
 		
 		try {
 			
-			if(roleId.trim().length() == 0) {
+			if(roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
 				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
@@ -108,7 +108,7 @@ public class UserDAO extends JdbcDaoSupport {
 		
 		try {
 			
-			if(roleId.trim().length() == 0) {
+			if(roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%"+userName+"%", pageable.getOffset(), pageable.getPageSize() };
 				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
@@ -130,7 +130,7 @@ public class UserDAO extends JdbcDaoSupport {
 		
 		try {
 			
-			if(roleId.trim().length() == 0) {
+			if(roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%"+email+"%", pageable.getOffset(), pageable.getPageSize() };
 				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
@@ -152,7 +152,7 @@ public class UserDAO extends JdbcDaoSupport {
 		
 		try {
 			
-			if(roleId.trim().length() == 0) {
+			if(roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%"+fullName+"%", pageable.getOffset(), pageable.getPageSize() };
 				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
