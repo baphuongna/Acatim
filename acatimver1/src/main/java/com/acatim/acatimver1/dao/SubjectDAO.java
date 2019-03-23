@@ -43,6 +43,14 @@ public class SubjectDAO extends JdbcDaoSupport {
 		Subject subject = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 		return subject;
 	}
+	
+	public List<Subject> getSubjectByCategoryId(String categoryId) {
+		String sql = "SELECT * FROM Subject Where category_id = ?;";
+		Object[] params = new Object[] { categoryId };
+		SubjectMapper mapper = new SubjectMapper();
+		List<Subject> subject = this.getJdbcTemplate().query(sql, params, mapper);
+		return subject;
+	}
 
 	public void addCourse(Subject subject) {
 		String sql = "INSERT INTO Subject (subject_id, category_id, subject_name, create_date, update_date, active)\r\n"

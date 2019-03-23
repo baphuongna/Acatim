@@ -5,13 +5,13 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.mapper.CourseExtractor;
 import com.acatim.acatimver1.mapper.CourseMapper;
-import com.acatim.acatimver1.mapper.DiscountCodeMapper;
 import com.acatim.acatimver1.model.Course;
 
 @Repository
@@ -73,7 +73,93 @@ public class CourseDAO extends JdbcDaoSupport {
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
 		return courses;
 	}
-
+	
+	/* _______________________________________ */
+	
+	public List<Course> getAllCoursePaging(Pageable pageable) {
+		String sql = "SELECT * FROM Course LIMIT ?, ?;";
+		Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> searchAllCoursePaging(Pageable pageable, String courseName) {
+		String sql = "SELECT * FROM where courseName LIKE ? Course LIMIT ?, ?;";
+		Object[] params = new Object[] {"%"+courseName+"%",  pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> getAllCourseBySujectId(String subjectId) {
+		String sql = "SELECT * FROM Course where subject_id = ?;";
+		Object[] params = new Object[] { subjectId };
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> searchAllCourseBySujectId(String subjectId, String courseName) {
+		String sql = "SELECT * FROM Course where subject_id = ? and courseName LIKE ?;";
+		Object[] params = new Object[] { subjectId, "%"+courseName+"%" };
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> getAllCourseBySujectIdPaging(Pageable pageable, String subjectId) {
+		String sql = "SELECT * FROM Course where subject_id = ?  LIMIT ?, ?;";
+		Object[] params = new Object[] { subjectId , pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> searchAllCourseBySujectIdPaging(Pageable pageable, String subjectId, String courseName) {
+		String sql = "SELECT * FROM Course where subject_id = ? and courseName LIKE ? LIMIT ?, ?;";
+		Object[] params = new Object[] { subjectId, "%"+courseName+"%" , pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> getAllCourseByCateId(String cateId) {
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ?";
+		Object[] params = new Object[] { cateId };
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> searchAllCourseByCateId(String cateId, String courseName) {
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ? and Course.courseName LIKE ?";
+		Object[] params = new Object[] { cateId, "%"+courseName+"%" };
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> getAllCourseByCateIdPaging(Pageable pageable, String cateId) {
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ?  LIMIT ?, ?;";
+		Object[] params = new Object[] { cateId , pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> searchAllCourseByCateIdPaging(Pageable pageable, String cateId, String courseName) {
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ? and Course.courseName LIKE ? LIMIT ?, ?;";
+		Object[] params = new Object[] { cateId, "%"+courseName+"%" , pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	
+	
+	/* _______________________________________ */
+	
 	public void addCourse(Course course) {
 		String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date)\r\n"
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";

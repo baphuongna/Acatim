@@ -8,6 +8,10 @@ public class SearchValue {
 	
 	private String roleId;
 	
+	private String categoryId;
+	
+	private String subjectId;
+	
 	private String search;
 
 	public SearchValue() {
@@ -18,6 +22,15 @@ public class SearchValue {
 		super();
 		this.value = value;
 		this.roleId = roleId;
+		this.search = search;
+	}
+
+	public SearchValue(String value, String roleId, String categoryId, String subjectId, String search) {
+		super();
+		this.value = value;
+		this.roleId = roleId;
+		this.categoryId = categoryId;
+		this.subjectId = subjectId;
 		this.search = search;
 	}
 	

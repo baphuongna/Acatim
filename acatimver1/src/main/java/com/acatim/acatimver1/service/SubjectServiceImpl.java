@@ -38,6 +38,10 @@ public class SubjectServiceImpl {
 		this.subjectDAO.removeCourse(subjectId, active);
 	}
 	
+	public List<Subject> getSubjectByCategoryId(String categoryId) {
+		return this.subjectDAO.getSubjectByCategoryId(categoryId);
+	}
+	
 	public String genSubjectId() {
 		List<Subject> listSubject = this.subjectDAO.getListSubject();
 		int incNumber = listSubject.size() + 1;
