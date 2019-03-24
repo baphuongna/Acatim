@@ -192,6 +192,30 @@ public class ManagerCourseController {
 		modelAndView.setViewName("admin/all-courses");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = { "blockStudent" }, method = RequestMethod.GET)
+	public ModelAndView blockStudent(@RequestParam("courseId") String courseId) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			courseService.removeCourse(courseId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.setViewName("redirect:/admin/all-courses");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "unlockStudent" }, method = RequestMethod.GET)
+	public ModelAndView unlockStudent(@RequestParam("courseId") String courseId) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			courseService.unlockCourse(courseId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.setViewName("redirect:/admin/all-courses");
+		return modelAndView;
+	}
 
 	@RequestMapping(value = {"add-course"}, method = RequestMethod.GET)
 	public ModelAndView addCourse() {

@@ -138,11 +138,11 @@
 											</select>
 										</div>
 									</div>
-									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" th:if="${allSubjects != null}">
 										<div class="chosen-select-single mg-b-20">
 											<select class="chosen-select" th:field="*{subjectId}">
 												<option value="0">--Tât Cả--</option>
-												<option th:if="${allSubjects != null}" th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
+												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
 											</select>
 										</div>
 									</div>
@@ -186,7 +186,7 @@
 										<th>Trạng Thái</th>
 										<th></th>
 									</tr>
-									<tr th:each="course : ${allCourses}">
+									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}">
 										<td th:text="${course.courseId}"></td>
 										<td th:text="${course.courseName}"></td>
 										<td th:text="${course.courseDescription}"></td>
@@ -202,12 +202,18 @@
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
 										<a th:href="@{/admin/editUser(userName=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
+										<button type="button" class="btn btn-primary" data-toggle="modal"
+							 							th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm</button>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
 							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>
 							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${course.active == false}"
 							 								th:attr="data-target='#'+${course.courseId}+'2'">Mở Khóa</button>
 										</td>
 									</tr>
+									<tr th:if="${allCourses == null}">
+										<td>Không Tìm Thấy Khóa Học nào</td>
+									</tr>
+									
 								</table>
                             </div>
                             <div class="custom-pagination">
@@ -240,7 +246,7 @@
             </div>
         </div>
         
-        <div th:id="${course.courseId}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="course : ${allCourses}">
+        <div th:if="${allCourses != null}" th:id="${course.courseId}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="course : ${allCourses}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-close-area modal-close-df">
@@ -253,13 +259,13 @@
                                     </div>
                                     <div class="modal-footer danger-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/blockUser(userName=${course.courseId})}">Đúng</a>
+                                        <a th:href="@{/admin/blockStudent(courseId=${course.courseId})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-        <div th:id="${course.courseId}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="course : ${allCourses}">
+        <div th:if="${allCourses != null}" th:id="${course.courseId}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="course : ${allCourses}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-close-area modal-close-df">
@@ -272,12 +278,78 @@
                                     </div>
                                     <div class="modal-footer warning-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/unlockUser(userName=${course.courseId})}">Đúng</a>
+                                        <a th:href="@{/admin/unlockStudent(courseId=${course.courseId})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
         
+        <div th:if="${allCourses != null}" th:each="course : ${allCourses}">
+		<form autocomplete="off" >
+			<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="productGrid">
+				<div class="modal-dialog modal-lg" role="document" >
+					<div class="modal-content">
+						<div class="modal-header">
+						<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+								khóa học</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-4">
+									<img
+										src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+										class="img-responsive" alt="a">
+								</div>
+								<div class="col-md-8">
+									<h3 class="course-title"></h3>
+									<div class="rating">
+										<div class="stars">
+											<span class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+											<span class="fa fa-star"></span>
+										</div>
+										<span class="review-no">41 reviews</span></br> <span
+											class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userName})}" th:text="${course.userName}"></a>
+									</div>
+									<p class="product-description" th:text="${course.courseDescription}"></p>
+									<h4 class="price">
+										Giá: <span>$ <span th:text="${course.price}"></span></span>
+									</h4>
+									<p class="vote">
+										<strong>91%</strong> người thích khóa học này<strong>(87
+											votes)</strong>
+									</p>
+									<h4 class="price">
+										Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+									</h4>
+									<h4 class="price">
+										Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+									</h4>
+
+								</div>
+							</div>
+							<!-- hết popup course detail -->
+						</div>
+						<div class="modal-footer">
+							<button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="remove();">Close</button>
+							<input type="submit" value="Gửi" class="btn btn-primary py-3 px-5">
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+		</form>
+		
+	</div>
+	<!-- /.modal -->
+	
         <div class="footer-copyright-area">
             <div class="container-fluid">
                 <div class="row">

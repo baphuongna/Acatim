@@ -179,7 +179,7 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 
 	public void removeCourse(String courseId, boolean active) {
-		String sql = "UPDATE Course SET active = ? WHERE user_name = ?;";
+		String sql = "UPDATE Course SET active = ? WHERE course_id = ?;";
 		this.getJdbcTemplate().update(sql, active, courseId);
 	}
 }

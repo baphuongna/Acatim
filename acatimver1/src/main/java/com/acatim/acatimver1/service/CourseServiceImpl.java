@@ -31,6 +31,11 @@ public class CourseServiceImpl {
 		boolean active = false;
 		this.courseDAO.removeCourse(courseId, active);
 	}
+	
+	public void unlockCourse(String courseId) {
+		boolean active = true;
+		this.courseDAO.removeCourse(courseId, active);
+	}
 
 	public List<Course> searchCourseByCourseName(String courseName) {
 		return this.courseDAO.searchCourseByCourseName(courseName);
