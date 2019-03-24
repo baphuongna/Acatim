@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.mapper.CourseByName;
 import com.acatim.acatimver1.mapper.CourseExtractor;
 import com.acatim.acatimver1.mapper.CourseMapper;
 import com.acatim.acatimver1.model.Course;
@@ -53,6 +54,13 @@ public class CourseDAO extends JdbcDaoSupport {
 		Object[] params = new Object[] { userName };
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
+	public List<Course> getCourseByUserNameWithFullInfo(String userName) {
+		String sql = "SELECT * FROM Course,User where (Course.user_name = ?) and (User.user_name = ?);";
+		Object[] params = new Object[] { userName, userName };
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseByName());
 		return courses;
 	}
 

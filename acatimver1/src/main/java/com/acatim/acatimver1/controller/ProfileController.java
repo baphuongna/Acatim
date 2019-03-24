@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.Rating;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.Teacher;
@@ -54,6 +55,11 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(roleName);
 		String gender = null;
+		int progress5 = 80;
+		int progress4 = 60;
+		int progress3 = 40;
+		int progress2 = 20;
+		int progress1 = 15;
 		 if (useInfo == null) {
 	            System.out.println("User not found! " + userName);
 	            modelAndView.setViewName("index");
@@ -62,15 +68,19 @@ public class ProfileController {
 	    }else {
 	    	model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
+			List<Course> courses = courseService.getCourseByUserNameWithFullInfo(userName);
 			if(roleName.equals("Student")) {
 				Student student = userInfoService.loadStudentByUsername(userName);
-				model.addAttribute("studentInfo", userInfoService.loadStudentByUsername(userName));
+				model.addAttribute("studentInfo", student);
 				if(student.isGender() == true) {
 					gender = "Nam";
 				}else {
 					gender = "Nữ";
 				}
 				model.addAttribute("gender", gender);
+				
+				List<Rating> ratings = ratingService.getAllRatingByUserName(userName);
+				model.addAttribute("ratings", ratings);
 			}else if(roleName.equals("Teacher")) {
 				Teacher teacher = userInfoService.loadTeacherByUsername(userName);
 				model.addAttribute("teacherInfo", teacher);
@@ -80,17 +90,43 @@ public class ProfileController {
 					gender = "Nữ";
 				}
 				model.addAttribute("gender", gender);
+				
 				List<Rating> ratings = ratingService.getAllRatingTeacherByRecieverName(userName);
-				System.out.println(ratings);
+				int numberPeopleRate = 0;
+				
+				for(int i=0; i< ratings.size(); i++) {
+					numberPeopleRate++;
+				}
+				model.addAttribute("courses", courses);
 				model.addAttribute("ratings", ratings);
+				model.addAttribute("progress5", progress5);
+				model.addAttribute("progress4", progress4);
+				model.addAttribute("progress3", progress3);
+				model.addAttribute("progress2", progress2);
+				model.addAttribute("progress1", progress1);
+				model.addAttribute("numberPeopleRate", numberPeopleRate);
 				
 			}else if(roleName.equals("Study Center")) {
 				
 				model.addAttribute("studyCenterInfo", userInfoService.loadStudyCenterByUsername(userName));
-				
 				List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(userName);
+				
+				System.out.println(courses);
 				System.out.println(ratings);
+				int numberPeopleRate = 0;
+				
+				for(int i=0; i< ratings.size(); i++) {
+					numberPeopleRate++;
+				}
+				model.addAttribute("courses", courses);
 				model.addAttribute("ratings", ratings);
+				model.addAttribute("progress5", progress5);
+				model.addAttribute("progress4", progress4);
+				model.addAttribute("progress3", progress3);
+				model.addAttribute("progress2", progress2);
+				model.addAttribute("progress1", progress1);
+				model.addAttribute("numberPeopleRate", numberPeopleRate);
+				
 			}
 			modelAndView.setViewName("profile");
 	    }

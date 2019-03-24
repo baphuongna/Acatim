@@ -134,6 +134,11 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
+                        	<div class="row">
+		                    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
+		                        	<b>Liên hệ với chúng tôi</b>
+		                        </div>
+	                        </div>
                             <div class="profile-img">
                                 <img src="admin/admin/img/profile/1.jpg" alt="" />
                             </div>
@@ -141,32 +146,36 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Name</b><br /> Fly Zend</p>
-                                            <input type="hidden" class="rating" value="2"/>
+                                        	<b>Tên</b>
+                                            <p>Acatim</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Department</b><br /> CSE</p>
+                                        	<b>Website</b>
+                                            <p>http://acatim.edu.vn</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
-                                            <p><b>Email ID</b><br /> fly@gmail.com</p>
+                                        	<b>Địa chỉ Email</b>
+                                            <p>acatim@gmail.com</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                            <p><b>Phone</b><br /> +01962067309</p>
+	                                        <b>Điện thoại</b>
+	                                        <p>1900-666-888</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="address-hr">
-                                            <p><b>Address</b><br /> E104, catn-2, Chandlodia Ahmedabad Gujarat, UK.</p>
+                                        	<b>Địa chỉ</b>
+                                            <p>Đại học FPT - Khu công nghệ cao Hòa Lạc</p>
                                         </div>
                                     </div>
                                 </div>
@@ -196,10 +205,10 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Activity</a></li>
-                                <li><a href="#reviews"> Biography</a></li>
+                                <li class="active"><a href="#description">Hồ sơ</a></li>
+                                <li><a href="#reviews">Bình Luận</a></li>
                                  <li th:if="${roleName == 'Teacher' || roleName == 'Study Center'}"><a href="#Course">Khóa học</a></li>
-                                 <li><a href="#INFORMATION">Update Details</a></li>
+                                 <li><a href="#INFORMATION">Cập nhật thông tin</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
@@ -209,133 +218,181 @@
                                                 <div class="row">
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Full Name</b><br /> Fly Zend</p>
+                                                            <b>Tên</b>
+                                            				<p th:text="${useInfo.fullName}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Mobile</b><br /> 01962067309</p>
+                                                            <b>Điện thoại</b>
+	                                        				<p th:text="${useInfo.phone}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Email</b><br /> fly@gmail.com</p>
+                                                            <b>Địa chỉ Email</b>
+                                            				<p th:text="${useInfo.email}"></p>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
-                                                            <p><b>Location</b><br /> UK</p>
+                                                            <b>Chức vụ</b>
+				                                            <p th:if="${roleName == 'Study Center'}">Trung tâm</p>
+				                                            <p th:if="${roleName == 'Teacher'}">Giáo viên</p>
+				                                            <p th:if="${roleName == 'Student'}">Học viên</p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
+                                                <div class="row" >
+                                                    <div class="col-lg-3">
                                                         <div class="content-profile">
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                                            <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras
-                                                                dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
+                                                            <b>Địa chỉ</b>
+                                                            <p th:text="${useInfo.address}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3" th:if="${roleName == 'Student'}">
+                                                        <div class="content-profile">
+                                                            <b>Ngày sinh</b>
+                                                            <p th:text="${studentInfo.dob}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3" th:if="${roleName == 'Teacher'}">
+                                                        <div class="content-profile">
+                                                            <b>Ngày sinh</b>
+                                                            <p th:text="${teacherInfo.dob}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3" th:if="${roleName == 'Student' || roleName == 'Teacher'}">
+                                                        <div class="content-profile">
+                                                            <b>Giới tính</b>
+                                                            <p th:text="${gender}"></p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mg-b-15">
+                                                
+                                                <div class="row mg-b-15" th:if="${roleName == 'Study Center' || roleName == 'Teacher'}">
                                                     <div class="col-lg-12">
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="skill-title">
-                                                                    <h2>Skill Set</h2>
+                                                                    <h2>Mô tả</h2>
                                                                     <hr />
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Java</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 90%;" class="progress-bar progress-yellow"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Php</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 80%;" class="progress-bar progress-green"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>Apps</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 70%;" class="progress-bar progress-blue"></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="progress-skill">
-                                                            <h2>C#</h2>
-                                                            <div class="progress progress-mini">
-                                                                <div style="width: 60%;" class="progress-bar progress-red"></div>
-                                                            </div>
-                                                        </div>
+                                                        <div class="row">
+		                                                    <div class="col-lg-12">
+		                                                        <div class="content-profile">
+		                                                            <p th:if="${roleName == 'Study Center'}" th:text="${studyCenterInfo.description}"></p>
+		                                                        	<p th:if="${roleName == 'Teacher'}" th:text="${teacherInfo.description}"></p>
+		                                                        </div>
+		                                                    </div>
+		                                                </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mg-b-15">
+                                                <div class="row mg-b-15" th:if="${roleName == 'Study Center' || roleName == 'Teacher'}">
                                                     <div class="col-lg-12">
                                                         <div class="row">
                                                             <div class="col-lg-12">
                                                                 <div class="skill-title">
-                                                                    <h2>Education</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-b-15">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Experience</h2>
+                                                                    <h2>Đánh giá</h2>
                                                                     <hr />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                                <div class="skill-title">
-                                                                    <h2>Subjects</h2>
-                                                                    <hr />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="ex-pro">
-                                                            <ul>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                                <li><i class="fa fa-angle-right"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                                                            </ul>
+                                                        	<div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 text-center">
+                        <h1 class="rating-num">
+                            2.4</h1>
+                        <div class="rating">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </div>
+                        <div>
+                            <span class="glyphicon glyphicon-user"></span>[[${numberPeopleRate}]] total
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="row rating-desc">
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>5
+                            </div>
+                            <div class="col-xs-8 col-md-9">
+                                <div class="progress progress-striped">
+                                <p id="valueProgress5" th:text="${progress5}" style="display: none;"></p>
+                                    <div id="progressMake5" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 5 -->
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>4
+                            </div>
+                            <div class="col-xs-8 col-md-9">
+                                <div class="progress">
+                                <p id="valueProgress4" th:text="${progress4}" style="display: none;"></p>
+                                    <div id="progressMake4" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">60%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 4 -->
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>3
+                            </div>
+                            <div class="col-xs-8 col-md-9">
+                                <div class="progress">
+                                <p id="valueProgress3" th:text="${progress3}" style="display: none;"></p>
+                                    <div id="progressMake3" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">40%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 3 -->
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>2
+                            </div>
+                            <div class="col-xs-8 col-md-9">
+                                <div class="progress">
+                                <p id="valueProgress2" th:text="${progress2}" style="display: none;"></p>
+                                    <div id="progressMake2" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">20%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 2 -->
+                            <div class="col-xs-3 col-md-3 text-right">
+                                <span class="glyphicon glyphicon-star"></span>1
+                            </div>
+                            <div class="col-xs-8 col-md-9">
+                                <div class="progress">
+                                <p id="valueProgress1" th:text="${progress1}" style="display: none;"></p>
+                                    <div id="progressMake1" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end 1 -->
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -348,127 +405,58 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <div class="review-content-section">
                                                 <div class="chat-discussion" style="height: auto">
-                                                    <div class="chat-message">
+                                                <p th:if="${ratings.size() == 0 }">Chưa có bình luận nào...</p>
+                                                    <div class="chat-message" th:each="rating : ${ratings}">
+                                                   
 														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/1.jpg" alt="">
+															  <img class="message-avatar" src="admin/admin/img/contact/1.jpg" alt="">
 														</div>
                                                         <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-                                                            <span class="message-content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-															</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i> Love</a>
+                                                         
+                                                            <a th:if="${roleName == 'Study Center' || roleName == 'Teacher'}" class="message-author" href="#" th:text="${rating.userName}"></a>
+                                                            <a class="message-author" href="#" th:text="${rating.userName}"></a> > <a class="message-author" href="#" th:text="${rating.recieverName}"></a>
+                                                            <span class="message-date" th:text="${rating.createDate}"></span>
+                                                            <span class="message-content" th:text="${rating.comment}"></span>
+                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate <= 1}">
+                                                                <span class="fa fa-star checked"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/2.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Karl Jordan </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover.
-																	</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i> Love</a>
-                                                                <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Message</a>
+                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 1 and rating.rate <=2}">
+                                                                <span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/3.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-																	</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/4.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Alice Jordan </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-																		It uses a dictionary of over 200 Latin words.
-																	</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-warning"><i class="fa fa-eye"></i> Nudge</a>
+                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 2 and rating.rate <=3}">
+                                                            	
+                                                                <span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star"></span>
+																<span class="fa fa-star"></span>
+																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/1.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Mark Smith </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-																		It uses a dictionary of over 200 Latin words.
-																	</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-success"><i class="fa fa-heart"></i> Love</a>
+                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 3 and rating.rate <=4}">
+                                                                <span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star"></span>
+																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/2.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Karl Jordan </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover.
-																	</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i> Love</a>
-                                                                <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Message</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/3.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Michael Smith </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration.
-																	</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-message">
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/img/contact/4.jpg" alt="">
-														</div>
-                                                        <div class="message">
-                                                            <a class="message-author" href="#"> Alice Jordan </a>
-                                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                                            <span class="message-content">
-																	All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-																		It uses a dictionary of over 200 Latin words.
-																	</span>
-                                                            <div class="m-t-md mg-t-10">
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                                <a class="btn btn-xs btn-default"><i class="fa fa-heart"></i> Love</a>
+                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 4 and rating.rate <=5}">
+                                                                <span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<span class="fa fa-star checked"></span>
+																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -576,7 +564,81 @@
                                 </div>
                                 <div class="product-tab-list tab-pane fade" id="Course">
                                     <div class="row">
-                                    	KHOA HOC
+												<div class="col-md-12 d-flex" th:each="course,wind : ${courses}">
+													<div class="course align-self-stretch" style="border: none; background: none; -webkit-box-shadow: none; box-shadow: 0px 3px 39px -24px rgba(0, 0, 0, 0.2);">
+														<div class="text p-4" style="border: 1px solid #e0dfdf; border-radius: 11px; background-color: #f7f7f7;">
+															<p class="category" >
+																<span th:text="${course.courseName}"></span> 
+																<span class="price">$<span class="price" th:text="${course.price}"></span></span>
+															</p>
+															<h3 class="mb-3">
+																<a href="#" th:text="${course.courseName}"></a>
+															</h3>
+															<p th:text="${course.courseDescription}"></p>
+															<button type="button" class="btn btn-primary" data-toggle="modal"
+															 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm ...</button>
+														</div>
+													</div>
+												</div>
+                                    	<div th:each="course,wind : ${courses}">
+												<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+													aria-labelledby="productGrid">
+													<div class="modal-dialog modal-lg" role="document" >
+														<div class="modal-content">
+															<div class="modal-header">
+															<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+																	khóa học</h4>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">×</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<div class="row">
+																	<div class="col-md-4">
+																		<img
+																			src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+																			class="img-responsive" alt="a">
+																	</div>
+																	<div class="col-md-8">
+																		<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
+																		<div class="rating">
+																			<div class="stars">
+																				<span class="fa fa-star checked"></span> <span
+																					class="fa fa-star checked"></span> <span
+																					class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+																				<span class="fa fa-star"></span>
+																			</div>
+																			<span class="review-no">41 reviews</span></br> <span
+																				class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
+																		</div>
+																		<p class="product-description" th:text="${course.courseDescription}"></p>
+																		<h4 class="price">
+																			Giá: <span>$ <span th:text="${course.price}"></span></span>
+																		</h4>
+																		<p class="vote">
+																			<strong>91%</strong> người thích khóa học này<strong>(87
+																				votes)</strong>
+																		</p>
+																		<h4 class="price">
+																			Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+																		</h4>
+																		<h4 class="price">
+																			Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+																		</h4>
+																	</div>
+																</div>
+																<!-- hết popup course detail -->
+															</div>
+															<div class="modal-footer">
+																<button data-dismiss="modal" class="btn btn-primary">Close</button>
+															</div>
+														</div>
+														<!-- /.modal-content -->
+													</div>
+													<!-- /.modal-dialog -->
+												</div>
+										</div>
                                     </div>
                                 </div>
                             </div>
@@ -599,6 +661,18 @@
 	<!-- End Page Wrapper -->
 
 	<!-- JavaScripts -->
+	<script type="text/javascript">
+		var getValue5 = document.getElementById("valueProgress5").innerHTML;
+		var getValue4 = document.getElementById("valueProgress4").innerHTML;
+		var getValue3 = document.getElementById("valueProgress3").innerHTML;
+		var getValue2 = document.getElementById("valueProgress2").innerHTML;
+		var getValue1 = document.getElementById("valueProgress1").innerHTML;
+		document.getElementById("progressMake5").style.width = getValue5+"%";
+		document.getElementById("progressMake4").style.width = getValue4+"%";
+		document.getElementById("progressMake3").style.width = getValue3+"%";
+		document.getElementById("progressMake2").style.width = getValue2+"%";
+		document.getElementById("progressMake1").style.width = getValue1+"%";
+	</script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>

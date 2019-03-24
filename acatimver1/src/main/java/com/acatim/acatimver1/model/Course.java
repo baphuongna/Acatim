@@ -69,7 +69,4 @@ public class Course {
 		this.updateDate = updateDate;
 		this.active = active;
 	}
-	
-	
-	
 }

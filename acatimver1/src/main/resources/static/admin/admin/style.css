@@ -109,6 +109,10 @@ body {}
 }
 .mg-t-10{
 	margin-top:10px;
+	background-color: #FAFAFA;
+    border: 1px solid #EFEFEF;
+    padding: 11px 15px 10px 15px;
+    border-radius: 3px;
 }
 .mg-b-15{
 	margin-bottom:20px;
@@ -1085,9 +1089,6 @@ ul.breadcome-menu li a:hover{
     font-size: 18px;
     margin-bottom: 25px;
 }
-.progress-bar.progress-bar-success{
-	background:#006DF0;
-}
 .progress-bar.progress-bar-danger.ctn-vs-1{
 	background:#006DF0;
 }
@@ -1811,7 +1812,6 @@ ul.tab-custon-design li a, ul.tab-custon-design li a:hover, ul.tab-custon-design
 	border-color: #e12503;
 }
 .analysis-progrebar-ctn .progress {
-    height: 5px;
     margin-bottom: 10px;
 }
 .analysis-progrebar-ctn{
@@ -4086,12 +4086,6 @@ div#sparklinehome canvas {
 .analytics-content .text-inverse{
 	color:#D80027;
 }
-.progress-bar.progress-bar-danger{
-	background:#933EC5;
-}
-.progress-bar.progress-bar-info{
-	background:#65b12d;
-}
 .progress-bar.progress-bar-inverse{
 	background:#D80027;
 }
@@ -4719,3 +4713,11 @@ div#sparklinehome canvas {
 	color:#fff;
 	text-decoration:none;
 }
+.checked {color: orange;}
+.glyphicon { margin-right:2px;}
+.rating .glyphicon {font-size: 22px;}
+.rating-num { margin-top:0px;font-size: 54px; }
+.progressNew { margin-bottom: 5px;}
+.progressNew-bar { text-align: left; }
+.rating-desc .col-md-3 {padding-right: 0px;}
+.sr-only {height: 15px; margin-left: 5px;overflow: visible;clip: auto; color: white;}
