@@ -14,6 +14,7 @@ import com.acatim.acatimver1.dao.UserDAO;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
+import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -25,7 +26,7 @@ import javassist.NotFoundException;
 public class UserInfoServiceImpl implements UserInfoService {
 	@Autowired
 	private UserDAO UserDAO;
-	
+
 	@Autowired
 	private RoleDAO RoleDAO;
 
@@ -43,7 +44,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserModel user = this.UserDAO.findUserAccount(username);
 		return user;
 	}
-	
+
 	@Override
 	public UserModel loadUserbyEmail(String email) throws NotFoundException {
 		UserModel user = this.UserDAO.findUserAccountByEmail(email);
@@ -64,7 +65,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public List<Student> loadAllStudent() throws NotFoundException {
 		return this.StudentDAO.getAllStudent();
 	}
-	
+
 	@Override
 	public List<UserModel> loadAllUserTeacher() throws NotFoundException {
 		return this.TeacherDAO.getAllUserTeacher();
@@ -131,12 +132,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 		boolean active = false;
 		this.UserDAO.removeUser(userName, active);
 	}
-	
+
 	@Override
 	public void unlockUser(String userName) throws NotFoundException {
 		boolean active = true;
 		this.UserDAO.removeUser(userName, active);
-		
+
 	}
 
 	@Override
@@ -199,17 +200,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) throws NotFoundException {
+	public List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId)
+			throws NotFoundException {
 		return this.UserDAO.searchAllUsersByUserName(pageable, userName, roleId);
 	}
 
 	@Override
-	public List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException {
+	public List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId)
+			throws NotFoundException {
 		return this.UserDAO.searchAllUsersByEmail(pageable, email, roleId);
 	}
 
 	@Override
-	public List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException {
+	public List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId)
+			throws NotFoundException {
 		return this.UserDAO.searchAllUsersByFullName(pageable, fullName, roleId);
 	}
 
@@ -222,5 +226,40 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public StudyCenterForm getUserStudyCenterByUserName(String userName) throws NotFoundException {
 		return this.StudyCenterDAO.getUserStudyCenterByUserName(userName);
 	}
+
+	@Override
+	public List<Contact> getAllContact() throws NotFoundException {
+		return this.UserDAO.getAllContact();
+	}
 	
+	@Override
+	public List<Contact> getAllContactPageable(Pageable pageable) throws NotFoundException {
+		return this.UserDAO.getAllContactPageable(pageable);
+	}
+
+	@Override
+	public List<Contact> searchAllContactByUserName(Pageable pageable, String userName)
+			throws NotFoundException {
+		return this.UserDAO.searchAllContactByUserName(pageable, userName);
+	}
+
+	@Override
+	public List<Contact> searchAllContactByEmail(Pageable pageable, String email)
+			throws NotFoundException {
+		return this.UserDAO.searchAllContactByEmail(pageable, email);
+	}
+	
+	@Override
+	public void removeContact(String userName) throws NotFoundException {
+		boolean active = false;
+		this.UserDAO.removeContact(userName, active);
+	}
+
+	@Override
+	public void unlockContact(String userName) throws NotFoundException {
+		boolean active = true;
+		this.UserDAO.removeContact(userName, active);
+
+	}
+
 }

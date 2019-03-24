@@ -58,7 +58,7 @@ public class RegistrationController {
 				data.setCreateDate(dateCurent);
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
-						data.isActive());
+						true);
 				System.out.println("hhhhhieu  "+user);
 				if (data.getRole_id() == 1) {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());

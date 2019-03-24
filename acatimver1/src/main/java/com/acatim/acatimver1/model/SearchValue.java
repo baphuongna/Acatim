@@ -34,6 +34,11 @@ public class SearchValue {
 		this.search = search;
 	}
 	
+	public SearchValue(String value, String search) {
+		super();
+		this.value = value;
+		this.search = search;
+	}
 	
 	
 	

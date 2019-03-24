@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
+import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
@@ -52,5 +53,12 @@ public interface UserInfoService {
 	List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException;
 	List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException;
 	
+	List<Contact> getAllContact() throws NotFoundException;
+	List<Contact> getAllContactPageable(Pageable pageable) throws NotFoundException;
+	List<Contact> searchAllContactByUserName(Pageable pageable, String userName) throws NotFoundException;
+	List<Contact> searchAllContactByEmail(Pageable pageable, String email) throws NotFoundException;
+	
+	void removeContact(String userName) throws NotFoundException;
+	void unlockContact(String userName) throws NotFoundException;
 	
 }
