@@ -208,7 +208,7 @@
                                 <li class="active"><a href="#description">Hồ sơ</a></li>
                                 <li><a href="#reviews">Bình Luận</a></li>
                                  <li th:if="${roleName == 'Teacher' || roleName == 'Study Center'}"><a href="#Course">Khóa học</a></li>
-                                 <li><a href="#INFORMATION">Cập nhật thông tin</a></li>
+                                 <li th:if="${checkDetail == false or showDetailMySelf == true}"><a href="#INFORMATION">Cập nhật thông tin</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
@@ -414,7 +414,9 @@
                                                         <div class="message">
                                                          
                                                             <a th:if="${roleName == 'Study Center' || roleName == 'Teacher'}" class="message-author" href="#" th:text="${rating.userName}"></a>
-                                                            <a class="message-author" href="#" th:text="${rating.userName}"></a> > <a class="message-author" href="#" th:text="${rating.recieverName}"></a>
+                                                            <div th:if="${roleName == 'Student'}">
+                                                            	<a class="message-author" href="#" th:text="${rating.userName}"></a> > <a class="message-author" href="#" th:text="${rating.recieverName}"></a>
+                                                            </div>
                                                             <span class="message-date" th:text="${rating.createDate}"></span>
                                                             <span class="message-content" th:text="${rating.comment}"></span>
                                                             <div class="m-t-md mg-t-10" th:if="${rating.rate <= 1}">
@@ -562,8 +564,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-tab-list tab-pane fade" id="Course">
+                                <div th:if="${roleName == 'Teacher' || roleName == 'Study Center'}" class="product-tab-list tab-pane fade" id="Course">
                                     <div class="row">
+                                    <p style="margin: 15px; color: #303030; line-height: 24px;" th:if="${courses.size() == 0 }">Chưa có khóa học nào...</p>
 												<div class="col-md-12 d-flex" th:each="course,wind : ${courses}">
 													<div class="course align-self-stretch" style="border: none; background: none; -webkit-box-shadow: none; box-shadow: 0px 3px 39px -24px rgba(0, 0, 0, 0.2);">
 														<div class="text p-4" style="border: 1px solid #e0dfdf; border-radius: 11px; background-color: #f7f7f7;">
@@ -610,7 +613,9 @@
 																				<span class="fa fa-star"></span>
 																			</div>
 																			<span class="review-no">41 reviews</span></br> <span
-																				class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
+																				class="review-no">Giáo viên: </span>
+																				<a th:if="${checkDetail == true}" th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
+																				<a th:if="${checkDetail == false}" href="#" th:text="${course.userModel.fullName}"></a>
 																		</div>
 																		<p class="product-description" th:text="${course.courseDescription}"></p>
 																		<h4 class="price">

@@ -45,6 +45,7 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
+		boolean checkDetail = false;
 		String userName = principal.getName();
 		System.out.println("User Name: " + userName);
 
@@ -68,6 +69,7 @@ public class ProfileController {
 	    }else {
 	    	model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
+			model.addAttribute("checkDetail", checkDetail);
 			List<Course> courses = courseService.getCourseByUserNameWithFullInfo(userName);
 			if(roleName.equals("Student")) {
 				Student student = userInfoService.loadStudentByUsername(userName);
@@ -135,18 +137,28 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/profileDetail", method = RequestMethod.GET)
-	public ModelAndView profile(@RequestParam("userName") String name, Model model) throws NotFoundException {
+	public ModelAndView profile(@RequestParam("userName") String name, Model model, Principal principal) throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
 		//String userName = principal.getName();
+		String curentUserName = principal.getName();
 		System.out.println("User Name: " + name);
-
+		boolean checkDetail = true;
+		boolean showDetailMySelf = false;
+		
 		//User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
 		String roleName = userInfoService.getRoleName(name);
 		UserModel useInfo = userInfoService.loadUserByUsername(name);
-		
+		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
 		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		int progress5 = 80;
+		int progress4 = 60;
+		int progress3 = 40;
+		int progress2 = 20;
+		int progress1 = 15;
 		String gender = null;
 		 if (useInfo == null) {
 	            System.out.println("User not found! " + name);
@@ -156,15 +168,25 @@ public class ProfileController {
 	    }else {
 	    	model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
+			model.addAttribute("checkDetail", checkDetail);
+			
+			
+			if (name.equals(curentUserName)) {
+				showDetailMySelf = true;
+			}
+			model.addAttribute("showDetailMySelf", showDetailMySelf);
+			
 			if(roleName.equals("Student")) {
 				Student student = userInfoService.loadStudentByUsername(name);
 				model.addAttribute("studentInfo", userInfoService.loadStudentByUsername(name));
 				if(student.isGender() == true) {
 					gender = "Nam";
-				}else {
+				} else {
 					gender = "Nữ";
 				}
 				model.addAttribute("gender", gender);
+				List<Rating> ratings = ratingService.getAllRatingByUserName(name);
+				model.addAttribute("ratings", ratings);
 			}else if(roleName.equals("Teacher")) {
 				Teacher teacher = userInfoService.loadTeacherByUsername(name);
 				model.addAttribute("teacherInfo", teacher);
@@ -176,7 +198,19 @@ public class ProfileController {
 				model.addAttribute("gender", gender);
 				List<Rating> ratings = ratingService.getAllRatingTeacherByRecieverName(name);
 				System.out.println(ratings);
+				int numberPeopleRate = 0;
+				
+				for(int i=0; i< ratings.size(); i++) {
+					numberPeopleRate++;
+				}
+				model.addAttribute("courses", courses);
 				model.addAttribute("ratings", ratings);
+				model.addAttribute("progress5", progress5);
+				model.addAttribute("progress4", progress4);
+				model.addAttribute("progress3", progress3);
+				model.addAttribute("progress2", progress2);
+				model.addAttribute("progress1", progress1);
+				model.addAttribute("numberPeopleRate", numberPeopleRate);
 				
 			}else if(roleName.equals("Study Center")) {
 				
@@ -184,7 +218,20 @@ public class ProfileController {
 				
 				List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(name);
 				System.out.println(ratings);
+				int numberPeopleRate = 0;
+				
+				for(int i=0; i< ratings.size(); i++) {
+					numberPeopleRate++;
+				}
+				
+				model.addAttribute("courses", courses);
 				model.addAttribute("ratings", ratings);
+				model.addAttribute("progress5", progress5);
+				model.addAttribute("progress4", progress4);
+				model.addAttribute("progress3", progress3);
+				model.addAttribute("progress2", progress2);
+				model.addAttribute("progress1", progress1);
+				model.addAttribute("numberPeopleRate", numberPeopleRate);
 			}
 			modelAndView.setViewName("profile");
 	    }
