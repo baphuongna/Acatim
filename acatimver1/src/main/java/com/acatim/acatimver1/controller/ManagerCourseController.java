@@ -1,15 +1,21 @@
 package com.acatim.acatimver1.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.acatim.acatimver1.form.StudentForm;
+import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.SearchValue;
 import com.acatim.acatimver1.service.CategoriesServiceImpl;
 import com.acatim.acatimver1.service.CourseServiceImpl;
@@ -169,10 +175,7 @@ public class ManagerCourseController {
 			}
 			
 			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
-			
-			
-			
-			
+
 			
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
@@ -220,7 +223,29 @@ public class ManagerCourseController {
 	@RequestMapping(value = {"add-course"}, method = RequestMethod.GET)
 	public ModelAndView addCourse() {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
+		modelAndView.addObject("course", new Course());
+		
 		modelAndView.setViewName("admin/add-course");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = {"add-course"}, method = RequestMethod.POST)
+	public ModelAndView addNewCourse(@Valid @ModelAttribute("course") Course course,
+			BindingResult result, final RedirectAttributes redirectAttributes) {
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(course);
+		
+		if(course.getSubjectId().equals("0")) {
+			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.setViewName("redirect:admin/add-course");
+			return modelAndView;
+		}
+		
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
+		modelAndView.addObject("course", new Course());
+		
+		modelAndView.setViewName("redirect:admin/add-course");
 		return modelAndView;
 	}
 
