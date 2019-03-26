@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,16 +20,22 @@ public class Course {
 	
 	private String userName;
 	
+	@NotEmpty(message = "*Tên khóa học không được để trống")
 	private String courseName;
 	
+	@NotEmpty(message = "*Thông Tin khóa học không được để trống")
 	private String courseDescription;
 	
+	@NotEmpty(message = "*Thời Gian bắt đầu khóa học không được để trống")
 	private String startTime;
 	
+	@NotEmpty(message = "*Thời Gian kết thúc khóa học không được để trống")
 	private String endTime;
 	
+	@NotEmpty(message = "*Ngày bắt đầu khóa học không được để trống")
 	private String startDate;
 	
+	@NotEmpty(message = "*ngày kết thúc khóa học không được để trống")
 	private String endDate;
 	
 	private float price;

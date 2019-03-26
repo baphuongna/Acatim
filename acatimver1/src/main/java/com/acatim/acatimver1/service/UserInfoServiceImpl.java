@@ -262,4 +262,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	}
 
+	@Override
+	public List<UserModel> getAllTeacherST() throws NotFoundException {
+		return this.UserDAO.getAllTeacherST();
+	}
+
 }

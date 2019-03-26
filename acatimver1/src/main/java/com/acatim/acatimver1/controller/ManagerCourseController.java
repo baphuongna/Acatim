@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.SearchValue;
 import com.acatim.acatimver1.service.CategoriesServiceImpl;
 import com.acatim.acatimver1.service.CourseServiceImpl;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.SubjectServiceImpl;
+import com.acatim.acatimver1.service.UserInfoServiceImpl;
+
 
 @Controller
 @RequestMapping(value = {"/admin"})
@@ -34,6 +35,9 @@ public class ManagerCourseController {
 	
 	@Autowired
 	private CategoriesServiceImpl categoriesService;
+	
+	@Autowired
+	private UserInfoServiceImpl userInfoService;
 	
 	private PageableService pageableService;
 
@@ -223,9 +227,13 @@ public class ManagerCourseController {
 	@RequestMapping(value = {"add-course"}, method = RequestMethod.GET)
 	public ModelAndView addCourse() {
 		ModelAndView modelAndView = new ModelAndView();
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 		modelAndView.addObject("course", new Course());
-		
 		modelAndView.setViewName("admin/add-course");
 		return modelAndView;
 	}
@@ -234,18 +242,45 @@ public class ManagerCourseController {
 	public ModelAndView addNewCourse(@Valid @ModelAttribute("course") Course course,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		ModelAndView modelAndView = new ModelAndView();
+		
+		String courseId = courseService.genCourseId();
+		course.setCourseId(courseId);
 		System.out.println(course);
 		
 		if(course.getSubjectId().equals("0")) {
 			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
-			modelAndView.setViewName("redirect:admin/add-course");
+			modelAndView.setViewName("admin/add-course");
+		}
+		
+		if(course.getUserName().equals("0")) {
+			modelAndView.addObject("errorUserName", "Chọn Người dùng có khóa học này trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.setViewName("admin/add-course");
+		}
+		
+		if (result.hasErrors()) {
+			modelAndView.setViewName("admin/add-course");
+			modelAndView.addObject("allSubjects", subjectService.getListSubject());
+			try {
+				modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			modelAndView.addObject("course", course);
 			return modelAndView;
 		}
 		
-		modelAndView.addObject("allSubjects", subjectService.getListSubject());
-		modelAndView.addObject("course", new Course());
+		try {
+			//courseService.addCourse(course);
+			System.out.println("success");
+		}catch (Exception e) {
+			modelAndView.addObject("allSubjects", subjectService.getListSubject());
+			modelAndView.addObject("course", course);
+			modelAndView.setViewName("admin/add-course");
+			return modelAndView;
+		}
 		
-		modelAndView.setViewName("redirect:admin/add-course");
+		
+		modelAndView.setViewName("redirect:admin/all-courses");
 		return modelAndView;
 	}
 

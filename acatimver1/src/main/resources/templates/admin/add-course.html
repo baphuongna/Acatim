@@ -166,6 +166,15 @@
            												th:utext="${errorMessage}" class="error">...</div>
 										</div>
 										<div class="form-group">
+											<label>Khóa Học Thuộc Người Dùng</label> 
+											<select class="chosen-select" th:field="*{userName}">
+												<option value="0">--Tât Cả--</option>
+												<option th:each="user : ${allTeacherSC}" th:value="${user.userName}">[[${user.fullName}]]</option>
+											</select>
+											<div th:if="${errorUserName != null}"
+           												th:utext="${errorUserName}" class="error">...</div>
+										</div>
+										<div class="form-group">
 											<label>Tên Khóa Học</label> <input type="text"
 												class="form-control" th:field="*{courseName}"
 												placeholder="Tên Khóa Học"> <span id="error"
@@ -192,9 +201,11 @@
                                             	<input type="text" class="form-control" name="start" th:field="*{startDate}"/>
                                            		 <span class="input-group-addon">Đến</span>
                                            	 	<input type="text" class="form-control" name="end" th:field="*{endDate}" />
-                                           	 	<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">..</span>
-												<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">..</span>
+                                           	 	
                                         	</div>
+                                        	<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">..</span>
+                                        	<br>
+											<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Giá (VND)</label> <input type="text"
@@ -206,6 +217,7 @@
 										<div class="form-group res-mg-t-15">
 											<label>Thông Tin Khóa Học</label>
                                             <textarea name="description" th:field="*{courseDescription}" placeholder="Description"></textarea>
+                                            <span th:if="${#fields.hasErrors('courseDescription')}" th:errors="*{courseDescription}">..</span>
                                         </div>
 									</div>
 									

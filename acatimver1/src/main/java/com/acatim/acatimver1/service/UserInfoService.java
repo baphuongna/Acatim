@@ -60,5 +60,5 @@ public interface UserInfoService {
 	
 	void removeContact(String userName) throws NotFoundException;
 	void unlockContact(String userName) throws NotFoundException;
-	
+	List<UserModel> getAllTeacherST() throws NotFoundException;
 }
