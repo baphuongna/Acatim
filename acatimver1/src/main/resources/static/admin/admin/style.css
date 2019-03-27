@@ -4721,3 +4721,8 @@ div#sparklinehome canvas {
 .progressNew-bar { text-align: left; }
 .rating-desc .col-md-3 {padding-right: 0px;}
 .sr-only {height: 15px; margin-left: 5px;overflow: visible;clip: auto; color: white;}
+
+.rating-header {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

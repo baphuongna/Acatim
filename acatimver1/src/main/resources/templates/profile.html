@@ -113,6 +113,8 @@
 		============================================ -->
     <script src="admin/admin/js/vendor/modernizr-2.8.3.min.js"></script>
 
+
+
 </head>
 <body>
 
@@ -207,8 +209,9 @@
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#description">Hồ sơ</a></li>
                                 <li><a href="#reviews">Bình Luận</a></li>
-                                 <li th:if="${roleName == 'Teacher' || roleName == 'Study Center'}"><a href="#Course">Khóa học</a></li>
-                                 <li th:if="${checkDetail == false or showDetailMySelf == true}"><a href="#INFORMATION">Cập nhật thông tin</a></li>
+                                <li th:if="${roleName == 'Teacher' || roleName == 'Study Center'}"><a href="#Course">Khóa học</a></li>
+                                <li th:if="${checkDetail == false or showDetailMySelf == true}"><a href="#INFORMATION">Cập nhật thông tin</a></li>
+                                <li th:if="${curentRoleName == 'Student' and checkDetail == true}"><a href="#Feedback">Phản hồi</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
@@ -306,8 +309,7 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-xs-12 col-md-6 text-center">
-                        <h1 class="rating-num">
-                            2.4</h1>
+                        <h1 th:text="${rateAverage}" class="rating-num"></h1>
                         <div class="rating">
                             <span class="glyphicon glyphicon-star"></span>
                             <span class="glyphicon glyphicon-star"></span>
@@ -329,7 +331,7 @@
                                 <p id="valueProgress5" th:text="${progress5}" style="display: none;"></p>
                                     <div id="progressMake5" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">80%</span>
+                                        <span th:text="${progress5}" class="sr-only"></span>
                                     </div>
                                 </div>
                             </div>
@@ -342,7 +344,7 @@
                                 <p id="valueProgress4" th:text="${progress4}" style="display: none;"></p>
                                     <div id="progressMake4" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">60%</span>
+                                        <span th:text="${progress4}" class="sr-only"></span>
                                     </div>
                                 </div>
                             </div>
@@ -355,7 +357,7 @@
                                 <p id="valueProgress3" th:text="${progress3}" style="display: none;"></p>
                                     <div id="progressMake3" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">40%</span>
+                                        <span th:text="${progress3}" class="sr-only"></span>
                                     </div>
                                 </div>
                             </div>
@@ -368,7 +370,7 @@
                                 <p id="valueProgress2" th:text="${progress2}" style="display: none;"></p>
                                     <div id="progressMake2" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">20%</span>
+                                        <span th:text="${progress2}" class="sr-only"></span>
                                     </div>
                                 </div>
                             </div>
@@ -381,7 +383,7 @@
                                 <p id="valueProgress1" th:text="${progress1}" style="display: none;"></p>
                                     <div id="progressMake1" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span class="sr-only">15%</span>
+                                        <span th:text="${progress1}" class="sr-only"></span>
                                     </div>
                                 </div>
                             </div>
@@ -583,75 +585,129 @@
 														</div>
 													</div>
 												</div>
-                                    	<div th:each="course,wind : ${courses}">
-												<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
-													aria-labelledby="productGrid">
-													<div class="modal-dialog modal-lg" role="document" >
-														<div class="modal-content">
-															<div class="modal-header">
-															<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
-																	khóa học</h4>
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">×</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																<div class="row">
-																	<div class="col-md-4">
-																		<img
-																			src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-																			class="img-responsive" alt="a">
-																	</div>
-																	<div class="col-md-8">
-																		<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
-																		<div class="rating">
-																			<div class="stars">
-																				<span class="fa fa-star checked"></span> <span
-																					class="fa fa-star checked"></span> <span
-																					class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-																				<span class="fa fa-star"></span>
-																			</div>
-																			<span class="review-no">41 reviews</span></br> <span
-																				class="review-no">Giáo viên: </span>
-																				<a th:if="${checkDetail == true}" th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
-																				<a th:if="${checkDetail == false}" href="#" th:text="${course.userModel.fullName}"></a>
+			                                    	<div th:each="course,wind : ${courses}">
+															<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+																aria-labelledby="productGrid">
+																<div class="modal-dialog modal-lg" role="document" >
+																	<div class="modal-content">
+																		<div class="modal-header">
+																		<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+																				khóa học</h4>
+																			<button type="button" class="close" data-dismiss="modal"
+																				aria-label="Close">
+																				<span aria-hidden="true">×</span>
+																			</button>
 																		</div>
-																		<p class="product-description" th:text="${course.courseDescription}"></p>
-																		<h4 class="price">
-																			Giá: <span>$ <span th:text="${course.price}"></span></span>
-																		</h4>
-																		<p class="vote">
-																			<strong>91%</strong> người thích khóa học này<strong>(87
-																				votes)</strong>
-																		</p>
-																		<h4 class="price">
-																			Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
-																		</h4>
-																		<h4 class="price">
-																			Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
-																		</h4>
+																		<div class="modal-body">
+																			<div class="row">
+																				<div class="col-md-4">
+																					<img
+																						src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+																						class="img-responsive" alt="a">
+																				</div>
+																				<div class="col-md-8">
+																					<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
+																					<div class="rating">
+																						<div class="stars">
+																							<span class="fa fa-star checked"></span> <span
+																								class="fa fa-star checked"></span> <span
+																								class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+																							<span class="fa fa-star"></span>
+																						</div>
+																						<span class="review-no">41 reviews</span></br> <span
+																							class="review-no">Giáo viên: </span>
+																							<a th:if="${checkDetail == true}" th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
+																							<a th:if="${checkDetail == false}" href="#" th:text="${course.userModel.fullName}"></a>
+																					</div>
+																					<p class="product-description" th:text="${course.courseDescription}"></p>
+																					<h4 class="price">
+																						Giá: <span>$ <span th:text="${course.price}"></span></span>
+																					</h4>
+																					<p class="vote">
+																						<strong>91%</strong> người thích khóa học này<strong>(87
+																							votes)</strong>
+																					</p>
+																					<h4 class="price">
+																						Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+																					</h4>
+																					<h4 class="price">
+																						Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+																					</h4>
+																				</div>
+																			</div>
+																			<!-- hết popup course detail -->
+																		</div>
+																		<div class="modal-footer">
+																			<button data-dismiss="modal" class="btn btn-primary">Close</button>
+																		</div>
 																	</div>
+																	<!-- /.modal-content -->
 																</div>
-																<!-- hết popup course detail -->
+																<!-- /.modal-dialog -->
 															</div>
-															<div class="modal-footer">
-																<button data-dismiss="modal" class="btn btn-primary">Close</button>
-															</div>
-														</div>
-														<!-- /.modal-content -->
 													</div>
-													<!-- /.modal-dialog -->
-												</div>
-										</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+			                                    </div>
+			                                </div>
+			                                <div th:if="${checkDetail == true}" class="product-tab-list tab-pane fade" id="Feedback">
+			                                    <div class="row">
+			                                    	<div class="form-group" id="rating-ability-wrapper">
+													    <label class="control-label" for="rating">
+													    <span class="field-label-header">How would you rate your ability to use the computer and access internet?*</span><br>
+													    <span class="field-label-info"></span>
+													    <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+													    </label>
+													    <h2 class="bold rating-header" style="">
+													    <span class="selected-rating">0</span><small> / 5</small>
+													    </h2>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													</div>
+													<div class="form-group" id="rating-ability-wrapper">
+													    <label class="control-label" for="rating">
+													    <span class="field-label-header">How would you rate your ability to use the computer and access internet?*</span><br>
+													    <span class="field-label-info"></span>
+													    <input type="hidden" id="selected_rating" name="selected_rating" value="" required="required">
+													    </label>
+													    <h2 class="bold rating-header" style="">
+													    <span class="selected-rating">0</span><small> / 5</small>
+													    </h2>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="1" id="rating-star-1">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="2" id="rating-star-2">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="3" id="rating-star-3">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="4" id="rating-star-4">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													    <button type="button" class="btnrating btn btn-default btn-lg" data-attr="5" id="rating-star-5">
+													        <i class="fa fa-star" aria-hidden="true"></i>
+													    </button>
+													</div>
+			                                    </div>
+			                                </div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
 				</div>
 			</div>
 		</div>
@@ -687,7 +743,34 @@
 	<!-- Begin Map Script-->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	<script src="js/map.js"></script>
-	
+	<script>
+	jQuery(document).ready(function($){
+	    
+		$(".btnrating").on('click',(function(e) {
+		
+		var previous_value = $("#selected_rating").val();
+		
+		var selected_value = $(this).attr("data-attr");
+		$("#selected_rating").val(selected_value);
+		
+		$(".selected-rating").empty();
+		$(".selected-rating").html(selected_value);
+		
+		for (i = 1; i <= selected_value; ++i) {
+		$("#rating-star-"+i).toggleClass('btn-warning');
+		$("#rating-star-"+i).toggleClass('btn-default');
+		}
+		
+		for (ix = 1; ix <= previous_value; ++ix) {
+		$("#rating-star-"+ix).toggleClass('btn-warning');
+		$("#rating-star-"+ix).toggleClass('btn-default');
+		}
+		
+		}));
+		
+			
+	});
+	</script>
 	<!-- jquery
 		============================================ -->
     <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
