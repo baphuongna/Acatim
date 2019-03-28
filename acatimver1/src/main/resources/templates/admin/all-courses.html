@@ -201,7 +201,7 @@
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
-										<a th:href="@{/admin/editUser(userName=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
+										<a th:href="@{/admin/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
 										<button type="button" class="btn btn-primary" data-toggle="modal"
 							 							th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm</button>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
@@ -319,7 +319,7 @@
 									</div>
 									<p class="product-description" th:text="${course.courseDescription}"></p>
 									<h4 class="price">
-										Giá: <span>$ <span th:text="${course.price}"></span></span>
+										Giá: <span>VND <span th:text="${course.price}"></span></span>
 									</h4>
 									<p class="vote">
 										<strong>91%</strong> người thích khóa học này<strong>(87

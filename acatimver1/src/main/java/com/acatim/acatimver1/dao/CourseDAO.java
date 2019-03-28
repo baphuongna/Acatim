@@ -41,6 +41,14 @@ public class CourseDAO extends JdbcDaoSupport {
 		return courses;
 	}
 	
+	public Course getCourseById(String courseId) {
+		String sql = "SELECT * FROM Course where course_id = ?;";
+		Object[] params = new Object[] { courseId };
+		CourseMapper mapper = new CourseMapper();
+		Course course = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+		return course;
+	}
+	
 	public List<Course> getCourseBySubjectId(String subjectId) {
 		String sql = "SELECT * FROM Course where subject_id = ?;";
 		Object[] params = new Object[] { subjectId };
@@ -171,7 +179,7 @@ public class CourseDAO extends JdbcDaoSupport {
 	public void addCourse(Course course) {
 		String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date)\r\n"
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, course.getCourseId(), course.getSubjectId(), course.getUserName(),
+		this.getJdbcTemplate().update(sql, course.getCourseId(), course.getSubjectId(), course.getUserName(), course.getCourseName(),
 				course.getCourseDescription(), course.getStartTime(), course.getEndTime(), course.getStartDate(),
 				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate());
 	}
@@ -181,7 +189,7 @@ public class CourseDAO extends JdbcDaoSupport {
 				+ "SET subject_id = ?, user_name = ?, courseName = ?, courseDescription = ?, start_time = ?,\r\n"
 				+ "end_time = ?, start_date = ?, end_date = ?, price = ?, create_date = ?, update_date = ?\r\n"
 				+ "WHERE course_id = ?;";
-		this.getJdbcTemplate().update(sql, course.getSubjectId(), course.getUserName(),
+		this.getJdbcTemplate().update(sql, course.getSubjectId(), course.getUserName(), course.getCourseName(),
 				course.getCourseDescription(), course.getStartTime(), course.getEndTime(), course.getStartDate(),
 				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate() , course.getCourseId());
 	}

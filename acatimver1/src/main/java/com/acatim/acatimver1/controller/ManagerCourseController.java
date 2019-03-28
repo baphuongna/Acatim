@@ -1,5 +1,8 @@
 package com.acatim.acatimver1.controller;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.SearchValue;
 import com.acatim.acatimver1.service.CategoriesServiceImpl;
@@ -240,37 +245,46 @@ public class ManagerCourseController {
 	
 	@RequestMapping(value = {"add-course"}, method = RequestMethod.POST)
 	public ModelAndView addNewCourse(@Valid @ModelAttribute("course") Course course,
-			BindingResult result, final RedirectAttributes redirectAttributes) {
+			BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		String courseId = courseService.genCourseId();
 		course.setCourseId(courseId);
 		System.out.println(course);
 		
+		Date date = new Date();
+		long time = date.getTime();
+		Timestamp currentDate = new Timestamp(time);
+		course.setCreateDate(currentDate+"");
+		
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("course", course);
+		
+		if (result.hasErrors()) {
+			modelAndView.setViewName("admin/add-course");
+			return modelAndView;
+		}
+		
 		if(course.getSubjectId().equals("0")) {
 			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
 			modelAndView.setViewName("admin/add-course");
+			return modelAndView;
 		}
 		
 		if(course.getUserName().equals("0")) {
 			modelAndView.addObject("errorUserName", "Chọn Người dùng có khóa học này trước khi hoàn thành đăng ký thông tin khóa học!");
 			modelAndView.setViewName("admin/add-course");
-		}
-		
-		if (result.hasErrors()) {
-			modelAndView.setViewName("admin/add-course");
-			modelAndView.addObject("allSubjects", subjectService.getListSubject());
-			try {
-				modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			modelAndView.addObject("course", course);
 			return modelAndView;
 		}
 		
+		
 		try {
-			//courseService.addCourse(course);
+			courseService.addCourse(course);
 			System.out.println("success");
 		}catch (Exception e) {
 			modelAndView.addObject("allSubjects", subjectService.getListSubject());
@@ -279,15 +293,71 @@ public class ManagerCourseController {
 			return modelAndView;
 		}
 		
-		
 		modelAndView.setViewName("redirect:admin/all-courses");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = {"edit-course"}, method = RequestMethod.GET)
-	public ModelAndView editCourse() {
+	public ModelAndView editCourse(@RequestParam("courseId") String courseId) {
 		ModelAndView modelAndView = new ModelAndView();
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("course", courseService.getCourseById(courseId));
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
+		
 		modelAndView.setViewName("admin/edit-course");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = {"edit-course"}, method = RequestMethod.POST)
+	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course,
+			BindingResult result) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		System.out.println(course);
+		
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (result.hasErrors()) {
+			modelAndView.setViewName("admin/edit-course");
+			modelAndView.addObject("course", course);
+			return modelAndView;
+		}
+		
+		if(course.getSubjectId().equals("0")) {
+			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.addObject("course", course);
+			modelAndView.setViewName("admin/edit-course");
+			return modelAndView;
+		}
+		
+		if(course.getUserName().equals("0")) {
+			modelAndView.addObject("errorUserName", "Chọn Người dùng có khóa học này trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.addObject("course", course);
+			modelAndView.setViewName("admin/edit-course");
+			return modelAndView;
+		}
+		
+		try {
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
+			course.setUpdateDate(currentDate+"");
+			System.out.println(course);
+			courseService.updateCourse(course);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		modelAndView.setViewName("redirect:/admin/all-courses");
 		return modelAndView;
 	}
 

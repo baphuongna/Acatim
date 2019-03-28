@@ -20,6 +20,7 @@ public class CourseServiceImpl {
 	}
 
 	public void addCourse(Course course) {
+		course.setActive(true);
 		this.courseDAO.addCourse(course);
 	}
 
@@ -35,6 +36,10 @@ public class CourseServiceImpl {
 	public void unlockCourse(String courseId) {
 		boolean active = true;
 		this.courseDAO.removeCourse(courseId, active);
+	}
+	
+	public Course getCourseById(String courseId) {
+		return this.courseDAO.getCourseById(courseId);
 	}
 
 	public List<Course> searchCourseByCourseName(String courseName) {
