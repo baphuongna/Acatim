@@ -1,10 +1,9 @@
 package com.acatim.acatimver1.model;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,7 +21,8 @@ public class Subject {
 	private String subjectId;
 
 	private int categoryId;
-
+	
+	@NotEmpty(message = "*Tên Môn Học không được để trống")
 	private String subjectName;
 
 	private String createDate;
@@ -33,6 +33,10 @@ public class Subject {
 
 	@OneToMany(mappedBy = "subject", cascade = CascadeType.ALL)
 	private List<Course> courses;
+	
+	@ManyToOne
+    @JoinColumn
+    private Categories category;
 
 //	public Subject(String subjectId, int categoryId, String subjectName, String createDate, String updateDate,
 //			Course courses) {
@@ -60,5 +64,19 @@ public class Subject {
 		this.updateDate = updateDate;
 		this.active = active;
 	}
+
+	public Subject(String subjectId, int categoryId, String subjectName, String createDate, String updateDate,
+			boolean active, List<Course> courses) {
+		super();
+		this.subjectId = subjectId;
+		this.categoryId = categoryId;
+		this.subjectName = subjectName;
+		this.createDate = createDate;
+		this.updateDate = updateDate;
+		this.active = active;
+		this.courses = courses;
+	}
+	
+	
 
 }

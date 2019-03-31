@@ -29,7 +29,7 @@ public class CategoriesDAO extends JdbcDaoSupport {
 		return userList;
 	}
 	
-	public Categories getCategoriesBySubjectId(String categoryId) {
+	public Categories getCategoriesByCategoryId(String categoryId) {
 		String sql = "SELECT * FROM Categories Where category_id = ?;";
 		Object[] params = new Object[] { categoryId };
 		CategoriesMapper mapper = new CategoriesMapper();
@@ -49,7 +49,7 @@ public class CategoriesDAO extends JdbcDaoSupport {
 		this.getJdbcTemplate().update(sql, categories.getCategoryName(), categories.getCreateDate(), categories.getUpdateDate(), categories.isActive(), categories.getCategoryId());
 	}
 
-	public void removeCategories(Categories categoryId, boolean active) {
+	public void removeCategories(String categoryId, boolean active) {
 		String sql = "UPDATE Categories SET active = ? WHERE category_id = ?;";
 		this.getJdbcTemplate().update(sql, active, categoryId);
 	}

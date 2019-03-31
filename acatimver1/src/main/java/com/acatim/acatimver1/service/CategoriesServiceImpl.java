@@ -18,8 +18,8 @@ public class CategoriesServiceImpl {
 		return this.categoriesDAO.getAllCategories();
 	}
 	
-	public Categories getCategoriesBySubjectId(String categoryId) {
-		return this.categoriesDAO.getCategoriesBySubjectId(categoryId);
+	public Categories getCategoriesByCategoryId(String categoryId) {
+		return this.categoriesDAO.getCategoriesByCategoryId(categoryId);
 	}
 	
 	public void addCategories(Categories categories) {
@@ -30,8 +30,14 @@ public class CategoriesServiceImpl {
 		this.categoriesDAO.updateCategories(categories);
 	}
 	
-	public void removeCategories(Categories categoryId) {
+	public void removeCategories(String categoryId) {
 		boolean active = false;
 		this.categoriesDAO.removeCategories(categoryId, active);
 	}
+	
+	public void unlockCategories(String categoryId) {
+		boolean active = true;
+		this.categoriesDAO.removeCategories(categoryId, active);
+	}
+	
 }

@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ public class Categories {
 	@Id
 	private int categoryId;
 	
+	@NotEmpty(message = "*Tên Thể Loại không được để trống")
 	private String categoryName;
 	
 	private String createDate;

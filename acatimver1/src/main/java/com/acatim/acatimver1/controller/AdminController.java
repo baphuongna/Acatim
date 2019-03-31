@@ -1,9 +1,6 @@
 package com.acatim.acatimver1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,63 +52,7 @@ public class AdminController {
 		modelAndView.setViewName("admin/index");
 		return modelAndView;
 	}
-	
-
-	@RequestMapping(value = {"all-subjects"}, method = RequestMethod.GET)
-	public ModelAndView allSubjects() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-subjects");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"add-subject"}, method = RequestMethod.GET)
-	public ModelAndView addSubject() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-subject");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-subject"}, method = RequestMethod.GET)
-	public ModelAndView editSubject() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-subject");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"subject-info"}, method = RequestMethod.GET)
-	public ModelAndView subjectInfo() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/subject-info");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"all-categories"}, method = RequestMethod.GET)
-	public ModelAndView allCategories() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/all-categories");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"add-category"}, method = RequestMethod.GET)
-	public ModelAndView addCategory() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/add-category");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"edit-category"}, method = RequestMethod.GET)
-	public ModelAndView editCategory() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/edit-category");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = {"category-info"}, method = RequestMethod.GET)
-	public ModelAndView categoryInfo() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/category-info");
-		return modelAndView;
-	}
+		
 
 	@RequestMapping(value = {"library-assets"}, method = RequestMethod.GET)
 	public ModelAndView libraryAssets() {

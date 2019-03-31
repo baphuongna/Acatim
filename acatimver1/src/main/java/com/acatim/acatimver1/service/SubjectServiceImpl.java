@@ -3,6 +3,7 @@ package com.acatim.acatimver1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.SubjectDAO;
@@ -25,21 +26,34 @@ public class SubjectServiceImpl {
 		return this.subjectDAO.getSubjectBySubjectId(subjectId);
 	}
 	
-	public void addCourse(Subject subject) {
-		this.subjectDAO.addCourse(subject);
+	public void addSubject(Subject subject) {
+		this.subjectDAO.addSubject(subject);
 	}
 	
-	public void updateCourse(Subject subject) {
-		this.subjectDAO.updateCourse(subject);
+	public void updateSubject(Subject subject) {
+		this.subjectDAO.updateSubject(subject);
 	}
 	
-	public void removeCourse(String subjectId) {
+	public void removeSubject(String subjectId) {
 		boolean active = false;
-		this.subjectDAO.removeCourse(subjectId, active);
+		this.subjectDAO.removeSubject(subjectId, active);
+	}
+	
+	public void unlockSubject(String subjectId) {
+		boolean active = true;
+		this.subjectDAO.removeSubject(subjectId, active);
 	}
 	
 	public List<Subject> getSubjectByCategoryId(String categoryId) {
 		return this.subjectDAO.getSubjectByCategoryId(categoryId);
+	}
+	
+	public List<Subject> getListSubjectPageable(Pageable pageable){
+		return this.subjectDAO.getListSubjectPageable(pageable);
+	}
+	
+	public List<Subject> getSubjectByCategoryIdPageable(Pageable pageable, String categoryId){
+		return this.subjectDAO.getSubjectByCategoryIdPageable(pageable, categoryId);
 	}
 	
 	public String genSubjectId() {
