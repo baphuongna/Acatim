@@ -77,6 +77,17 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 	
+	public List<UserModel> getAllManager() {
+		try {
+			String sql = "SELECT * FROM User Where User.role_id = 4;";
+			UserMapper mapper = new UserMapper();
+			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
 	public List<UserModel> getAllUsers(String roleId) {
 		try {
 			if (roleId == null) {

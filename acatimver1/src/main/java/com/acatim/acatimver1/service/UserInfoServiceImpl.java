@@ -267,4 +267,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return this.UserDAO.getAllTeacherST();
 	}
 
+	@Override
+	public List<UserModel> getAllManager() throws NotFoundException {
+		return this.UserDAO.getAllManager();
+	}
+
 }
