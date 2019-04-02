@@ -9,7 +9,7 @@ import com.acatim.acatimver1.dao.DiscountCodeDAO;
 import com.acatim.acatimver1.model.DiscountCode;
 
 @Service
-public class DiscountCodeServiceImpl {
+public class DiscountCodeServiceImpl implements DiscountCodeService{
 	
 	@Autowired
 	private DiscountCodeDAO discountCodeDAO;

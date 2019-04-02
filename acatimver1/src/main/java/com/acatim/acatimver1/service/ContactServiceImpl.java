@@ -8,7 +8,7 @@ import com.acatim.acatimver1.model.Contact;
 
 import javassist.NotFoundException;
 @Service
-public class ContactServiceImpl {
+public class ContactServiceImpl implements ContactService{
 	
 	@Autowired
 	private ContactDAO contactDao;

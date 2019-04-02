@@ -13,7 +13,7 @@ import com.acatim.acatimver1.model.RateTeacher;
 import com.acatim.acatimver1.model.Rating;
 
 @Service
-public class RatingServiceImpl {
+public class RatingServiceImpl implements RatingService{
 
 	@Autowired
 	private RatingDAO ratingDAO;

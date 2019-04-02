@@ -18,11 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.SearchValue;
-import com.acatim.acatimver1.service.CategoriesServiceImpl;
-import com.acatim.acatimver1.service.CourseServiceImpl;
+import com.acatim.acatimver1.service.CategoriesService;
+import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.PageableService;
-import com.acatim.acatimver1.service.SubjectServiceImpl;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.PageableServiceImpl;
+import com.acatim.acatimver1.service.SubjectService;
+import com.acatim.acatimver1.service.UserInfoService;
 
 
 @Controller
@@ -30,16 +31,16 @@ import com.acatim.acatimver1.service.UserInfoServiceImpl;
 public class ManagerCourseController {
 
 	@Autowired
-	private CourseServiceImpl courseService;
+	private CourseService courseService;
 	
 	@Autowired
-	private SubjectServiceImpl subjectService;
+	private SubjectService subjectService;
 	
 	@Autowired
-	private CategoriesServiceImpl categoriesService;
+	private CategoriesService categoriesService;
 	
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 	
 	private PageableService pageableService;
 
@@ -76,7 +77,7 @@ public class ManagerCourseController {
 
 			int total = subjectService.getAllSubject().size();
 			
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 			
 			
 			
@@ -180,7 +181,7 @@ public class ManagerCourseController {
 				}
 			}
 			
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
 			
 			modelAndView.addObject("totalPages", pageableService.listPage());

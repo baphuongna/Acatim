@@ -19,10 +19,10 @@ import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
-import com.acatim.acatimver1.service.CourseServiceImpl;
-import com.acatim.acatimver1.service.RatingServiceImpl;
-import com.acatim.acatimver1.service.SubjectServiceImpl;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.CourseService;
+import com.acatim.acatimver1.service.RatingService;
+import com.acatim.acatimver1.service.SubjectService;
+import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
 import javassist.NotFoundException;
@@ -32,16 +32,16 @@ import javassist.NotFoundException;
 public class ProfileController {
 
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 
 	@Autowired
-	private CourseServiceImpl courseService;
+	private CourseService courseService;
 
 	@Autowired
-	private SubjectServiceImpl subjectService;
+	private SubjectService subjectService;
 	
 	@Autowired
-	private RatingServiceImpl ratingService;
+	private RatingService ratingService;
 	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {

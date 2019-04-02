@@ -2,6 +2,7 @@ package com.acatim.acatimver1.controller;
 
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,9 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.SearchValue;
-import com.acatim.acatimver1.model.UserModel;
 import com.acatim.acatimver1.service.PageableService;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.PageableServiceImpl;
+import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -24,7 +25,7 @@ import javassist.NotFoundException;
 @RequestMapping(value = { "/admin" })
 public class ManagerUserContact {
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 
 	private PageableService pageableService;
 
@@ -46,7 +47,7 @@ public class ManagerUserContact {
 
 			int total = userInfoService.getAllContact().size();
 			List<Contact> listUser = null;
-			pageableService = new PageableService(2, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(2, currentPage - 1, total, currentPage);
 			listUser=userInfoService.getAllContactPageable(pageable);
 			System.out.println("trung   "+listUser.get(0).isActive());	
 
@@ -107,7 +108,7 @@ public class ManagerUserContact {
 				}
 			}
 
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

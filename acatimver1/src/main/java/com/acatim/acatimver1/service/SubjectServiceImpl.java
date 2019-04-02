@@ -10,7 +10,7 @@ import com.acatim.acatimver1.dao.SubjectDAO;
 import com.acatim.acatimver1.model.Subject;
 
 @Service
-public class SubjectServiceImpl {
+public class SubjectServiceImpl implements SubjectService {
 	@Autowired
 	private SubjectDAO subjectDAO;
 	

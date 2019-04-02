@@ -17,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.model.Course;
-import com.acatim.acatimver1.model.DiscountCode;
-import com.acatim.acatimver1.model.StudyCenter;
-import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
-import com.acatim.acatimver1.service.CourseServiceImpl;
-import com.acatim.acatimver1.service.DiscountCodeServiceImpl;
-import com.acatim.acatimver1.service.SubjectServiceImpl;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.CourseService;
+import com.acatim.acatimver1.service.DiscountCodeService;
+import com.acatim.acatimver1.service.SubjectService;
+import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
 import javassist.NotFoundException;
@@ -34,16 +31,16 @@ import javassist.NotFoundException;
 public class MainController {
 
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 
 	@Autowired
-	private CourseServiceImpl courseService;
+	private CourseService courseService;
 
 	@Autowired
-	private SubjectServiceImpl subjectService;
+	private SubjectService subjectService;
 	
 	@Autowired
-	private DiscountCodeServiceImpl discountCodeServiceImpl;
+	private DiscountCodeService discountCodeServiceImpl;
 
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index(Principal principal) {

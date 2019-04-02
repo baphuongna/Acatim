@@ -19,7 +19,7 @@ import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -28,7 +28,7 @@ import javassist.NotFoundException;
 public class RegistrationController {
 	
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {

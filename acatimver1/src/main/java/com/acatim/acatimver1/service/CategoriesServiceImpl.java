@@ -9,7 +9,7 @@ import com.acatim.acatimver1.dao.CategoriesDAO;
 import com.acatim.acatimver1.model.Categories;
 
 @Service
-public class CategoriesServiceImpl {
+public class CategoriesServiceImpl implements CategoriesService{
 	
 	@Autowired
 	private CategoriesDAO categoriesDAO;

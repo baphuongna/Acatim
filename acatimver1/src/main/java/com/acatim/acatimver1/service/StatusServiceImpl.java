@@ -9,7 +9,7 @@ import com.acatim.acatimver1.dao.StatusDAO;
 import com.acatim.acatimver1.model.Status;
 
 @Service
-public class StatusServiceImpl {
+public class StatusServiceImpl implements StatusService{
 	
 	@Autowired
 	private StatusDAO statusDAO;

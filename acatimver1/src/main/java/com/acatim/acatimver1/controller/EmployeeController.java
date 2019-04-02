@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -15,7 +15,7 @@ import javassist.NotFoundException;
 public class EmployeeController {
 	
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 	
 	@RequestMapping(value = {"all-managers"}, method = RequestMethod.GET)
 	public ModelAndView allmanagers() {

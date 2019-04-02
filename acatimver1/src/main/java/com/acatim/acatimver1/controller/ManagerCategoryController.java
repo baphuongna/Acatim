@@ -21,9 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.acatim.acatimver1.model.Categories;
 import com.acatim.acatimver1.model.SearchValue;
 import com.acatim.acatimver1.model.Subject;
-import com.acatim.acatimver1.service.CategoriesServiceImpl;
+import com.acatim.acatimver1.service.CategoriesService;
 import com.acatim.acatimver1.service.PageableService;
-import com.acatim.acatimver1.service.SubjectServiceImpl;
+import com.acatim.acatimver1.service.PageableServiceImpl;
+import com.acatim.acatimver1.service.SubjectService;
 
 import javassist.NotFoundException;
 
@@ -33,10 +34,10 @@ import javassist.NotFoundException;
 public class ManagerCategoryController {
 
 	@Autowired
-	private SubjectServiceImpl subjectService;
+	private SubjectService subjectService;
 	
 	@Autowired
-	private CategoriesServiceImpl categoriesService;
+	private CategoriesService categoriesService;
 	
 	private PageableService pageableService;
 	
@@ -62,7 +63,7 @@ public class ManagerCategoryController {
 
 			int total = subjectService.getListSubject().size();
 
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

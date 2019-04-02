@@ -10,7 +10,7 @@ import com.acatim.acatimver1.dao.CourseDAO;
 import com.acatim.acatimver1.model.Course;
 
 @Service
-public class CourseServiceImpl {
+public class CourseServiceImpl implements CourseService{
 
 	@Autowired
 	private CourseDAO courseDAO;

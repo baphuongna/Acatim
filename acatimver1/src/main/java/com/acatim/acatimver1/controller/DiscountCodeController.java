@@ -1,8 +1,5 @@
 package com.acatim.acatimver1.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,22 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
-
-import javassist.NotFoundException;
-
-import com.acatim.acatimver1.model.Contact;
 import com.acatim.acatimver1.model.Course;
 import com.acatim.acatimver1.model.DiscountCode;
-import com.acatim.acatimver1.model.ObjectUser;
-import com.acatim.acatimver1.service.DiscountCodeServiceImpl;;
+import com.acatim.acatimver1.service.DiscountCodeService;
+
+import javassist.NotFoundException;;
 
 @Controller
 @RequestMapping(value = {""})
 public class DiscountCodeController {
 	
 	@Autowired
-	private DiscountCodeServiceImpl discountCodeService;
+	private DiscountCodeService discountCodeService;
 	
 	@RequestMapping(value = "/courseDiscountCode", method = RequestMethod.POST)
 	public ModelAndView createNewUser(@Valid @ModelAttribute("codeInfo") DiscountCode code, BindingResult bindingResult)

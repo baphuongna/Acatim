@@ -28,7 +28,8 @@ import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
 import com.acatim.acatimver1.service.PageableService;
-import com.acatim.acatimver1.service.UserInfoServiceImpl;
+import com.acatim.acatimver1.service.PageableServiceImpl;
+import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -36,7 +37,7 @@ import javassist.NotFoundException;
 @RequestMapping(value = { "/admin" })
 public class ManagerUserController {
 	@Autowired
-	private UserInfoServiceImpl userInfoService;
+	private UserInfoService userInfoService;
 
 	private PageableService pageableService;
 
@@ -60,7 +61,7 @@ public class ManagerUserController {
 
 			int total = userInfoService.getAllUsers(roleId).size();
 
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
@@ -127,7 +128,7 @@ public class ManagerUserController {
 				}
 			}
 
-			pageableService = new PageableService(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
