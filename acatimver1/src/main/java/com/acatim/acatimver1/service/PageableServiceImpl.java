@@ -3,8 +3,6 @@ package com.acatim.acatimver1.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 public class PageableServiceImpl implements PageableService{
 
 	private int limit;
