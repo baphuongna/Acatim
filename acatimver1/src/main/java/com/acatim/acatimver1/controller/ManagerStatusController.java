@@ -12,14 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
-import com.acatim.acatimver1.service.StatusService;
+import com.acatim.acatimver1.service.HistoryService;
 
 @Controller
 @RequestMapping(value = { "/admin" })
 public class ManagerStatusController {
 
 	@Autowired
-	private StatusService statusService;
+	private HistoryService statusService;
 	
 	private PageableService pageableService;
 	
@@ -40,7 +40,7 @@ public class ManagerStatusController {
 			@SuppressWarnings("deprecation")
 			Pageable pageable = new PageRequest(currentPage - 1, 8);
 
-			int total = statusService.getAllStatus().size();
+			int total = statusService.getAllHistory().size();
 
 			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 
@@ -53,10 +53,10 @@ public class ManagerStatusController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allStatus", statusService.getAllStatusPageble(pageable));
+			modelAndView.addObject("allStatus", statusService.getAllHistoryPageble(pageable));
 			System.out.println();
 			
-			modelAndView.addObject("checklist", statusService.getAllStatusPageble(pageable).size() == 0);
+			modelAndView.addObject("checklist", statusService.getAllHistoryPageble(pageable).size() == 0);
 			
 			SearchValue searchValue = new SearchValue();
 			modelAndView.addObject("searchValue", searchValue);

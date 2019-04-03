@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acatim.acatimver1.entity.SearchValue;
-import com.acatim.acatimver1.entity.Status;
+import com.acatim.acatimver1.entity.History;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
@@ -33,9 +33,8 @@ import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
-import com.acatim.acatimver1.service.StatusService;
+import com.acatim.acatimver1.service.HistoryService;
 import com.acatim.acatimver1.service.UserInfoService;
-import com.acatim.acatimver1.utils.WebUtils;
 
 import javassist.NotFoundException;
 
@@ -48,7 +47,7 @@ public class ManagerUserController {
 	private PageableService pageableService;
 	
 	@Autowired
-	private StatusService statusService;
+	private HistoryService historyService;
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
@@ -172,12 +171,12 @@ public class ManagerUserController {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
 			
-			Status status = new Status();
-			status.setIdChange(userName);
-			status.setValueChanged("Blocked");
-			status.setDateChange(currentDate+"");
-			status.setBy(loginedUser.getUsername());
-			statusService.addStatus(status);
+			History history = new History();
+			history.setIdChange(userName);
+			history.setValueChanged("Blocked");
+			history.setDateChange(currentDate+"");
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
@@ -202,12 +201,12 @@ public class ManagerUserController {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
 			
-			Status status = new Status();
-			status.setIdChange(userName);
-			status.setValueChanged("Active");
-			status.setDateChange(currentDate+"");
-			status.setBy(loginedUser.getUsername());
-			statusService.addStatus(status);
+			History history = new History();
+			history.setIdChange(userName);
+			history.setValueChanged("Active");
+			history.setDateChange(currentDate+"");
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
@@ -417,7 +416,6 @@ public class ManagerUserController {
 			}
 
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -452,12 +450,12 @@ public class ManagerUserController {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
 			
-			Status status = new Status();
-			status.setIdChange(studentForm.getUserName());
-			status.setValueChanged("Infomation");
-			status.setDateChange(currentDate+"");
-			status.setBy(loginedUser.getUsername());
-			statusService.addStatus(status);
+			History history = new History();
+			history.setIdChange(studentForm.getUserName());
+			history.setValueChanged("Infomation");
+			history.setDateChange(currentDate+"");
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 
 		} catch (NotFoundException e) {
 			e.printStackTrace();
@@ -498,12 +496,12 @@ public class ManagerUserController {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
 			
-			Status status = new Status();
-			status.setIdChange(teacherForm.getUserName());
-			status.setValueChanged("Infomation");
-			status.setDateChange(currentDate+"");
-			status.setBy(loginedUser.getUsername());
-			statusService.addStatus(status);
+			History history = new History();
+			history.setIdChange(teacherForm.getUserName());
+			history.setValueChanged("Infomation");
+			history.setDateChange(currentDate+"");
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			modelAndView.addObject("studentForm", teacherForm);
@@ -543,12 +541,12 @@ public class ManagerUserController {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
 			
-			Status status = new Status();
-			status.setIdChange(studyCenterForm.getUserName());
-			status.setValueChanged("Infomation");
-			status.setDateChange(currentDate+"");
-			status.setBy(loginedUser.getUsername());
-			statusService.addStatus(status);
+			History history = new History();
+			history.setIdChange(studyCenterForm.getUserName());
+			history.setValueChanged("Infomation");
+			history.setDateChange(currentDate+"");
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			modelAndView.addObject("studyCenterForm", studyCenterForm);
