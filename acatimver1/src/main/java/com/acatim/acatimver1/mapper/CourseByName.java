@@ -10,10 +10,10 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.acatim.acatimver1.model.Course;
-import com.acatim.acatimver1.model.DiscountCode;
-import com.acatim.acatimver1.model.Subject;
-import com.acatim.acatimver1.model.UserModel;
+import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.DiscountCode;
+import com.acatim.acatimver1.entity.Subject;
+import com.acatim.acatimver1.entity.UserModel;
 
 public class CourseByName implements ResultSetExtractor<List<Course>> {
 

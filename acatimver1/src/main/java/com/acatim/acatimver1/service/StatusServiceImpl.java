@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.StatusDAO;
-import com.acatim.acatimver1.model.Status;
+import com.acatim.acatimver1.entity.Status;
 
 @Service
 public class StatusServiceImpl implements StatusService{

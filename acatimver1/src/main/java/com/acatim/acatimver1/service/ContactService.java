@@ -1,6 +1,6 @@
 package com.acatim.acatimver1.service;
 
-import com.acatim.acatimver1.model.Contact;
+import com.acatim.acatimver1.entity.Contact;
 
 import javassist.NotFoundException;
 

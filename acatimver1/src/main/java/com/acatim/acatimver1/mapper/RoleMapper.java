@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.Role;
+import com.acatim.acatimver1.entity.Role;
 
 public class RoleMapper implements RowMapper<Role>{
 

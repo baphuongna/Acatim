@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.acatim.acatimver1.dao.RateStudyCenterDAO;
 import com.acatim.acatimver1.dao.RateTeacherDAO;
 import com.acatim.acatimver1.dao.RatingDAO;
-import com.acatim.acatimver1.model.RateStudyCenter;
-import com.acatim.acatimver1.model.RateTeacher;
-import com.acatim.acatimver1.model.Rating;
+import com.acatim.acatimver1.entity.RateStudyCenter;
+import com.acatim.acatimver1.entity.RateTeacher;
+import com.acatim.acatimver1.entity.Rating;
 
 @Service
 public class RatingServiceImpl implements RatingService{

@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.RateTeacher;
 import com.acatim.acatimver1.mapper.RateTeacherMapper;
-import com.acatim.acatimver1.model.RateTeacher;
 
 @Repository
 @Transactional

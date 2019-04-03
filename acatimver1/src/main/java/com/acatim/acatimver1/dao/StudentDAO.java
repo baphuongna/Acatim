@@ -10,12 +10,12 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.Student;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.mapper.StudentExtractor;
 import com.acatim.acatimver1.mapper.StudentFormMapper;
 import com.acatim.acatimver1.mapper.StudentMapper;
-import com.acatim.acatimver1.model.Student;
-import com.acatim.acatimver1.model.UserModel;
 
 @Repository
 @Transactional

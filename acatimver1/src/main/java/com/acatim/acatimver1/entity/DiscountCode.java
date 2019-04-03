@@ -1,4 +1,4 @@
-package com.acatim.acatimver1.model;
+package com.acatim.acatimver1.entity;
 
 import javax.persistence.*;
 
@@ -12,14 +12,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Manager {
+public class DiscountCode {
 	
 	@Id
+	private String codeId;
+	
 	private String userName;
 	
-	private String dob;
+	private String courseId;
 	
-	private boolean gender;
+	private String createDate;
 	
-	private String description;
+	private String expireDate;
+	
+	private String status;
+	
+	private boolean active;
 }

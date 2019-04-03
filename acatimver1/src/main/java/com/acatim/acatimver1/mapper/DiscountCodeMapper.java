@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.DiscountCode;
+import com.acatim.acatimver1.entity.DiscountCode;
 
 public class DiscountCodeMapper implements RowMapper<DiscountCode>{
 

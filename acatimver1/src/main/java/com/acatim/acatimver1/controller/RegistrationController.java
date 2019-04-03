@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.model.ObjectUser;
-import com.acatim.acatimver1.model.Student;
-import com.acatim.acatimver1.model.StudyCenter;
-import com.acatim.acatimver1.model.Teacher;
-import com.acatim.acatimver1.model.UserModel;
+import com.acatim.acatimver1.entity.ObjectUser;
+import com.acatim.acatimver1.entity.Student;
+import com.acatim.acatimver1.entity.StudyCenter;
+import com.acatim.acatimver1.entity.Teacher;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;

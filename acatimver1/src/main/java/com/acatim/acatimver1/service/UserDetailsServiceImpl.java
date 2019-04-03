@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.RoleDAO;
 import com.acatim.acatimver1.dao.UserDAO;
-import com.acatim.acatimver1.model.UserModel;
+import com.acatim.acatimver1.entity.UserModel;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{

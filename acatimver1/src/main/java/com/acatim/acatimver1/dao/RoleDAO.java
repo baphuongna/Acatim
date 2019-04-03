@@ -10,8 +10,8 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.Role;
 import com.acatim.acatimver1.mapper.RoleMapper;
-import com.acatim.acatimver1.model.Role;
 
 @Repository
 @Transactional

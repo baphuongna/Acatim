@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.model.SearchValue;
+import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.StatusService;

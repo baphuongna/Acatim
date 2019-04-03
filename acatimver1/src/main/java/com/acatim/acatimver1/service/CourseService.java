@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
-import com.acatim.acatimver1.model.Course;
+import com.acatim.acatimver1.entity.Course;
 
 public interface CourseService {
 	

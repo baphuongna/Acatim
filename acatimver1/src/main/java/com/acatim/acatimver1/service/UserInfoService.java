@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 
+import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.Student;
+import com.acatim.acatimver1.entity.StudyCenter;
+import com.acatim.acatimver1.entity.Teacher;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
-import com.acatim.acatimver1.model.Contact;
-import com.acatim.acatimver1.model.Student;
-import com.acatim.acatimver1.model.StudyCenter;
-import com.acatim.acatimver1.model.Teacher;
-import com.acatim.acatimver1.model.UserModel;
 
 import javassist.NotFoundException;
 

@@ -10,10 +10,10 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.Subject;
 import com.acatim.acatimver1.mapper.SubjectCateExtractor;
 import com.acatim.acatimver1.mapper.SubjectExtractor;
 import com.acatim.acatimver1.mapper.SubjectMapper;
-import com.acatim.acatimver1.model.Subject;
 
 @Repository
 @Transactional

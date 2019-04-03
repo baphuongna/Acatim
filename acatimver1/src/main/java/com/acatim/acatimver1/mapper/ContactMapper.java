@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.Contact;
+import com.acatim.acatimver1.entity.Contact;
 
 public class ContactMapper implements RowMapper<Contact> {
 

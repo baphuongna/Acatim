@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.CourseDAO;
-import com.acatim.acatimver1.model.Course;
+import com.acatim.acatimver1.entity.Course;
 
 @Service
 public class CourseServiceImpl implements CourseService{

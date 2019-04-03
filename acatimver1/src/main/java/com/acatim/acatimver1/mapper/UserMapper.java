@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.UserModel;
+import com.acatim.acatimver1.entity.UserModel;
 
 public class UserMapper implements RowMapper<UserModel> {
 	public static final String BASE_SQL //

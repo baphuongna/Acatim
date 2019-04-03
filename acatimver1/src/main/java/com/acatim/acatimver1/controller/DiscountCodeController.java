@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.model.Course;
-import com.acatim.acatimver1.model.DiscountCode;
+import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.DiscountCode;
 import com.acatim.acatimver1.service.DiscountCodeService;
 
 import javassist.NotFoundException;;

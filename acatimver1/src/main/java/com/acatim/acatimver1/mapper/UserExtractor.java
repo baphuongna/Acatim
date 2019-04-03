@@ -10,8 +10,8 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.acatim.acatimver1.model.Role;
-import com.acatim.acatimver1.model.UserModel;
+import com.acatim.acatimver1.entity.Role;
+import com.acatim.acatimver1.entity.UserModel;
 
 public class UserExtractor implements ResultSetExtractor<List<UserModel>> {
 

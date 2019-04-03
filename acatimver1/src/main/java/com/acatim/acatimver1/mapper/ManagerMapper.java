@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.Manager;
+import com.acatim.acatimver1.entity.Manager;
 
 public class ManagerMapper implements RowMapper<Manager>{
 

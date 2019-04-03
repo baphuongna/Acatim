@@ -11,14 +11,14 @@ import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
+import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.Student;
+import com.acatim.acatimver1.entity.StudyCenter;
+import com.acatim.acatimver1.entity.Teacher;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
-import com.acatim.acatimver1.model.Contact;
-import com.acatim.acatimver1.model.Student;
-import com.acatim.acatimver1.model.StudyCenter;
-import com.acatim.acatimver1.model.Teacher;
-import com.acatim.acatimver1.model.UserModel;
 
 import javassist.NotFoundException;
 

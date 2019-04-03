@@ -10,7 +10,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.acatim.acatimver1.model.Contact;
+import com.acatim.acatimver1.entity.Contact;
 
 public class ContactExtractor implements ResultSetExtractor<List<Contact>> {
 

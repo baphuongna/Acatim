@@ -1,4 +1,4 @@
-package com.acatim.acatimver1.model;
+package com.acatim.acatimver1.entity;
 
 import java.util.*;
 

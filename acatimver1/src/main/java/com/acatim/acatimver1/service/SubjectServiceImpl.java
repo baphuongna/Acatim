@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.SubjectDAO;
-import com.acatim.acatimver1.model.Subject;
+import com.acatim.acatimver1.entity.Subject;
 
 @Service
 public class SubjectServiceImpl implements SubjectService {

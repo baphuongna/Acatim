@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.Subject;
+import com.acatim.acatimver1.entity.Subject;
 
 public class SubjectMapper implements RowMapper<Subject>{
 	

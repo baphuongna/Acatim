@@ -2,9 +2,9 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
-import com.acatim.acatimver1.model.RateStudyCenter;
-import com.acatim.acatimver1.model.RateTeacher;
-import com.acatim.acatimver1.model.Rating;
+import com.acatim.acatimver1.entity.RateStudyCenter;
+import com.acatim.acatimver1.entity.RateTeacher;
+import com.acatim.acatimver1.entity.Rating;
 
 public interface RatingService {
 	

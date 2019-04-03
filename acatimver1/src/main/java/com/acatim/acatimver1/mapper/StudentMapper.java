@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.acatim.acatimver1.model.Student;
+import com.acatim.acatimver1.entity.Student;
 
 public class StudentMapper implements RowMapper<Student>{
 

@@ -11,12 +11,12 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.mapper.ContactExtractor;
 import com.acatim.acatimver1.mapper.ContactMapper;
 import com.acatim.acatimver1.mapper.UserExtractor;
 import com.acatim.acatimver1.mapper.UserMapper;
-import com.acatim.acatimver1.model.Contact;
-import com.acatim.acatimver1.model.UserModel;
 
 @Repository
 @Transactional
