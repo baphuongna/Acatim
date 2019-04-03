@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,14 +27,23 @@ public class StatusDAO extends JdbcDaoSupport {
 		List<Status> discountCode = this.getJdbcTemplate().query(sql, new StatusMapper());
 		return discountCode;
 	}
+	
+	public List<Status> getAllStatusPageble(Pageable pageable) {
+		String sql = "SELECT * FROM Status LIMIT ?, ?;";
+		Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
+		List<Status> discountCode = this.getJdbcTemplate().query(sql, params, new StatusMapper());
+		return discountCode;
+	}
 
 	public void addStatus(Status status) {
-		String sql = "INSERT INTO Status (id, value, lastManagerChangeName)\r\n" + "VALUES (?, ?, ?);";
-		this.getJdbcTemplate().update(sql, status.getId(), status.getValue(), status.getLastManagerChangeName());
+		String sql = "INSERT INTO Status (id_change, value_changed, fixer, date_change)\r\n" + "VALUES (?, ?, ?, ?);";
+		this.getJdbcTemplate().update(sql, status.getIdChange(), status.getValueChanged(), status.getBy(), status.getDateChange());
 	}
 
 	public void updateStatus(Status status) {
-		String sql = "UPDATE Status SET value = ?, lastManagerChangeName = ? WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, status.getValue(), status.getLastManagerChangeName(), status.getId());
+		String sql = "UPDATE Status SET id_change= ?, value_changed = ? , fixer = ? , date_change = ? WHERE id = ?;";
+		this.getJdbcTemplate().update(sql, status.getIdChange(), status.getValueChanged(), status.getBy(), status.getDateChange() , status.getId());
 	}
+	
+	
 }

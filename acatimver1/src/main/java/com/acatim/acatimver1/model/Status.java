@@ -14,9 +14,13 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Status {
 	@Id
-	private String id;
+	private int id;
 	
-	private String value;
+	private String idChange;
 	
-	private String lastManagerChangeName;
+	private String valueChanged;
+	
+	private String by;
+	
+	private String dateChange;
 }

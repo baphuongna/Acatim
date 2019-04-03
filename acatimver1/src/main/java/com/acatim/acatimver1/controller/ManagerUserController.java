@@ -1,5 +1,6 @@
 package com.acatim.acatimver1.controller;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -23,13 +26,16 @@ import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
 import com.acatim.acatimver1.model.SearchValue;
+import com.acatim.acatimver1.model.Status;
 import com.acatim.acatimver1.model.Student;
 import com.acatim.acatimver1.model.StudyCenter;
 import com.acatim.acatimver1.model.Teacher;
 import com.acatim.acatimver1.model.UserModel;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
+import com.acatim.acatimver1.service.StatusService;
 import com.acatim.acatimver1.service.UserInfoService;
+import com.acatim.acatimver1.utils.WebUtils;
 
 import javassist.NotFoundException;
 
@@ -40,6 +46,9 @@ public class ManagerUserController {
 	private UserInfoService userInfoService;
 
 	private PageableService pageableService;
+	
+	@Autowired
+	private StatusService statusService;
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
@@ -149,10 +158,26 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "blockUser" }, method = RequestMethod.GET)
-	public ModelAndView blockStudent(@RequestParam("userName") String userName) {
+	public ModelAndView blockStudent(@RequestParam("userName") String userName, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
+			
 			userInfoService.removeUser(userName);
+			
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			Status status = new Status();
+			status.setIdChange(userName);
+			status.setValueChanged("Blocked");
+			status.setDateChange(currentDate+"");
+			status.setBy(loginedUser.getUsername());
+			statusService.addStatus(status);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
@@ -161,10 +186,28 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "unlockUser" }, method = RequestMethod.GET)
-	public ModelAndView unlockStudent(@RequestParam("userName") String userName) {
+	public ModelAndView unlockStudent(@RequestParam("userName") String userName, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
+			
+			
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
+			
 			userInfoService.unlockUser(userName);
+			
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			Status status = new Status();
+			status.setIdChange(userName);
+			status.setValueChanged("Active");
+			status.setDateChange(currentDate+"");
+			status.setBy(loginedUser.getUsername());
+			statusService.addStatus(status);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
@@ -382,7 +425,7 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "userStudent" }, method = RequestMethod.POST)
-	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm) {
+	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentForm);
 
@@ -398,6 +441,23 @@ public class ManagerUserController {
 
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateStudentInfo(studentInfo);
+			
+			
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
+
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			Status status = new Status();
+			status.setIdChange(studentForm.getUserName());
+			status.setValueChanged("Infomation");
+			status.setDateChange(currentDate+"");
+			status.setBy(loginedUser.getUsername());
+			statusService.addStatus(status);
 
 		} catch (NotFoundException e) {
 			e.printStackTrace();
@@ -411,7 +471,7 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "userTeacher" }, method = RequestMethod.POST)
-	public ModelAndView updateTeacher(@ModelAttribute("teacherForm") @Validated TeacherForm teacherForm) {
+	public ModelAndView updateTeacher(@ModelAttribute("teacherForm") @Validated TeacherForm teacherForm, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(teacherForm);
 
@@ -428,7 +488,22 @@ public class ManagerUserController {
 
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateTeacherInfo(teacher);
+			
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
 
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			Status status = new Status();
+			status.setIdChange(teacherForm.getUserName());
+			status.setValueChanged("Infomation");
+			status.setDateChange(currentDate+"");
+			status.setBy(loginedUser.getUsername());
+			statusService.addStatus(status);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			modelAndView.addObject("studentForm", teacherForm);
@@ -442,7 +517,7 @@ public class ManagerUserController {
 
 	@RequestMapping(value = { "userStudyCenter" }, method = RequestMethod.POST)
 	public ModelAndView updateStudyCenter(
-			@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm) {
+			@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studyCenterForm);
 
@@ -458,7 +533,22 @@ public class ManagerUserController {
 					currentSt.getRate());
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateStudyCenterInfo(studyCenter);
+			
+			Date date = new Date();
+			long time = date.getTime();
+			Timestamp currentDate = new Timestamp(time);
 
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			Status status = new Status();
+			status.setIdChange(studyCenterForm.getUserName());
+			status.setValueChanged("Infomation");
+			status.setDateChange(currentDate+"");
+			status.setBy(loginedUser.getUsername());
+			statusService.addStatus(status);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 			modelAndView.addObject("studyCenterForm", studyCenterForm);

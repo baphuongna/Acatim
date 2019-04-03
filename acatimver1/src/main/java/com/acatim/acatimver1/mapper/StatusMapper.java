@@ -15,11 +15,13 @@ public class StatusMapper implements RowMapper<Status>{
 	@Override
 	public Status mapRow(ResultSet rs, int rowNum) throws SQLException {
 		
-		String id = rs.getString("id");
-		String value = rs.getString("value");
-		String lastManagerChangeName = rs.getString("lastManagerChangeName");
+		int id = rs.getInt("id");
+		String idChange = rs.getString("id_change");
+		String valueChanged = rs.getString("value_changed");
+		String by = rs.getString("fixer");
+		String dateChange = rs.getString("date_change");
 
-		return new Status(id, value, lastManagerChangeName);
+		return new Status(id, idChange, valueChanged, by, dateChange);
 	}
 
 }
