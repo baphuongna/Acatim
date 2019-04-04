@@ -1,7 +1,6 @@
 package com.acatim.acatimver1.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

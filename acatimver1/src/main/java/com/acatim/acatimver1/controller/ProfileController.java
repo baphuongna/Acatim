@@ -21,7 +21,6 @@ import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.RatingService;
-import com.acatim.acatimver1.service.SubjectService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
@@ -36,9 +35,6 @@ public class ProfileController {
 
 	@Autowired
 	private CourseService courseService;
-
-	@Autowired
-	private SubjectService subjectService;
 	
 	@Autowired
 	private RatingService ratingService;

@@ -1,8 +1,6 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
-import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.validation.Valid;
 
