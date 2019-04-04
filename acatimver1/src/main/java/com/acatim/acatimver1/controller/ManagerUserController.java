@@ -1,8 +1,6 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -31,6 +29,7 @@ import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudentForm;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.form.TeacherForm;
+import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.HistoryService;
@@ -48,6 +47,8 @@ public class ManagerUserController {
 	
 	@Autowired
 	private HistoryService historyService;
+	
+	private DateFormat dateformat = new DateFormat();
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
@@ -160,10 +161,7 @@ public class ManagerUserController {
 	public ModelAndView blockStudent(@RequestParam("userName") String userName, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
-			
+
 			userInfoService.removeUser(userName);
 			
 			User loginedUser = null;
@@ -174,7 +172,7 @@ public class ManagerUserController {
 			History history = new History();
 			history.setIdChange(userName);
 			history.setValueChanged("Blocked");
-			history.setDateChange(currentDate+"");
+			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
 		} catch (NotFoundException e) {
@@ -189,22 +187,17 @@ public class ManagerUserController {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			
-			
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
-			
 			userInfoService.unlockUser(userName);
 			
 			User loginedUser = null;
 			if (principal != null) {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();
 			}
-			
+
 			History history = new History();
 			history.setIdChange(userName);
 			history.setValueChanged("Active");
-			history.setDateChange(currentDate+"");
+			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
 		} catch (NotFoundException e) {
@@ -243,11 +236,6 @@ public class ManagerUserController {
 			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(studentForm);
-
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp currentDate = new Timestamp(time);
 
 		boolean userExists = userInfoService.checkUserExist(studentForm.getUserName());
 		if (userExists == true) {
@@ -267,7 +255,7 @@ public class ManagerUserController {
 		}
 
 		UserModel user = new UserModel(studentForm.getUserName(), studentForm.getRole_id(), studentForm.getFullName(),
-				studentForm.getEmail(), studentForm.getPassword(), currentDate + "", studentForm.getPhoneNo(),
+				studentForm.getEmail(), studentForm.getPassword(), dateformat.currentDate() , studentForm.getPhoneNo(),
 				studentForm.getAddress(), true);
 
 		Student studentInfo = new Student(studentForm.getUserName(), studentForm.getDob(), studentForm.isGender());
@@ -295,11 +283,6 @@ public class ManagerUserController {
 			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(teacherForm);
-
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp currentDate = new Timestamp(time);
 
 		boolean userExists = userInfoService.checkUserExist(teacherForm.getUserName());
 		if (userExists == true) {
@@ -319,13 +302,11 @@ public class ManagerUserController {
 		}
 
 		UserModel user = new UserModel(teacherForm.getUserName(), teacherForm.getRole_id(), teacherForm.getFullName(),
-				teacherForm.getEmail(), teacherForm.getPassword(), currentDate + "", teacherForm.getPhoneNo(),
+				teacherForm.getEmail(), teacherForm.getPassword(), dateformat.currentDate(), teacherForm.getPhoneNo(),
 				teacherForm.getAddress(), true);
 
 		Teacher teacherInfo = new Teacher(teacherForm.getUserName(), teacherForm.getDob(), teacherForm.isGender(),
 				teacherForm.getDescription(), 0);
-//			System.out.println(user);
-//			System.out.println(studentInfo);
 		try {
 			userInfoService.addUserInfo(user);
 			userInfoService.addTeacherInfo(teacherInfo);
@@ -348,12 +329,7 @@ public class ManagerUserController {
 			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(studyCenterForm);
-
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp currentDate = new Timestamp(time);
-
+		
 		boolean userExists = userInfoService.checkUserExist(studyCenterForm.getUserName());
 		if (userExists == true) {
 			result.rejectValue("userName", "error.user",
@@ -373,7 +349,7 @@ public class ManagerUserController {
 
 		UserModel user = new UserModel(studyCenterForm.getUserName(), studyCenterForm.getRole_id(),
 				studyCenterForm.getFullName(), studyCenterForm.getEmail(), studyCenterForm.getPassword(),
-				currentDate + "", studyCenterForm.getPhoneNo(), studyCenterForm.getAddress(), true);
+				dateformat.currentDate(), studyCenterForm.getPhoneNo(), studyCenterForm.getAddress(), true);
 
 		StudyCenter studyCenterInfo = new StudyCenter(studyCenterForm.getUserName(), studyCenterForm.getDescription(),
 				0);
@@ -439,11 +415,7 @@ public class ManagerUserController {
 
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateStudentInfo(studentInfo);
-			
-			
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
+
 
 			User loginedUser = null;
 			if (principal != null) {
@@ -453,7 +425,7 @@ public class ManagerUserController {
 			History history = new History();
 			history.setIdChange(studentForm.getUserName());
 			history.setValueChanged("Infomation");
-			history.setDateChange(currentDate+"");
+			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
 
@@ -486,10 +458,6 @@ public class ManagerUserController {
 
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateTeacherInfo(teacher);
-			
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
 
 			User loginedUser = null;
 			if (principal != null) {
@@ -499,7 +467,7 @@ public class ManagerUserController {
 			History history = new History();
 			history.setIdChange(teacherForm.getUserName());
 			history.setValueChanged("Infomation");
-			history.setDateChange(currentDate+"");
+			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
 		} catch (NotFoundException e) {
@@ -531,10 +499,6 @@ public class ManagerUserController {
 					currentSt.getRate());
 			userInfoService.updateUserInfo(user);
 			userInfoService.updateStudyCenterInfo(studyCenter);
-			
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
 
 			User loginedUser = null;
 			if (principal != null) {
@@ -544,7 +508,7 @@ public class ManagerUserController {
 			History history = new History();
 			history.setIdChange(studyCenterForm.getUserName());
 			history.setValueChanged("Infomation");
-			history.setDateChange(currentDate+"");
+			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
 		} catch (NotFoundException e) {

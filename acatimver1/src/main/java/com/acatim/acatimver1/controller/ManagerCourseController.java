@@ -1,5 +1,6 @@
 package com.acatim.acatimver1.controller;
 
+import java.security.Principal;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -8,6 +9,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.History;
 import com.acatim.acatimver1.entity.SearchValue;
+import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.CategoriesService;
 import com.acatim.acatimver1.service.CourseService;
+import com.acatim.acatimver1.service.HistoryService;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.SubjectService;
@@ -42,7 +48,12 @@ public class ManagerCourseController {
 	@Autowired
 	private UserInfoService userInfoService;
 	
+	@Autowired
+	private HistoryService historyService;
+	
 	private PageableService pageableService;
+	
+	private DateFormat dateformat = new DateFormat();
 
 	@RequestMapping(value = {"all-courses"}, method = RequestMethod.GET)
 	public ModelAndView allCourses(@RequestParam(required = false, name = "page") String page,
@@ -204,10 +215,22 @@ public class ManagerCourseController {
 	}
 	
 	@RequestMapping(value = { "blockStudent" }, method = RequestMethod.GET)
-	public ModelAndView blockStudent(@RequestParam("courseId") String courseId) {
+	public ModelAndView blockStudent(@RequestParam("courseId") String courseId,Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			courseService.removeCourse(courseId);
+			
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			History history = new History();
+			history.setIdChange(courseId);
+			history.setValueChanged("Blocked");
+			history.setDateChange(dateformat.currentDate());
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -216,10 +239,22 @@ public class ManagerCourseController {
 	}
 
 	@RequestMapping(value = { "unlockStudent" }, method = RequestMethod.GET)
-	public ModelAndView unlockStudent(@RequestParam("courseId") String courseId) {
+	public ModelAndView unlockStudent(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
 			courseService.unlockCourse(courseId);
+			
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+
+			History history = new History();
+			history.setIdChange(courseId);
+			history.setValueChanged("Active");
+			history.setDateChange(dateformat.currentDate());
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -248,12 +283,7 @@ public class ManagerCourseController {
 		
 		String courseId = courseService.genCourseId();
 		course.setCourseId(courseId);
-		System.out.println(course);
-		
-		Date date = new Date();
-		long time = date.getTime();
-		Timestamp currentDate = new Timestamp(time);
-		course.setCreateDate(currentDate+"");
+		course.setCreateDate(dateformat.currentDate());
 		
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 		try {
@@ -282,8 +312,14 @@ public class ManagerCourseController {
 		
 		
 		try {
+			
+			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
+			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
+			
+			
+			System.out.println(course);
 			courseService.addCourse(course);
-			System.out.println("success");
+
 		}catch (Exception e) {
 			modelAndView.addObject("allSubjects", subjectService.getListSubject());
 			modelAndView.addObject("course", course);
@@ -291,7 +327,7 @@ public class ManagerCourseController {
 			return modelAndView;
 		}
 		
-		modelAndView.setViewName("redirect:admin/all-courses");
+		modelAndView.setViewName("redirect:/admin/all-courses");
 		return modelAndView;
 	}
 
@@ -312,7 +348,7 @@ public class ManagerCourseController {
 	
 	@RequestMapping(value = {"edit-course"}, method = RequestMethod.POST)
 	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course,
-			BindingResult result) {
+			BindingResult result, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		System.out.println(course);
@@ -344,12 +380,21 @@ public class ManagerCourseController {
 		}
 		
 		try {
-			Date date = new Date();
-			long time = date.getTime();
-			Timestamp currentDate = new Timestamp(time);
-			course.setUpdateDate(currentDate+"");
+			course.setUpdateDate(dateformat.currentDate());
 			System.out.println(course);
 			courseService.updateCourse(course);
+			
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+			
+			History history = new History();
+			history.setIdChange(course.getCourseId());
+			history.setValueChanged("Infomation");
+			history.setDateChange(dateformat.currentDate());
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
