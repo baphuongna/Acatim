@@ -1,0 +1,16 @@
+.search-form {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px 0;
+    margin-bottom: 10px;
+}
+
+.form-inline .form-control, .form-inline .form-control {
+    background: none repeat scroll 0 0 #eeeeee;
+    border-radius: 1px;
+    color: #333;
+    font-style: italic;
+    height: 40px;
+    margin-right: 10px;
+    width: 195px;
+}

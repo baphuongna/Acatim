@@ -31,6 +31,8 @@
     <link rel="stylesheet" href="css/Menu.css">
     <link rel="stylesheet" href="css/Teacher.css">
     
+    <link rel="stylesheet" href="css/filterbar.css">
+    
     <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -43,76 +45,6 @@
 	<div class="hero-wrap hero-wrap-2"
 		style="background-image: url('images/bg_2.jpg'); background-attachment: fixed;">
 		<div class="overlay"></div>
-		<div class="container">
-
-			<section class="search-banner text-white py-3 form-arka-plan"
-				id="search-banner">
-				<div class="container py-5 my-5">
-					<div class="row text-center pb-4">
-						<div class="col-md-12">
-							<h2 class="text-white siyah-cerceve">Giáo Viên</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card acik-renk-form">
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group ">
-												<select id="iller" class="form-control">
-													<option selected>Tất cả</option>
-													<option>İstanbul</option>
-													<option>Ankara</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group ">
-												<select id="ilceler" class="form-control">
-													<option selected>tất cả</option>
-													<option>BMW</option>
-													<option>Audi</option>
-													<option>Maruti</option>
-													<option>Tesla</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group ">
-												<select id="arac-turu" class="form-control">
-													<option selected>Tất cả</option>
-													<option>Otobüs</option>
-													<option>Minibüs</option>
-													<option>Karavan</option>
-													<option>Vito</option>
-													<option>Limuzin</option>
-
-												</select>
-											</div>
-										</div>
-									</div>
-									<p class="font-weight-light text-dark">Tìm bằng tên</p>
-									<div class="row">
-										<div class="col-md-9">
-											<div class="form-group ">
-												<input type="text" class="form-control"
-													placeholder="Gõ tên giáo viên hoặc trung tâm vào đây">
-											</div>
-										</div>
-										<div class="col-md-3">
-											<button type="button" class="btn btn-warning  pl-5 pr-5">Tìm
-												kiếm</button>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</section>
-		</div>
 	</div>
 	<section class="ftco-section bg-light">
       <div class="container">
@@ -121,6 +53,37 @@
             <h2 class="mb-4" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></h2>
           </div>
         </div>
+        
+       	<div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
+            <form action="" class=" form-inline">
+            					<div class="form-group">
+                                    <select name="" id="" class="form-control">
+                                        <option selected="">Sắp Xếp theo</option>
+                                        <option >Tên</option>
+                                        <option>Ngày cập nhật</option>
+                                        <option>Đánh Giá từ Thấp tới Cao</option>
+                                        <option>Đánh Giá từ Cao tới Thấp</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Gõ tên giáo viên hoặc trung tâm vào đây" style="width: 350px;">
+                                </div>
+                                
+                                <!-- <div class="form-group">
+                                    <select name="" id="" class="form-control">
+                                        <option>Select Your Category</option>
+                                        <option selected="">Graphic Design</option>
+                                        <option>Web Design</option>
+                                        <option>App Design</option>
+                                    </select>
+                                </div> -->
+                                <input type="submit" class="btn" value="Tìm kiếm" style="width: 100px; height: 57px;">
+
+
+            </form>
+        </div>
+        
         <div class="row">
         	<div class="col-lg-4 mb-sm-4 ftco-animate" th:each="teacher : ${listTeacher}">
         		<div class="staff min_height_222">
@@ -198,6 +161,7 @@
         </div>
       </div>
     </section>
+    
     
 
     <div th:insert="/footer :: footer"></div>
