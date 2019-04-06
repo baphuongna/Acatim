@@ -14,3 +14,51 @@
     margin-right: 10px;
     width: 195px;
 }
+
+.carousel-item{min-height:300px; background:#ccc; }
+.carousel-item img {
+	height: 300px; width: auto;
+}
+
+
+.themeBtn3 {
+    background: #167ce9;
+    color: #ffffff !important;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 500;
+    height: 50px;
+    line-height: 0.8;
+    padding: 18px 30px;
+    text-transform: capitalize;
+    border-radius: 1px;
+    letter-spacing: 0.5px;
+	border:0px !important;
+	cursor:pointer;
+	border-radius:100px;
+	width: 20%;
+	text-align: center;
+	margin: 0 20px 0 20px;
+}
+.themeBtn3:hover {
+    background: rgb(255, 46, 77);
+    color: #ffffff;
+    box-shadow: 0 10px 25px -2px rgba(255, 46, 77, 0.6);
+}
+
+.btn-circle {
+  width: auto;
+  height: 35px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+  margin-right: 5px;
+}
+
+.drop-sort{
+	
+}
+
+
