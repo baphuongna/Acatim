@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>All Students | Acatim - Acatim Admin</title>
+    <title>All Contacts | Acatim - Acatim Admin</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- favicon
@@ -105,7 +105,7 @@
                                         <ul class="breadcome-menu">
                                             <li><a href="#">Home</a> <span class="bread-slash">/</span>
                                             </li>
-                                            <li><span class="bread-blod">All Students</span>
+                                            <li><span class="bread-blod">all Contacts</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -136,7 +136,7 @@
 									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 										<div class="chosen-select-single mg-b-20">
 											<select class="chosen-select" th:field="*{value}">
-												<option value="userName">Tên Tài khoản</option>
+												<option value="userName">Tên</option>
 												<option value="email">Email</option>
 											</select>
 										</div>
@@ -161,7 +161,7 @@
 				<div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
-                            <h4>Danh Sách Học Sinh</h4>
+                            <h4>Danh Sách Phản Hồi</h4>
                             <div class="asset-inner">
                                 <table>
 									<tr>
@@ -222,44 +222,7 @@
                 </div>
             </div>
         </div>
-        
-        <div th:id="${user.userName}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="user : ${allUser}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-                                        <h2>KHÓA!</h2>
-                                        <p>Bạn có chắc muốn KHÓA tài khoản này!</p>
-                                    </div>
-                                    <div class="modal-footer danger-md">
-                                        <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/blockUser(userName=${user.id})}">Đúng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-        <div th:id="${user.userName}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="user : ${allUser}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span class="educate-icon educate-warning modal-check-pro information-icon-pro"></span>
-                                        <h2>MỞ KHÓA!</h2>
-                                        <p>Bạn có chắc muốn MỞ KHÓA tài khoản này!</p>
-                                    </div>
-                                    <div class="modal-footer warning-md">
-                                        <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/unlockUser(userName=${user.id})}">Đúng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+   
         
         <div class="footer-copyright-area">
             <div class="container-fluid">

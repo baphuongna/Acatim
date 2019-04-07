@@ -40,12 +40,11 @@ public class AdminController {
 			modelAndView.addObject("allStudyCenter", userInfoService.loadAllStudyCenter().size());
 			modelAndView.addObject("allTeacher", userInfoService.loadAllTeacher().size());
 			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
-			modelAndView.addObject("allSubject", subjectService.getAllSubject().size());
+			modelAndView.addObject("allSubject", subjectService.getListSubject().size());
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
 
 			
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

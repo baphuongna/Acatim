@@ -30,7 +30,7 @@ public class ManagerContactController {
 	private PageableService pageableService;
 
 	@RequestMapping(value = { "/allContact" }, method = RequestMethod.GET)
-	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page) {
+	public ModelAndView allContact(@RequestParam(required = false, name = "page") String page) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (page == null) {
 			page = 1 + "";
@@ -43,11 +43,11 @@ public class ManagerContactController {
 			}
 
 			@SuppressWarnings("deprecation")
-			Pageable pageable = new PageRequest(currentPage - 1, 2);
+			Pageable pageable = new PageRequest(currentPage - 1, 8);
 
 			int total = userInfoService.getAllContact().size();
 			List<Contact> listUser = null;
-			pageableService = new PageableServiceImpl(2, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
 			listUser=userInfoService.getAllContactPageable(pageable);
 			System.out.println("trung   "+listUser.get(0).isActive());	
 
@@ -71,7 +71,7 @@ public class ManagerContactController {
 	}
 
 	@RequestMapping(value = { "/allContact" }, method = RequestMethod.POST)
-	public ModelAndView searchUsers(@RequestParam(required = false, name = "page") String page,
+	public ModelAndView searchContacts(@RequestParam(required = false, name = "page") String page,
 			@ModelAttribute("searchValue") SearchValue search) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (page == null) {
@@ -127,31 +127,6 @@ public class ManagerContactController {
 		modelAndView.setViewName("admin/allContact");
 		return modelAndView;
 	}
-
-	@RequestMapping(value = { "blockContact" }, method = RequestMethod.GET)
-	public ModelAndView blockStudent(@RequestParam("id") String id) {
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			userInfoService.removeContact(id);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		modelAndView.setViewName("redirect:/admin/allContact");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = { "unlockContact" }, method = RequestMethod.GET)
-	public ModelAndView unlockStudent(@RequestParam("id") String id) {
-		ModelAndView modelAndView = new ModelAndView();
-		try {
-			userInfoService.unlockUser(id);
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		modelAndView.setViewName("redirect:/admin/allContact");
-		return modelAndView;
-	}
-
 
 
 }
