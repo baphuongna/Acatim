@@ -101,18 +101,13 @@
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 
 		<ul class="nav nav-tabs">
-			<li class="nav-item"><a target="_blank"
-				class="themeBtn3 nav-link active" th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></a>
+			<li class="nav-item"><a th:href="@{/teacher}" target="_blank"
+				class="themeBtn3 nav-link" th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></a>
 			</li>
-			<li class="nav-item"><a th:href="@{/study-center}" target="_blank"
-				class="themeBtn3 nav-link" th:text="${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></a></li>
+			<li class="nav-item"><a target="_blank"
+				class="themeBtn3 nav-link active" th:text="${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></a></li>
 		</ul>
 	</div>
-	
-	
-
-	
-	
 	
 	<section class="ftco-section bg-light">
 	
@@ -122,7 +117,7 @@
 				<form action="" class=" form-inline">
 					<div class="form-group">
 						<input type="text" class="form-control"
-							placeholder="Gõ tên giáo viên vào đây"
+							placeholder="Gõ tên trung tâm vào đây"
 							style="width: 100%;">
 					</div>
 					<input type="submit" class="btn" value="Tìm kiếm"
@@ -160,43 +155,30 @@
 								</div>
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 mb-sm-4 ftco-animate"
-					th:each="teacher : ${listTeacher}">
-					<div class="staff min_height_222">
-						<div class="d-flex mb-4">
-							<div class="img"
-								style="background-image: url(images/person_1.jpg);"></div>
-							<div class="info ml-4">
-								<h3>
-									<a th:href="@{/profileDetail(userName=${teacher.userName})}"
-										th:text="${teacher.fullName}"></a>
-								</h3>
-								<span class="position"
-									th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></span>
-								<p class="ftco-social d-flex">
-									<a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-twitter"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-facebook"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-instagram"></span></a>
-								</p>
-							</div>
-						</div>
-						<div class="text">
-							<p
-								th:utext="${#strings.replace(teacher.teacher.description,'\n','&lt;/br&gt;')}"></p>
-						</div>
-					</div>
-				</div>
-			</div>
+        	<div class="col-lg-4 mb-sm-4 ftco-animate" th:each="studyCenter : ${listStudyCenter}">
+        		<div class="staff min_height_222">
+        			<div class="d-flex mb-4">
+        				<div class="img" style="background-image: url(images/person_1.jpg);"></div>
+        				<div class="info ml-4">
+        					<h3><a th:href="@{/profileDetail(userName=${studyCenter.userName})}" th:text="${studyCenter.fullName}"></a></h3>
+        					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></span>
+        					<p class="ftco-social d-flex">
+		                <a href="#" class="d-flex justify-content-center align-items-center"><span class="icon-twitter"></span></a>
+		                <a href="#" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
+		                <a href="#" class="d-flex justify-content-center align-items-center"><span class="icon-instagram"></span></a>
+		              </p>
+        				</div>
+        			</div>
+        			<div class="text">
+        				<p th:utext="${studyCenter.studyCenter.description}"></p>
+        			</div>
+        		</div>
+        	</div>
+        </div>
 			
 			
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
@@ -212,8 +194,6 @@
 			
 		</div>
 	</section>
-
-    
 
     <div th:insert="/footer :: footer"></div>
     

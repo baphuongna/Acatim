@@ -220,6 +220,53 @@ public class MainController {
 		modelAndView.setViewName("teacher");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = { "/study-center" }, method = RequestMethod.GET)
+	public ModelAndView studyCenter() {
+		ModelAndView modelAndView = new ModelAndView();
+		List<UserModel> listTeacher = null;
+		List<UserModel> listStudyCenter = null;
+		
+		try {
+			//get teacher
+			listTeacher = this.userInfoService.loadAllUserTeacher();
+			if(listTeacher != null && listTeacher.size() > 0) {
+				for (UserModel teacher : listTeacher) {
+					
+					//split description
+					if(teacher.getTeacher().getDescription().length() > 40) {
+						teacher.getTeacher().setDescription(teacher.getTeacher().getDescription().substring(0, 40) + " ...");
+					}
+					if(teacher.getTeacher().getDescription().contains("</br>")) {
+						String[] splitDes = teacher.getTeacher().getDescription().split("</br>");
+						teacher.getTeacher().setDescription(splitDes[0]+ " ...");
+					}
+				}
+			}
+			//get study center
+			listStudyCenter = this.userInfoService.loadAllUserStudyCenter();
+			if(listStudyCenter != null && listStudyCenter.size() > 0) {
+				for (UserModel studyCenter : listStudyCenter) {
+					
+					//split description
+					if(studyCenter.getStudyCenter().getDescription().length() > 40) {
+						studyCenter.getStudyCenter().setDescription(studyCenter.getStudyCenter().getDescription().substring(0, 40)+ " ...");
+					}
+					if(studyCenter.getStudyCenter().getDescription().contains("</br>")) {
+						String[] splitDes = studyCenter.getStudyCenter().getDescription().split("</br>");
+						studyCenter.getStudyCenter().setDescription(splitDes[0]+ " ...");
+					}
+				}
+			}
+			
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("listTeacher", listTeacher);
+		modelAndView.addObject("listStudyCenter", listStudyCenter);
+		modelAndView.setViewName("study-center");
+		return modelAndView;
+	}
 
 	@RequestMapping(value = { "/rating" }, method = RequestMethod.GET)
 	public ModelAndView rating() {
