@@ -97,7 +97,7 @@
 		</aside>
 	</div>
 	
-	<div class="search-form wow pulse animated" data-wow-delay="0.8s"
+	<div class="search-form" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 
 		<ul class="nav nav-tabs">
@@ -108,11 +108,6 @@
 				class="themeBtn3 nav-link" th:text="${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></a></li>
 		</ul>
 	</div>
-	
-	
-
-	
-	
 	
 	<section class="ftco-section bg-light">
 	
@@ -133,7 +128,7 @@
 
 			<div class="panel panel-default">
 
-				<div class="panel-heading accordion-head" style="width: 100%;">
+				<div class="panel-heading accordion-head" style="width: 100%; ">
 					<h4 class="panel-title">
 						<a data-toggle="collapse" data-parent="#accordion2"
 							href="#collapse5"> <span class="glyphicon glyphicon-filter"></span>
@@ -143,11 +138,31 @@
 				</div>
 
 				<div id="collapse5" class="panel-collapse panel-ic collapse">
-					<div class="panel-body admin-panel-content animated flash">
-						<div class="filter-form wow pulse animated" data-wow-delay="0.8s"
-							style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex;">
+					<div class="panel-body admin-panel-content">
+						<div class="filter-form" style=" display: flex; justify-content: center;">
+							<form action="" class=" form-inline">
+								<div class="chosen-select-single mg-b-20">
+									<select class="form-control">
+										<option value="">-Tỉnh-</option>
+										<option value="1">Hà Nội</option>
+										<option value="2">Đà Năng</option>
+										<option value=3>Hồ Chí Minh</option>
+									</select>
+								</div>
+								<div class="chosen-select-single mg-b-20">
+									<select class="form-control">
+										<option value="">-Sắp Xếp theo-</option>
+										<option value="1">Tên</option>
+										<option value="2">Ngày cập nhật</option>
+										<option value=3>Đánh Giá từ Thấp tới Cao</option>
+										<option value=3>Đánh Giá từ Cao tới Thấp</option>
+									</select>
+								</div>
+								<input type="submit" class="btn" value="Lọc" style="height: 100%; width: auto;">
+								
+							</form>
 
-							<div class="drop-sort">
+							<!-- <div class="drop-sort">
 								<button type="button" class="btn dropdown-toggle "
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">Sắp Xếp theo</button>
@@ -158,7 +173,7 @@
 									<a class="dropdown-item" href="#">Đánh Giá từ Thấp tới Cao</a>
 									<a class="dropdown-item" href="#">Đánh Giá từ Cao tới Thấp</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
 
 
@@ -197,19 +212,19 @@
 					</div>
 				</div>
 			</div>
-			
-			
+
+
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a href="#" class="btn btn-circle btn-primary">Fisrt</a>
-				<a href="#" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
-				<a href="#" class="btn btn-circle btn-primary">1</a>
-				<a href="#" class="btn btn-circle btn-primary">2</a>
-				<a href="#" class="btn btn-circle btn-primary">3</a>
-				<a href="#" class="btn btn-circle btn-primary" th:text="'>>'">Next</a>
-				<a href="#" class="btn btn-circle btn-primary">Last</a>
-	</div>
-			
+				<a href="#" class="btn btn-circle btn-primary">Fisrt</a> <a href="#"
+					class="btn btn-circle btn-primary" th:text="'<<'">Previous</a> <a
+					href="#" class="btn btn-circle btn-primary">1</a> <a href="#"
+					class="btn btn-circle btn-primary">2</a> <a href="#"
+					class="btn btn-circle btn-primary">3</a> <a href="#"
+					class="btn btn-circle btn-primary" th:text="'>>'">Next</a> <a
+					href="#" class="btn btn-circle btn-primary">Last</a>
+			</div>
+
 		</div>
 	</section>
 

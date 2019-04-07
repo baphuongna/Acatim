@@ -139,10 +139,30 @@
 
 				<div id="collapse5" class="panel-collapse panel-ic collapse">
 					<div class="panel-body admin-panel-content animated flash">
-						<div class="filter-form wow pulse animated" data-wow-delay="0.8s"
-							style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex;">
+						<div class="filter-form" style=" display: flex; justify-content: center;">
+							<form action="" class=" form-inline">
+								<div class="chosen-select-single mg-b-20">
+									<select class="form-control">
+										<option value="">-Tỉnh-</option>
+										<option value="1">Hà Nội</option>
+										<option value="2">Đà Năng</option>
+										<option value=3>Hồ Chí Minh</option>
+									</select>
+								</div>
+								<div class="chosen-select-single mg-b-20">
+									<select class="form-control">
+										<option value="">-Sắp Xếp theo-</option>
+										<option value="1">Tên</option>
+										<option value="2">Ngày cập nhật</option>
+										<option value=3>Đánh Giá từ Thấp tới Cao</option>
+										<option value=3>Đánh Giá từ Cao tới Thấp</option>
+									</select>
+								</div>
+								<input type="submit" class="btn" value="Lọc" style="height: 100%; width: auto;">
+								
+							</form>
 
-							<div class="drop-sort">
+							<!-- <div class="drop-sort">
 								<button type="button" class="btn dropdown-toggle "
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">Sắp Xếp theo</button>
@@ -153,8 +173,9 @@
 									<a class="dropdown-item" href="#">Đánh Giá từ Thấp tới Cao</a>
 									<a class="dropdown-item" href="#">Đánh Giá từ Cao tới Thấp</a>
 								</div>
-							</div>
+							</div> -->
 						</div>
+
 					</div>
 				</div>
 			</div>

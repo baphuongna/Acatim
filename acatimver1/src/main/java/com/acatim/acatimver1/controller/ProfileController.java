@@ -198,7 +198,13 @@ public class ProfileController {
 
 		// Sau khi user login thanh cong se co principal
 		//String userName = principal.getName();
-		String curentUserName = principal.getName();
+		
+		String curentUserName = null;
+		String curentRoleName =null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+			curentRoleName = userInfoService.getRoleName(curentUserName);
+		}
 		System.out.println("User Name: " + name);
 		boolean checkDetail = true;
 		boolean showDetailMySelf = false;
@@ -206,7 +212,6 @@ public class ProfileController {
 		//User loginedUser = (User) ((Authentication) principal).getPrincipal();
 
 		String roleName = userInfoService.getRoleName(name);
-		String curentRoleName = userInfoService.getRoleName(curentUserName);
 		UserModel useInfo = userInfoService.loadUserByUsername(name);
 		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
 		ModelAndView modelAndView = new ModelAndView();
