@@ -59,6 +59,7 @@ public class ProfileController {
 		float progress3 = 0;
 		float progress2 = 0;
 		float progress1 = 0;
+		
 		int count1 = 0;
 		int count2 = 0;
 		int count3 = 0;
@@ -198,20 +199,20 @@ public class ProfileController {
 
 		// Sau khi user login thanh cong se co principal
 		//String userName = principal.getName();
-		
 		String curentUserName = null;
-		String curentRoleName =null;
 		if (principal != null) {
 			curentUserName = principal.getName();
-			curentRoleName = userInfoService.getRoleName(curentUserName);
 		}
 		System.out.println("User Name: " + name);
 		boolean checkDetail = true;
 		boolean showDetailMySelf = false;
-		
-		//User loginedUser = (User) ((Authentication) principal).getPrincipal();
-
+		String curentRoleName;
 		String roleName = userInfoService.getRoleName(name);
+		if (curentUserName != null) {
+			curentRoleName = userInfoService.getRoleName(curentUserName);
+		} else {
+			curentRoleName = "";
+		}
 		UserModel useInfo = userInfoService.loadUserByUsername(name);
 		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
 		ModelAndView modelAndView = new ModelAndView();
@@ -242,10 +243,12 @@ public class ProfileController {
 			System.out.println("checkDetail "+ checkDetail);
 			System.out.println("roleName "+ roleName);
 			
-			
-			if (name.equals(curentUserName)) {
+			if (curentUserName != null && name.equals(curentUserName)) {
 				showDetailMySelf = true;
+			} else {
+				showDetailMySelf = false;
 			}
+			
 			model.addAttribute("showDetailMySelf", showDetailMySelf);
 			
 			if(roleName.equals("Student")) {
