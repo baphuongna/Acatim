@@ -3,7 +3,6 @@ package com.acatim.acatimver1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.CourseDAO;
@@ -69,11 +68,11 @@ public class CourseServiceImpl implements CourseService{
 		return newCourseId;
 	}
 
-	public List<Course> getAllCoursePaging(Pageable pageable) {
+	public List<Course> getAllCoursePaging(PageableService pageable) {
 		return this.courseDAO.getAllCoursePaging(pageable);
 	}
 
-	public List<Course> searchAllCoursePaging(Pageable pageable, String courseName) {
+	public List<Course> searchAllCoursePaging(PageableService pageable, String courseName) {
 		return this.courseDAO.searchAllCoursePaging(pageable, courseName);
 	}
 
@@ -86,12 +85,12 @@ public class CourseServiceImpl implements CourseService{
 		return this.courseDAO.searchAllCourseBySujectId(subjectId, courseName);
 	}
 
-	public List<Course> getAllCourseBySujectIdPaging(Pageable pageable, String subjectId) {
+	public List<Course> getAllCourseBySujectIdPaging(PageableService pageable, String subjectId) {
 
 		return this.courseDAO.getAllCourseBySujectIdPaging(pageable, subjectId);
 	}
 
-	public List<Course> searchAllCourseBySujectIdPaging(Pageable pageable, String subjectId, String courseName) {
+	public List<Course> searchAllCourseBySujectIdPaging(PageableService pageable, String subjectId, String courseName) {
 
 		return this.courseDAO.searchAllCourseBySujectIdPaging(pageable, subjectId, courseName);
 	}
@@ -106,12 +105,12 @@ public class CourseServiceImpl implements CourseService{
 		return this.courseDAO.searchAllCourseByCateId(cateId, courseName);
 	}
 
-	public List<Course> getAllCourseByCateIdPaging(Pageable pageable, String cateId) {
+	public List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId) {
 
 		return this.courseDAO.getAllCourseByCateIdPaging(pageable, cateId);
 	}
 
-	public List<Course> searchAllCourseByCateIdPaging(Pageable pageable, String cateId, String courseName) {
+	public List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName) {
 
 		return this.courseDAO.searchAllCourseByCateIdPaging(pageable, cateId, courseName);
 	}

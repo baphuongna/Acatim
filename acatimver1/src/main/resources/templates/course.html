@@ -112,9 +112,9 @@
 		
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<form action="" class=" form-inline">
+				<form th:action="@{all-courses}" th:object="${searchValue}" method="POST" class=" form-inline">
 					<div class="form-group">
-						<input type="text" class="form-control"
+						<input type="text" th:field="*{search}" class="form-control"
 							placeholder="Gõ tên khóa học cần tìm vào đây"
 							style="width: 100%;">
 					</div>
@@ -137,37 +137,19 @@
 				<div id="collapse5" class="panel-collapse panel-ic collapse">
 					<div class="panel-body admin-panel-content">
 						<div class="filter-form" style=" display: flex; justify-content: center;">
-							<form action="" class=" form-inline">
-
-								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
-									<div class="input-group" style="margin-right: 10px;  flex-direction: column;">
-										<input type="number" class="form-control" required="required" style="order: 1;"/>
-										<span class="input-group-addon">VND</span> <span
-											class="input-group-addon" style="font-weight: bold; order: 1;">Đến</span>
-										<input type="number" class="form-control" required="required" style="order: 2;"/>
-										<span class="input-group-addon">VND</span>
-									</div>
-								</div>
-
-								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
-									<div class="input-daterange input-group" id="datepicker">
-										<input type="date" class="form-control"/>
-										 <span class="input-group-addon">Đến</span> 
-										 <input type="date" class="form-control" />
-									</div>
-								</div>
-
+							<form th:action="@{all-courses}" th:object="${searchValue}" method="POST" class=" form-inline">
+							
 								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
 									<div class="chosen-select-single mg-b-20">
-										<select class="form-control">
-											<option value="">-Tỉnh-</option>
-											<option value="1">Hà Nội</option>
-											<option value="2">Đà Năng</option>
-											<option value=3>Hồ Chí Minh</option>
+										<select class="form-control" th:field="*{categoryId}">
+											<option value="0">--Tât Cả Các Thể loại--</option>
+												<option th:if="${allCategories != null}" th:each="category : ${allCategories}" th:value="${category.categoryId}">
+												[[${category.categoryName}]]
+												</option>
 										</select>
 									</div>
 								</div>
-
+						
 								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
 									<div class="chosen-select-single mg-b-20">
 										<select class="form-control">
@@ -179,11 +161,7 @@
 										</select>
 									</div>
 								</div>
-		
-								<div class="col-md-4 d-flex ftco-animate">
-									
-								</div>
-								
+
 								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
 									<input type="submit" class="btn" value="Lọc"
 									style="height: 100%; width: auto;">
@@ -198,7 +176,7 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-md-4 d-flex ftco-animate" th:each="course,wind : ${courses}">
+				<div class="col-md-4 d-flex ftco-animate" th:each="course,wind : ${allCourses}">
 					<div class="course align-self-stretch">
 						<a href="#" class="img"
 							style="background-image: url(images/course-1.jpg)"></a>
@@ -220,13 +198,18 @@
 			
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a href="#" class="btn btn-circle btn-primary">Fisrt</a> <a href="#"
-					class="btn btn-circle btn-primary" th:text="'<<'">Previous</a> <a
-					href="#" class="btn btn-circle btn-primary">1</a> <a href="#"
-					class="btn btn-circle btn-primary">2</a> <a href="#"
-					class="btn btn-circle btn-primary">3</a> <a href="#"
-					class="btn btn-circle btn-primary" th:text="'>>'">Next</a> <a
-					href="#" class="btn btn-circle btn-primary">Last</a>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
+				
+				<a th:if="${hasPrevious == true}" th:href="@{/course(page=${previous}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<div th:each="totalPage : ${totalPages}">
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/course(page=${totalPage}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
+				</div>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/course(page=${next}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="'>>'">Next</a>
+				
+				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/course(page=${last}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
 			</div>
 		</div>
 	</section>
@@ -235,7 +218,7 @@
 	
 	
 	<!-- phần popup detail course -->
-	<div th:each="course,wind : ${courses}">
+	<!-- <div th:each="course,wind : ${allCourses}">
 		<form autocomplete="off" th:action="@{/courseDiscountCode}" th:object="${codeInfo}" method="POST">
 			<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
 				aria-labelledby="productGrid">
@@ -298,27 +281,27 @@
 										
 										<input th:if="${#request.userPrincipal != null}" th:value="${#request.userPrincipal.name}" type="text" name="userName" style="display: none;"/>
 										<input th:value="${course.courseId}" type="text" name="courseId" style="display: none;"/>
-										<!-- <input type="text" th:field="*{codeId}"
-															placeholder="Code" /> -->
-										<!-- <button class="like btn btn-danger" type="button">
+										<input type="text" th:field="*{codeId}"
+															placeholder="Code" />
+										<button class="like btn btn-danger" type="button">
 											<span class="fa fa-heart"></span>
-										</button> -->
+										</button>
 									</div>
 								</div>
 							</div>
-							<!-- hết popup course detail -->
+							hết popup course detail
 						</div>
 						<div class="modal-footer">
 							<button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="remove();">Close</button>
 							<input type="submit" value="Gửi" class="btn btn-primary py-3 px-5">
 						</div>
 					</div>
-					<!-- /.modal-content -->
+					/.modal-content
 				</div>
-				<!-- /.modal-dialog -->
+				/.modal-dialog
 			</div>
 		</form>
-	</div>
+	</div> -->
 	<!-- /.modal -->
 
 	<!-- loader -->

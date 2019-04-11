@@ -3,18 +3,22 @@ package com.acatim.acatimver1.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 public class PageableServiceImpl implements PageableService{
 
 	private int limit;
 	private int offset;
 	private int total;
 	private int currentPage;
+	private Sort sort;
 	
-	public PageableServiceImpl(int limit, int offset, int total, int currentPage) {
+	public PageableServiceImpl(int limit, int offset, int total, int currentPage, Sort sort) {
 		this.limit = limit;
 		this.offset = offset;
 		this.total = total;
 		this.currentPage = currentPage;
+		this.sort = sort;
 	}
 
 
@@ -77,6 +81,12 @@ public class PageableServiceImpl implements PageableService{
 			return true;
 		}
 		return false;
+	}
+
+
+	@Override
+	public Sort sort() {
+		return this.sort;
 	}
 	
 }

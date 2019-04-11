@@ -5,8 +5,6 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -81,26 +79,23 @@ public class ManagerCourseController {
 				currentPage = 1;
 			}
 			
-			@SuppressWarnings("deprecation")
-			Pageable pageable = new PageRequest(currentPage - 1, 8);
-
 			int total = subjectService.getAllSubject().size();
 			
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 			
 			
 			
 			
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
 			if(!categoryId.equals("0") && subjectId.equals("0")) {
-				modelAndView.addObject("allCourses", courseService.getAllCourseByCateIdPaging(pageable, categoryId));
+				modelAndView.addObject("allCourses", courseService.getAllCourseByCateIdPaging(pageableService, categoryId));
 				modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(categoryId));
 			}else if(!subjectId.equals("0")) {
-				modelAndView.addObject("allCourses", courseService.getAllCourseBySujectIdPaging(pageable, subjectId));
+				modelAndView.addObject("allCourses", courseService.getAllCourseBySujectIdPaging(pageableService, subjectId));
 				modelAndView.addObject("allSubjects", subjectService.getListSubject());
 			}else{
 				modelAndView.addObject("allSubjects", subjectService.getListSubject());
-				modelAndView.addObject("allCourses", courseService.getAllCoursePaging(pageable));
+				modelAndView.addObject("allCourses", courseService.getAllCoursePaging(pageableService));
 			}
 			
 			
@@ -154,11 +149,6 @@ public class ManagerCourseController {
 				currentPage = 1;
 			}
 			
-			@SuppressWarnings("deprecation")
-			Pageable pageable = new PageRequest(currentPage - 1, 8);
-
-			
-			
 			int total = 0;
 			
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
@@ -167,30 +157,30 @@ public class ManagerCourseController {
 				total = subjectService.getAllSubject().size();
 								
 				if(!search.getCategoryId().equals("0") && search.getSubjectId().equals("0")) {
-					modelAndView.addObject("allCourses", courseService.getAllCourseByCateIdPaging(pageable, search.getCategoryId()));
+					modelAndView.addObject("allCourses", courseService.getAllCourseByCateIdPaging(pageableService, search.getCategoryId()));
 					modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));
 				}else if(!search.getSubjectId().equals("0")) {
-					modelAndView.addObject("allCourses", courseService.getAllCourseBySujectIdPaging(pageable, search.getSubjectId()));
+					modelAndView.addObject("allCourses", courseService.getAllCourseBySujectIdPaging(pageableService, search.getSubjectId()));
 					modelAndView.addObject("allSubjects", subjectService.getListSubject());
 				}else{
 					modelAndView.addObject("allSubjects", subjectService.getListSubject());
-					modelAndView.addObject("allCourses", courseService.getAllCoursePaging(pageable));
+					modelAndView.addObject("allCourses", courseService.getAllCoursePaging(pageableService));
 				}
 				
 			}else {
 				if(!search.getCategoryId().equals("0") && search.getSubjectId().equals("0")) {
-					modelAndView.addObject("allCourses", courseService.searchAllCourseByCateIdPaging(pageable, search.getCategoryId(), search.getSearch()));
+					modelAndView.addObject("allCourses", courseService.searchAllCourseByCateIdPaging(pageableService, search.getCategoryId(), search.getSearch()));
 					modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));
 				}else if(!search.getSubjectId().equals("0")) {
-					modelAndView.addObject("allCourses", courseService.searchAllCourseBySujectIdPaging(pageable, search.getSubjectId(), search.getSearch()));
+					modelAndView.addObject("allCourses", courseService.searchAllCourseBySujectIdPaging(pageableService, search.getSubjectId(), search.getSearch()));
 					modelAndView.addObject("allSubjects", subjectService.getListSubject());
 				}else{
 					modelAndView.addObject("allSubjects", subjectService.getListSubject());
-					modelAndView.addObject("allCourses", courseService.searchAllCoursePaging(pageable, search.getSearch()));
+					modelAndView.addObject("allCourses", courseService.searchAllCoursePaging(pageableService, search.getSearch()));
 				}
 			}
 			
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 
 			
 			modelAndView.addObject("totalPages", pageableService.listPage());

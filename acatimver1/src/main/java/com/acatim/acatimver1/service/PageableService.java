@@ -2,6 +2,8 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 public interface PageableService {
 	
 	int getNumberPager();
@@ -23,4 +25,6 @@ public interface PageableService {
 	boolean hasPrevious();
 	
 	boolean hasNext();
+	
+	Sort sort();
 }

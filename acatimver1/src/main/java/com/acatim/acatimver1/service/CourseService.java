@@ -2,8 +2,6 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
-
 import com.acatim.acatimver1.entity.Course;
 
 public interface CourseService {
@@ -32,23 +30,23 @@ public interface CourseService {
 
 	String genCourseId();
 
-	List<Course> getAllCoursePaging(Pageable pageable);
+	List<Course> getAllCoursePaging(PageableService pageable);
 
-	List<Course> searchAllCoursePaging(Pageable pageable, String courseName);
+	List<Course> searchAllCoursePaging(PageableService pageable, String courseName);
 
 	List<Course> getAllCourseBySujectId(String subjectId);
 
 	List<Course> searchAllCourseBySujectId(String subjectId, String courseName);
 
-	List<Course> getAllCourseBySujectIdPaging(Pageable pageable, String subjectId);
+	List<Course> getAllCourseBySujectIdPaging(PageableService pageable, String subjectId);
 
-	List<Course> searchAllCourseBySujectIdPaging(Pageable pageable, String subjectId, String courseName);
+	List<Course> searchAllCourseBySujectIdPaging(PageableService pageable, String subjectId, String courseName);
 
 	List<Course> getAllCourseByCateId(String cateId);
 
 	List<Course> searchAllCourseByCateId(String cateId, String courseName);
 
-	List<Course> getAllCourseByCateIdPaging(Pageable pageable, String cateId);
+	List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId);
 
-	List<Course> searchAllCourseByCateIdPaging(Pageable pageable, String cateId, String courseName);
+	List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName);
 }

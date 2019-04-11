@@ -70,7 +70,7 @@ public class ManagerUserController {
 
 			int total = userInfoService.getAllUsers(roleId).size();
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
@@ -137,7 +137,7 @@ public class ManagerUserController {
 				}
 			}
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

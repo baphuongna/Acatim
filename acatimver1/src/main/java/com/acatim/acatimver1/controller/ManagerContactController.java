@@ -47,7 +47,7 @@ public class ManagerContactController {
 
 			int total = userInfoService.getAllContact().size();
 			List<Contact> listUser = null;
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 			listUser=userInfoService.getAllContactPageable(pageable);
 			System.out.println("trung   "+listUser.get(0).isActive());	
 
@@ -108,7 +108,7 @@ public class ManagerContactController {
 				}
 			}
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage);
+			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
