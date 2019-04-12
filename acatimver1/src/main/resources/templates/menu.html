@@ -51,14 +51,10 @@
 										class="dropdown-item" href="profile.html"
 										th:href="@{/profile}">Trang cá nhân </a> <a
 										class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
+							<a th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
+							<a th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
 								</div></li>
-							<a href="registration.html" th:href="@{/registration}"
-								th:if="${#request.userPrincipal == null}" role="button"
-								class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
-							<a href="loginPage.html" th:href="@{/loginPage}"
-								th:if="${#request.userPrincipal == null}" role="button"
-								class="btn btn-primary"
-								style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
+							
 						</ul>
 					</div>
 				</form>
