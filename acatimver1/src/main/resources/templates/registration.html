@@ -81,7 +81,7 @@ input[type="date"]:valid::before {
 	<div id="wrap">
 
 		<!-- Header -->
-		<div th:insert="/menu :: menu"></div>
+		<div th:replace="menu :: menu"></div>
 		<!-- End Header -->
 
 		<!-- Content -->
@@ -293,7 +293,7 @@ input[type="date"]:valid::before {
 		</main>
 		<!-- End Content -->
 		<!-- Footer -->
-		<div th:insert="/footer :: footer"></div>
+		<div th:replace="footer :: footer"></div>
 		<!-- End Footer -->
 	</div>
 	<!-- End Page Wrapper -->
