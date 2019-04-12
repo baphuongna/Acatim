@@ -3,9 +3,13 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
 <title>Insert title here</title>
 <meta charset="utf-8">
@@ -51,11 +55,16 @@
 										class="dropdown-item" href="profile.html"
 										th:href="@{/profile}">Trang cá nhân </a> <a
 										class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
-							<a th:href="@{/registration}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a>
-							<a th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}" role="button" class="btn btn-primary" style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
+
 								</div></li>
-							
+
 						</ul>
+						<a th:href="@{/registration}"
+							th:if="${#request.userPrincipal == null}" role="button"
+							class="btn btn-primary" style="margin-top: 8px;">Đăng ký</a> <a
+							th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}"
+							role="button" class="btn btn-primary"
+							style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
 					</div>
 				</form>
 			</div>
