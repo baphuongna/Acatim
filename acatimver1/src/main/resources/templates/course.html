@@ -49,7 +49,7 @@
 	<div th:replace="menu :: menu"></div>
 	<!-- END nav -->
 
-	<div class="hero-wrap hero-wrap-2" style="height: 360px; background-attachment: fixed; display: flex; justify-content: center; padding: 25px;;">
+	<div class="hero-wrap hero-wrap-2" style="height: 360px; background-attachment: fixed; display: flex; justify-content: center; padding: 25px;">
 		<div class="overlay"></div>
 		<aside class="col-md-6">
 			<!-- 2-carousel bootstrap -->
@@ -189,8 +189,8 @@
 								<a href="#" th:text="${course.courseName}"></a>
 							</h3>
 							<p th:text="${course.courseDescription}"></p>
-							<button type="button" class="btn btn-primary" data-toggle="modal"
-							 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm ...</button>
+							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" data-toggle="modal"
+							 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Chi Tiết</button></a>
 						</div>
 					</div>
 				</div>

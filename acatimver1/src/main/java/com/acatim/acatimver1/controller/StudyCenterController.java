@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.entity.UserModel;
+import com.acatim.acatimver1.service.PageableService;
+import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
@@ -21,48 +24,44 @@ public class StudyCenterController {
 	@Autowired
 	private UserInfoService userInfoService;
 	
+	private PageableService pageableService;
+	
 	@RequestMapping(value = { "/study-center" }, method = RequestMethod.GET)
-	public ModelAndView studyCenter() {
+	public ModelAndView studyCenter(@RequestParam(required = false, name = "page") String page) {
+		
+		if (page == null) {
+			page = 1 + "";
+		}
+		
 		ModelAndView modelAndView = new ModelAndView();
-		List<UserModel> listTeacher = null;
+
 		List<UserModel> listStudyCenter = null;
 		
 		try {
-			//get teacher
-			listTeacher = this.userInfoService.loadAllUserTeacher();
-			if(listTeacher != null && listTeacher.size() > 0) {
-				for (UserModel teacher : listTeacher) {
-					
-					//split description
-					if(teacher.getTeacher().getDescription().length() > 40) {
-						teacher.getTeacher().setDescription(teacher.getTeacher().getDescription().substring(0, 40) + " ...");
-					}
-					if(teacher.getTeacher().getDescription().contains("</br>")) {
-						String[] splitDes = teacher.getTeacher().getDescription().split("</br>");
-						teacher.getTeacher().setDescription(splitDes[0]+ " ...");
-					}
-				}
+			int currentPage = Integer.parseInt(page);
+
+			if (currentPage < 1) {
+				currentPage = 1;
 			}
-			//get study center
-			listStudyCenter = this.userInfoService.loadAllUserStudyCenter();
-			if(listStudyCenter != null && listStudyCenter.size() > 0) {
-				for (UserModel studyCenter : listStudyCenter) {
-					
-					//split description
-					if(studyCenter.getStudyCenter().getDescription().length() > 40) {
-						studyCenter.getStudyCenter().setDescription(studyCenter.getStudyCenter().getDescription().substring(0, 40)+ " ...");
-					}
-					if(studyCenter.getStudyCenter().getDescription().contains("</br>")) {
-						String[] splitDes = studyCenter.getStudyCenter().getDescription().split("</br>");
-						studyCenter.getStudyCenter().setDescription(splitDes[0]+ " ...");
-					}
-				}
-			}
+			int total = userInfoService.loadAllUserStudyCenter().size();
+	
+			pageableService = new PageableServiceImpl(9, total, currentPage, null);
+			
+			listStudyCenter = userInfoService.getAllUsersPageable(pageableService, "3");
+			
+			modelAndView.addObject("totalPages", pageableService.listPage());
+			modelAndView.addObject("currentPage", currentPage);
+			modelAndView.addObject("hasPrevious", pageableService.hasPrevious());
+			modelAndView.addObject("hasNext", pageableService.hasNext());
+			modelAndView.addObject("previous", pageableService.previous());
+			modelAndView.addObject("next", pageableService.next());
+			modelAndView.addObject("last", pageableService.last());
+			modelAndView.addObject("first", pageableService.first());
+
 			
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
-		modelAndView.addObject("listTeacher", listTeacher);
 		modelAndView.addObject("listStudyCenter", listStudyCenter);
 		modelAndView.setViewName("study-center");
 		return modelAndView;

@@ -17,6 +17,7 @@ import com.acatim.acatimver1.mapper.ContactExtractor;
 import com.acatim.acatimver1.mapper.ContactMapper;
 import com.acatim.acatimver1.mapper.UserExtractor;
 import com.acatim.acatimver1.mapper.UserMapper;
+import com.acatim.acatimver1.service.PageableService;
 
 @Repository
 @Transactional
@@ -106,7 +107,7 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public List<UserModel> getAllUsersPageable(Pageable pageable, String roleId) {
+	public List<UserModel> getAllUsersPageable(PageableService pageable, String roleId) {
 
 		try {
 

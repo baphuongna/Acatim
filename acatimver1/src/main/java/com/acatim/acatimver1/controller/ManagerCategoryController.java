@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -64,7 +63,7 @@ public class ManagerCategoryController {
 
 			int total = subjectService.getListSubject().size();
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/Menu.css">
-    <link rel="stylesheet" href="css/Teacher.css">
+    <link rel="stylesheet" href="css/study-center.css">
     
     <link rel="stylesheet" href="css/filterbar.css">
     
@@ -101,11 +101,12 @@
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 
 		<ul class="nav nav-tabs">
-			<li class="nav-item"><a th:href="@{/teacher}" target="_blank"
-				class="themeBtn3 nav-link" th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></a>
+			<li class="nav-item"><a th:href="@{/teacher}"
+				class="themeBtn3 nav-link"
+				th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></a>
 			</li>
-			<li class="nav-item"><a target="_blank"
-				class="themeBtn3 nav-link active" th:text="${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></a></li>
+			<li class="nav-item"><a class="themeBtn3 nav-link active"
+				th:text="${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></a></li>
 		</ul>
 	</div>
 	
@@ -195,7 +196,7 @@
         				</div>
         			</div>
         			<div class="text">
-        				<p th:utext="${studyCenter.studyCenter.description}"></p>
+        				<!-- <p th:utext="${studyCenter.studyCenter.description}"></p> -->
         			</div>
         		</div>
         	</div>
@@ -204,14 +205,19 @@
 			
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a href="#" class="btn btn-circle btn-primary">Fisrt</a>
-				<a href="#" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
-				<a href="#" class="btn btn-circle btn-primary">1</a>
-				<a href="#" class="btn btn-circle btn-primary">2</a>
-				<a href="#" class="btn btn-circle btn-primary">3</a>
-				<a href="#" class="btn btn-circle btn-primary" th:text="'>>'">Next</a>
-				<a href="#" class="btn btn-circle btn-primary">Last</a>
-	</div>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${first})}">Trang Đầu</a>
+				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
+				
+				<a th:if="${hasPrevious == true}" th:href="@{/study-center(page=${previous})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<div th:each="totalPage : ${totalPages}">
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${totalPage})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
+				</div>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${next})}" th:text="'>>'">Next</a>
+				
+				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${last})}">Trang Cuối</a>
+				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
+			</div>
 			
 		</div>
 	</section>

@@ -14,12 +14,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
+import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.service.CategoriesService;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.DiscountCodeService;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.SubjectService;
+import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -35,6 +37,9 @@ public class CourseController {
 	
 	@Autowired
 	private CategoriesService categoriesService;
+	
+	@Autowired
+	private UserInfoService userInfoService;
 	
 	@Autowired
 	private DiscountCodeService discountCodeServiceImpl;
@@ -68,7 +73,7 @@ public class CourseController {
 			
 			int total = subjectService.getAllSubject().size();
 			
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 			
 			model.addAttribute("allCategories", categoriesService.getAllCategories());
 			if(!categoryId.equals("0") && subjectId.equals("0")) {
@@ -101,23 +106,39 @@ public class CourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		
-//		model.addAttribute("courses", courseService.getAllCourse());
-//		Course search = new Course();
-//		model.addAttribute("search",search);
-		
+
 		model.addAttribute("discountCode", discountCodeServiceImpl.getAllDiscountCode());
 		return "course";
 	}
 	
 
 	@RequestMapping(value = "/course", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid @ModelAttribute("search") Course khanh, BindingResult bindingResult)
+	public ModelAndView searchCourse(@Valid @ModelAttribute("search") Course khanh, BindingResult bindingResult)
 			throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		courseService.searchCourseByCourseName(khanh.getCourseName());
 		modelAndView.setViewName("course");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/detail-course", method = RequestMethod.GET)
+	public ModelAndView detailCourse(@RequestParam(required = false, name = "courseId") String courseId)
+			throws NotFoundException {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		try {
+			Course course = courseService.getCourseById(courseId);
+			
+			UserModel user = userInfoService.loadUserByUsername(course.getUserName());
+			
+			modelAndView.addObject("course", course);
+			modelAndView.addObject("creater", user);
+			modelAndView.setViewName("detail-course");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return modelAndView;
 	}
 }

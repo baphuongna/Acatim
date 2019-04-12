@@ -42,7 +42,7 @@ public class ManagerStatusController {
 
 			int total = statusService.getAllHistory().size();
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

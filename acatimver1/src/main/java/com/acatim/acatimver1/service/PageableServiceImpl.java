@@ -8,14 +8,12 @@ import org.springframework.data.domain.Sort;
 public class PageableServiceImpl implements PageableService{
 
 	private int limit;
-	private int offset;
 	private int total;
 	private int currentPage;
 	private Sort sort;
 	
-	public PageableServiceImpl(int limit, int offset, int total, int currentPage, Sort sort) {
+	public PageableServiceImpl(int limit, int total, int currentPage, Sort sort) {
 		this.limit = limit;
-		this.offset = offset;
 		this.total = total;
 		this.currentPage = currentPage;
 		this.sort = sort;
@@ -47,7 +45,7 @@ public class PageableServiceImpl implements PageableService{
 
 	
 	public int getOffset() {
-		return offset;
+		return (currentPage*limit)-limit;
 	}
 	
 	public int next() {

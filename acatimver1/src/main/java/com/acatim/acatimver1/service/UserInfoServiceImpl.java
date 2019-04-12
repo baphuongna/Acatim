@@ -195,7 +195,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserModel> getAllUsersPageable(Pageable pageable, String roleId) throws NotFoundException {
+	public List<UserModel> getAllUsersPageable(PageableService pageable, String roleId) throws NotFoundException {
 		return this.UserDAO.getAllUsersPageable(pageable, roleId);
 	}
 

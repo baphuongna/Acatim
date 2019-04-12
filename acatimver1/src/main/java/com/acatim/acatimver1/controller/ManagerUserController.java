@@ -65,12 +65,9 @@ public class ManagerUserController {
 				currentPage = 1;
 			}
 
-			@SuppressWarnings("deprecation")
-			Pageable pageable = new PageRequest(currentPage - 1, 8);
-
 			int total = userInfoService.getAllUsers(roleId).size();
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
@@ -81,7 +78,7 @@ public class ManagerUserController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageable, roleId));
+			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, roleId));
 			SearchValue searchValue = new SearchValue();
 			searchValue.setRoleId(roleId);
 			modelAndView.addObject("searchValue", searchValue);
@@ -112,12 +109,12 @@ public class ManagerUserController {
 			Pageable pageable = new PageRequest(currentPage - 1, 8);
 
 			int total = 0;
-
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 			if (search.getSearch().trim().length() == 0) {
 				total = userInfoService.getAllUsers(search.getRoleId()).size();
-				System.out.println(
-						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
-				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageable, search.getRoleId()));
+//				System.out.println(
+//						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
+				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search.getRoleId()));
 			} else {
 				List<UserModel> listUser = null;
 				if (search.getValue().equals("userName")) {
@@ -137,7 +134,7 @@ public class ManagerUserController {
 				}
 			}
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

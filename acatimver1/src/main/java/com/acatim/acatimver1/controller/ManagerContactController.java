@@ -47,7 +47,7 @@ public class ManagerContactController {
 
 			int total = userInfoService.getAllContact().size();
 			List<Contact> listUser = null;
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 			listUser=userInfoService.getAllContactPageable(pageable);
 			System.out.println("trung   "+listUser.get(0).isActive());	
 
@@ -92,8 +92,8 @@ public class ManagerContactController {
 
 			if (search.getSearch().trim().length() == 0) {
 				total = userInfoService.getAllContact().size();
-				System.out.println(
-						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
+//				System.out.println(
+//						total + " " + userInfoService.getAllUsersPageable(pageableService, search.getRoleId()).size());
 				modelAndView.addObject("allContact", userInfoService.getAllContactPageable(pageable));
 			} else {
 				List<Contact> listUser = null;
@@ -108,7 +108,7 @@ public class ManagerContactController {
 				}
 			}
 
-			pageableService = new PageableServiceImpl(8, currentPage - 1, total, currentPage, null);
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
