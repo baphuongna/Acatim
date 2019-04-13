@@ -143,18 +143,20 @@ public class CourseController {
 			
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
 			Sort sort = null;
-			
-			if(!search.getSortValue().equals("0")) {
-				if(search.getSortValue().equals("1")) {
-					sort = Sort.by("courseName").ascending();
-				}else if(search.getSortValue().equals("2")) {
-					sort = Sort.by("create_date").ascending();
-				}else if(search.getSortValue().equals("3")) {
-					sort = Sort.by("price").ascending();
-				}else if(search.getSortValue().equals("4")) {
-					sort = Sort.by("price").descending();
+			if(search.getSortValue() != null) {
+				if(!search.getSortValue().equals("0")) {
+					if(search.getSortValue().equals("1")) {
+						sort = Sort.by("courseName").ascending();
+					}else if(search.getSortValue().equals("2")) {
+						sort = Sort.by("create_date").ascending();
+					}else if(search.getSortValue().equals("3")) {
+						sort = Sort.by("price").ascending();
+					}else if(search.getSortValue().equals("4")) {
+						sort = Sort.by("price").descending();
+					}
 				}
 			}
+			
 			
 			
 			if (search.getSearch() == null) {
