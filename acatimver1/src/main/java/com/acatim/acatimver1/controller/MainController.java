@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.service.CourseService;
-import com.acatim.acatimver1.service.SubjectService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
@@ -27,9 +26,6 @@ public class MainController {
 
 	@Autowired
 	private CourseService courseService;
-
-	@Autowired
-	private SubjectService subjectService;
 
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index(Principal principal) {
@@ -81,11 +77,9 @@ public class MainController {
 //        return "index";
 //    }
 
-	@RequestMapping("/test")
+	@RequestMapping("/password-recovery")
 	public String showAllCourse(Model model) {
-		model.addAttribute("subjects", subjectService.getAllSubject());
-		model.addAttribute("courses", courseService.getAllCourse());
-		return "TestShowCourse";
+		return "password-recovery";
 	}
 	
 	

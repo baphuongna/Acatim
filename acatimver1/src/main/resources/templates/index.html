@@ -5,7 +5,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<title>Genius - Free Bootstrap 4 Template by Colorlib</title>
+<title th:text="'Acatim'"></title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -83,24 +83,29 @@
 
 					<div class="container" th:if="${#request.userPrincipal == null}">
 						<form th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
-							<h3 class="form-signin-heading" th:text="Welcome"></h3>
+							<h3 class="form-signin-heading" th:text="'Đăng Nhập'"></h3>
 							<br /> <input type="text" id="username" name="username"
 								th:placeholder="Username" class="form-control" /> <br /> <input
 								type="password" th:placeholder="Password" id="password"
 								name="password" class="form-control" /> <br />
 							
 							<div align="center" th:if="${param.error}">
-								<p style="font-size: 20; color: #FF1C19;" th:text="${T(com.acatim.acatimver1.constants.Constants).msg_login_invalid}"></p>
+								<p style="font-size: 15px; color: #FF1C19;" th:text="${T(com.acatim.acatimver1.constants.Constants).msg_login_invalid}"></p>
 							</div>
 							<div style="display: flex; align-items: flex-start; left: 3px; top: -17px; position: relative;">
 							 <input type="checkbox" name="remember-me" style="display: flex; justify-content: flex-start;">
 							  <h6 style="position: relative; left: 7px; top: -6px;" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_remember_me}"></h6>
+							  
 							  </div>
+							  <div style="display: flex; align-items: flex-start; left: 3px; top: -17px; position: relative;">
+							  	<a th:href="@{/registration}" th:text="'Tạo Tài Khoản?'" style="margin-right: 2%;"></a>
+								<a th:href="@{/password-recovery}" th:text="'Quên Mật Khẩu?'"></a>
+								
+							</div>
 							
 							<button class="btn btn-lg btn-primary btn-block" name="Submit"
-								value="Login" type="Submit" th:text="Login"></button>
+								value="Login" type="Submit" th:text="'Đăng Nhập'"></button>
 						</form>
-						<a href="registration.html" th:href="@{/registration}" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_register}"></a>
 					</div>
 
 					<!-- BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB -->
