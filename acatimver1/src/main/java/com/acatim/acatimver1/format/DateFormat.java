@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class DateFormat {
 
@@ -49,6 +50,18 @@ public class DateFormat {
 			return null;
 		}
 		return dateSQL.toString();
+	}
+	
+	public String RandomCode() {
+		Random r = new Random();
+
+	    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	    String code = "";
+	    for (int i = 0; i < 20; i++) {
+	    	code += alphabet.charAt(r.nextInt(alphabet.length()));
+	    }
+	    
+		return code;
 	}
 
 }

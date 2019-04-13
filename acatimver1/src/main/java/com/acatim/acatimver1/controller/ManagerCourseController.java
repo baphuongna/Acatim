@@ -155,7 +155,6 @@ public class ManagerCourseController {
 			
 			if (search.getSearch().trim().length() == 0) {
 				total = subjectService.getAllSubject().size();
-								
 				if(!search.getCategoryId().equals("0") && search.getSubjectId().equals("0")) {
 					modelAndView.addObject("allCourses", courseService.getAllCourseByCateIdPaging(pageableService, search.getCategoryId()));
 					modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));

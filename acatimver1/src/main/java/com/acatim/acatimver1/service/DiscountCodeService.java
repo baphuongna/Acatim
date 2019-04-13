@@ -13,4 +13,6 @@ public interface DiscountCodeService {
 	void removeDiscountCode(String codeId);
 	
 	void updateDiscountCode(DiscountCode discountCode);
+	
+	DiscountCode getDiscountCodeByUserName(String userName, String courseId);
 }

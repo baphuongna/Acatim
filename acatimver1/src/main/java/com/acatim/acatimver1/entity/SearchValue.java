@@ -13,6 +13,8 @@ public class SearchValue {
 	private String subjectId;
 	
 	private String search;
+	
+	private String sortValue;
 
 	public SearchValue() {
 		super();

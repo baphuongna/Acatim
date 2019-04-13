@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,7 +94,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	/* _______________________________________ */
 	
 	public List<Course> getAllCoursePaging(PageableService pageable) {
-		String sql = "SELECT * FROM Course LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
 		Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -101,7 +109,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> searchAllCoursePaging(PageableService pageable, String courseName) {
-		String sql = "SELECT * FROM where courseName LIKE ? Course LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course where courseName LIKE ?";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
 		Object[] params = new Object[] {"%"+courseName+"%",  pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -125,7 +140,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> getAllCourseBySujectIdPaging(PageableService pageable, String subjectId) {
-		String sql = "SELECT * FROM Course where subject_id = ?  LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course where subject_id = ?";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
 		Object[] params = new Object[] { subjectId , pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -133,7 +155,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> searchAllCourseBySujectIdPaging(PageableService pageable, String subjectId, String courseName) {
-		String sql = "SELECT * FROM Course where subject_id = ? and courseName LIKE ? LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course where subject_id = ? and courseName LIKE ?";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
 		Object[] params = new Object[] { subjectId, "%"+courseName+"%" , pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -157,7 +186,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId) {
-		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ?  LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course where Subject.category_id = ?";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
 		Object[] params = new Object[] { cateId , pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -165,7 +201,15 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName) {
-		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ? and Course.courseName LIKE ? LIMIT ?, ?;";
+		String sql = "SELECT * FROM Course where Subject.category_id = ? and Course.courseName LIKE ?";
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
+		
 		Object[] params = new Object[] { cateId, "%"+courseName+"%" , pageable.getOffset(), pageable.getPageSize()};
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);

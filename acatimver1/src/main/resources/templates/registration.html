@@ -157,10 +157,9 @@ input[type="date"]:valid::before {
 															style="text-align: center;">Bạn là</h6></label>
 													<div class="col-sm-9">
 														<select th:field="*{role_id}"
-															class="form-control form-control-sm" name="role_id"
-															onchange="myStudent()" id="inputRoll">
-															<option value="2">Giáo Viên</option>
+															class="form-control form-control-sm" name="role_id" onchange="myStudent()" id="inputRoll">
 															<option value="1">Học Sinh</option>
+															<option value="2">Giáo Viên</option>
 															<option value="3">Trung Tâm</option>
 														</select>
 													</div>
@@ -231,7 +230,7 @@ input[type="date"]:valid::before {
 														</div>
 													</div>
 												</div>
-												<div class="form-group row" id="	1">
+												<div class="form-group row" id="dob1">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="date" 
 															placeholder="Ngày sinh của bạn &emsp;&emsp;" name="dob" 

@@ -106,6 +106,9 @@
     <!-- style CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/admin/style.css">
+    <!-- discountCode CSS
+		============================================ -->
+    <link rel="stylesheet" href="css/discountCode.css">
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/admin/css/responsive.css">
@@ -148,12 +151,37 @@
                                                 <span><a href="#"><i class="fa fa-comments-o" ></i> <b style="color: black;">Người Tạo:</b> [[${creater.fullName}]]</a></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span th:text="${course.startDate}"></span><b> đến </b><span th:text="${course.endDate}"></span></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span th:text="${course.startTime}"></span><b> đến </b><span th:text="${course.endTime}"></span></span>
-                                                
                                             </div>
                                             <h1><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
                                             <p th:text="${course.courseDescription}"></p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="lead-head">
+                                        <h3 th:text="'Nếu bạn thích khóa học này thì bạn có thể nhận mã giảm khi học khóa học này'"></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="coment-area col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+
+                                    <div class="action">
+
+										<a th:if="${discountCode == null }" class="add-to-cart btn btn-success buttonGetCode" th:href="@{/courseDiscountCode(courseId=${course.courseId})}">Lấy mã giảm giá</a>
+										
+										<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}" th:text="'Vui lòng đăng nhập để có thể dùng chức năng này'"></p>
+										
+										<input name="codeId" class="codeDiscount" style="text-align: center;"/>
+										
+										<div th:if="${discountCode != null and loging != null}" style="text-align: center;" >
+											<p style="color: green; line-height: 34px;" th:text="'Bạn đã nhận mã của khóa học này'"></p>
+											<input class="showCodeDiscount" th:value="${discountCode.codeId}"/>
+										</div>
+									</div>
+
                                 </div>
                             </div>
                             <div class="row">
@@ -187,6 +215,7 @@
 	</div>
 	<!-- End Page Wrapper -->
 
+	<script src="js/discountCode.js"></script>
 	<!-- jquery
 		============================================ -->
     <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>

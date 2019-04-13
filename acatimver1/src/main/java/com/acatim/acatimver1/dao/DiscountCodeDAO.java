@@ -26,6 +26,19 @@ public class DiscountCodeDAO extends JdbcDaoSupport {
 		List<DiscountCode> discountCode = this.getJdbcTemplate().query(sql, new DiscountCodeMapper());
 		return discountCode;
 	}
+	
+	public DiscountCode getDiscountCodeByUserName(String userName, String courseId) {
+		String sql = "SELECT * FROM DiscountCode Where user_name = ? and course_id = ?";
+		Object[] params = new Object[] {userName, courseId};
+		DiscountCode discountCode = null;
+		try {
+			discountCode = this.getJdbcTemplate().queryForObject(sql, params, new DiscountCodeMapper());
+			return discountCode;
+		}catch (Exception e) {
+			return null;
+		}
+		
+	}
 
 	public void addDiscountCode(DiscountCode discountCode) {
 		String sql = "INSERT INTO DiscountCode\r\n"

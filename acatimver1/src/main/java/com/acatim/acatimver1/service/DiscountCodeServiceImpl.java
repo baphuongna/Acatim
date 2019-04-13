@@ -30,4 +30,9 @@ public class DiscountCodeServiceImpl implements DiscountCodeService{
 	public void updateDiscountCode(DiscountCode discountCode) {
 		this.discountCodeDAO.updateDiscountCode(discountCode);
 	}
+
+	@Override
+	public DiscountCode getDiscountCodeByUserName(String userName, String courseId) {
+		return this.discountCodeDAO.getDiscountCodeByUserName(userName, courseId);
+	}
 }
