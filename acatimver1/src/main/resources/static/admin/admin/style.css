@@ -3859,6 +3859,18 @@ div#sparklinehome canvas {
 .progress-red {
     background-color: #D80027;
 }
+.progress-pink {
+    background-color: #bd550b;
+}
+.progress-orange {
+    background-color: #0df5d5;
+}
+.progress-phong {
+    background-color: #848681;
+}
+.progress-khanh {
+    background-color: #e88888;
+}
 .blog-sig-details-dt.courses-info span {
     margin: 10px 50px 0;
     display: inline-block;
