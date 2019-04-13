@@ -186,7 +186,7 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId) {
-		String sql = "SELECT * FROM Course where Subject.category_id = ?";
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ?";
 		if(pageable.sort() != null) {
 			for (Order o : pageable.sort()) {
 				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
@@ -201,7 +201,7 @@ public class CourseDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName) {
-		String sql = "SELECT * FROM Course where Subject.category_id = ? and Course.courseName LIKE ?";
+		String sql = "SELECT * FROM Course INNER JOIN Subject ON Course.subject_id = Subject.subject_id where Subject.category_id = ? and Course.courseName LIKE ?";
 		if(pageable.sort() != null) {
 			for (Order o : pageable.sort()) {
 				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
