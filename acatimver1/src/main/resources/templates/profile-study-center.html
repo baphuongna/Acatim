@@ -44,6 +44,18 @@
 
 <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="css/rating.css">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script type="text/javascript" src="magicRating.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	
 
 
 <!-- FontsOnline -->
@@ -289,7 +301,7 @@
 														                <div class="row">
 														                    <div class="col-xs-12 col-md-6 text-center">
 														                        <h1 th:text="${rateAverage}" class="rating-num"></h1>
-														                        <div class="rating">
+														                        <div class="ratingInfor">
 														                            <span class="glyphicon glyphicon-star"></span>
 														                            <span class="glyphicon glyphicon-star"></span>
 														                            <span class="glyphicon glyphicon-star"></span>
@@ -380,6 +392,168 @@
 														    </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="row mg-b-15">
+                                                	<div class="col-lg-12">
+                                                		<div class="row">
+                                                			<div class="col-lg-12">
+                                                				<div class="skill-title">
+                                                					<h2>Đánh giá của bạn về Trung tâm</h2>
+                                                					<hr>
+                                                				</div>
+                                                			</div>
+                                                		</div>
+                                                		<div class="row">
+                                                			<div class="col-lg-12">
+                                                				<div class="container" style="width: 100%;">
+															        <!-- Modal -->
+															        <div style="top:60px;">
+															                <div id="page3" >
+															                    <div class="mobile_progress_bar">
+															                        <div class="text-left visible-xs" style="margin-bottom:40px;">
+															                            <div class="progress">
+															                                <div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-info" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+															                            </div>
+															                            <strong>Tổng số đánh giá của bạn</strong>
+															                        </div>
+															                    </div>
+															                    <div class="modal-body row">
+															                        <div class="col-md-12">
+															                            <div class="col-md-6">
+															                                <div class="col-md-11">
+															                                    <h5>
+															                                        Bạn cảm thấy thế nào về chất lược dạy học của Trung tâm?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Teaching quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+																							</div>
+															                            </div>
+																						
+															                            <div class="col-md-6">
+															                                <div class="col-md-11 hidden-xs">
+															                                    <h5>
+															                                        Vị trí của Trung tâm có thuận tiện với bạn không?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Location" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+															                        </div>
+																					  <div class="col-md-12">
+															                            <div class="col-md-6">
+															                                <div class="col-md-11">
+															                                    <h5>
+															                                        Bạn có hài lòng về chất lượng Internet ở Trung tâm không?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Internet" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+																						
+															                            <div class="col-md-6">
+															                                <div class="col-md-11 hidden-xs">
+															                                    <h5>
+															                                        Việc học ở Trung tâm có thoải mái với bạn không?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="safety" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+															                        </div>
+																					  <div class="col-md-12">
+															                            <div class="col-md-6">
+															                                <div class="col-md-11">
+															                                    <h5>
+															                                        Bạn có cảm thấy hạnh phúc khi học ở Trung tâm?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Happiness" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+																						
+															                            <div class="col-md-6">
+															                                <div class="col-md-11 hidden-xs">
+															                                    <h5>
+															                                        Uy tín của Trung tâm có làm bạn tin tưởng không?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="Reputation" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+															
+															                        </div>
+																					
+																					  <div class="col-md-12">
+															                            <div class="col-md-6">
+															                                <div class="col-md-11">
+															                                    <h5>
+															                                        Thái độ phục vụ của các nhân viên trong trung tâm có làm bạn hài lòng?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Staff attitude" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+																						
+															                            <div class="col-md-6">
+															                                <div class="col-md-11 hidden-xs">
+															                                    <h5>
+															                                        Chất lượng cơ sở vật chất của Trung tâm thì sao nhỉ?
+															                                    </h5>
+															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="equipment quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                </div>
+															                            </div>
+															                        </div>
+															                        <div class="col-md-12">
+															                            <div class="col-xs-12 col-lg-12 col-sm-12 col-md-12">
+															                                <div class="form-group">
+															                                        <div class="mat-input">
+															                                            <div class="mat-input-outer" style="margin-bottom:35px;">
+															                                                <label style="font-size: 15px; line-height: 20px;">
+															                                                	Bạn có bất kỳ ý kiến hoặc đề xuất nào bạn muốn chia sẻ với Trung tâm này không?
+															                                                </label>
+															                                                <input style="height:90px; width: 100%;" type="text" autocomplete="off" />
+															                                            </div>
+															                                        </div>
+															                                </div>
+															                            </div>
+																					</div>
+															                    </div>
+															                    <div class="col-md-12">
+															                        <div class="row">
+															                            <div class="col-lg-6 col-sm-6 col-md-6 text-left hidden-xs">
+															                                <strong>Tổng đánh giá của bạn: </strong>
+															                                <label id="demo" style="color:red">1</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
+															                            </div>
+															                            <div class="col-lg-6 col-sm-6 col-md-6 hidden-xs">
+																                             <div class="col-md-4 hidden-xs">
+																                                   <button type="button" id="ok2" class="btn btn-default ok" data-dismiss="">Gửi  <span class="glyphicon glyphicon-ok"></span></button>
+																                             </div>
+															                            </div>
+															                        </div>
+															
+															
+															                    </div>
+															                </div>
+															                <!-- END Modal content page3-->
+															                <!-- Modal content page 4-->
+															                <div id="page4" style="display:none;" class="modal-content">
+															                    <div class="modal-body ">
+															                        <div class="col-lg-12">
+															                        </div>
+															                        <div class="thank_you_body">
+															                            <div class="heading_msg2">
+															                                <h3>
+															                                    <span>Cảm ơn sự đóng góp của bạn!</span>
+															                                </h3>
+																							<p style="font-size: 16px;">Ý kiến của bạn đã được gửi đến chúng tôi. Chúng tôi sẽ cố gắng nâng cấp để sản phẩm ngày càng tốt hơn!</p>	
+															                            </div>
+															                            <!-- <div class="row text-center give_feedback">
+															                                <a style="margin-left: 15px;" href="index.html" th:href="@{/}"><button type="submit" class="btn btn-default ">Close</button></a>
+															                            </div> -->
+															                        </div>
+															                    </div>
+															
+															                </div>
+															                <!--End Modal content page 4-->
+															        </div>
+															
+															    </div>
+                                                			</div>
+                                                		</div>
+                                                	</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -750,5 +924,237 @@
     <!-- tawk chat JS
 		============================================ -->
     <script src="admin/admin/js/tawk-chat.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	$("#myModal").modal('show');
+                $("#page3").show();
+                $("#page4").hide();
+                $("#main_popup").hide();
+        });
+        $("#ok2,#arr2").click(function() {
+            $("#page3").hide();
+            $("#page4").show();
+            $("#main_popup").hide();
+        });
+    </script>
+    <script>
+        new WOW().init();
+    </script>
+    <script>
+        $(function() {
+            $('.mat-input-outer label').click(function() {
+                $(this).prev('input').focus();
+            });
+            $('.mat-input-outer input').focusin(function() {
+                $(this).next('label').addClass('active');
+            });
+            $('.mat-input-outer input').focusout(function() {
+                if (!$(this).val()) {
+                    $(this).next('label').removeClass('active');
+                } else {
+                    $(this).next('label').addClass('active');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.rating').magicRatingInit({
+                success: function(magicRatingWidget, rating) {
+                    alert(rating);
+                },
+                iconGood: "fa-bicycle",
+                iconBad: "fa-car",
+            });
+            $(".rating2").magicRatingInit({
+                success: function(magicRatingWidget, rating) {
+                    alert(rating);
+                }
+            })
+        });
+    </script>
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+        
+    </script>
+
+<script type="text/javascript">
+// Init function
+
+            var nameOfIcon;		
+			function myFunction(name) {
+			 nameOfIcon=name.getAttribute("name");
+             }	 
+	
+$.fn.magicRatingInit = function(config) {
+
+    // Init each widget return by the selector
+    for (widget of $(this)) {
+        var magicRatingWidget = $(widget);
+        //// Get datas ////
+        // Icon +
+        if (magicRatingWidget.data("iconGood") == null) {
+            magicRatingWidget.data("iconGood", config.iconGood != null ? config.iconGood : "fa-star");
+        };
+
+        // Icon -
+        if (magicRatingWidget.data("iconBad") == null) {
+            magicRatingWidget.data("iconBad", config.iconBad != null ? config.iconBad : "fa-star-o");
+        };
+
+        // Max mark
+        if (magicRatingWidget.data("maxMark") == null) {
+            magicRatingWidget.data("maxMark", config.maxMark != null ? config.maxMark : 5);
+        };
+        /*
+        console.log(magicRatingWidget.data("iconGood"));
+        console.log(magicRatingWidget.data("iconBad"));
+        */
+
+        // Clear the widget
+        magicRatingWidget.html("");
+
+        // Init icons
+        for (i = 1; i <= magicRatingWidget.data("maxMark"); i++) {
+            if (i <= magicRatingWidget.data("currentRating")) {
+                magicRatingWidget.append('<i class=" ' + magicRatingWidget.data("iconGood") + ' magic-rating-icon" aria-hidden="true" data-default=true data-rating=' + i + '></i>');
+            } else {
+                magicRatingWidget.append('<i class=" ' + magicRatingWidget.data("iconBad") + ' magic-rating-icon" aria-hidden="true" data-default=false data-rating=' + i + '></i>');
+            }
+        }
+
+        // Init reset handler
+        magicRatingWidget.on("mouseleave", function() {
+            var widget = $(this);
+            
+           // console.log("mouseleave");
+           // console.log(widget.data("iconGood"));
+           // console.log(widget.data("iconBad"));
+            
+            widget.children().each(function() {
+                var icon = $(this);
+                if (icon.data("default") && !icon.hasClass("fa-star")) {
+                    icon.removeClass(widget.data("iconBad"));
+                    icon.addClass(widget.data("iconGood"));
+                } else if (!icon.data("default") && !icon.hasClass("fa-star-o")) {
+                    icon.removeClass(widget.data("iconGood"));
+                    icon.addClass(widget.data("iconBad"));
+                }
+            });
+        });
+				
+				var sumFeedback=0;
+				var hash = {};
+				hash['Teaching quality'] = 1; 
+				hash['Location'] = 1;
+				hash['Internet'] = 1;
+				hash['safety'] = 1;
+				hash['Happiness'] = 1;
+				hash['Reputation'] = 1;
+				hash['Staff attitude'] = 1;
+				hash['equipment quality'] = 1;
+        // Init click handler
+        magicRatingWidget.on("click", ".magic-rating-icon", function() {
+            // Get rating
+            var icon = $(this);
+            var widget = icon.parent();
+			var rating1=icon.data("rating");
+            var rating = parseInt(rating1);
+			var nameIcon = widget.data("iconGood");
+			         if("Teaching quality" === nameOfIcon){
+					 hash['Teaching quality'] = rating;
+					 }
+					 if("Location" === nameOfIcon){
+					 hash['Location'] = rating;
+					 }
+					 if("Internet" === nameOfIcon){
+					 hash['Internet'] = rating;
+					 }
+					 if("safety" === nameOfIcon){
+					 hash['safety'] = rating;
+					 }
+					 if("Happiness" === nameOfIcon){
+					 hash['Happiness'] = rating;
+					 }
+					 if("Reputation" === nameOfIcon){
+					 hash['Reputation'] = rating;
+					 }
+					 if("Staff attitude" === nameOfIcon){
+					 hash['Staff attitude'] = rating;
+					 }
+					 if("equipment quality" === nameOfIcon){
+					 hash['equipment quality'] = rating;
+					 }
+				console.log(hash)
+				sumFeedback= hash['Teaching quality']+ hash['Location']+hash['Internet']+hash['safety']+hash['Happiness']+hash['Reputation']+hash['Staff attitude']+hash['equipment quality'];
+					
+			 document.getElementById("demo").innerHTML = parseFloat(sumFeedback / 8).toFixed(2);
+
+
+           
+            
+            // Update rating
+            widget.children().each(function() {
+                if ($(this).data("rating") <= rating) {
+                    if (!$(this).hasClass(widget.data("iconGood"))) {
+                        $(this).removeClass(widget.data("iconBad"));
+                        $(this).addClass(widget.data("iconGood"));
+                    };
+                    $(this).data("default", true);
+                } else {
+                    if (!$(this).hasClass(widget.data("iconBad"))) {
+                        $(this).removeClass(widget.data("iconGood"));
+                        $(this).addClass(widget.data("iconBad"));
+                    }
+                    $(this).data("default", false);
+                }
+            });
+
+            //var callbackSuccess = config.success.bind(null, widget, rating);//get data-current-rating
+            //callbackSuccess();
+        });
+
+        // Init hover icons
+        magicRatingWidget.on("mouseenter", ".magic-rating-icon", function() {
+            var icon = $(this);
+            var rating = icon.data("rating");
+            var widget = icon.parent();
+            /*
+            console.log("mouseenter");
+            console.log(widget.data("iconGood"));
+            console.log(widget.data("iconBad"));
+            */
+            widget.children().each(function() {
+                if ($(this).data("rating") <= rating) {
+                    if (!$(this).hasClass(widget.data("iconGood"))) {
+                        $(this).removeClass(widget.data("iconBad"));
+                        $(this).addClass(widget.data("iconGood"));
+                    };
+                } else {
+                    if (!$(this).hasClass(widget.data("iconBad"))) {
+                        $(this).removeClass(widget.data("iconGood"));
+                        $(this).addClass(widget.data("iconBad"));
+                    }
+                }
+            });
+        });
+    }
+};
+
+// Update for hover icons
+</script>
 </body>
 </html>

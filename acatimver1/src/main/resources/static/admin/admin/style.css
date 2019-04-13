@@ -897,32 +897,32 @@ ul.breadcome-menu li a:hover{
     text-align:left;
 	float:left;
 }
-.rating {
+.ratingInfor {
   border: none;
 }
-.rating > input {
+.ratingInfor > input {
   display: none;
 }
-.rating > label:before {
+.ratingInfor > label:before {
   margin: 5px;
   font-size: 16px;
   font-family: FontAwesome;
   display: inline-block;
   content: "\f005";
 }
-.rating > .half:before {
+.ratingInfor > .half:before {
   content: "\f089";
   position: absolute;
 }
-.rating > label {
+.ratingInfor > label {
   color: #ddd;
   float: right;
 }
-.rating > input:checked ~ label, .rating:not(:checked) > label:hover, .rating:not(:checked) > label:hover ~ label {
+.ratingInfor > input:checked ~ label, .ratingInfor:not(:checked) > label:hover, .ratingInfor:not(:checked) > label:hover ~ label {
   color: #e12503;
 } 
-.rating > input:checked + label:hover, .rating > input:checked ~ label:hover,
-.rating > label:hover ~ input:checked ~ label, .rating > input:checked ~ label:hover ~ label {
+.ratingInfor > input:checked + label:hover, .ratingInfor > input:checked ~ label:hover,
+.ratingInfor > label:hover ~ input:checked ~ label, .ratingInfor > input:checked ~ label:hover ~ label {
   color: #e12503;
 }
 .text-muted p{
@@ -4715,7 +4715,7 @@ div#sparklinehome canvas {
 }
 .checked {color: orange;}
 .glyphicon { margin-right:2px;}
-.rating .glyphicon {font-size: 22px;}
+.ratingInfor .glyphicon {font-size: 22px;}
 .rating-num { margin-top:0px;font-size: 54px; }
 .progressNew { margin-bottom: 5px;}
 .progressNew-bar { text-align: left; }
