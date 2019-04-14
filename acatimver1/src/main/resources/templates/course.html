@@ -105,7 +105,7 @@
 	</div> -->
 
 	<header>
-  <div style="width: 82%; margin: auto; padding: 17px; background-color: #fff;" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div style="width: 82%; margin: auto; padding: 17px; background-color: #fff;" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -172,11 +172,11 @@
 				</div>
 
 				<div id="collapse5" class="panel-collapse panel-ic collapse">
-					<div class="panel-body admin-panel-content">
-						<div class="filter-form" style=" display: flex; justify-content: center;">
-							<form th:action="@{course}" th:object="${searchValue}" method="POST" class=" form-inline">
+					<div style="padding: 0px;" class="panel-body admin-panel-content">
+						<div class="filter-form" style="justify-content: center;">
+							<form style="width: 50%; margin: auto;" th:action="@{course}" th:object="${searchValue}" method="POST" class=" form-inline">
 							
-								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
+								<div class="d-flex ftco-animate" style="justify-content: center;">
 									<div class="chosen-select-single mg-b-20">
 										<select class="form-control" th:field="*{categoryId}">
 											<option value="0">--Tât Cả Các Thể loại--</option>
@@ -186,7 +186,7 @@
 										</select>
 									</div>
 								</div>
-								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
+								<div class="d-flex ftco-animate" style="justify-content: center;">
 									<div class="chosen-select-single mg-b-20">
 										<select class="form-control" th:field="*{sortValue}">
 											<option value="0">-Sắp Xếp theo-</option>
@@ -198,7 +198,7 @@
 									</div>
 								</div>
 
-								<div class="col-md-4 d-flex ftco-animate" style="justify-content: center;">
+								<div class="d-flex ftco-animate" style="justify-content: center;">
 									<input type="submit" class="btn" value="Lọc"
 									style="height: 100%; width: auto;">
 								</div>
