@@ -77,7 +77,7 @@
 					<!-- module login -->
 
 					<div class="container" th:if="${#request.userPrincipal == null}">
-						<form th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
+						<form  th:action="@{/j_spring_security_check}" method="POST" style="margin: auto;" class="form-signin">
 							<h3 class="form-signin-heading" th:text="'Đăng Nhập'"></h3>
 							<br /> <input type="text" id="username" name="username"
 								th:placeholder="Username" class="form-control" /> <br /> <input

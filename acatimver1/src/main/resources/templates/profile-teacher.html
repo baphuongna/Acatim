@@ -424,40 +424,40 @@
                                                             <h2 style="text-transform: none; float: left;">Mức độ khó môn học</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.examDifficulty} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.examDifficulty * 20}">
-                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-red"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Giáo án</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.textbookUse} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.textbookUse * 20}">
-                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-green"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Thái độ giảng dạy</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.helpfulLevel} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.helpfulLevel * 20}">
-                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-blue"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Cách thức giảng dạy</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.clarityLevel} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.clarityLevel * 20}">
-                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-khanh"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Kiến thức giáo viên</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.knowledgeable} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.knowledgeable * 20}">
-                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-phong"></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mg-b-15" th:if="${showDetailMySelf == true}">
+                                                <div class="row mg-b-15">
                                                 	<div class="col-lg-12">
                                                 		<div class="row">
                                                 			<div class="col-lg-12">
