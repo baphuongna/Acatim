@@ -16,6 +16,7 @@ import com.acatim.acatimver1.form.TeacherForm;
 import com.acatim.acatimver1.mapper.TeacherExtractor;
 import com.acatim.acatimver1.mapper.TeacherFormMapper;
 import com.acatim.acatimver1.mapper.TeacherMapper;
+
 @Repository
 @Transactional
 public class TeacherDAO extends JdbcDaoSupport {
@@ -38,7 +39,7 @@ public class TeacherDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public List<UserModel> getAllUserTeacher() {
 		String sql = "SELECT * FROM User INNER JOIN Teacher ON User.user_name = Teacher.user_name;";
 		try {
@@ -48,21 +49,21 @@ public class TeacherDAO extends JdbcDaoSupport {
 			return null;
 		}
 	}
-	
+
 	public TeacherForm getUserTeacherByUserName(String userName) {
 		String sql = "SELECT * FROM User INNER JOIN Teacher ON User.user_name = Teacher.user_name Where User.user_name = ?;";
 		Object[] params = new Object[] { userName };
-		
+
 		TeacherFormMapper mapper = new TeacherFormMapper();
 		try {
-			
+
 			TeacherForm teacher = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 			return teacher;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
-	
+
 	public List<Teacher> getAllTeacher() {
 		String sql = TeacherMapper.BASE_SQL;
 
@@ -74,16 +75,21 @@ public class TeacherDAO extends JdbcDaoSupport {
 			return null;
 		}
 	}
-	
+
 	public void updateTeacherInfo(Teacher teacher) {
 		String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ?, rate = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(), teacher.getRate(),
-				teacher.getUserName());
+		this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(),
+				teacher.getRate(), teacher.getUserName());
 	}
-	
+
+	public void updateTotalRateTeacher(Teacher teacher) {
+		String sql = "UPDATE Teacher SET rate = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, teacher.getRate(), teacher.getUserName());
+	}
+
 	public void addTeacherInfo(Teacher teacher) {
-		String sql = "INSERT INTO Teacher (user_name, DOB, gender, description, rate)\r\n" + 
-				"VALUES (?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, teacher.getUserName(), teacher.getDob(), teacher.isGender(), teacher.getDescription(), teacher.getRate());
+		String sql = "INSERT INTO Teacher (user_name, DOB, gender, description, rate)\r\n" + "VALUES (?, ?, ?, ?, ?);";
+		this.getJdbcTemplate().update(sql, teacher.getUserName(), teacher.getDob(), teacher.isGender(),
+				teacher.getDescription(), teacher.getRate());
 	}
 }

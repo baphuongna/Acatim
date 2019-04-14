@@ -3,11 +3,14 @@ package com.acatim.acatimver1.controller;
 import java.security.Principal;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +27,7 @@ import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
+import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.RatingService;
 import com.acatim.acatimver1.service.UserInfoService;
@@ -43,6 +47,8 @@ public class ProfileController {
 
 	@Autowired
 	private RatingService ratingService;
+	
+	private DateFormat dateformat = new DateFormat();
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
@@ -375,7 +381,7 @@ public class ProfileController {
 			Rating rating = new Rating();
 			rating.setRateTeacher(new RateTeacher());
 			model.addAttribute("rateTeacher", rating);
-			
+			rating.setRecieverName(name);
 			modelAndView.setViewName("profile-teacher");
 		}
 		return modelAndView;
@@ -446,6 +452,7 @@ public class ProfileController {
 			model.addAttribute("caculater", caculater);
 			
 			Rating rating = new Rating();
+			rating.setRecieverName(name);
 			rating.setRateStudyCenter(new RateStudyCenter());
 			model.addAttribute("rateStudyCenter", rating);
 			
@@ -455,7 +462,7 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/rateTeacher", method = RequestMethod.POST)
-	public ModelAndView rateTeacher(@ModelAttribute("rateTeacher") Rating rating, @RequestParam("userName") String name, Model model, Principal principal)
+	public ModelAndView rateTeacher(@Valid @ModelAttribute("rateTeacher") Rating rating, Model model, Principal principal, RedirectAttributes redirectAttributes, BindingResult bindingResult)
 			throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
@@ -464,49 +471,68 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + name);
-//		boolean checkDetail = true;
-//		boolean showDetailMySelf = false;
-//		String curentRoleName;
-//		String roleName = userInfoService.getRoleName(name);
-//		if (curentUserName != null) {
-//			curentRoleName = userInfoService.getRoleName(curentUserName);
-//		} else {
-//			curentRoleName = "";
-//		}
-//		UserModel useInfo = userInfoService.loadUserByUsername(name);
-//		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
+		System.out.println("User Name: " + rating.getRecieverName());
+
 		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		try {
+			rating.setUserName(curentUserName);
+			rating.setCreateDate(dateformat.currentDate());
+			rating.setRateId(ratingService.genRatingId());
+			
+			ratingService.addRating(rating);
+			
+			rating.getRateTeacher().setCheckTeaNull("not null");
+			rating.getRateTeacher().setRateId(rating.getRateId());
+			
+			ratingService.addRateTeacher(rating.getRateTeacher());
+			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		
 		System.out.println(rating);
-		modelAndView.setViewName("redirect:/DetailTeacher");
+		redirectAttributes.addAttribute("userName", rating.getRecieverName());
+		modelAndView.setViewName("DetailTeacher");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/rateStudyCenter", method = RequestMethod.POST)
-	public ModelAndView rateStudyCenter(@ModelAttribute("rateStudyCenter") Rating rating, @RequestParam("userName") String name, Model model, Principal principal)
+	public ModelAndView rateStudyCenter(@Valid @ModelAttribute("rateStudyCenter") Rating rating, Model model, Principal principal, RedirectAttributes redirectAttributes, BindingResult bindingResult)
 			throws NotFoundException {
 
-		// Sau khi user login thanh cong se co principal
-		// String userName = principal.getName();
 		String curentUserName = null;
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + name);
-//		boolean checkDetail = true;
-//		boolean showDetailMySelf = false;
-//		String curentRoleName;
-//		String roleName = userInfoService.getRoleName(name);
-//		if (curentUserName != null) {
-//			curentRoleName = userInfoService.getRoleName(curentUserName);
-//		} else {
-//			curentRoleName = "";
-//		}
-//		UserModel useInfo = userInfoService.loadUserByUsername(name);
-//		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
+		System.out.println("User Name: " + rating.getRecieverName());
+		
 		ModelAndView modelAndView = new ModelAndView();
+		
+		try {
+			rating.setUserName(curentUserName);
+			rating.setCreateDate(dateformat.currentDate());
+			rating.setRateId(ratingService.genRatingId());
+			
+			ratingService.addRating(rating);
+			
+			rating.getRateStudyCenter().setCheckSCNull("not null");
+			rating.getRateStudyCenter().setRateId(rating.getRateId());
+			
+			ratingService.addRateStudyCenter(rating.getRateStudyCenter());
+			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		
 		System.out.println(rating);
-		modelAndView.setViewName("redirect:/DetailTeacher");
+		redirectAttributes.addAttribute("userName", rating.getRecieverName());
+		modelAndView.setViewName("redirect:/DetailStudyCenter");
 		return modelAndView;
 	}
 

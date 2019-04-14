@@ -46,4 +46,10 @@ public interface RatingService {
 	RateTeacher caculaterRateTeacher(String userName);
 	
 	RateStudyCenter caculaterRateStudyCenter(String userName);
+	
+	void updateTotalRateTeacher(String userName);
+	
+	void updateTotalRateStudyCenter(String userName);
+	
+	String genRatingId();
 }

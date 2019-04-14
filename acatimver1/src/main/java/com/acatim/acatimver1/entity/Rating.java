@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.entity;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,10 +32,12 @@ public class Rating {
 	
 	@OneToOne
 	@JoinColumn
+	@Valid
 	private RateTeacher rateTeacher;
 	
 	@OneToOne
 	@JoinColumn
+	@Valid
 	private RateStudyCenter rateStudyCenter;
 
 	public Rating(String rateId, String userName, String recieverName, String createDate, String updateDate, float rate,

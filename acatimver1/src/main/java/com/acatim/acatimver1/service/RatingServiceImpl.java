@@ -8,10 +8,14 @@ import org.springframework.stereotype.Service;
 import com.acatim.acatimver1.dao.RateStudyCenterDAO;
 import com.acatim.acatimver1.dao.RateTeacherDAO;
 import com.acatim.acatimver1.dao.RatingDAO;
+import com.acatim.acatimver1.dao.StudyCenterDAO;
+import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.RateStudyCenter;
 import com.acatim.acatimver1.entity.RateTeacher;
 import com.acatim.acatimver1.entity.Rating;
+import com.acatim.acatimver1.entity.StudyCenter;
+import com.acatim.acatimver1.entity.Teacher;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -24,6 +28,12 @@ public class RatingServiceImpl implements RatingService {
 
 	@Autowired
 	private RateTeacherDAO rateTeacherDAO;
+	
+	@Autowired
+	private StudyCenterDAO StudyCenterDAO;
+
+	@Autowired
+	private TeacherDAO TeacherDAO;
 
 	public List<Rating> getAllRatingTeacher() {
 		return this.ratingDAO.getAllRatingTeacher();
@@ -33,55 +43,68 @@ public class RatingServiceImpl implements RatingService {
 		return this.ratingDAO.getAllRatingStudyCenter();
 	}
 
+	@Override
 	public List<Rating> getAllRatingTeacherByRecieverName(String recieverName) {
 		return this.ratingDAO.getAllRatingTeacherByRecieverName(recieverName);
 	}
 
+	@Override
 	public List<Rating> getAllRatingStudyCenterByRecieverName(String recieverName) {
 		return this.ratingDAO.getAllRatingStudyCenterByRecieverName(recieverName);
 	}
 
+	@Override
 	public List<Rating> getAllRatingByUserName(String userName) {
 		return this.ratingDAO.getAllRatingByUserName(userName);
 	}
 
+	@Override
 	public List<Rating> getAllRating() {
 		return this.ratingDAO.getAllRating();
 	}
 
+	@Override
 	public void addRating(Rating rating) {
 		this.ratingDAO.addRating(rating);
 	}
 
+	@Override
 	public void removeRating(String rateId) {
 		boolean active = false;
 		this.ratingDAO.removeRating(rateId, active);
 	}
 
+	@Override
 	public void updateRating(Rating rating) {
 		this.ratingDAO.updateRating(rating);
 	}
 
+	@Override
 	public RateTeacher getRateTeacherByUserName(String rateId) {
 		return this.rateTeacherDAO.getRateTeacherByUserName(rateId);
 	}
 
+	@Override
 	public void addRateTeacher(RateTeacher rateTeacher) {
 		this.rateTeacherDAO.addRateTeacher(rateTeacher);
 	}
 
+	@Override
 	public void updateRateTeacher(RateTeacher rateTeacher) {
 		this.rateTeacherDAO.updateRateTeacher(rateTeacher);
 	}
 
+	@Override
 	public RateStudyCenter getRateStudyCenterByUserName(String rateId) {
 		return this.rateStudyCenterDAO.getRateStudyCenterByUserName(rateId);
 	}
 
+	@Override
 	public void addRateStudyCenter(RateStudyCenter rateStudyCenter) {
 		this.rateStudyCenterDAO.addRateStudyCenter(rateStudyCenter);
 	}
 
+	@Override
 	public void updateRateStudyCenter(RateStudyCenter rateStudyCenter) {
 		this.rateStudyCenterDAO.updateRateStudyCenter(rateStudyCenter);
 	}
@@ -252,4 +275,63 @@ public class RatingServiceImpl implements RatingService {
 		return new RateStudyCenter(null, equipmentQuality, staffAttitude, reputation, happiness, safety, internet,
 				location, teachingQuality, null);
 	}
+
+	@Override
+	public void updateTotalRateTeacher(String userName) {
+		
+		List<Rating> ratings = this.ratingDAO.getAllRatingTeacherByRecieverName(userName);
+		
+		float totalRate = 0;
+		int count = 0;
+		float rateAvg = 0;
+		
+		for (Rating rate : ratings) {
+			count++;
+			totalRate += rate.getRate();
+		}
+		if (count > 0) {
+			rateAvg = totalRate/count;
+		}
+		Teacher teacher = new Teacher();
+		
+		teacher.setUserName(userName);
+		teacher.setRate(rateAvg);
+		
+		this.TeacherDAO.updateTotalRateTeacher(teacher);
+		
+	}
+
+	@Override
+	public void updateTotalRateStudyCenter(String userName) {
+		
+		List<Rating> ratings = this.ratingDAO.getAllRatingStudyCenterByRecieverName(userName);
+		
+		float totalRate = 0;
+		int count = 0;
+		float rateAvg = 0;
+		
+		for (Rating rate : ratings) {
+			count++;
+			totalRate += rate.getRate();
+		}
+		if (count > 0) {
+			rateAvg = totalRate/count;
+		}
+		StudyCenter studyCenter = new StudyCenter();
+		
+		studyCenter.setUserName(userName);
+		studyCenter.setRate(rateAvg);
+		
+		this.StudyCenterDAO.updateTotalRateStudyCenter(studyCenter);
+		
+	}
+
+	@Override
+	public String genRatingId() {
+		List<Rating> ratings = this.ratingDAO.getAllRating();
+		int incNumber = ratings.size() + 1;
+		String newrateId = "rate" + incNumber;
+		return newrateId;
+	}
+
 }
