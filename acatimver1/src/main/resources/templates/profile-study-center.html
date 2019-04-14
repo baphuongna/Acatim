@@ -309,7 +309,7 @@
 														                            <span class="glyphicon glyphicon-star-empty"></span>
 														                        </div>
 														                        <div>
-														                            <span class="glyphicon glyphicon-user"></span>[[${numberPeopleRate}]] total
+														                            <span class="glyphicon glyphicon-user"></span>[[${count.numberPeopleRate}]] total
 														                        </div>
 														                    </div>
 														                    <div class="col-xs-12 col-md-6">
@@ -319,10 +319,10 @@
 														                            </div>
 														                            <div class="col-xs-8 col-md-9">
 														                                <div class="progress progress-striped">
-														                                <p id="valueProgress5" th:text="${progress5}" style="display: none;"></p>
+														                                <p id="valueProgress5" th:text="${count.fiveStar}" style="display: none;"></p>
 														                                    <div id="progressMake5" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
 														                                        aria-valuemin="0" aria-valuemax="100">
-														                                        <span th:text="${progress5}" class="sr-only"></span>
+														                                        <span th:text="${count.fiveStar}" class="sr-only"></span>
 														                                    </div>
 														                                </div>
 														                            </div>
@@ -332,10 +332,10 @@
 														                            </div>
 														                            <div class="col-xs-8 col-md-9">
 														                                <div class="progress">
-														                                <p id="valueProgress4" th:text="${progress4}" style="display: none;"></p>
+														                                <p id="valueProgress4" th:text="${count.fourStar}" style="display: none;"></p>
 														                                    <div id="progressMake4" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
 														                                        aria-valuemin="0" aria-valuemax="100">
-														                                        <span th:text="${progress4}" class="sr-only"></span>
+														                                        <span th:text="${count.fourStar}" class="sr-only"></span>
 														                                    </div>
 														                                </div>
 														                            </div>
@@ -345,10 +345,10 @@
 														                            </div>
 														                            <div class="col-xs-8 col-md-9">
 														                                <div class="progress">
-														                                <p id="valueProgress3" th:text="${progress3}" style="display: none;"></p>
+														                                <p id="valueProgress3" th:text="${count.threeStar}" style="display: none;"></p>
 														                                    <div id="progressMake3" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
 														                                        aria-valuemin="0" aria-valuemax="100">
-														                                        <span th:text="${progress3}" class="sr-only"></span>
+														                                        <span th:text="${count.threeStar}" class="sr-only"></span>
 														                                    </div>
 														                                </div>
 														                            </div>
@@ -358,10 +358,10 @@
 														                            </div>
 														                            <div class="col-xs-8 col-md-9">
 														                                <div class="progress">
-														                                <p id="valueProgress2" th:text="${progress2}" style="display: none;"></p>
+														                                <p id="valueProgress2" th:text="${count.twoStar}" style="display: none;"></p>
 														                                    <div id="progressMake2" class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
 														                                        aria-valuemin="0" aria-valuemax="100">
-														                                        <span th:text="${progress2}" class="sr-only"></span>
+														                                        <span th:text="${count.twoStar}" class="sr-only"></span>
 														                                    </div>
 														                                </div>
 														                            </div>
@@ -371,10 +371,10 @@
 														                            </div>
 														                            <div class="col-xs-8 col-md-9">
 														                                <div class="progress">
-														                                <p id="valueProgress1" th:text="${progress1}" style="display: none;"></p>
+														                                <p id="valueProgress1" th:text="${count.oneStar}" style="display: none;"></p>
 														                                    <div id="progressMake1" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
 														                                        aria-valuemin="0" aria-valuemax="100">
-														                                        <span th:text="${progress1}" class="sr-only"></span>
+														                                        <span th:text="${count.oneStar}" class="sr-only"></span>
 														                                    </div>
 														                                </div>
 														                            </div>
@@ -402,58 +402,58 @@
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Chất lượng dạy học của Trung tâm</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">3.5/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 90%;" class="progress-bar progress-yellow"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.teachingQuality} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.teachingQuality * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Vị trí</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">3/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 80%;" class="progress-bar progress-green"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.location} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.location * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Chất lượng Internet</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">2.5/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 70%;" class="progress-bar progress-blue"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.internet} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.internet * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Sự thoải mái trong học tập</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">2/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 60%;" class="progress-bar progress-red"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.safety} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.safety * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Chỉ số hạnh phúc</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">1/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 50%;" class="progress-bar progress-orange"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.happiness} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.happiness * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Sự tin tưởng về uy tín</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">2.5/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 80%;" class="progress-bar progress-khanh"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.reputation} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.reputation * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Thái độ của nhân viên</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">4.5/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 80%;" class="progress-bar progress-phong"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.staffAttitude} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.staffAttitude * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
                                                             <h2 style="text-transform: none; float: left;">Cơ sở vật chất</h2>
-                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;">2.5/5</p>
-                                                            <div style="clear: both;" class="progress progress-mini">
-                                                                <div style="width: 80%;" class="progress-bar progress-pink"></div>
+                                                            <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.equipmentQuality} + '/5'"></p>
+                                                            <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.equipmentQuality * 20}">
+                                                                <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-yellow"></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -473,6 +473,7 @@
                                                 				<div class="container" style="width: 100%;">
 															        <!-- Modal -->
 															        <div style="top:60px;">
+															        <form th:action="@{/rateStudyCenter(userName=${useInfo.userName})}" th:object="${rateStudyCenter}" method="post">
 															                <div id="page3" >
 															                    <div class="mobile_progress_bar">
 															                        <div class="text-left visible-xs" style="margin-bottom:40px;">
@@ -489,7 +490,7 @@
 															                                    <h5>
 															                                        Bạn cảm thấy thế nào về chất lượng dạy học của Trung tâm?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Teaching quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.teachingQuality}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Teaching quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 																							</div>
 															                            </div>
 																						
@@ -498,7 +499,7 @@
 															                                    <h5>
 															                                        Vị trí của Trung tâm có thuận tiện với bạn không?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Location" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.location}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Location" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 															                        </div>
@@ -508,7 +509,7 @@
 															                                    <h5>
 															                                        Bạn có hài lòng về chất lượng Internet ở Trung tâm không?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Internet" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.internet}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Internet" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 																						
@@ -517,7 +518,7 @@
 															                                    <h5>
 															                                        Việc học ở Trung tâm có thoải mái với bạn không?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="safety" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.safety}" onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="safety" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 															                        </div>
@@ -527,7 +528,7 @@
 															                                    <h5>
 															                                        Bạn có cảm thấy hạnh phúc khi học ở Trung tâm?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Happiness" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.happiness}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Happiness" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 																						
@@ -536,7 +537,7 @@
 															                                    <h5>
 															                                        Uy tín của Trung tâm có làm bạn tin tưởng không?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="Reputation" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.reputation}" onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="Reputation" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 															
@@ -548,7 +549,7 @@
 															                                    <h5>
 															                                        Thái độ phục vụ của các nhân viên trong trung tâm có làm bạn hài lòng?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Staff attitude" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.staffAttitude}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="Staff attitude" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 																						
@@ -557,7 +558,7 @@
 															                                    <h5>
 															                                        Chất lượng cơ sở vật chất của Trung tâm thì sao nhỉ?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="equipment quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.equipmentQuality}" onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="equipment quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                </div>
 															                            </div>
 															                        </div>
@@ -569,7 +570,7 @@
 															                                                <label style="font-size: 15px; line-height: 20px;">
 															                                                	Bạn có bất kỳ ý kiến hoặc đề xuất nào bạn muốn chia sẻ với Trung tâm này không?
 															                                                </label>
-															                                                <input style="height:90px; width: 100%;" type="text" autocomplete="off" />
+															                                                <input th:field="*{comment}" style="height:90px; width: 100%;" type="text" autocomplete="off" />
 															                                            </div>
 															                                        </div>
 															                                </div>
@@ -580,18 +581,18 @@
 															                        <div class="row">
 															                            <div class="col-lg-6 col-sm-6 col-md-6 text-left hidden-xs">
 															                                <strong>Tổng đánh giá của bạn: </strong>
-															                                <label id="demo" style="color:red">1</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
+															                                <label id="demo" style="color:red" th:field="*{rate}">1</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
 															                            </div>
 															                            <div class="col-lg-6 col-sm-6 col-md-6 hidden-xs">
 																                             <div class="col-md-4 hidden-xs">
-																                                   <button type="button" id="ok2" class="btn btn-default ok" data-dismiss="">Gửi  <span class="glyphicon glyphicon-ok"></span></button>
+																                                   <button type="submit" id="ok2" class="btn btn-default ok" data-dismiss="">Gửi  <span class="glyphicon glyphicon-ok"></span></button>
 																                             </div>
 															                            </div>
 															                        </div>
-															
-															
 															                    </div>
+															                    
 															                </div>
+															                </form>
 															                <!-- END Modal content page3-->
 															                <!-- Modal content page 4-->
 															                <div id="page4" style="display:none;" class="modal-content">

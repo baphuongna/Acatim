@@ -8,13 +8,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.RateStudyCenter;
+import com.acatim.acatimver1.entity.RateTeacher;
 import com.acatim.acatimver1.entity.Rating;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
@@ -148,17 +152,7 @@ public class ProfileController {
 		System.out.println(roleName);
 		String gender = null;
 		float rateAverage = 0;
-		float progress5 = 0;
-		float progress4 = 0;
-		float progress3 = 0;
-		float progress2 = 0;
-		float progress1 = 0;
 
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
@@ -183,41 +177,15 @@ public class ProfileController {
 			model.addAttribute("gender", gender);
 
 			List<Rating> ratings = ratingService.getAllRatingTeacherByRecieverName(userName);
-			float numberPeopleRate = 0;
 
-			for (int i = 0; i < ratings.size(); i++) {
-				if (ratings.get(i).getRate() <= 1) {
-					count1++;
-				} else if (ratings.get(i).getRate() > 1 && ratings.get(i).getRate() <= 2) {
-					count2++;
-				} else if (ratings.get(i).getRate() > 2 && ratings.get(i).getRate() <= 3) {
-					count3++;
-				} else if (ratings.get(i).getRate() > 3 && ratings.get(i).getRate() <= 4) {
-					count4++;
-				} else if (ratings.get(i).getRate() > 4 && ratings.get(i).getRate() <= 5) {
-					count5++;
-				}
-			}
-
-			for (int i = 0; i < ratings.size(); i++) {
-				numberPeopleRate++;
-			}
-
-			progress5 = (count5 / numberPeopleRate) * 100;
-			progress4 = (count4 / numberPeopleRate) * 100;
-			progress3 = (count3 / numberPeopleRate) * 100;
-			progress2 = (count2 / numberPeopleRate) * 100;
-			progress1 = (count1 / numberPeopleRate) * 100;
-
+			CountRate count = ratingService.countRatingTeacher(userName);
+			RateTeacher caculater = ratingService.caculaterRateTeacher(userName);
+			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
-			model.addAttribute("progress5", progress5);
-			model.addAttribute("progress4", progress4);
-			model.addAttribute("progress3", progress3);
-			model.addAttribute("progress2", progress2);
-			model.addAttribute("progress1", progress1);
-			model.addAttribute("numberPeopleRate", numberPeopleRate);
+			model.addAttribute("count", count);
+			model.addAttribute("caculater", caculater);
 
 			modelAndView.setViewName("profile-teacher");
 		}
@@ -238,17 +206,7 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(roleName);
 		float rateAverage = 0;
-		float progress5 = 0;
-		float progress4 = 0;
-		float progress3 = 0;
-		float progress2 = 0;
-		float progress1 = 0;
 
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
@@ -267,47 +225,15 @@ public class ProfileController {
 
 			rateAverage = studyCenter.getRate();
 
-			for (int i = 0; i < ratings.size(); i++) {
-				if (ratings.get(i).getRate() <= 1) {
-					count1++;
-				} else if (ratings.get(i).getRate() > 1 && ratings.get(i).getRate() <= 2) {
-					count2++;
-				} else if (ratings.get(i).getRate() > 2 && ratings.get(i).getRate() <= 3) {
-					count3++;
-				} else if (ratings.get(i).getRate() > 3 && ratings.get(i).getRate() <= 4) {
-					count4++;
-				} else if (ratings.get(i).getRate() > 4 && ratings.get(i).getRate() <= 5) {
-					count5++;
-				}
-			}
-
-			System.out.println(courses);
-			System.out.println(ratings);
-			float numberPeopleRate = 0;
-
-			for (int i = 0; i < ratings.size(); i++) {
-				numberPeopleRate++;
-			}
-
-			progress5 = (count5 / numberPeopleRate) * 100;
-			progress4 = (count4 / numberPeopleRate) * 100;
-			progress3 = (count3 / numberPeopleRate) * 100;
-			progress2 = (count2 / numberPeopleRate) * 100;
-			progress1 = (count1 / numberPeopleRate) * 100;
-
-			System.out.println(
-					" PROGRESS: " + progress5 + " " + progress4 + " " + progress3 + " " + progress2 + " " + progress1);
-
+			CountRate count = ratingService.countRatingStudyCenter(userName);
+			RateStudyCenter caculater = ratingService.caculaterRateStudyCenter(userName);
+			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
-			model.addAttribute("progress5", progress5);
-			model.addAttribute("progress4", progress4);
-			model.addAttribute("progress3", progress3);
-			model.addAttribute("progress2", progress2);
-			model.addAttribute("progress1", progress1);
-			model.addAttribute("numberPeopleRate", numberPeopleRate);
-
+			model.addAttribute("count", count);
+			model.addAttribute("caculater", caculater);
+			
 			modelAndView.setViewName("profile-study-center");
 		}
 		return modelAndView;
@@ -400,16 +326,7 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		float rateAverage = 0;
-		float progress5 = 80;
-		float progress4 = 60;
-		float progress3 = 40;
-		float progress2 = 20;
-		float progress1 = 15;
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
+
 		String gender = null;
 		if (useInfo == null) {
 			System.out.println("User not found! " + name);
@@ -445,42 +362,20 @@ public class ProfileController {
 			}
 			model.addAttribute("gender", gender);
 			List<Rating> ratings = ratingService.getAllRatingTeacherByRecieverName(name);
-			float numberPeopleRate = 0;
 
-			for (int i = 0; i < ratings.size(); i++) {
-				if (ratings.get(i).getRate() <= 1) {
-					count1++;
-				} else if (ratings.get(i).getRate() > 1 && ratings.get(i).getRate() <= 2) {
-					count2++;
-				} else if (ratings.get(i).getRate() > 2 && ratings.get(i).getRate() <= 3) {
-					count3++;
-				} else if (ratings.get(i).getRate() > 3 && ratings.get(i).getRate() <= 4) {
-					count4++;
-				} else if (ratings.get(i).getRate() > 4 && ratings.get(i).getRate() <= 5) {
-					count5++;
-				}
-			}
-
-			for (int i = 0; i < ratings.size(); i++) {
-				numberPeopleRate++;
-			}
-
-			progress5 = (count5 / numberPeopleRate) * 100;
-			progress4 = (count4 / numberPeopleRate) * 100;
-			progress3 = (count3 / numberPeopleRate) * 100;
-			progress2 = (count2 / numberPeopleRate) * 100;
-			progress1 = (count1 / numberPeopleRate) * 100;
-
+			CountRate count = ratingService.countRatingTeacher(name);
+			RateTeacher caculater = ratingService.caculaterRateTeacher(name);
+			System.out.println(caculater);
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
-			model.addAttribute("progress5", progress5);
-			model.addAttribute("progress4", progress4);
-			model.addAttribute("progress3", progress3);
-			model.addAttribute("progress2", progress2);
-			model.addAttribute("progress1", progress1);
-			model.addAttribute("numberPeopleRate", numberPeopleRate);
-
+			model.addAttribute("count", count);
+			model.addAttribute("caculater", caculater);
+			
+			Rating rating = new Rating();
+			rating.setRateTeacher(new RateTeacher());
+			model.addAttribute("rateTeacher", rating);
+			
 			modelAndView.setViewName("profile-teacher");
 		}
 		return modelAndView;
@@ -511,16 +406,7 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		float rateAverage = 0;
-		float progress5 = 80;
-		float progress4 = 60;
-		float progress3 = 40;
-		float progress2 = 20;
-		float progress1 = 15;
-		int count1 = 0;
-		int count2 = 0;
-		int count3 = 0;
-		int count4 = 0;
-		int count5 = 0;
+
 		if (useInfo == null) {
 			System.out.println("User not found! " + name);
 			modelAndView.setViewName("index");
@@ -547,47 +433,80 @@ public class ProfileController {
 			model.addAttribute("studyCenterInfo", studyCenter);
 
 			List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(name);
-			System.out.println(ratings);
-			float numberPeopleRate = 0;
-
-			for (int i = 0; i < ratings.size(); i++) {
-				if (ratings.get(i).getRate() <= 1) {
-					count1++;
-				} else if (ratings.get(i).getRate() > 1 && ratings.get(i).getRate() <= 2) {
-					count2++;
-				} else if (ratings.get(i).getRate() > 2 && ratings.get(i).getRate() <= 3) {
-					count3++;
-				} else if (ratings.get(i).getRate() > 3 && ratings.get(i).getRate() <= 4) {
-					count4++;
-				} else if (ratings.get(i).getRate() > 4 && ratings.get(i).getRate() <= 5) {
-					count5++;
-				}
-			}
-
 			rateAverage = studyCenter.getRate();
-
-			for (int i = 0; i < ratings.size(); i++) {
-				numberPeopleRate++;
-			}
-
-			progress5 = (count5 / numberPeopleRate) * 100;
-			progress4 = (count4 / numberPeopleRate) * 100;
-			progress3 = (count3 / numberPeopleRate) * 100;
-			progress2 = (count2 / numberPeopleRate) * 100;
-			progress1 = (count1 / numberPeopleRate) * 100;
-
+			
+			CountRate count = ratingService.countRatingStudyCenter(name);
+			
+			RateStudyCenter caculater = ratingService.caculaterRateStudyCenter(name);
+			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
-			model.addAttribute("progress5", progress5);
-			model.addAttribute("progress4", progress4);
-			model.addAttribute("progress3", progress3);
-			model.addAttribute("progress2", progress2);
-			model.addAttribute("progress1", progress1);
-			model.addAttribute("numberPeopleRate", numberPeopleRate);
-
+			model.addAttribute("count", count);
+			model.addAttribute("caculater", caculater);
+			
+			Rating rating = new Rating();
+			rating.setRateStudyCenter(new RateStudyCenter());
+			model.addAttribute("rateStudyCenter", rating);
+			
 			modelAndView.setViewName("profile-study-center");
 		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/rateTeacher", method = RequestMethod.POST)
+	public ModelAndView rateTeacher(@ModelAttribute("rateTeacher") Rating rating, @RequestParam("userName") String name, Model model, Principal principal)
+			throws NotFoundException {
+
+		// Sau khi user login thanh cong se co principal
+		// String userName = principal.getName();
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+		System.out.println("User Name: " + name);
+//		boolean checkDetail = true;
+//		boolean showDetailMySelf = false;
+//		String curentRoleName;
+//		String roleName = userInfoService.getRoleName(name);
+//		if (curentUserName != null) {
+//			curentRoleName = userInfoService.getRoleName(curentUserName);
+//		} else {
+//			curentRoleName = "";
+//		}
+//		UserModel useInfo = userInfoService.loadUserByUsername(name);
+//		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(rating);
+		modelAndView.setViewName("redirect:/DetailTeacher");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/rateStudyCenter", method = RequestMethod.POST)
+	public ModelAndView rateStudyCenter(@ModelAttribute("rateStudyCenter") Rating rating, @RequestParam("userName") String name, Model model, Principal principal)
+			throws NotFoundException {
+
+		// Sau khi user login thanh cong se co principal
+		// String userName = principal.getName();
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+		System.out.println("User Name: " + name);
+//		boolean checkDetail = true;
+//		boolean showDetailMySelf = false;
+//		String curentRoleName;
+//		String roleName = userInfoService.getRoleName(name);
+//		if (curentUserName != null) {
+//			curentRoleName = userInfoService.getRoleName(curentUserName);
+//		} else {
+//			curentRoleName = "";
+//		}
+//		UserModel useInfo = userInfoService.loadUserByUsername(name);
+//		List<Course> courses = courseService.getCourseByUserNameWithFullInfo(name);
+		ModelAndView modelAndView = new ModelAndView();
+		System.out.println(rating);
+		modelAndView.setViewName("redirect:/DetailTeacher");
 		return modelAndView;
 	}
 
