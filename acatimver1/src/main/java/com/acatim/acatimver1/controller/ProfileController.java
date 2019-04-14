@@ -442,6 +442,7 @@ public class ProfileController {
 			model.addAttribute("studyCenterInfo", studyCenter);
 
 			List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(name);
+			System.out.println(studyCenter);
 			rateAverage = studyCenter.getRate();
 			
 			CountRate count = ratingService.countRatingStudyCenter(name);
@@ -467,7 +468,7 @@ public class ProfileController {
 	}
 	
 	@RequestMapping(value = "/rateTeacher", method = RequestMethod.POST)
-	public ModelAndView rateTeacher(@Valid @ModelAttribute("rateTeacher") Rating rating, Model model, Principal principal, RedirectAttributes redirectAttributes, BindingResult bindingResult)
+	public ModelAndView rateTeacher(@ModelAttribute("rateTeacher") Rating rating, Model model, Principal principal, RedirectAttributes redirectAttributes, BindingResult bindingResult)
 			throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
@@ -501,7 +502,7 @@ public class ProfileController {
 		
 		System.out.println(rating);
 		redirectAttributes.addAttribute("userName", rating.getRecieverName());
-		modelAndView.setViewName("DetailTeacher");
+		modelAndView.setViewName("redirect:/DetailTeacher");
 		return modelAndView;
 	}
 	
