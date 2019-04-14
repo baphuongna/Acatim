@@ -380,8 +380,11 @@ public class ProfileController {
 			
 			Rating rating = new Rating();
 			rating.setRateTeacher(new RateTeacher());
-			model.addAttribute("rateTeacher", rating);
 			rating.setRecieverName(name);
+			model.addAttribute("rateTeacher", rating);
+			
+			model.addAttribute("checkRateExist", ratingService.check(curentUserName, name));
+			System.out.println(ratingService.check(curentUserName, name));
 			modelAndView.setViewName("profile-teacher");
 		}
 		return modelAndView;
@@ -455,6 +458,8 @@ public class ProfileController {
 			rating.setRecieverName(name);
 			rating.setRateStudyCenter(new RateStudyCenter());
 			model.addAttribute("rateStudyCenter", rating);
+			model.addAttribute("checkRateExist", ratingService.check(curentUserName, name));
+			
 			
 			modelAndView.setViewName("profile-study-center");
 		}

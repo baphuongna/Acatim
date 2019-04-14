@@ -462,7 +462,7 @@
                                                 		<div class="row">
                                                 			<div class="col-lg-12">
                                                 				<div class="skill-title">
-                                                					<h2>Đánh giá của bạn về Giáo viên</h2>
+                                                					<h2 th:text="'Cảm nhận của bạn về Giáo viên'"></h2>
                                                 					<hr>
                                                 				</div>
                                                 			</div>
@@ -470,8 +470,10 @@
                                                 		<div class="row">
                                                 			<div class="col-lg-12">
                                                 				<div class="container" style="width: 100%;">
+                                                				<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}" th:text="'Vui lòng đăng nhập để có thể dùng chức năng này'"></p>
+                                                				<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal != null and checkRateExist == true}" th:text="'Bạn đã Đánh Giá rồi'"></p>
 															        <!-- Modal -->
-															        <div style="top:60px;">
+															        <div style="top:60px;" th:if="${#request.userPrincipal != null and checkRateExist == false}">
 															        	<form th:action="@{/rateTeacher}" th:object="${rateTeacher}" method="post">
 															        		<input type="hidden" th:field="*{recieverName}" readonly>
 															                <div id="page3" >

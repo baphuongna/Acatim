@@ -52,4 +52,6 @@ public interface RatingService {
 	void updateTotalRateStudyCenter(String userName);
 	
 	String genRatingId();
+	
+	boolean check(String userName, String recieverName);
 }

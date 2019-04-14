@@ -60,6 +60,25 @@ public class RatingDAO extends JdbcDaoSupport {
 		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingMapper());
 		return rating;
 	}
+	
+	public boolean check(String userName, String recieverName) {
+		String sql = "SELECT * FROM Rating Where user_name = ? and reciever_name = ?";
+		Object[] params = new Object[] { userName, recieverName};
+		try {
+			List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingMapper());
+			System.out.println(userName + " " +recieverName + " "+ rating);
+			if(userName != null && !rating.isEmpty()) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e) {
+			System.out.println(e);
+			return false;
+		}
+		
+		
+	}
 
 	public List<Rating> getAllRating() {
 		String sql = "SELECT * FROM Rating";

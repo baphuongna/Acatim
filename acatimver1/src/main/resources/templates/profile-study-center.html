@@ -471,8 +471,10 @@
                                                 		<div class="row">
                                                 			<div class="col-lg-12">
                                                 				<div class="container" style="width: 100%;">
+                                                				<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal == null}" th:text="'Vui lòng đăng nhập để có thể dùng chức năng này'"></p>
+                                                				<p style="color: red; line-height: 34px;" th:if="${#request.userPrincipal != null and checkRateExist == true}" th:text="'Bạn đã Đánh Giá rồi'"></p>
 															        <!-- Modal -->
-															        <div style="top:60px;">
+															        <div style="top:60px;"  th:if="${#request.userPrincipal != null and checkRateExist == false}">
 															        <form th:action="@{/rateStudyCenter}" th:object="${rateStudyCenter}" method="post">
 															        <input th:field="*{recieverName}" hidden="true">
 															                <div id="page3" >

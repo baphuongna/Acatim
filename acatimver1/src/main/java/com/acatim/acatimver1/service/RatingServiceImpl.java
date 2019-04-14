@@ -334,4 +334,9 @@ public class RatingServiceImpl implements RatingService {
 		return newrateId;
 	}
 
+	@Override
+	public boolean check(String userName, String recieverName) {
+		return this.ratingDAO.check(userName, recieverName);
+	}
+
 }
