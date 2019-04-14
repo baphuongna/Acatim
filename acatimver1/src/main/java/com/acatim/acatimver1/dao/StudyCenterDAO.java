@@ -50,21 +50,21 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public StudyCenterForm getUserStudyCenterByUserName(String userName) {
 		String sql = "SELECT * FROM User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name Where User.user_name = ?;";
 		Object[] params = new Object[] { userName };
-		
+
 		StudyCenterFormMapper mapper = new StudyCenterFormMapper();
 		try {
-			
+
 			StudyCenterForm teacher = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 			return teacher;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
-	
+
 	public List<StudyCenter> getAllStudyCenter() {
 		String sql = StudyCenterMapper.BASE_SQL;
 
@@ -77,22 +77,20 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public void updateStudyCenterInfo(StudyCenter studyCenter) {
-		String sql = "UPDATE StudyCenter SET description = ?, rate = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getRate(),
-				studyCenter.getUserName());
+		String sql = "UPDATE StudyCenter SET description = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getUserName());
 	}
-	
+
 	public void updateTotalRateStudyCenter(StudyCenter studyCenter) {
 		String sql = "UPDATE StudyCenter SET rate = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, studyCenter.getRate(),
-				studyCenter.getUserName());
+		this.getJdbcTemplate().update(sql, studyCenter.getRate(), studyCenter.getUserName());
 	}
-	
+
 	public void addStudyCenterInfo(StudyCenter studyCenter) {
-		String sql = "INSERT INTO StudyCenter (user_name, description, rate)\r\n" + 
-				"VALUES (?, ?, ?);";
-		this.getJdbcTemplate().update(sql, studyCenter.getUserName(), studyCenter.getDescription(), studyCenter.getRate());
+		String sql = "INSERT INTO StudyCenter (user_name, description, rate)\r\n" + "VALUES (?, ?, ?);";
+		this.getJdbcTemplate().update(sql, studyCenter.getUserName(), studyCenter.getDescription(),
+				studyCenter.getRate());
 	}
 }

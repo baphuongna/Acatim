@@ -31,7 +31,10 @@ public interface UserInfoService {
 	void updateStudentInfo(Student student) throws NotFoundException;
 	void removeUser(String userName) throws NotFoundException;
 	void unlockUser(String userName) throws NotFoundException;
+	
 	void changePassword(String userName, String password) throws NotFoundException;
+	boolean checkPassword(String userName, String password);
+	
 	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
 	List<UserModel> searchUserByEmail(String email)  throws NotFoundException;
 	List<Teacher> loadAllTeacher() throws NotFoundException;
@@ -41,7 +44,7 @@ public interface UserInfoService {
 	List<UserModel> loadAllUserStudyCenter() throws NotFoundException;
 	List<UserModel> loadAllUserStudent() throws NotFoundException;
 	boolean checkUserExist(String userName) throws NotFoundException;
-	String getRoleName(String userName) throws NotFoundException;
+	String getRoleName(String userName);
 	
 	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
 	TeacherForm getUserTeacherByUserName(String userName) throws NotFoundException;

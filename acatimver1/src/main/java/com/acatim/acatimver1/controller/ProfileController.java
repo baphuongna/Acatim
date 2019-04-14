@@ -27,6 +27,7 @@ import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
+import com.acatim.acatimver1.form.PasswordForm;
 import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.RatingService;
@@ -54,7 +55,6 @@ public class ProfileController {
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
 		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
@@ -107,7 +107,6 @@ public class ProfileController {
 		// Sau khi user login thanh cong se co principal
 		boolean checkDetail = false;
 		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
@@ -148,14 +147,13 @@ public class ProfileController {
 		// Sau khi user login thanh cong se co principal
 		boolean checkDetail = false;
 		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(roleName);
+
 		String gender = null;
 		float rateAverage = 0;
 
@@ -203,14 +201,13 @@ public class ProfileController {
 		// Sau khi user login thanh cong se co principal
 		boolean checkDetail = false;
 		String userName = principal.getName();
-		System.out.println("User Name: " + userName);
 
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(roleName);
+
 		float rateAverage = 0;
 
 		if (useInfo == null) {
@@ -255,7 +252,7 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + name);
+
 		boolean checkDetail = true;
 		boolean showDetailMySelf = false;
 		String curentRoleName;
@@ -279,9 +276,6 @@ public class ProfileController {
 			model.addAttribute("roleName", roleName);
 			model.addAttribute("checkDetail", checkDetail);
 			model.addAttribute("curentRoleName", curentRoleName);
-
-			System.out.println("checkDetail " + checkDetail);
-			System.out.println("roleName " + roleName);
 
 			if (curentUserName != null && name.equals(curentUserName)) {
 				showDetailMySelf = true;
@@ -317,7 +311,7 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + name);
+
 		boolean checkDetail = true;
 		boolean showDetailMySelf = false;
 		String curentRoleName;
@@ -345,9 +339,6 @@ public class ProfileController {
 			model.addAttribute("checkDetail", checkDetail);
 			model.addAttribute("curentRoleName", curentRoleName);
 
-			System.out.println("checkDetail " + checkDetail);
-			System.out.println("roleName " + roleName);
-
 			if (curentUserName != null && name.equals(curentUserName)) {
 				showDetailMySelf = true;
 			} else {
@@ -371,7 +362,7 @@ public class ProfileController {
 
 			CountRate count = ratingService.countRatingTeacher(name);
 			RateTeacher caculater = ratingService.caculaterRateTeacher(name);
-			System.out.println(caculater);
+
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
@@ -384,7 +375,7 @@ public class ProfileController {
 			model.addAttribute("rateTeacher", rating);
 			
 			model.addAttribute("checkRateExist", ratingService.check(curentUserName, name));
-			System.out.println(ratingService.check(curentUserName, name));
+
 			modelAndView.setViewName("profile-teacher");
 		}
 		return modelAndView;
@@ -427,9 +418,6 @@ public class ProfileController {
 			model.addAttribute("checkDetail", checkDetail);
 			model.addAttribute("curentRoleName", curentRoleName);
 
-			System.out.println("checkDetail " + checkDetail);
-			System.out.println("roleName " + roleName);
-
 			if (curentUserName != null && name.equals(curentUserName)) {
 				showDetailMySelf = true;
 			} else {
@@ -442,7 +430,7 @@ public class ProfileController {
 			model.addAttribute("studyCenterInfo", studyCenter);
 
 			List<Rating> ratings = ratingService.getAllRatingStudyCenterByRecieverName(name);
-			System.out.println(studyCenter);
+
 			rateAverage = studyCenter.getRate();
 			
 			CountRate count = ratingService.countRatingStudyCenter(name);
@@ -477,7 +465,6 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + rating.getRecieverName());
 
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -496,11 +483,9 @@ public class ProfileController {
 			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
 			
 		}catch (Exception e) {
-			System.out.println(e);
+			e.fillInStackTrace();
 		}
 		
-		
-		System.out.println(rating);
 		redirectAttributes.addAttribute("userName", rating.getRecieverName());
 		modelAndView.setViewName("redirect:/DetailTeacher");
 		return modelAndView;
@@ -514,7 +499,6 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-		System.out.println("User Name: " + rating.getRecieverName());
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
@@ -532,14 +516,139 @@ public class ProfileController {
 			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
 			
 		}catch (Exception e) {
-			System.out.println(e);
+			e.fillInStackTrace();
 		}
 		
-		
-		System.out.println(rating);
 		redirectAttributes.addAttribute("userName", rating.getRecieverName());
 		modelAndView.setViewName("redirect:/DetailStudyCenter");
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/change-password", method = RequestMethod.GET)
+	public ModelAndView changePassword() {
+		ModelAndView modelAndView = new ModelAndView();
+		PasswordForm passwordForm = new PasswordForm();
+		modelAndView.addObject("passwordForm", passwordForm);
+		modelAndView.setViewName("change-password");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/change-password", method = RequestMethod.POST)
+	public ModelAndView updatePassword(@Valid @ModelAttribute("passwordForm") PasswordForm passwordForm,
+			BindingResult bindingResult, Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+
+		if (!userInfoService.checkPassword(curentUserName, passwordForm.getOldPassword())) {
+			bindingResult.rejectValue("oldPassword", "error.passwordForm", "Nhập Sai Mật Khẩu Hiện tại !");
+		}
+
+		if (!passwordForm.getNewPassword().equals(passwordForm.getReNewPassword())) {
+			bindingResult.rejectValue("reNewPassword", "error.passwordForm", "Nhập Không giống với mật khẩu mới !");
+		}
+
+		modelAndView.addObject("passwordForm", passwordForm);
+
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("change-password");
+			return modelAndView;
+		}
+
+		try {
+
+			userInfoService.changePassword(curentUserName, passwordForm.getNewPassword());
+
+		} catch (Exception e) {
+			e.fillInStackTrace();
+			modelAndView.setViewName("change-password");
+			return modelAndView;
+		}
+
+		modelAndView.setViewName("redirect:/");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/update-info", method = RequestMethod.GET)
+	public ModelAndView changeInfo(Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+		
+		UserModel user;
+		try {
+			user = userInfoService.loadUserByUsername(curentUserName);
+			
+			if(user.getRole_id() == 1) {
+				user.setStudent(userInfoService.loadStudentByUsername(curentUserName));
+			}else if(user.getRole_id() == 2) {
+				user.setTeacher(userInfoService.loadTeacherByUsername(curentUserName));
+			}else if(user.getRole_id() == 3) {
+				user.setStudyCenter(userInfoService.loadStudyCenterByUsername(curentUserName));
+			}
+			
+			modelAndView.addObject("user", user);
+			modelAndView.setViewName("update-info");
+			
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/update-info", method = RequestMethod.POST)
+	public ModelAndView updateInfo(@Valid @ModelAttribute("user") UserModel user,
+			BindingResult bindingResult, Principal principal)  throws NotFoundException {
+		ModelAndView modelAndView = new ModelAndView();
+
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+		
+		UserModel checkEmail = userInfoService.loadUserbyEmail(user.getEmail());
+		UserModel currentUser = userInfoService.loadUserByUsername(curentUserName);
+		
+		if (checkEmail != null) {
+			if(!user.getEmail().equals(currentUser.getEmail())) {
+				bindingResult.rejectValue("email", "error.email", "Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+			}
+		}
+		
+		if (bindingResult.hasErrors()) {
+			modelAndView.setViewName("update-info");
+			return modelAndView;
+		}
+		
+
+		try {
+			userInfoService.updateUserInfo(user);
+
+			if(currentUser.getRole_id() == 1) {
+				user.getStudent().setUserName(user.getUserName());
+				userInfoService.updateStudentInfo(user.getStudent());
+			}else if(currentUser.getRole_id() == 2) {
+				user.getTeacher().setUserName(user.getUserName());
+				userInfoService.updateTeacherInfo(user.getTeacher());
+			}else if(currentUser.getRole_id() == 3) {
+				user.getStudyCenter().setUserName(user.getUserName());
+				userInfoService.updateStudyCenterInfo(user.getStudyCenter());
+			}
+
+		} catch (Exception e) {
+			e.fillInStackTrace();
+			modelAndView.setViewName("update-info");
+			return modelAndView;
+		}
+
+		modelAndView.setViewName("redirect:/update-info");
+		return modelAndView;
+	}
 }

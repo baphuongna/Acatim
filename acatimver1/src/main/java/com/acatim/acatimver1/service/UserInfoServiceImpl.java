@@ -142,8 +142,23 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public void changePassword(String userName, String password) throws NotFoundException {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		password = bCryptPasswordEncoder.encode(password);
 		this.UserDAO.changePassword(userName, password);
 
+	}
+	
+	@Override
+	public boolean checkPassword(String userName, String password) {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+
+		UserModel user = this.UserDAO.findUserAccount(userName);
+		
+		if(bCryptPasswordEncoder.matches(password, user.getPassword())) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	@Override
@@ -180,7 +195,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public String getRoleName(String userName) throws NotFoundException {
+	public String getRoleName(String userName) {
 		return this.RoleDAO.getRoleNameByUserName(userName);
 	}
 

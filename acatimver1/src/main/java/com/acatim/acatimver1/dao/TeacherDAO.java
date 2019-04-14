@@ -77,9 +77,9 @@ public class TeacherDAO extends JdbcDaoSupport {
 	}
 
 	public void updateTeacherInfo(Teacher teacher) {
-		String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ?, rate = ? WHERE user_name = ?;";
+		String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(),
-				teacher.getRate(), teacher.getUserName());
+				teacher.getUserName());
 	}
 
 	public void updateTotalRateTeacher(Teacher teacher) {

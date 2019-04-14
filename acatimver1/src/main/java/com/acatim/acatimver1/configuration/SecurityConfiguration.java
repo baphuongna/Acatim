@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Các trang không yêu cầu login
 		http.authorizeRequests()
 				.antMatchers("/", "/index", "/rating", "/ratingTeacher", "/test", "registration", "/loginPage",
-						"/profileDetail", "/profile", "/study-center", "/detail-course", "/profile-student",
+						"/profileDetail", "/study-center", "/detail-course", "/profile-student",
 						"/profile-teacher", "/profile-study-center")
 				.permitAll();
 
@@ -60,6 +60,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Trang chỉ dành cho ADMIN
 //        http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
 		http.authorizeRequests().antMatchers("/profile").hasAnyAuthority("Student", "Teacher", "Study Center");
+		
+		http.authorizeRequests().antMatchers("/change-password", "/update-info").hasAnyAuthority("Student", "Teacher", "Study Center", "Admin", "Manager");
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,
 		// Ngoại lệ AccessDeniedException sẽ ném ra.

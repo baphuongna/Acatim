@@ -7,6 +7,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,29 +19,29 @@ import javax.validation.constraints.NotEmpty;
 public class UserModel {
 
     @Id
-    @NotEmpty(message = "*Please provide your user name")
+    @NotEmpty(message = "*Tên của bạn không được để trống")
     private String userName;
     
     private int role_id;
     
-    @NotEmpty(message = "*Please provide your full name")
+    @NotEmpty(message = "*Họ và Tên không được để trống")
     private String fullName;
      
-    @Email(message = "*Please provide a valid Email")
-    @NotEmpty(message = "*Please provide an email")
+    @Email(message = "*Địa chỉ email chưa đúng")
+    @NotEmpty(message = "*Email không được để trống")
     private String email;
    
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5")
+    @NotEmpty(message = "*Mật khẩu không được để trống")
     private String password;
     
-    @NotEmpty(message = "*Please provide your create date")
     private String createDate;
     
-    @NotEmpty(message = "*Please provide your phone")
+    @Digits(fraction = 0, integer = 11, message ="Số điện thoại có độ dài tối đa là 11")
+    @NotEmpty(message = "*Số điện thoại không được bỏ trống")
     private String phone;
     
-    @NotEmpty(message = "*Please provide your address")
+    @NotEmpty(message = "*Địa chỉ không được bỏ trống")
     private String address;
     
     private boolean active;

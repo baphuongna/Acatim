@@ -24,12 +24,12 @@ import com.acatim.acatimver1.service.UserInfoService;
 import javassist.NotFoundException;
 
 @Controller
-@RequestMapping(value = {""})
+@RequestMapping(value = { "" })
 public class RegistrationController {
-	
+
 	@Autowired
 	private UserInfoService userInfoService;
-	
+
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -40,29 +40,31 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult) throws NotFoundException {
+	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult)
+			throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("data   "+ data);
+		System.out.println("data   " + data);
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
-		  if (userExists == true) { 
-			  bindingResult .rejectValue("userName", "error.user","Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác"); 
-		  }
+		if (userExists == true) {
+			bindingResult.rejectValue("userName", "error.user",
+					"Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác");
+		}
 		if (bindingResult.hasErrors()) {
-			modelAndView.addObject("erorrMessage","Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
+			modelAndView.addObject("erorrMessage", "Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
 			modelAndView.setViewName("registration");
 		} else {
 			try {
 				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 				Date date = new Date();
-				String dateCurent=(String)dateFormat.format(date);
+				String dateCurent = (String) dateFormat.format(date);
 				data.setCreateDate(dateCurent);
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
 						true);
-				System.out.println("hhhhhieu  "+user);
+				System.out.println("hhhhhieu  " + user);
 				if (data.getRole_id() == 1) {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
-					System.out.println("student"+newStudent);
+					System.out.println("student" + newStudent);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudentInfo(newStudent);
 					System.out.println("học sinh thanh cong");
@@ -75,7 +77,7 @@ public class RegistrationController {
 					System.out.println("giáo vien thanh cong");
 				}
 				if (data.getRole_id() == 3) {
-					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(),1);
+					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(), 1);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudyCenterInfo(newStudyCenter);
 					System.out.println("trung tam thanh cong");
@@ -90,5 +92,6 @@ public class RegistrationController {
 		}
 		return modelAndView;
 	}
+
 
 }
