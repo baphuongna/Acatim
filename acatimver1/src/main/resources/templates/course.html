@@ -225,8 +225,7 @@
 								<a href="#" th:text="${course.courseName}"></a>
 							</h3>
 							<p th:text="${course.courseDescription}"></p>
-							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" data-toggle="modal"
-							 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Chi Tiết</button></a>
+							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
 						</div>
 					</div>
 				</div>

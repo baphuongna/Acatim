@@ -148,7 +148,7 @@
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
                                                 <span style="color: black;"><i class="fa fa-user"></i> <b>Tên Khóa Học:</b> [[${course.courseName}]]</span>
                                                 <span style="color: black;"><i class="fa fa-heart"></i> <b>Giá Khóa Học:</b> [[${course.price}]] VND</span>
-                                                <span><a href="#"><i class="fa fa-comments-o" ></i> <b style="color: black;">Người Tạo:</b> [[${creater.fullName}]]</a></span>
+                                                <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-comments-o" ></i> <b style="color: black;">Người Tạo:</b> [[${creater.fullName}]]</a></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span th:text="${course.startDate}"></span><b> đến </b><span th:text="${course.endDate}"></span></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span th:text="${course.startTime}"></span><b> đến </b><span th:text="${course.endTime}"></span></span>
                                             </div>

@@ -821,72 +821,11 @@
 																<a href="#" th:text="${course.courseName}"></a>
 															</h3>
 															<p th:text="${course.courseDescription}"></p>
-															<button type="button" class="btn btn-primary" data-toggle="modal"
-															 th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm ...</button>
+															<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" th:text="'Chi Tiết'"></button></a>
 														</div>
 													</div>
 												</div>
-			                                    	<div th:each="course,wind : ${courses}">
-															<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
-																aria-labelledby="productGrid">
-																<div class="modal-dialog modal-lg" role="document" >
-																	<div class="modal-content">
-																		<div class="modal-header">
-																		<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
-																				khóa học</h4>
-																			<button type="button" class="close" data-dismiss="modal"
-																				aria-label="Close">
-																				<span aria-hidden="true">×</span>
-																			</button>
-																		</div>
-																		<div class="modal-body">
-																			<div class="row">
-																				<div class="col-md-4">
-																					<img
-																						src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-																						class="img-responsive" alt="a">
-																				</div>
-																				<div class="col-md-8">
-																					<h3 class="course-title"><p th:text="${course.courseName}"></p></h3>
-																					<div class="rating">
-																						<div class="stars">
-																							<span class="fa fa-star checked"></span> <span
-																								class="fa fa-star checked"></span> <span
-																								class="fa fa-star checked"></span> <span class="fa fa-star"></span>
-																							<span class="fa fa-star"></span>
-																						</div>
-																						<span class="review-no">41 reviews</span></br> <span
-																							class="review-no">Giáo viên: </span>
-																							<a th:if="${checkDetail == true}" th:href="@{/profileDetail(userName=${course.userModel.userName})}" th:text="${course.userModel.fullName}"></a>
-																							<a th:if="${checkDetail == false}" href="#" th:text="${course.userModel.fullName}"></a>
-																					</div>
-																					<p class="product-description" th:text="${course.courseDescription}"></p>
-																					<h4 class="price">
-																						Giá: <span>$ <span th:text="${course.price}"></span></span>
-																					</h4>
-																					<p class="vote">
-																						<strong>91%</strong> người thích khóa học này<strong>(87
-																							votes)</strong>
-																					</p>
-																					<h4 class="price">
-																						Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
-																					</h4>
-																					<h4 class="price">
-																						Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
-																					</h4>
-																				</div>
-																			</div>
-																			<!-- hết popup course detail -->
-																		</div>
-																		<div class="modal-footer">
-																			<button data-dismiss="modal" class="btn btn-primary">Close</button>
-																		</div>
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-													</div>
+			                                    	
 			                                    </div>
 			                                </div>
 			                            </div>
