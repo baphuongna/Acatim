@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -49,16 +49,14 @@
 								data-toggle="dropdown" th:utext="${#request.userPrincipal.name}">
 							</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" href="admin/index.html"
-										sec:authorize="hasAnyAuthority('Admin', 'Manager')"
-										th:href="@{/admin/}">Trang Quản lý Web</a> <a
-										class="dropdown-item" href="profile.html"
-										th:href="@{/profile}">Trang cá nhân </a><a
-										class="dropdown-item" th:href="@{/change-password}">Đổi Mật Khẩu </a>
-										<a class="dropdown-item" th:href="@{/update-info}">Cập Nhật Thông Tin </a> <a
-										class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
+									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" th:href="@{/admin/}">Trang Quản lý Web</a>
+									<a class="dropdown-item" href="profile.html" th:href="@{/profile}">Trang cá nhân </a>
+									<a class="dropdown-item" th:href="@{/change-password}">Đổi Mật Khẩu </a>
+									<a class="dropdown-item" th:href="@{/update-info}">Cập Nhật Thông Tin </a>
+									<a class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
 
 								</div></li>
+								
 
 						</ul>
 						<a th:href="@{/registration}"
