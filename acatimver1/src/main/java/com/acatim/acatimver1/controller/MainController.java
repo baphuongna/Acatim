@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
@@ -46,7 +45,6 @@ public class MainController {
 			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllStudyCenter().size());
 			modelAndView.addObject("numberOfStudent", userInfoService.loadAllStudent().size());
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("index");
@@ -72,11 +70,10 @@ public class MainController {
 //        return "loginPage";
 //    }
 
-//    @RequestMapping(value = "/index", method = RequestMethod.GET)
-//    public String logoutSuccessfulPage(Model model) {
-//        //model.addAttribute("title", "Logout");
-//        return "index";
-//    }
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String error(Model model) {
+        return "error";
+    }
 
 	@RequestMapping("/password-recovery")
 	public String showAllCourse(Model model) {
