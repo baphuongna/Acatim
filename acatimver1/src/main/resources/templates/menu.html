@@ -49,11 +49,12 @@
 								data-toggle="dropdown" th:utext="${#request.userPrincipal.name}">
 							</a>
 								<div class="dropdown-menu">
-									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" th:href="@{/admin/}">Trang Quản lý Web</a>
-									<a class="dropdown-item" href="profile.html" th:href="@{/profile}">Trang cá nhân </a>
-									<a class="dropdown-item" th:href="@{/change-password}">Đổi Mật Khẩu </a>
-									<a class="dropdown-item" th:href="@{/update-info}">Cập Nhật Thông Tin </a>
-									<a class="dropdown-item" th:href="@{/Logout}">Đăng xuất</a>
+									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" th:href="@{/admin/}" th:text="'Trang Quản lý Web'"></a>
+									<a class="dropdown-item" href="profile.html" th:href="@{/profile}" th:text="'Trang cá nhân'"> </a>
+									<a class="dropdown-item"  sec:authorize="hasAnyAuthority('Teacher', 'Study Center')"  th:href="@{/manager-course}" th:text="'Quản Lý Khóa Học'"></a>
+									<a class="dropdown-item" th:href="@{/change-password}" th:text="'Đổi Mật Khẩu'"> </a>
+									<a class="dropdown-item" th:href="@{/update-info}" th:text="'Cập Nhật Thông Tin'"> </a>
+									<a class="dropdown-item" th:href="@{/Logout}" th:text="'Đăng xuất'"></a>
 
 								</div></li>
 								

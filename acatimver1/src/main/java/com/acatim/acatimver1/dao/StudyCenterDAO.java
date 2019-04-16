@@ -40,7 +40,7 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 	}
 
 	public List<UserModel> getAllUserStudyCenter() {
-		String sql = "SELECT * FROM User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
+		String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
 
 		try {
 			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new StudyCenterExtractor());

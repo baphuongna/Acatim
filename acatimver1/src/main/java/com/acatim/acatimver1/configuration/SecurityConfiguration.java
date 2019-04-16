@@ -60,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Trang chỉ dành cho ADMIN
 //        http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
 		http.authorizeRequests().antMatchers("/profile").hasAnyAuthority("Student", "Teacher", "Study Center");
-		
+		http.authorizeRequests().antMatchers("/manager-course", "/add-course").hasAnyAuthority("Teacher", "Study Center");
 		http.authorizeRequests().antMatchers("/change-password", "/update-info").hasAnyAuthority("Student", "Teacher", "Study Center", "Admin", "Manager");
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

@@ -1,0 +1,460 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="M_Adnan" />
+<!-- Document Title -->
+<title>Profile</title>
+
+<!-- StyleSheets -->
+
+<link rel="stylesheet" type="text/css"
+	href="@{/css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/Menu.css">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="css/rating.css">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script type="text/javascript" src="magicRating.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	
+
+
+<!-- FontsOnline -->
+<link
+	href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+
+<!-- JavaScripts -->
+<script src="js/vendors/modernizr.js"></script>
+
+<!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/owl.carousel.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.theme.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.transitions.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/normalize.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/main.css">
+    <!-- educate icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="admin/admin/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="admin/admin/css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/form/all-type-forms.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="admin/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+
+</head>
+<body>
+
+	<!-- Page Wrapper -->
+	<div id="wrap">
+
+		<!-- Header -->
+		<div th:replace="menu :: menu"></div>
+		<!-- End Header -->
+
+		<!-- Content -->
+		<main class="cd-main-content">
+		<div id="content">
+			<div class="resume">
+				<div class="container">
+
+					<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="container-fluid">
+				<form th:action="@{all-courses}" th:object="${searchValue}" method="POST">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div >
+								<div class="row">
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											
+										</div>
+									</div>
+									<!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="chosen-select-single mg-b-20">
+											<select class="chosen-select" th:field="*{categoryId}">
+												<option value="0">--Tât Cả--</option>
+												<option th:if="${allCategories != null}" th:each="category : ${allCategories}" th:value="${category.categoryId}">
+												</option>
+											</select>
+										</div>
+									</div> -->
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" th:if="${allSubjects != null}">
+										<div class="chosen-select-single mg-b-20">
+											<select class="chosen-select" th:field="*{subjectId}">
+												<option value="0">--Tât Cả--</option>
+												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											<input type="text" th:field="*{search}" placeholder="Tìm Kiếm" style="width: 100%"
+												class="search-int form-control">
+										</div>
+									</div>
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+										<div class="breadcome-heading">
+											<button type="submit"
+												class="btn btn-primary waves-effect waves-light">Tìm Kiếm</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap drp-lst">
+                            <h4>Danh Sách Khóa Học</h4>
+                            <div class="add-product">
+                                <a th:href="@{/add-course}">Thêm Khóa Học</a>
+                            </div>
+                            <div class="asset-inner">
+                                <table>
+									<tr>
+										<th>ID Khóa Học</th>
+										<th>Tên Khóa Học</th>
+										<th>Thông Tin Khóa Học</th>
+										<th>Giờ Bắt Đầu</th>
+										<th>Giờ Kết thúc</th>
+										<th>Ngày Bắt Đầu</th>
+										<th>Ngày Kết thúc</th>
+										<th>Giá (VND)</th>
+										<th>Người Tạo</th>
+										<th>Ngày Tạo</th>
+										<th>Trạng Thái</th>
+										<th></th>
+									</tr>
+									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}">
+										<td th:text="${course.courseId}"></td>
+										<td th:text="${course.courseName}"></td>
+										<td th:text="${course.courseDescription}"></td>
+										<td th:text="${course.startTime}"></td>
+										<td th:text="${course.endTime}"></td>
+										<td th:text="${course.startDate}"></td>
+										<td th:text="${course.endDate}"></td>
+										<td th:text="${course.price}"></td>
+										<td th:text="${course.userName}"></td>
+										<td th:text="${course.createDate}"></td>
+										
+										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
+										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
+										<td>
+										<a th:href="@{/admin/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
+										<button type="button" class="btn btn-primary" data-toggle="modal"
+							 							th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm</button>
+							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
+							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>
+							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${course.active == false}"
+							 								th:attr="data-target='#'+${course.courseId}+'2'">Mở Khóa</button>
+										</td>
+									</tr>
+									<tr th:if="${allCourses == null}">
+										<td>Không Tìm Thấy Khóa Học nào</td>
+									</tr>
+									
+								</table>
+                            </div>
+                            <div class="custom-pagination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination" >
+                                    	<li class="page-item" >
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/all-courses(page=${first}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+                                        	<a th:if="${currentPage == first}" class="page-link" >Trang Đầu</a>
+                                        </li>
+                                    	<li class="page-item"  th:if="${hasPrevious == true}">
+                                        	<a class="page-link" th:href="@{/admin/all-courses(page=${previous}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
+                                        </li>
+                                        <li class="page-item" th:each="totalPage : ${totalPages}">
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/all-courses(page=${totalPage}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
+                                        </li>
+                                        <li class="page-item"  th:if="${hasNext == true}">
+                                        	<a class="page-link" th:href="@{/admin/all-courses(page=${next}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
+                                        </li>
+                                        <li class="page-item">
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/all-courses(page=${last}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+                                        	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</div>
+		</main>
+		<!-- End Content -->
+
+		
+		<div th:if="${allCourses != null}" th:id="${course.courseId}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="course : ${allCourses}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                                        <h2>KHÓA!</h2>
+                                        <p>Bạn có chắc muốn KHÓA khóa học này!</p>
+                                    </div>
+                                    <div class="modal-footer danger-md">
+                                        <a data-dismiss="modal" href="#">Không</a>
+                                        <a th:href="@{/admin/blockStudent(courseId=${course.courseId})}">Đúng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+        <div th:if="${allCourses != null}" th:id="${course.courseId}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="course : ${allCourses}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-warning modal-check-pro information-icon-pro"></span>
+                                        <h2>MỞ KHÓA!</h2>
+                                        <p>Bạn có chắc muốn MỞ KHÓA khóa học này!</p>
+                                    </div>
+                                    <div class="modal-footer warning-md">
+                                        <a data-dismiss="modal" href="#">Không</a>
+                                        <a th:href="@{/admin/unlockStudent(courseId=${course.courseId})}">Đúng</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+        <div th:if="${allCourses != null}" th:each="course : ${allCourses}">
+		<form autocomplete="off" >
+			<div th:id="${course.courseId}" class="modal fade" tabindex="-1" role="dialog"
+				aria-labelledby="productGrid">
+				<div class="modal-dialog modal-lg" role="document" >
+					<div class="modal-content">
+						<div class="modal-header">
+						<h4 class="modal-title1" id="productGrid">Thông tin chi tiết
+								khóa học</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-4">
+									<img
+										src="https://images.unsplash.com/photo-1551567676-94fef02ca1b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+										class="img-responsive" alt="a">
+								</div>
+								<div class="col-md-8">
+									<h3 class="course-title"></h3>
+									<div class="rating">
+										<div class="stars">
+											<span class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span
+												class="fa fa-star checked"></span> <span class="fa fa-star"></span>
+											<span class="fa fa-star"></span>
+										</div>
+										<span class="review-no">41 reviews</span></br> <span
+											class="review-no">Giáo viên: </span><a th:href="@{/profileDetail(userName=${course.userName})}" th:text="${course.userName}"></a>
+									</div>
+									<p class="product-description" th:text="${course.courseDescription}"></p>
+									<h4 class="price">
+										Giá: <span>VND <span th:text="${course.price}"></span></span>
+									</h4>
+									<p class="vote">
+										<strong>91%</strong> người thích khóa học này<strong>(87
+											votes)</strong>
+									</p>
+									<h4 class="price">
+										Thời gian: từ <span th:text="${course.startDate}"></span> đến <span th:text="${course.endDate}"><span>
+									</h4>
+									<h4 class="price">
+										Thời gian bắt đầu học : từ <span th:text="${course.startTime}"></span> đến <span th:text="${course.endTime}"><span>
+									</h4>
+
+								</div>
+							</div>
+							<!-- hết popup course detail -->
+						</div>
+						<div class="modal-footer">
+							<button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="remove();">Close</button>
+							<input type="submit" value="Gửi" class="btn btn-primary py-3 px-5">
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+		</form>
+		
+	</div>
+
+
+
+		<!-- Footer -->
+		<div th:replace="footer :: footer"></div>
+		<!-- End Footer -->
+
+	</div>
+	<!-- End Page Wrapper -->
+
+	<!-- JavaScripts -->
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/mainProfile.js"></script>
+	<script src="js/rating.js"></script>
+	<!-- Begin Map Script-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/map.js"></script>
+	<!-- jquery
+		============================================ -->
+    <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="admin/admin/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="admin/admin/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="admin/admin/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="admin/admin/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="admin/admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="admin/admin/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="admin/admin/js/metisMenu/metisMenu.min.js"></script>
+    <script src="admin/admin/js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+		============================================ -->
+    <script src="admin/admin/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="admin/admin/js/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- calendar JS
+		============================================ -->
+    <script src="admin/admin/js/calendar/moment.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="admin/admin/js/tab.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="admin/admin/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="admin/admin/js/main.js"></script>
+    <!-- tawk chat JS
+		============================================ -->
+    <script src="admin/admin/js/tawk-chat.js"></script>
+</body>
+</html>

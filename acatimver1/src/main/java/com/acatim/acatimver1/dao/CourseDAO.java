@@ -108,6 +108,26 @@ public class CourseDAO extends JdbcDaoSupport {
 		return courses;
 	}
 	
+	public List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId) {
+		String sql = "SELECT * FROM Course where user_name = ?";
+		
+		if(subjectId != null) {
+			sql += " and subjectId = "+ subjectId + " ";
+		}
+		
+		if(pageable.sort() != null) {
+			for (Order o : pageable.sort()) {
+				sql += " ORDER BY " + o.getProperty() + " " + o.getDirection().toString() + " ";
+			}
+		}
+		
+		sql += " LIMIT ?, ?;";
+		Object[] params = new Object[] {userName ,  pageable.getOffset(), pageable.getPageSize()};
+		CourseMapper mapper = new CourseMapper();
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+		return courses;
+	}
+	
 	public List<Course> searchAllCoursePaging(PageableService pageable, String courseName) {
 		String sql = "SELECT * FROM Course where courseName LIKE ?";
 		if(pageable.sort() != null) {

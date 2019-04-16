@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import com.acatim.acatimver1.entity.Role;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.UserModel;
 
@@ -44,6 +45,12 @@ public class StudentExtractor implements ResultSetExtractor<List<UserModel>>{
 			boolean gender = rs.getBoolean("gender");
 			student = new Student(userName, dob, gender);
 			user.setStudent(student);
+			
+			Role role = new Role();
+			int roleId = rs.getInt("role_id");
+			String roleName = rs.getString("role_name");
+			role = new Role(roleId, roleName);
+			user.setRole(role);
 		}
 		return new ArrayList<UserModel>(map.values());
 	}

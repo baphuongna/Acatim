@@ -207,16 +207,16 @@ public class ManagerCourseController {
 		try {
 			courseService.removeCourse(courseId);
 			
-			User loginedUser = null;
+			String userName = null;
 			if (principal != null) {
-				loginedUser = (User) ((Authentication) principal).getPrincipal();
+				userName = principal.getName();
 			}
 			
 			History history = new History();
 			history.setIdChange(courseId);
 			history.setValueChanged("Blocked");
 			history.setDateChange(dateformat.currentDate());
-			history.setBy(loginedUser.getUsername());
+			history.setBy(userName);
 			historyService.addHistory(history);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -231,16 +231,16 @@ public class ManagerCourseController {
 		try {
 			courseService.unlockCourse(courseId);
 			
-			User loginedUser = null;
+			String userName = null;
 			if (principal != null) {
-				loginedUser = (User) ((Authentication) principal).getPrincipal();
+				userName = principal.getName();
 			}
 
 			History history = new History();
 			history.setIdChange(courseId);
 			history.setValueChanged("Active");
 			history.setDateChange(dateformat.currentDate());
-			history.setBy(loginedUser.getUsername());
+			history.setBy(userName);
 			historyService.addHistory(history);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -308,8 +308,6 @@ public class ManagerCourseController {
 			courseService.addCourse(course);
 
 		}catch (Exception e) {
-			modelAndView.addObject("allSubjects", subjectService.getListSubject());
-			modelAndView.addObject("course", course);
 			modelAndView.setViewName("admin/add-course");
 			return modelAndView;
 		}

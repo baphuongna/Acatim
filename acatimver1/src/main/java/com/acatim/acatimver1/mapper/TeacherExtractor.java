@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import com.acatim.acatimver1.entity.Role;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
 
@@ -26,7 +27,7 @@ public class TeacherExtractor implements ResultSetExtractor<List<UserModel>>{
 			user = map.get(userName);
 
 			if (user == null) {
-				int roleId = rs.getInt("role_id");
+				int roleId = rs.getInt("User.role_id");
 				String fullName = rs.getString("full_name");
 				String email = rs.getString("email");
 				String password = rs.getString("password");
@@ -46,6 +47,12 @@ public class TeacherExtractor implements ResultSetExtractor<List<UserModel>>{
 			float rate = rs.getFloat("rate");
 			teacher = new Teacher(userName, dob, gender, description, rate);
 			user.setTeacher(teacher);
+			
+			Role role = new Role();
+			int roleId = rs.getInt("role_id");
+			String roleName = rs.getString("role_name");
+			role = new Role(roleId, roleName);
+			user.setRole(role);
 		}
 		return new ArrayList<UserModel>(map.values());
 	}

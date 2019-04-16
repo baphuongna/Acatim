@@ -114,4 +114,9 @@ public class CourseServiceImpl implements CourseService{
 
 		return this.courseDAO.searchAllCourseByCateIdPaging(pageable, cateId, courseName);
 	}
+
+	@Override
+	public List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId) {
+		return this.courseDAO.getAllCourseByUserName(pageable, userName, subjectId);
+	}
 }

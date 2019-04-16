@@ -49,4 +49,6 @@ public interface CourseService {
 	List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId);
 
 	List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName);
+	
+	List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId);
 }

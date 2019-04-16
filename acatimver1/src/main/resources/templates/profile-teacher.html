@@ -456,7 +456,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row mg-b-15">
+                                                <div class="row mg-b-15" th:if="${showDetailMySelf == false}">
                                                 	<div class="col-lg-12">
                                                 		<div class="row">
                                                 			<div class="col-lg-12">
@@ -686,14 +686,18 @@
                                 </div>
                                 
                                 <div class="product-tab-list tab-pane fade" id="Course">
+                                	<div class="row" th:if="${checkDetail == false or showDetailMySelf == true}" style="justify-content: center; margin-bottom: 10px;">
+                                		<a th:href="@{/manager-course}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý Khóa Học của Bạn'"></button></a>
+                                		<a th:href="@{/add-course}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Thêm Khóa Học'"></button></a>
+                                	</div>
                                     <div class="row">
-                                    <p style="margin: 15px; color: #303030; line-height: 24px;" th:if="${courses.size() == 0 }">Chưa có khóa học nào...</p>
-												<div class="col-md-12 d-flex" th:each="course,wind : ${courses}">
-													<div class="course align-self-stretch" style="border: none; background: none; -webkit-box-shadow: none; box-shadow: 0px 3px 39px -24px rgba(0, 0, 0, 0.2);">
+                                    	<p style="margin: 15px; color: #303030; line-height: 24px;" th:if="${courses.size() == 0 }">Chưa có khóa học nào...</p>
+										<div class="col-md-12 d-flex" th:each="course,wind : ${courses}" >
+													<div class="course align-self-stretch" style="width: 100%; border: none; background: none; -webkit-box-shadow: none; box-shadow: 0px 3px 39px -24px rgba(0, 0, 0, 0.2);">
 														<div class="text p-4" style="border: 1px solid #e0dfdf; border-radius: 11px; background-color: #f7f7f7;">
 															<p class="category" >
 																<span th:text="${course.courseName}"></span> 
-																<span class="price">$<span class="price" th:text="${course.price}"></span></span>
+																<span class="price"><span class="price" th:text="${course.price}"></span>VND</span>
 															</p>
 															<h3 class="mb-3">
 																<a href="#" th:text="${course.courseName}"></a>
@@ -702,10 +706,9 @@
 															<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" th:text="'Chi Tiết'"></button></a>
 														</div>
 													</div>
-												</div>
-			                                    	
-			                                    </div>
-			                                </div>
+										</div>   	
+			                         </div>
+			                     </div>
 			                            </div>
 			                        </div>
 			                    </div>
