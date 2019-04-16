@@ -214,7 +214,7 @@
 			<div class="row">
 				<div class="col-md-4 d-flex ftco-animate" th:each="course,wind : ${allCourses}">
 					<div class="course align-self-stretch" style="width: 100%;">
-						<a href="#" class="img"
+						<a th:href="@{/detail-course(courseId=${course.courseId})}" class="img"
 							style="background-image: url(images/course-1.jpg)"></a>
 						<div class="text p-4">
 							<p class="category" >
@@ -222,7 +222,7 @@
 								<span class="price">$<span class="price" th:text="${course.price}"></span></span>
 							</p>
 							<h3 class="mb-3">
-								<a href="#" th:text="${course.courseName}"></a>
+								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 							</h3>
 							<p th:text="${course.courseDescription}"></p>
 							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
@@ -233,17 +233,17 @@
 			
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
 				
-				<a th:if="${hasPrevious == true}" th:href="@{/course(page=${previous}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<a th:if="${hasPrevious == true}" th:href="@{/course(page=${previous}, subjectId=${searchValue.subjectId})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
 				<div th:each="totalPage : ${totalPages}">
-				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/course(page=${totalPage}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/course(page=${totalPage},  subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
 				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
 				</div>
-				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/course(page=${next}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="'>>'">Next</a>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/course(page=${next}, subjectId=${searchValue.subjectId})}" th:text="'>>'">Next</a>
 				
-				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/course(page=${last}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
 				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
 			</div>
 		</div>
