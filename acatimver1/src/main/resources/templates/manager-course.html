@@ -146,7 +146,7 @@
 					<div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
                 <div class="container-fluid">
-				<form th:action="@{all-courses}" th:object="${searchValue}" method="POST">
+				<form th:action="@{manager-course}" th:object="${searchValue}" method="POST">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div >
@@ -247,21 +247,21 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination" >
                                     	<li class="page-item" >
-                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/all-courses(page=${first}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/manager-course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
                                         	<a th:if="${currentPage == first}" class="page-link" >Trang Đầu</a>
                                         </li>
                                     	<li class="page-item"  th:if="${hasPrevious == true}">
-                                        	<a class="page-link" th:href="@{/admin/all-courses(page=${previous}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
+                                        	<a class="page-link" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
                                         </li>
                                         <li class="page-item" th:each="totalPage : ${totalPages}">
-                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/all-courses(page=${totalPage}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/manager-course(page=${totalPage}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
                                         	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
                                         </li>
                                         <li class="page-item"  th:if="${hasNext == true}">
-                                        	<a class="page-link" th:href="@{/admin/all-courses(page=${next}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
+                                        	<a class="page-link" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
                                         </li>
                                         <li class="page-item">
-                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/all-courses(page=${last}, categoryId=${searchValue.categoryId}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/manager-course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
                                         	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
                                         </li>
                                     </ul>
@@ -293,7 +293,7 @@
                                     </div>
                                     <div class="modal-footer danger-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/blockStudent(courseId=${course.courseId})}">Đúng</a>
+                                        <a th:href="@{/blockStudent(courseId=${course.courseId})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
@@ -312,7 +312,7 @@
                                     </div>
                                     <div class="modal-footer warning-md">
                                         <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/admin/unlockStudent(courseId=${course.courseId})}">Đúng</a>
+                                        <a th:href="@{/unlockStudent(courseId=${course.courseId})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
