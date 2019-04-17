@@ -154,9 +154,9 @@
 		<div class="container">
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<form action="" class=" form-inline">
+				<form th:action="@{study-center}" th:object="${searchValue}" method="POST" class=" form-inline">
 					<div class="form-group">
-						<input type="text" class="form-control"
+						<input type="text" class="form-control" th:field="*{search}" 
 							placeholder="Gõ tên trung tâm vào đây"
 							style="width: 100%;">
 					</div>

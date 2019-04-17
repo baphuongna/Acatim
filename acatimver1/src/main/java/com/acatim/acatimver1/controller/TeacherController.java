@@ -70,8 +70,10 @@ public class TeacherController {
 			int total = userInfoService.loadAllUserTeacher().size();
 
 			pageableService = new PageableServiceImpl(9, total, currentPage, sort);
-
-			listTeacher = userInfoService.getAllUsersPageable(pageableService, "2");
+			
+			search.setRoleId("2");
+			
+			listTeacher = userInfoService.getAllUsersPageable(pageableService, search);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

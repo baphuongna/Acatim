@@ -13,9 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.TeacherForm;
-import com.acatim.acatimver1.mapper.TeacherExtractor;
 import com.acatim.acatimver1.mapper.TeacherFormMapper;
 import com.acatim.acatimver1.mapper.TeacherMapper;
+import com.acatim.acatimver1.mapper.UserMapper;
 
 @Repository
 @Transactional
@@ -43,7 +43,8 @@ public class TeacherDAO extends JdbcDaoSupport {
 	public List<UserModel> getAllUserTeacher() {
 		String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id INNER JOIN Teacher ON User.user_name = Teacher.user_name;";
 		try {
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new TeacherExtractor());
+			UserMapper mapper = new UserMapper();
+			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, mapper);
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -59,18 +60,6 @@ public class TeacherDAO extends JdbcDaoSupport {
 
 			TeacherForm teacher = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 			return teacher;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	public List<Teacher> getAllTeacher() {
-		String sql = TeacherMapper.BASE_SQL;
-
-		TeacherMapper mapper = new TeacherMapper();
-		try {
-			List<Teacher> userInfo = this.getJdbcTemplate().query(sql, mapper);
-			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}

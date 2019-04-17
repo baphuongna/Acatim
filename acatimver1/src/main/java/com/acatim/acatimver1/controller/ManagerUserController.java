@@ -64,7 +64,9 @@ public class ManagerUserController {
 			if (currentPage < 1) {
 				currentPage = 1;
 			}
-
+			SearchValue searchValue = new SearchValue();
+			searchValue.setRoleId(roleId);
+			
 			int total = userInfoService.getAllUsers(roleId).size();
 
 			pageableService = new PageableServiceImpl(8, total, currentPage, null);
@@ -78,9 +80,8 @@ public class ManagerUserController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, roleId));
-			SearchValue searchValue = new SearchValue();
-			searchValue.setRoleId(roleId);
+			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, searchValue));
+			
 			modelAndView.addObject("searchValue", searchValue);
 		} catch (NotFoundException e) {
 			e.printStackTrace();
@@ -114,7 +115,7 @@ public class ManagerUserController {
 				total = userInfoService.getAllUsers(search.getRoleId()).size();
 //				System.out.println(
 //						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
-				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search.getRoleId()));
+				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search));
 			} else {
 				List<UserModel> listUser = null;
 				if (search.getValue().equals("userName")) {

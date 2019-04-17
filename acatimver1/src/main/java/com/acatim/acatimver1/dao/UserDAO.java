@@ -14,12 +14,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.mapper.ContactExtractor;
 import com.acatim.acatimver1.mapper.ContactMapper;
-import com.acatim.acatimver1.mapper.StudentExtractor;
-import com.acatim.acatimver1.mapper.StudyCenterExtractor;
-import com.acatim.acatimver1.mapper.TeacherExtractor;
 import com.acatim.acatimver1.mapper.UserExtractor;
 import com.acatim.acatimver1.mapper.UserMapper;
 import com.acatim.acatimver1.service.PageableService;
@@ -119,26 +117,32 @@ public class UserDAO extends JdbcDaoSupport {
 		return arr;
 	}
 
-	public List<UserModel> getAllUsersPageable(PageableService pageable, String roleId) {
+	public List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue search) {
 
 		try {
 			String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id ";
-
+			
 			Object[] params = new Object[] {};
-			if (roleId != null) {
-				if (roleId.equals("1")) {
+			UserMapper mapper = new UserMapper();
+			if (search.getRoleId() != null) {
+				if (search.getRoleId().equals("1")) {
 					sql += " INNER JOIN Student ON User.user_name = Student.user_name ";
-				} else if (roleId.equals("2")) {
+				} else if (search.getRoleId().equals("2")) {
 					sql += " INNER JOIN Teacher ON User.user_name = Teacher.user_name ";
-				} else if (roleId.equals("3")) {
+				} else if (search.getRoleId().equals("3")) {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
 			sql += " Where User.role_id < 4 ";
 
-			if (roleId != null) {
+			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
-				params = append(params, roleId);
+				params = append(params, search.getRoleId());
+			}
+			
+			if(search.getSearch() != null) {
+				sql += " and User.full_name like ? ";
+				params = append(params, "%" + search.getSearch() + "%");
 			}
 
 			if (pageable.sort() != null) {
@@ -152,17 +156,9 @@ public class UserDAO extends JdbcDaoSupport {
 			params = append(params, pageable.getPageSize());
 
 			List<UserModel> userInfo = null;
-
-			if (roleId != null && roleId.equals("1")) {
-				userInfo = this.getJdbcTemplate().query(sql, params, new StudentExtractor());
-			} else if (roleId != null && roleId.equals("2")) {
-				userInfo = this.getJdbcTemplate().query(sql, params, new TeacherExtractor());
-			} else if (roleId != null && roleId.equals("3")) {
-				userInfo = this.getJdbcTemplate().query(sql, params, new StudyCenterExtractor());
-			} else {
-				userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
-			}
-
+			
+			userInfo = this.getJdbcTemplate().query(sql, params, mapper);
+			
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

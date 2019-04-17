@@ -12,6 +12,7 @@ import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
 import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
@@ -50,22 +51,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserModel user = this.UserDAO.findUserAccountByEmail(email);
 		return user;
 	}
-
-	@Override
-	public List<Teacher> loadAllTeacher() throws NotFoundException {
-		return this.TeacherDAO.getAllTeacher();
-	}
-
-	@Override
-	public List<StudyCenter> loadAllStudyCenter() throws NotFoundException {
-		return this.StudyCenterDAO.getAllStudyCenter();
-	}
-
-	@Override
-	public List<Student> loadAllStudent() throws NotFoundException {
-		return this.StudentDAO.getAllStudent();
-	}
-
+	
 	@Override
 	public List<UserModel> loadAllUserTeacher() throws NotFoundException {
 		return this.TeacherDAO.getAllUserTeacher();
@@ -210,8 +196,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserModel> getAllUsersPageable(PageableService pageable, String roleId) throws NotFoundException {
-		return this.UserDAO.getAllUsersPageable(pageable, roleId);
+	public List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue Search) throws NotFoundException {
+		return this.UserDAO.getAllUsersPageable(pageable, Search);
 	}
 
 	@Override

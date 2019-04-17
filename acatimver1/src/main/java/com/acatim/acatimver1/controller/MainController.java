@@ -41,9 +41,9 @@ public class MainController {
 		}
 		
 		try {
-			modelAndView.addObject("numberOfTeacher", userInfoService.loadAllTeacher().size());
-			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllStudyCenter().size());
-			modelAndView.addObject("numberOfStudent", userInfoService.loadAllStudent().size());
+			modelAndView.addObject("numberOfTeacher", userInfoService.loadAllUserTeacher().size());
+			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllUserStudyCenter().size());
+			modelAndView.addObject("numberOfStudent", userInfoService.loadAllUserStudent().size());
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}

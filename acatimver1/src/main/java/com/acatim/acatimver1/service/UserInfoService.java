@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
@@ -37,9 +38,7 @@ public interface UserInfoService {
 	
 	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
 	List<UserModel> searchUserByEmail(String email)  throws NotFoundException;
-	List<Teacher> loadAllTeacher() throws NotFoundException;
-	List<StudyCenter> loadAllStudyCenter() throws NotFoundException;
-	List<Student> loadAllStudent() throws NotFoundException;
+
 	List<UserModel> loadAllUserTeacher() throws NotFoundException;
 	List<UserModel> loadAllUserStudyCenter() throws NotFoundException;
 	List<UserModel> loadAllUserStudent() throws NotFoundException;
@@ -51,7 +50,7 @@ public interface UserInfoService {
 	StudyCenterForm getUserStudyCenterByUserName(String userName) throws NotFoundException;
 	
 	List<UserModel> getAllUsers(String roleId) throws NotFoundException;
-	List<UserModel> getAllUsersPageable(PageableService pageable, String roleId) throws NotFoundException;
+	List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue Search) throws NotFoundException;
 	List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) throws NotFoundException;
 	List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException;
 	List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException;
@@ -66,4 +65,5 @@ public interface UserInfoService {
 	List<UserModel> getAllTeacherST() throws NotFoundException;
 	
 	List<UserModel> getAllManager() throws NotFoundException;
+
 }

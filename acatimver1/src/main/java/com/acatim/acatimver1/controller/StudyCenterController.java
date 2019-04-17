@@ -72,8 +72,10 @@ public class StudyCenterController {
 			int total = userInfoService.loadAllUserStudyCenter().size();
 
 			pageableService = new PageableServiceImpl(9, total, currentPage, sort);
-
-			listStudyCenter = userInfoService.getAllUsersPageable(pageableService, "3");
+			
+			search.setRoleId("3");
+			
+			listStudyCenter = userInfoService.getAllUsersPageable(pageableService, search);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

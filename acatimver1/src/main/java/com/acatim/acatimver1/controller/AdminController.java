@@ -36,9 +36,9 @@ public class AdminController {
 		
 		
 		try {
-			modelAndView.addObject("allStudent", userInfoService.loadAllStudent().size());
-			modelAndView.addObject("allStudyCenter", userInfoService.loadAllStudyCenter().size());
-			modelAndView.addObject("allTeacher", userInfoService.loadAllTeacher().size());
+			modelAndView.addObject("allStudent", userInfoService.loadAllUserStudent().size());
+			modelAndView.addObject("allStudyCenter", userInfoService.loadAllUserStudyCenter().size());
+			modelAndView.addObject("allTeacher", userInfoService.loadAllUserTeacher().size());
 			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
 			modelAndView.addObject("allSubject", subjectService.getListSubject().size());
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
