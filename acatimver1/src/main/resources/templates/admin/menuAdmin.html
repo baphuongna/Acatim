@@ -28,7 +28,7 @@
                                 <li><a title="Dashboard" th:href="@{/admin/}"><span class="mini-sub-pro">Dashboard </span></a></li>
                             </ul>
                         </li>
-                        <li>
+                        <li sec:authorize="hasAnyAuthority('Admin')">
                             <a class="has-arrow" th:href="@{/admin/all-managers}" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Quản Lý Nhân Viên</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Professors" th:href="@{/admin/all-managers}"><span class="mini-sub-pro">Danh Sách Nhân Viên</span></a></li>
