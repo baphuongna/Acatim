@@ -14,6 +14,8 @@ public class SearchValue {
 	
 	private String search;
 	
+	private String userName;
+	
 	private String sortValue;
 
 	public SearchValue() {

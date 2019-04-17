@@ -141,8 +141,10 @@ public class UserDAO extends JdbcDaoSupport {
 			}
 			
 			if(search.getSearch() != null) {
-				sql += " and User.full_name like ? ";
-				params = append(params, "%" + search.getSearch() + "%");
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
 			}
 
 			if (pageable.sort() != null) {

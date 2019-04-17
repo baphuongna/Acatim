@@ -3,6 +3,7 @@ package com.acatim.acatimver1.service;
 import java.util.List;
 
 import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.SearchValue;
 
 public interface CourseService {
 	
@@ -51,4 +52,6 @@ public interface CourseService {
 	List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName);
 	
 	List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId);
+	
+	List<Course> getAllCourse(PageableService pageable, SearchValue search);
 }
