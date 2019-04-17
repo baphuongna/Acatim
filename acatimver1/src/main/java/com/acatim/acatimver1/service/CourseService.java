@@ -30,28 +30,8 @@ public interface CourseService {
 	List<Course> getCourseByUserNameWithFullInfo(String userName);
 
 	String genCourseId();
-
-	List<Course> getAllCoursePaging(PageableService pageable);
-
-	List<Course> searchAllCoursePaging(PageableService pageable, String courseName);
-
-	List<Course> getAllCourseBySujectId(String subjectId);
-
-	List<Course> searchAllCourseBySujectId(String subjectId, String courseName);
-
-	List<Course> getAllCourseBySujectIdPaging(PageableService pageable, String subjectId);
-
-	List<Course> searchAllCourseBySujectIdPaging(PageableService pageable, String subjectId, String courseName);
-
-	List<Course> getAllCourseByCateId(String cateId);
-
-	List<Course> searchAllCourseByCateId(String cateId, String courseName);
-
-	List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId);
-
-	List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName);
 	
-	List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId);
+	List<Course> getAllCoursePaging(PageableService pageable, SearchValue search);
 	
-	List<Course> getAllCourse(PageableService pageable, SearchValue search);
+	List<Course> getAllCourse(SearchValue search);
 }

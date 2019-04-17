@@ -69,60 +69,13 @@ public class CourseServiceImpl implements CourseService{
 		return newCourseId;
 	}
 
-	public List<Course> getAllCoursePaging(PageableService pageable) {
-		return this.courseDAO.getAllCoursePaging(pageable);
-	}
-
-	public List<Course> searchAllCoursePaging(PageableService pageable, String courseName) {
-		return this.courseDAO.searchAllCoursePaging(pageable, courseName);
-	}
-
-	public List<Course> getAllCourseBySujectId(String subjectId) {
-		return this.courseDAO.getAllCourseBySujectId(subjectId);
-	}
-
-	public List<Course> searchAllCourseBySujectId(String subjectId, String courseName) {
-
-		return this.courseDAO.searchAllCourseBySujectId(subjectId, courseName);
-	}
-
-	public List<Course> getAllCourseBySujectIdPaging(PageableService pageable, String subjectId) {
-
-		return this.courseDAO.getAllCourseBySujectIdPaging(pageable, subjectId);
-	}
-
-	public List<Course> searchAllCourseBySujectIdPaging(PageableService pageable, String subjectId, String courseName) {
-
-		return this.courseDAO.searchAllCourseBySujectIdPaging(pageable, subjectId, courseName);
-	}
-
-	public List<Course> getAllCourseByCateId(String cateId) {
-
-		return this.courseDAO.getAllCourseByCateId(cateId);
-	}
-
-	public List<Course> searchAllCourseByCateId(String cateId, String courseName) {
-
-		return this.courseDAO.searchAllCourseByCateId(cateId, courseName);
-	}
-
-	public List<Course> getAllCourseByCateIdPaging(PageableService pageable, String cateId) {
-
-		return this.courseDAO.getAllCourseByCateIdPaging(pageable, cateId);
-	}
-
-	public List<Course> searchAllCourseByCateIdPaging(PageableService pageable, String cateId, String courseName) {
-
-		return this.courseDAO.searchAllCourseByCateIdPaging(pageable, cateId, courseName);
+	@Override
+	public List<Course> getAllCoursePaging(PageableService pageable, SearchValue search) {
+		return this.courseDAO.getAllCoursePaging(pageable, search);
 	}
 
 	@Override
-	public List<Course> getAllCourseByUserName(PageableService pageable, String userName, String subjectId) {
-		return this.courseDAO.getAllCourseByUserName(pageable, userName, subjectId);
-	}
-
-	@Override
-	public List<Course> getAllCourse(PageableService pageable, SearchValue search) {
-		return this.courseDAO.getAllCourse(pageable, search);
+	public List<Course> getAllCourse(SearchValue search) {
+		return this.courseDAO.getAllCourse(search);
 	}
 }

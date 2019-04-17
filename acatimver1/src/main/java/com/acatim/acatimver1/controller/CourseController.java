@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -108,14 +109,14 @@ public class CourseController {
 					}
 				}
 			}
-			if (search.getSearch() == null) {
-				total = courseService.getAllCourse().size();
-			} else {
-				total = courseService.searchCourseByCourseName(search.getSearch()).size();
-			}
 
+			total = courseService.getAllCourse(search).size();
+			
 			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
-			modelAndView.addObject("allCourses", courseService.getAllCourse(pageableService, search));
+			
+			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
+			
+			modelAndView.addObject("allCourses", Courses);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
@@ -125,9 +126,7 @@ public class CourseController {
 			modelAndView.addObject("next", pageableService.next());
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
-
 			modelAndView.addObject("searchValue", search);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -180,7 +179,6 @@ public class CourseController {
 
 	@RequestMapping(value = "/manager-course", method = RequestMethod.GET)
 	public ModelAndView managerCourse(@RequestParam(required = false, name = "page") String page, Principal principal,
-			@RequestParam(required = false, name = "subjectId") String subjectId,
 			@ModelAttribute("searchValue") SearchValue search) throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
 		String userName = null;
@@ -192,14 +190,8 @@ public class CourseController {
 			page = 1 + "";
 		}
 
-		if (subjectId == null) {
-			subjectId = "0";
-		} else {
-			search.setSubjectId(subjectId);
-		}
-
-		if (search.getSubjectId() == null) {
-			search.setSubjectId("0");
+		if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
+			search.setSubjectId(null);
 		}
 
 		try {
@@ -208,20 +200,19 @@ public class CourseController {
 			if (currentPage < 1) {
 				currentPage = 1;
 			}
-
-			int total = courseService.getCourseByUserName(userName).size();
-
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
-
+			
+			search.setUserName(userName);
+			
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
 
-			if (search.getSubjectId().equals("0")) {
-				modelAndView.addObject("allCourses",
-						courseService.getAllCourseByUserName(pageableService, userName, null));
-			} else {
-				modelAndView.addObject("allCourses",
-						courseService.getAllCourseByUserName(pageableService, userName, search.getSubjectId()));
-			}
+			int total = courseService.getAllCourse(search).size();
+			
+			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+			
+			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
+			
+			modelAndView.addObject("allCourses", Courses);
+			
 			modelAndView.addObject("allSubjects", subjectService.getListSubject());
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
@@ -234,7 +225,6 @@ public class CourseController {
 			modelAndView.addObject("first", pageableService.first());
 
 			modelAndView.addObject("searchValue", search);
-			System.out.println(search);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -251,8 +241,6 @@ public class CourseController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		redirectAttributes.addFlashAttribute("searchValue", search);
-		System.out.println(search);
-
 		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
