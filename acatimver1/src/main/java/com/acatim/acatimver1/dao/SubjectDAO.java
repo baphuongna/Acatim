@@ -25,7 +25,7 @@ public class SubjectDAO extends JdbcDaoSupport {
 	}
 
 	public List<Subject> getAllSubject() {
-		String sql = "SELECT * FROM Subject INNER JOIN Course ON Course.subject_id = Subject.subject_id;";
+		String sql = "SELECT * FROM Subject;";
 
 		List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectExtractor());
 		return subjects;
