@@ -398,6 +398,9 @@
 														                </div>
 														            </div>
 														        </div>
+														        <!-- <div class="col-xs-4 col-md-4">
+														        	<img src="https://hausa.premiumtimesng.com/wp-content/files/sites/4/2018/07/man-thinking-silhouette-hi.png">
+														        </div> -->
 														    </div>
                                                         </div>
                                                     </div>
@@ -476,14 +479,6 @@
 															        	<form th:action="@{/rateTeacher}" th:object="${rateTeacher}" method="post">
 															        		<input type="hidden" th:field="*{recieverName}" readonly>
 															                <div id="page3" >
-															                    <div class="mobile_progress_bar">
-															                        <div class="text-left visible-xs" style="margin-bottom:40px;">
-															                            <div class="progress">
-															                                <div data-percentage="0%" style="width: 60%;" class="progress-bar progress-bar-info" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-															                            </div>
-															                            <strong>Tổng số đánh giá của bạn</strong>
-															                        </div>
-															                    </div>
 															                    <div class="modal-body row">
 															                        <div class="col-md-12">
 															                            <div class="col-md-6">
@@ -491,7 +486,7 @@
 															                                    <h5>
 															                                        Bạn thấy các mức học của chương trình dạy thế nào?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="easyLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="easyLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="easyLevel" type="hidden" th:field="*{rateTeacher.easyLevel}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.easyLevel')}" th:errors="*{rateTeacher.easyLevel}" class="validation-message"></label>
 																							</div>
@@ -502,7 +497,7 @@
 															                                    <h5>
 															                                        Độ khó của các khung chương trình dạy?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="examDifficulty" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="examDifficulty" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="examDifficulty" type="hidden" th:field="*{rateTeacher.examDifficulty}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.examDifficulty')}" th:errors="*{rateTeacher.examDifficulty}" class="validation-message"></label>
 															                                </div>
@@ -514,7 +509,7 @@
 															                                    <h5>
 															                                        Giáo án có hữu ích với bạn không?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="textbookUse" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="textbookUse" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="textbookUse" type="hidden" th:field="*{rateTeacher.textbookUse}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.textbookUse')}" th:errors="*{rateTeacher.textbookUse}" class="validation-message"></label>
 															                                </div>
@@ -525,7 +520,7 @@
 															                                    <h5>
 															                                        Sự nhiệt tình trợ giúp, giảng giải của giáo viên thế nào?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="helpfulLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="helpfulLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="helpfulLevel" type="hidden" th:field="*{rateTeacher.helpfulLevel}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.helpfulLevel')}" th:errors="*{rateTeacher.helpfulLevel}" class="validation-message"></label>
 															                                </div>
@@ -537,7 +532,7 @@
 															                                    <h5>
 															                                        Mức độ ghê gớm của giáo viên thế nào?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange" id="rating" class="rating" name="clarityLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="clarityLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="clarityLevel" type="hidden" th:field="*{rateTeacher.clarityLevel}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.clarityLevel')}" th:errors="*{rateTeacher.clarityLevel}" class="validation-message"></label>
 															                                </div>
@@ -548,7 +543,7 @@
 															                                    <h5>
 															                                        Đánh giá kiến thức của giáo viên?
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange;" id="rating" class="rating" name="knowledgeable" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="knowledgeable" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="knowledgeable" type="hidden" th:field="*{rateTeacher.knowledgeable}" readonly>
 															                                    <label th:if="${#fields.hasErrors('rateTeacher.knowledgeable')}" th:errors="*{rateTeacher.knowledgeable}" class="validation-message"></label>
 															                                </div>
@@ -572,7 +567,7 @@
 															                    </div>
 															                    <div class="col-md-12">
 															                        <div class="row">
-															                            <div class="col-lg-6 col-sm-6 col-md-6 text-left hidden-xs">
+															                            <div style="font-size: 18px;" class="col-lg-6 col-sm-6 col-md-6 text-left hidden-xs">
 															                                <strong>Tổng đánh giá của bạn: </strong>
 															                               <label id="demo" style="color:red">0</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
 															                                <input id="total" type="hidden"  th:field="*{rate}" readonly>

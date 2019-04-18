@@ -2203,7 +2203,7 @@ ul.two-part-sp li{
     text-align: center;
 }
 .lead-head h3:before, .lead-head h3:after {
-    width: 30%;
+    width: 16%;
 }
 .comment-head h3::before, .lead-head h3:before {
     background: #e7e7e7 none repeat scroll 0 0;
@@ -2214,7 +2214,7 @@ ul.two-part-sp li{
     top: 50%;
 }
 .lead-head h3:before, .lead-head h3:after {
-    width: 30%;
+    width: 16%;
 }
 .comment-head h3::after, .lead-head h3:after {
     background: #e7e7e7 none repeat scroll 0 0;

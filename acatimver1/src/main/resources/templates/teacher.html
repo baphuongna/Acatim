@@ -160,7 +160,7 @@
 						<input type="hidden" th:field="*{rateFilter}">
 						<input type="hidden" th:field="*{sortValue}">
 					</div>
-					<input type="submit" class="btn" value="Tìm kiếm"
+					<input type="submit" class="btn btn-primary" value="Tìm kiếm"
 						style="width: 100px; height: 57px;">
 				</form>
 			</div>
@@ -174,7 +174,7 @@
 					</h4>
 
 					<form th:action="@{teacher}" th:object="${searchValue}"
-						method="POST" class=" form-inline">
+						method="POST" class=" form-inline" style="padding-top: 10px;">
 						
 						<div class="dropdown" style="margin-right: 1%; height: 58px;">
 							<button class="btn dropdown-toggle" type="button"
@@ -218,7 +218,7 @@
 								<option value="4">Đánh Giá từ Cao tới Thấp</option>
 							</select>
 						</div>
-						<input type="submit" class="btn" value="Lọc"
+						<input type="submit" class="btn btn-primary" value="Lọc"
 							style="height: 58px; width: 100px;">
 
 					</form>
@@ -233,25 +233,24 @@
 							<div class="img"
 								style="background-image: url(images/person_1.jpg);"></div>
 							<div class="info ml-4">
-								<h3>
+								<h4>
 									<a th:href="@{/profileDetail(userName=${teacher.userName})}"
 										th:text="${teacher.fullName}"></a>
-								</h3>
+								</h4>
 								<span class="position"
 									th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}"></span>
 								<p class="ftco-social d-flex">
-									<a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-twitter"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-facebook"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-instagram"></span></a>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star"></span>
+									<span class="glyphicon glyphicon-star-empty"></span>
 								</p>
 							</div>
 						</div>
-						<div class="text">
+						<div style="padding-top: 16px;" class="text">
 							<!-- <p th:utext="${#strings.replace(teacher.teacher.description,'\n','&lt;/br&gt;')}"></p> -->
+							<a th:href="@{/profileDetail(userName=${teacher.userName})}"><button type="button" class="btn btn-primary">Xem thêm</button></a>
 						</div>
 					</div>
 				</div>
