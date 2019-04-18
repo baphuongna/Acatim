@@ -161,17 +161,70 @@
 			</div>
 			
 			<div class="panel panel-default">
-
-				<div class="panel-heading accordion-head" style="width: 100%; ">
+				<div class="panel-heading accordion-head d-flex" style="width: 100%; ">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion2"
+						<span class="glyphicon glyphicon-filter"></span> Bộ lọc
+						<!-- <a data-toggle="collapse" data-parent="#accordion2"
 							href="#collapse5"> <span class="glyphicon glyphicon-filter"></span>
 							Bộ lọc
-						</a>
+						</a> -->
 					</h4>
+					<form style="margin: auto;" th:action="@{course}"
+						th:object="${searchValue}" method="POST" class="form-inline">
+						
+						<div class="dropdown" style="margin-right: 1%; height: 58px;">
+							<button class="btn dropdown-toggle" type="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255);"></button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" th:field="*{categoryId}">
+								<a class="dropdown-item" th:href="@{/course(categoryId='0')}" th:text="'-- Tất Cả --'"></a>
+								<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{course(categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
+							</div>
+						</div>
+
+						<div class="d-flex ftco-animate" style="justify-content: center;">
+							<div class="chosen-select-single mg-b-20">
+								<select class="form-control" th:field="*{subjectId}">
+									<option value="0" th:text="'-- Lọc Theo Môn Học --'"></option>
+									<option th:if="${allSubjects != null}"
+										th:each="subject : ${allSubjects}"
+										th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
+								</select>
+							</div>
+						</div>
+						<!-- <div class="d-flex ftco-animate" style="justify-content: center;">
+							<div class="chosen-select-single mg-b-20">
+								<select class="form-control" th:field="*{rateFilter}">
+									<option value="0" th:text="'-- Lọc Theo Đánh Giá --'"></option>
+									<option value="1" th:text="'1 Sao'"></option>
+									<option value="2" th:text="'2 Sao'"></option>
+									<option value="3" th:text="'3 Sao'"></option>
+									<option value="4" th:text="'4 Sao'"></option>
+									<option value="5" th:text="'5 Sao'"></option>
+								</select>
+							</div>
+						</div> -->
+						<div class="d-flex ftco-animate" style="justify-content: center;">
+							<div class="chosen-select-single mg-b-20">
+								<select class="form-control" th:field="*{sortValue}">
+									<option value="0" th:text="'-- Sắp Xếp theo --'"></option>
+									<option value="1" th:text="'Tên'"></option>
+									<option value="2" th:text="'Ngày cập nhật'"></option>
+									<option value="3" th:text="'Giá từ Thấp tới Cao'"></option>
+									<option value="4" th:text="'Giá từ Cao tới Thấp'"></option>
+								</select>
+							</div>
+						</div>
+
+						<div class="d-flex ftco-animate" style="justify-content: center;">
+							<input type="submit" class="btn" value="Lọc"
+								style="height: 58px; width: 100px;">
+						</div>
+					</form>
+
 				</div>
 
-				<div id="collapse5" class="panel-collapse panel-ic collapse">
+				<!-- <div id="collapse5" class="panel-collapse panel-ic collapse">
 					<div style="padding: 0px;" class="panel-body admin-panel-content">
 						<div class="filter-form" style="justify-content: center;">
 							<form style="width: 50%; margin: auto;" th:action="@{course}" th:object="${searchValue}" method="POST" class=" form-inline">
@@ -181,7 +234,7 @@
 										<select class="form-control" th:field="*{categoryId}">
 											<option value="0">--Tât Cả Các Thể loại--</option>
 												<option th:if="${allCategories != null}" th:each="category : ${allCategories}" th:value="${category.categoryId}">
-												[[${category.categoryName}]]
+												
 												</option>
 										</select>
 									</div>
@@ -208,7 +261,7 @@
 
 
 					</div>
-				</div>
+				</div> -->
 			</div>
 			
 			<div class="row">
@@ -219,7 +272,7 @@
 						<div class="text p-4">
 							<p class="category" >
 								<span th:text="${course.courseName}"></span> 
-								<span class="price">$<span class="price" th:text="${course.price}"></span></span>
+								<span class="price"><span class="price" th:text="${course.price}"></span> VND</span>
 							</p>
 							<h3 class="mb-3">
 								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>

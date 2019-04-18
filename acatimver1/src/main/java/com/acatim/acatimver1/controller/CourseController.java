@@ -63,6 +63,7 @@ public class CourseController {
 	@RequestMapping(value = "/course", method = RequestMethod.GET)
 	public ModelAndView showAllCourseFull(@RequestParam(required = false, name = "page") String page, Model model,
 			@RequestParam(required = false, name = "sortValue") String sortValue,
+			@RequestParam(required = false, name = "categoryId") String categoryId,
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -75,10 +76,11 @@ public class CourseController {
 			search.setSubjectId(null);
 		}
 
-		if (search.getCategoryId() != null && search.getCategoryId().equals("0")) {
+		if (search.getCategoryId() != null && search.getCategoryId().equals("0") || search.getCategoryId() != null && search.getCategoryId().trim().equals("")) {
 			search.setCategoryId(null);
 		}
-
+		
+		System.out.println(search);
 		try {
 			int currentPage = Integer.parseInt(page);
 
@@ -89,7 +91,15 @@ public class CourseController {
 			int total = courseService.getAllCourse().size();
 
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
-
+			
+			if (search.getCategoryId() != null) {
+				modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));
+			}else {
+				modelAndView.addObject("allSubjects", subjectService.getAllSubject());
+			}
+			
+			
+			
 			Sort sort = null;
 
 			if (sortValue != null) {

@@ -34,16 +34,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
- 
-        System.out.println("Found User: " + appUser);
- 
-        // [ROLE_USER, ROLE_ADMIN,..]
+        // [Student, Teacher, Study Center, Manager, Admin]
         List<String> roleNames = this.RoleDAO.getRoleNames(appUser.getUserName());
  
         List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
         if (roleNames != null) {
             for (String role : roleNames) {
-                // ROLE_USER, ROLE_ADMIN,..
+            	// Student, Teacher, Study Center, Manager, Admin
                 GrantedAuthority authority = new SimpleGrantedAuthority(role);
                 grantList.add(authority);
             }

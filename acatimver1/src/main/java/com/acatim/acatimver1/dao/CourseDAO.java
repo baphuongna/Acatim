@@ -128,7 +128,7 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " and Course.user_name = ? ";
 			params = append(params, search.getUserName());
 		}
-		
+
 		if(search.getSearch() != null) {
 			if(search.getSearch().trim().length() != 0) {
 				sql += " and Course.courseName like ? ";

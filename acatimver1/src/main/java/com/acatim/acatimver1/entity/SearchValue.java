@@ -17,6 +17,8 @@ public class SearchValue {
 	private String userName;
 	
 	private String sortValue;
+	
+	private String rateFilter;
 
 	public SearchValue() {
 		super();
