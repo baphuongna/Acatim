@@ -167,53 +167,64 @@
 
 				<div class="panel-heading accordion-head" style="width: 100%; ">
 					<h4 class="panel-title">
-						<a data-toggle="collapse" data-parent="#accordion2"
+						<span class="glyphicon glyphicon-filter"></span> Bộ lọc
+						<!-- <a data-toggle="collapse" data-parent="#accordion2"
 							href="#collapse5"> <span class="glyphicon glyphicon-filter"></span>
 							Bộ lọc
-						</a>
+						</a> -->
 					</h4>
-				</div>
 
-				<div id="collapse5" class="panel-collapse panel-ic collapse">
-					<div class="panel-body admin-panel-content">
-						<div class="filter-form" style=" display: flex; justify-content: center;">
-							<form th:action="@{teacher}" th:object="${searchValue}" method="POST" class=" form-inline">
-								<!-- <div class="chosen-select-single mg-b-20">
-									<select class="form-control">
-										<option value="">-Tỉnh-</option>
-										<option value="1">Hà Nội</option>
-										<option value="2">Đà Năng</option>
-										<option value=3>Hồ Chí Minh</option>
-									</select>
-								</div> -->
-								<div class="chosen-select-single mg-b-20">
-									<select class="form-control" th:field="*{sortValue}">
-										<option value="0">-Sắp Xếp theo-</option>
-										<option value="1">Tên</option>
-										<option value="2">Ngày cập nhật</option>
-										<option value="3">Đánh Giá từ Thấp tới Cao</option>
-										<option value="4">Đánh Giá từ Cao tới Thấp</option>
-									</select>
-								</div>
-								<input type="submit" class="btn" value="Lọc" style="height: 100%; width: auto;">
-								
-							</form>
-
-							<!-- <div class="drop-sort">
-								<button type="button" class="btn dropdown-toggle "
-									data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false">Sắp Xếp theo</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Tên</a> <a
-										class="dropdown-item" href="#">Ngày cập nhật</a>
-									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#">Đánh Giá từ Thấp tới Cao</a>
-									<a class="dropdown-item" href="#">Đánh Giá từ Cao tới Thấp</a>
-								</div>
-							</div> -->
+					<form th:action="@{teacher}" th:object="${searchValue}"
+						method="POST" class=" form-inline">
+						
+						<div class="dropdown" style="margin-right: 1%; height: 58px;">
+							<button class="btn dropdown-toggle" type="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255);"></button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" th:field="*{categoryId}">
+								<a class="dropdown-item" th:href="@{/teacher(categoryId='0')}" th:text="'-- Tất Cả --'"></a>
+								<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{teacher(categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
+							</div>
 						</div>
-					</div>
+
+						<div class="d-flex ftco-animate" style="justify-content: center;">
+							<div class="chosen-select-single mg-b-20">
+								<select class="form-control" th:field="*{subjectId}">
+									<option value="0" th:text="'-- Lọc Theo Môn Học --'"></option>
+									<option th:if="${allSubjects != null}"
+										th:each="subject : ${allSubjects}"
+										th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
+								</select>
+							</div>
+						</div>
+						<div class="d-flex ftco-animate" style="justify-content: center;">
+							<div class="chosen-select-single mg-b-20">
+								<select class="form-control" th:field="*{rateFilter}">
+									<option value="0" th:text="'-- Lọc Theo Đánh Giá --'"></option>
+									<option value="1" th:text="'1 Sao'"></option>
+									<option value="2" th:text="'2 Sao'"></option>
+									<option value="3" th:text="'3 Sao'"></option>
+									<option value="4" th:text="'4 Sao'"></option>
+									<option value="5" th:text="'5 Sao'"></option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="chosen-select-single mg-b-20">
+							<select class="form-control" th:field="*{sortValue}">
+								<option value="0">-Sắp Xếp theo-</option>
+								<option value="1">Tên</option>
+								<option value="2">Ngày cập nhật</option>
+								<option value="3">Đánh Giá từ Thấp tới Cao</option>
+								<option value="4">Đánh Giá từ Cao tới Thấp</option>
+							</select>
+						</div>
+						<input type="submit" class="btn" value="Lọc"
+							style="height: 100%; width: auto;">
+
+					</form>
 				</div>
+
 			</div>
 			<div class="row">
 				<div class="col-lg-4 mb-sm-4 ftco-animate"
@@ -250,17 +261,23 @@
 
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/teacher(page=${first}, sortValue=${searchValue.sortValue})}">Trang Đầu</a>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary"
+				 th:href="@{/teacher(page=${first}, sortValue=${searchValue.sortValue})}">Trang Đầu</a>
+				 
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
 				
 				<a th:if="${hasPrevious == true}" th:href="@{/teacher(page=${previous}, sortValue=${searchValue.sortValue})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				
 				<div th:each="totalPage : ${totalPages}">
-				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/teacher(page=${totalPage}, sortValue=${searchValue.sortValue})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" 
+				th:href="@{/teacher(page=${totalPage}, sortValue=${searchValue.sortValue})}" th:text="${totalPage}">1</a>
 				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
 				</div>
-				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/teacher(page=${next}, sortValue=${searchValue.sortValue})}" th:text="'>>'">Next</a>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary"
+				 th:href="@{/teacher(page=${next}, sortValue=${searchValue.sortValue})}" th:text="'>>'">Next</a>
 				
-				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/teacher(page=${last}, sortValue=${searchValue.sortValue})}">Trang Cuối</a>
+				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary"
+				 th:href="@{/teacher(page=${last}, sortValue=${searchValue.sortValue})}">Trang Cuối</a>
 				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
 			</div>
 

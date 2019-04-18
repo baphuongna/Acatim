@@ -133,11 +133,18 @@ public class UserDAO extends JdbcDaoSupport {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
+			
 			sql += " Where User.role_id < 4 ";
 
 			if (search.getRoleId() != null) {
-				sql += " and User.role_id = ? ";
+ 				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
+			}
+			
+			if (search.getRateFilter() != null) {
+				sql += " and rate >= ? and rate < ?";
+				params = append(params, search.getRateFilter());
+				params = append(params, Integer.parseInt(search.getRateFilter())+1);
 			}
 			
 			if(search.getSearch() != null) {

@@ -29,4 +29,6 @@ public interface SubjectService {
 	List<Subject> getSubjectByCategoryIdPageable(Pageable pageable, String categoryId);
 	
 	String genSubjectId();
+	
+	List<Subject> getSubjectByUserName(String userName);
 }

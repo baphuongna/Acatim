@@ -52,6 +52,14 @@ public class SubjectDAO extends JdbcDaoSupport {
 		return subject;
 	}
 	
+	public List<Subject> getSubjectByUserName(String userName) {
+		String sql = "SELECT * FROM Subject INNER JOIN Course ON Course.subject_id = Subject.subject_id Where Course.user_name = ?;";
+		Object[] params = new Object[] { userName };
+		SubjectMapper mapper = new SubjectMapper();
+		List<Subject> subject = this.getJdbcTemplate().query(sql, params, mapper);
+		return subject;
+	}
+	
 	
 	
 	public List<Subject> getListSubjectPageable(Pageable pageable) {
