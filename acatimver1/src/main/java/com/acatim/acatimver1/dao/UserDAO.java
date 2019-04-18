@@ -116,6 +116,53 @@ public class UserDAO extends JdbcDaoSupport {
 		arr[N] = element;
 		return arr;
 	}
+	
+	public List<UserModel> getAllUsers(SearchValue search) {
+
+		try {
+			String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id ";
+			
+			Object[] params = new Object[] {};
+			UserMapper mapper = new UserMapper();
+			if (search.getRoleId() != null) {
+				if (search.getRoleId().equals("1")) {
+					sql += " INNER JOIN Student ON User.user_name = Student.user_name ";
+				} else if (search.getRoleId().equals("2")) {
+					sql += " INNER JOIN Teacher ON User.user_name = Teacher.user_name ";
+				} else if (search.getRoleId().equals("3")) {
+					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
+				}
+			}
+			
+			sql += " Where User.role_id < 4 ";
+
+			if (search.getRoleId() != null) {
+ 				sql += " and User.role_id = ? ";
+				params = append(params, search.getRoleId());
+			}
+			
+			if (search.getRateFilter() != null) {
+				sql += " and rate >= ? and rate < ?";
+				params = append(params, search.getRateFilter());
+				params = append(params, Integer.parseInt(search.getRateFilter())+1);
+			}
+			
+			if(search.getSearch() != null) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+
+			List<UserModel> userInfo = null;
+			
+			userInfo = this.getJdbcTemplate().query(sql, params, mapper);
+			
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 
 	public List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue search) {
 

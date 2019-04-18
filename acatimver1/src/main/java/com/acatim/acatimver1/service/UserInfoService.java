@@ -51,6 +51,8 @@ public interface UserInfoService {
 	
 	List<UserModel> getAllUsers(String roleId) throws NotFoundException;
 	List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue Search) throws NotFoundException;
+	List<UserModel> getAllUsers(SearchValue search);
+	
 	List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) throws NotFoundException;
 	List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException;
 	List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException;

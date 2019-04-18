@@ -273,4 +273,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return this.UserDAO.getAllManager();
 	}
 
+	@Override
+	public List<UserModel> getAllUsers(SearchValue search) {
+		return this.UserDAO.getAllUsers(search);
+	}
+
 }

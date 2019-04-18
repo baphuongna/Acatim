@@ -33,7 +33,6 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Professors" th:href="@{/admin/all-managers}"><span class="mini-sub-pro">Danh Sách Nhân Viên</span></a></li>
                                 <li><a title="Add Professor"  th:href="@{/admin/add-manager}"><span class="mini-sub-pro">Thêm Nhân Viên</span></a></li>
-                                <li><a title="Professor Profile" th:href="@{/admin/manager-profile}"><span class="mini-sub-pro">Professor Profile</span></a></li>
                             </ul>
                         </li>
 						 <li>
@@ -51,23 +50,20 @@
                             <ul class="submenu-angle" aria-expanded="false">
                                 <li><a title="All Courses" th:href="@{/admin/all-courses}"><span class="mini-sub-pro">Danh Sách Khóa Học</span></a></li>
                                 <li><a title="Add Courses" th:href="@{/admin/add-course}"><span class="mini-sub-pro">Thêm Khóa học</span></a></li>
-                                <li><a title="Courses Profile" th:href="@{/admin/course-info}"><span class="mini-sub-pro">Courses Info</span></a></li>
                             </ul>
                         </li>
 						 <li>
-                            <a class="has-arrow" th:href="@{/admin/all-subjects}" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Subject</span></a>
+                            <a class="has-arrow" th:href="@{/admin/all-subjects}" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Môn Học</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" th:href="@{/admin/all-subjects}"><span class="mini-sub-pro">All Subject</span></a></li>
-                                <li><a title="Add Courses" th:href="@{/admin/add-subject}"><span class="mini-sub-pro">Add Subject</span></a></li>
-                                <li><a title="Courses Profile" th:href="@{/admin/subject-info}"><span class="mini-sub-pro">Subject Info</span></a></li>
+                                <li><a title="All Courses" th:href="@{/admin/all-subjects}"><span class="mini-sub-pro">Danh Sách Môn Học</span></a></li>
+                                <li><a title="Add Courses" th:href="@{/admin/add-subject}"><span class="mini-sub-pro">Thêm Môn Học</span></a></li>
                             </ul>
                         </li>
 						 <li>
-                            <a class="has-arrow" th:href="@{/admin/all-categories}" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Categories</span></a>
+                            <a class="has-arrow" th:href="@{/admin/all-categories}" aria-expanded="false"><span class="educate-icon educate-course icon-wrap"></span> <span class="mini-click-non">Thể Loại</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Courses" th:href="@{/admin/all-categories}"><span class="mini-sub-pro">All Categories</span></a></li>
-                                <li><a title="Add Courses" th:href="@{/admin/add-category}"><span class="mini-sub-pro">Add Categories</span></a></li>
-                                <li><a title="Courses Profile" th:href="@{/admin/category-info}"><span class="mini-sub-pro">Categories Info</span></a></li>
+                                <li><a title="All Courses" th:href="@{/admin/all-categories}"><span class="mini-sub-pro">Danh Sách Thể Loại</span></a></li>
+                                <li><a title="Add Courses" th:href="@{/admin/add-category}"><span class="mini-sub-pro">Thêm Thể Lọai</span></a></li>
                             </ul>
                         </li>
                         <li>
@@ -82,48 +78,11 @@
                                 <li><a title="All Courses" th:href="@{/admin/allStatus}"><span class="mini-sub-pro">Lịch Sử Thay Đổi</span></a></li>
                             </ul>
                         </li>
+                       
                         <li>
-                            <a class="has-arrow" th:href="@{/admin/library-assets}" aria-expanded="false"><span class="educate-icon educate-library icon-wrap"></span> <span class="mini-click-non">Library</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="All Library" th:href="@{/admin/library-assets}"><span class="mini-sub-pro">Library Assets</span></a></li>
-                                <li><a title="Add Library" th:href="@{/admin/add-library-assets}"><span class="mini-sub-pro">Add Library Asset</span></a></li>
-                                <li><a title="Edit Library" th:href="@{/admin/edit-library-assets}"><span class="mini-sub-pro">Edit Library Asset</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" th:href="@{/admin/departments}" aria-expanded="false"><span class="educate-icon educate-department icon-wrap"></span> <span class="mini-click-non">Departments</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Departments List" th:href="@{/admin/departments}"><span class="mini-sub-pro">Departments List</span></a></li>
-                                <li><a title="Add Departments" th:href="@{/admin/add-department}"><span class="mini-sub-pro">Add Departments</span></a></li>
-                                <li><a title="Edit Departments" th:href="@{/admin/edit-department}"><span class="mini-sub-pro">Edit Departments</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" th:href="@{/admin/data-table}" aria-expanded="false"><span class="educate-icon educate-data-table icon-wrap"></span> <span class="mini-click-non">Data Tables</span></a>
-                            <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Data Table" th:href="@{/admin/data-table}"><span class="mini-sub-pro">Data Table</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" th:href="@{/admin/basic-form-element}" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
+                            <a class="has-arrow" th:href="@{/admin/tinymc}" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
                             <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Basic Form Elements" th:href="@{/admin/basic-form-element}"><span class="mini-sub-pro">Bc Form Elements</span></a></li>
-                                <li><a title="Advance Form Elements" th:href="@{/admin/advance-form-element}"><span class="mini-sub-pro">Ad Form Elements</span></a></li>
-                                <li><a title="Password Meter" th:href="@{/admin/password-meter}"><span class="mini-sub-pro">Password Meter</span></a></li>
-                                <li><a title="Multi Upload" th:href="@{/admin/multi-upload}"><span class="mini-sub-pro">Multi Upload</span></a></li>
                                 <li><a title="Text Editor" th:href="@{/admin/tinymc}" ><span class="mini-sub-pro">Text Editor</span></a></li>
-                                <li><a title="Dual List Box" th:href="@{/admin/dual-list-box}"> <span class="mini-sub-pro">Dual List Box</span></a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="has-arrow" th:href="@{/admin/notifications}" aria-expanded="false"><span class="educate-icon educate-apps icon-wrap"></span> <span class="mini-click-non">App views</span></a>
-                            <ul class="submenu-angle app-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Notifications" th:href="@{/admin/notifications}"><span class="mini-sub-pro">Notifications</span></a></li>
-                                <li><a title="Alerts" th:href="@{/admin/alerts}"><span class="mini-sub-pro">Alerts</span></a></li>
-                                <li><a title="Modals" th:href="@{/admin/modals}"><span class="mini-sub-pro">Modals</span></a></li>
-                                <li><a title="Buttons"  th:href="@{/admin/buttons}"><span class="mini-sub-pro">Buttons</span></a></li>
-                                <li><a title="Tabs" th:href="@{/admin/tabs}"><span class="mini-sub-pro">Tabs</span></a></li>
-                                <li><a title="Accordion" th:href="@{/admin/accordion}"><span class="mini-sub-pro">Accordion</span></a></li>
                             </ul>
                         </li>
                         <li id="removable">

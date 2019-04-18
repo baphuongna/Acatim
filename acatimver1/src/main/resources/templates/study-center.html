@@ -159,6 +159,9 @@
 						<input type="text" class="form-control" th:field="*{search}" 
 							placeholder="Gõ tên trung tâm vào đây"
 							style="width: 100%;">
+						<input type="hidden" th:field="*{subjectId}">
+						<input type="hidden" th:field="*{rateFilter}">
+						<input type="hidden" th:field="*{sortValue}">
 					</div>
 					<input type="submit" class="btn" value="Tìm kiếm"
 						style="width: 100px; height: 57px;">
@@ -171,10 +174,6 @@
 				<div class="panel-heading accordion-head" style="width: 100%;">
 					<h4 class="panel-title">
 						<span class="glyphicon glyphicon-filter"></span> Bộ lọc
-						<!-- <a data-toggle="collapse" data-parent="#accordion2"
-							href="#collapse5"> <span class="glyphicon glyphicon-filter"></span>
-							Bộ lọc
-						</a> -->
 					</h4>
 
 					<form th:action="@{study-center}" th:object="${searchValue}"
@@ -223,7 +222,7 @@
 							</select>
 						</div>
 						<input type="submit" class="btn" value="Lọc"
-							style="height: 100%; width: auto;">
+							style="height: 58px; width: 100px;">
 
 					</form>
 				</div>
