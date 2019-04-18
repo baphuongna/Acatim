@@ -147,9 +147,9 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		Object[] params = new Object[] {};
 		
-		if(search.getCategoryId() != null) {
-			sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
-		}
+		
+		sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
+		
 		
 		sql += " where Course.active = 1 ";
 		
