@@ -262,22 +262,23 @@
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary"
-				 th:href="@{/teacher(page=${first}, sortValue=${searchValue.sortValue})}">Trang Đầu</a>
+				 th:href="@{/teacher(page=${first}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}">Trang Đầu</a>
 				 
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
 				
-				<a th:if="${hasPrevious == true}" th:href="@{/teacher(page=${previous}, sortValue=${searchValue.sortValue})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<a th:if="${hasPrevious == true}" th:href="@{/teacher(page=${previous}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}"
+				 class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
 				
 				<div th:each="totalPage : ${totalPages}">
 				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" 
-				th:href="@{/teacher(page=${totalPage}, sortValue=${searchValue.sortValue})}" th:text="${totalPage}">1</a>
+				th:href="@{/teacher(page=${totalPage}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}" th:text="${totalPage}">1</a>
 				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
 				</div>
 				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary"
-				 th:href="@{/teacher(page=${next}, sortValue=${searchValue.sortValue})}" th:text="'>>'">Next</a>
+				 th:href="@{/teacher(page=${next}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}" th:text="'>>'">Next</a>
 				
 				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary"
-				 th:href="@{/teacher(page=${last}, sortValue=${searchValue.sortValue})}">Trang Cuối</a>
+				 th:href="@{/teacher(page=${last}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}">Trang Cuối</a>
 				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
 			</div>
 

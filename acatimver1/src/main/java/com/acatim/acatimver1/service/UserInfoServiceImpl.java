@@ -1,25 +1,20 @@
 package com.acatim.acatimver1.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.acatim.acatimver1.dao.CourseDAO;
 import com.acatim.acatimver1.dao.RoleDAO;
 import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
-import com.acatim.acatimver1.dao.SubjectDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
 import com.acatim.acatimver1.entity.Contact;
-import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
-import com.acatim.acatimver1.entity.Subject;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudentForm;
@@ -44,9 +39,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Autowired
 	private TeacherDAO TeacherDAO;
-	
-	@Autowired
-	private SubjectDAO SubjectDAO;
 
 	@Override
 	public UserModel loadUserByUsername(String username) throws NotFoundException {
@@ -205,8 +197,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue search) throws NotFoundException {
-
-		
 		return this.UserDAO.getAllUsersPageable(pageable, search);
 	}
 

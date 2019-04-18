@@ -39,7 +39,7 @@ public class TeacherController {
 	@RequestMapping(value = { "/teacher" }, method = RequestMethod.GET)
 	public ModelAndView teacher(@RequestParam(required = false, name = "page") String page,
 			@RequestParam(required = false, name = "sortValue") String sortValue,
-			@RequestParam(required = false, name = "categoryId") String categoryId,
+			@RequestParam(required = false, name = "rateFilter") String rateFilter,
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		if (page == null) {
@@ -65,7 +65,7 @@ public class TeacherController {
 				search.setCategoryId(null);
 			}
 			
-			if (search.getRateFilter() != null && search.getRateFilter().equals("0")) {
+			if (search.getRateFilter() != null && search.getRateFilter().equals("0") || search.getRateFilter() != null && search.getRateFilter().trim().equals("")) {
 				search.setRateFilter(null);
 			}
 			

@@ -62,9 +62,4 @@ public class SubjectServiceImpl implements SubjectService {
 		String SubjectId = "sj" + incNumber;
 		return SubjectId;
 	}
-
-	@Override
-	public List<Subject> getSubjectByUserName(String userName) {
-		return this.subjectDAO.getSubjectByUserName(userName);
-	}
 }
