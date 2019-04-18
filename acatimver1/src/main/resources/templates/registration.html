@@ -8,7 +8,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="M_Adnan" />
 <!-- Document Title -->
-<title>Profile</title>
+<title th:text="'Acatim - Đăng Ký'"></title>
 
 <!-- StyleSheets -->
 
@@ -154,13 +154,13 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<label for="inputRoll" class="col-sm-2 col-form-label"
 														style="margin-left: 30px;"><h6
-															style="text-align: center;">Bạn là</h6></label>
+															style="text-align: center;" th:text="'Bạn là'"></h6></label>
 													<div class="col-sm-9">
 														<select th:field="*{role_id}"
 															class="form-control form-control-sm" name="role_id" onchange="myStudent()" id="inputRoll">
-															<option value="1">Học Sinh</option>
-															<option value="2">Giáo Viên</option>
-															<option value="3">Trung Tâm</option>
+															<option value="1" th:text="'Học Sinh'"></option>
+															<option value="2" th:text="'Giáo Viên'"></option>
+															<option value="3" th:text="'Trung Tâm'"></option>
 														</select>
 													</div>
 												</div>
@@ -263,18 +263,18 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<label for="inputGender" style="margin-left: 30px;"
 														class="col-sm-3 col-form-label" id="inputLabel"><h6
-															class="tittle1">Giới tính</h6> </a></label>
+															class="tittle1" th:text="'Giới tính'"></h6> </a></label>
 													<div class="col-sm-3">
 														<select class="form-control form-control-sm"
 															id="inputGender" name="gender">
-															<option value="true">Nam</option>
-															<option value="false">Nữ</option>
+															<option value="true" th:text="'Nam'"></option>
+															<option value="false"th:text="'Nữ'"></option>
 														</select>
 													</div>
 												</div>
 												<div class="form-actions">
 													<button type="submit" class="btn btn-primary btn-lg"
-														style="float: right">Đăng kí</button>
+														style="float: right" th:text="'Đăng kí'"></button>
 												</div>
 											</form>
 
