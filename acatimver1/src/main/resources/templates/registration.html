@@ -88,7 +88,7 @@ input[type="date"]:valid::before {
 		<main class="cd-main-content">
 		<div id="content">
 			<div class="resume">
-				<div class="container">
+				<div class="container" style="padding: 35px 0px 35px 0px;">
 
 					<div class="row">
 						<!-- Sidebar -->
@@ -119,8 +119,8 @@ input[type="date"]:valid::before {
 								<div class="contact padding-25">
 									<div class="note">
 										<p>
-											* Mời bạn chọn loại người dùng trước khi điển các thông tin khác. </br> </br>
-											* Mật khẩu bao gồm cả chữ và số,có độ dài ít nhất là 6 kí tự.</br></br>
+											* Mời bạn chọn loại người dùng trước khi điền các thông tin khác. </br> </br>
+											* Mật khẩu có độ dài ít nhất là 6 kí tự.</br></br>
 											* Số điện thoại có độ dài tối đa là 11 số.</br></br>
 											* Mọi thắc mắc cũng như ý kiến đóng góp xin bạn gửi về <a href="contact" style="color: blue;">Đây</a>
 										</p>
@@ -175,7 +175,7 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11">
 														<input type="text" th:field="*{userName}"
-															placeholder="Tên" class="form-control" /> <label
+															placeholder="Tên đăng nhập" class="form-control" /> <label
 															th:if="${#fields.hasErrors('userName')}"
 															th:errors="*{userName}" class="validation-message"></label>
 													</div>
@@ -184,7 +184,7 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="text" th:field="*{fullName}"
-															placeholder="Họ và Tên" class="form-control" /> <label
+															placeholder="Tên đầy đủ" class="form-control" /> <label
 															th:if="${#fields.hasErrors('fullName')}"
 															th:errors="*{fullName}" class="validation-message"></label>
 													</div>
@@ -209,8 +209,8 @@ input[type="date"]:valid::before {
 												</div>
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
-														<input type="password" id="passConfirm" onkeyup='check();'style="margin-bottom: 0px;"
-															placeholder="Nhập lại mật khẩu" class="form-control" /><label id='message'></label>
+														<input type="password" id="passConfirm" onkeyup='check();' style="margin-bottom: 5px;"
+															placeholder="Nhập lại mật khẩu" class="form-control" /><label style="display: block; margin-bottom: 0px;" id='message'></label>
 													</div>
 												</div>
 												<div class="form-group row">
@@ -247,7 +247,7 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<textarea
-															style="height: 120px; width: 100%; border-radius: 10px;"
+															style="height: 120px; width: 100%; border-radius: 10px; padding: 15px;"
 															id="description" oninput='textwrite()'
 															placeholder="Mô tả về bạn"></textarea>
 													</div>
@@ -274,7 +274,7 @@ input[type="date"]:valid::before {
 												</div>
 												<div class="form-actions">
 													<button type="submit" class="btn btn-primary btn-lg"
-														style="float: right" th:text="'Đăng kí'"></button>
+														style="float: right; margin-right: 65px; margin-bottom: 30px;" th:text="'Đăng kí'"></button>
 												</div>
 											</form>
 
