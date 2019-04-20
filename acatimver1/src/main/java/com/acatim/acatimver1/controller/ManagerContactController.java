@@ -15,17 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.entity.Contact;
 import com.acatim.acatimver1.entity.SearchValue;
+import com.acatim.acatimver1.service.ContactService;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
-import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
 @Controller
 @RequestMapping(value = { "/admin" })
 public class ManagerContactController {
+
 	@Autowired
-	private UserInfoService userInfoService;
+	private ContactService contactService;
 
 	private PageableService pageableService;
 
@@ -45,10 +46,10 @@ public class ManagerContactController {
 			@SuppressWarnings("deprecation")
 			Pageable pageable = new PageRequest(currentPage - 1, 8);
 
-			int total = userInfoService.getAllContact().size();
+			int total = contactService.getAllContact().size();
 			List<Contact> listUser = null;
 			pageableService = new PageableServiceImpl(8, total, currentPage, null);
-			listUser=userInfoService.getAllContactPageable(pageable);
+			listUser=contactService.getAllContactPageable(pageable);
 			System.out.println("trung   "+listUser.get(0).isActive());	
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
@@ -60,7 +61,7 @@ public class ManagerContactController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allContact", userInfoService.getAllContactPageable(pageable));
+			modelAndView.addObject("allContact", contactService.getAllContactPageable(pageable));
 			SearchValue searchValue = new SearchValue();
 			modelAndView.addObject("searchValue", searchValue);
 		} catch (NotFoundException e) {
@@ -91,18 +92,18 @@ public class ManagerContactController {
 			int total = 0;
 
 			if (search.getSearch().trim().length() == 0) {
-				total = userInfoService.getAllContact().size();
+				total = contactService.getAllContact().size();
 //				System.out.println(
 //						total + " " + userInfoService.getAllUsersPageable(pageableService, search.getRoleId()).size());
-				modelAndView.addObject("allContact", userInfoService.getAllContactPageable(pageable));
+				modelAndView.addObject("allContact", contactService.getAllContactPageable(pageable));
 			} else {
 				List<Contact> listUser = null;
 				if (search.getValue().equals("userName")) {
-					listUser = userInfoService.searchAllContactByUserName(pageable, search.getSearch());
+					listUser = contactService.searchAllContactByUserName(pageable, search.getSearch());
 					total = listUser.size();
 					modelAndView.addObject("allContact", listUser);
 				} else if (search.getValue().equals("email")) {
-					listUser = userInfoService.searchAllContactByEmail(pageable, search.getSearch());
+					listUser = contactService.searchAllContactByEmail(pageable, search.getSearch());
 					total = listUser.size();
 					modelAndView.addObject("allContact", listUser);
 				}

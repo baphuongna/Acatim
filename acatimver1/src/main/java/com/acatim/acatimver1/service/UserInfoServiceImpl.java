@@ -11,7 +11,7 @@ import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
-import com.acatim.acatimver1.entity.Contact;
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
@@ -228,27 +228,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return this.StudyCenterDAO.getUserStudyCenterByUserName(userName);
 	}
 
-	@Override
-	public List<Contact> getAllContact() throws NotFoundException {
-		return this.UserDAO.getAllContact();
-	}
-	
-	@Override
-	public List<Contact> getAllContactPageable(Pageable pageable) throws NotFoundException {
-		return this.UserDAO.getAllContactPageable(pageable);
-	}
-
-	@Override
-	public List<Contact> searchAllContactByUserName(Pageable pageable, String userName)
-			throws NotFoundException {
-		return this.UserDAO.searchAllContactByUserName(pageable, userName);
-	}
-
-	@Override
-	public List<Contact> searchAllContactByEmail(Pageable pageable, String email)
-			throws NotFoundException {
-		return this.UserDAO.searchAllContactByEmail(pageable, email);
-	}
 	
 	@Override
 	public void removeContact(String userName) throws NotFoundException {
@@ -276,6 +255,21 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public List<UserModel> getAllUsers(SearchValue search) {
 		return this.UserDAO.getAllUsers(search);
+	}
+
+	@Override
+	public CountByDate countStudentByDate() {
+		return this.UserDAO.countStudentByDate();
+	}
+
+	@Override
+	public CountByDate countTeacherByDate() {
+		return this.UserDAO.countTeacherByDate();
+	}
+
+	@Override
+	public CountByDate countStudyCentertByDate() {
+		return this.UserDAO.countStudyCentertByDate();
 	}
 
 }

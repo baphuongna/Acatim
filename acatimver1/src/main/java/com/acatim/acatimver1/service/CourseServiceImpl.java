@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.CourseDAO;
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
 
@@ -77,5 +78,10 @@ public class CourseServiceImpl implements CourseService{
 	@Override
 	public List<Course> getAllCourse(SearchValue search) {
 		return this.courseDAO.getAllCourse(search);
+	}
+
+	@Override
+	public CountByDate countCourseByDate() {
+		return this.courseDAO.countCourseByDate();
 	}
 }

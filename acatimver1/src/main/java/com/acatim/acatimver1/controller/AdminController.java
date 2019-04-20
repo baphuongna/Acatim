@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.service.CategoriesService;
+import com.acatim.acatimver1.service.ContactService;
 import com.acatim.acatimver1.service.CourseService;
+import com.acatim.acatimver1.service.RatingService;
 import com.acatim.acatimver1.service.SubjectService;
 import com.acatim.acatimver1.service.UserInfoService;
 
@@ -31,20 +33,32 @@ public class AdminController {
 	@Autowired
 	private CategoriesService categoriesService;
 	
+	@Autowired
+	private ContactService contactService;
+	
+	@Autowired
+	private RatingService ratingService;
+	
 	@RequestMapping(value = { "/", "/index"}, method = RequestMethod.GET)
 	public ModelAndView indexAdmin() {
 		ModelAndView modelAndView = new ModelAndView();
 		
-		
-		
 		try {
+			
 			modelAndView.addObject("allStudent", userInfoService.loadAllUserStudent().size());
 			modelAndView.addObject("allStudyCenter", userInfoService.loadAllUserStudyCenter().size());
 			modelAndView.addObject("allTeacher", userInfoService.loadAllUserTeacher().size());
 			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
 			modelAndView.addObject("allSubject", subjectService.getListSubject().size());
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
-
+			
+			modelAndView.addObject("countStudent", userInfoService.countStudentByDate());
+			modelAndView.addObject("countTeacher", userInfoService.countTeacherByDate());
+			modelAndView.addObject("countStudyCenter", userInfoService.countStudyCentertByDate());
+			
+			modelAndView.addObject("countCourse", courseService.countCourseByDate());
+			modelAndView.addObject("countContact", contactService.countContactUsByDate());
+			modelAndView.addObject("countRating", ratingService.countRatingByDate());
 			
 		} catch (NotFoundException e) {
 			e.printStackTrace();

@@ -39,7 +39,7 @@ public class MainController {
 
 			modelAndView.addObject("userRole", userRole);
 		}
-		
+
 		try {
 			modelAndView.addObject("numberOfTeacher", userInfoService.loadAllUserTeacher().size());
 			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllUserStudyCenter().size());

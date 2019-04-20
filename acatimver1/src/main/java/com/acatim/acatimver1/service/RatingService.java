@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.RateStudyCenter;
 import com.acatim.acatimver1.entity.RateTeacher;
@@ -58,4 +59,6 @@ public interface RatingService {
 	String genRatingId();
 	
 	boolean check(String userName, String recieverName);
+	
+	CountByDate countRatingByDate();
 }

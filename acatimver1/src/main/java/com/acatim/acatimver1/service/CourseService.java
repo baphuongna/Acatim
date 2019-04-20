@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
 
@@ -34,4 +35,6 @@ public interface CourseService {
 	List<Course> getAllCoursePaging(PageableService pageable, SearchValue search);
 	
 	List<Course> getAllCourse(SearchValue search);
+	
+	CountByDate countCourseByDate();
 }

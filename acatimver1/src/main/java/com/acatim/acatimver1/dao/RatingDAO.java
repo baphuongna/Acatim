@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Rating;
 import com.acatim.acatimver1.mapper.RatingMapper;
 import com.acatim.acatimver1.mapper.RatingStudyCenterExtractor;
@@ -84,6 +85,25 @@ public class RatingDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM Rating";
 		List<Rating> rating = this.getJdbcTemplate().query(sql, new RatingMapper());
 		return rating;
+	}
+	
+	public CountByDate countRatingByDate() {
+		CountByDate count = new CountByDate();
+		
+		String sqlDate = "select count(*) from Rating where date(create_date)=date(date_sub(now(),interval 1 day));";
+		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+		
+		String sqlMonth = "select count(*) from Rating where month(create_date)=month(date_sub(now(),interval 1 day));";
+		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+		
+		String sqlYear = "select count(*) from Rating where year(create_date)=year(now());";
+		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+		
+		count.setByDate(countDate);
+		count.setByMonth(countMonth);
+		count.setByYear(countYear);
+		
+		return count;
 	}
 
 	public void addRating(Rating rating) {

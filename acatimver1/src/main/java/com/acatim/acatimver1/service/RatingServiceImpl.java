@@ -10,6 +10,7 @@ import com.acatim.acatimver1.dao.RateTeacherDAO;
 import com.acatim.acatimver1.dao.RatingDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.RateStudyCenter;
 import com.acatim.acatimver1.entity.RateTeacher;
@@ -330,6 +331,11 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public void updateRateStudyCenter(float rate, String userName) {
 		this.StudyCenterDAO.updateRateStudyCenter(rate, userName);
+	}
+
+	@Override
+	public CountByDate countRatingByDate() {
+		return this.ratingDAO.countRatingByDate();
 	}
 
 }

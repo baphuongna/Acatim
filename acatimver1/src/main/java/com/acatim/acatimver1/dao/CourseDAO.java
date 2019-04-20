@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.mapper.CourseByName;
@@ -189,6 +190,25 @@ public class CourseDAO extends JdbcDaoSupport {
 		CourseMapper mapper = new CourseMapper();
 		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
 		return courses;
+	}
+	
+	public CountByDate countCourseByDate() {
+		CountByDate count = new CountByDate();
+		
+		String sqlDate = "select count(*) from Course where date(create_date)=date(date_sub(now(),interval 1 day));";
+		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+		
+		String sqlMonth = "select count(*) from Course where month(create_date)=month(date_sub(now(),interval 1 day));";
+		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+		
+		String sqlYear = "select count(*) from Course where year(create_date)=year(now());";
+		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+		
+		count.setByDate(countDate);
+		count.setByMonth(countMonth);
+		count.setByYear(countYear);
+		
+		return count;
 	}
 	
 	/* _______________________________________ */
