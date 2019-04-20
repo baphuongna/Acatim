@@ -71,13 +71,13 @@ public class RegistrationController {
 				}
 				if (data.getRole_id() == 2) {
 					Teacher newTeacher = new Teacher(data.getUserName(), data.getDob(), data.isGender(),
-							data.getDescription(), 1);
+							data.getDescription(), 0);
 					userInfoService.addUserInfo(user);
 					userInfoService.addTeacherInfo(newTeacher);
 					System.out.println("giáo vien thanh cong");
 				}
 				if (data.getRole_id() == 3) {
-					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(), 1);
+					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(), 0);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudyCenterInfo(newStudyCenter);
 					System.out.println("trung tam thanh cong");
