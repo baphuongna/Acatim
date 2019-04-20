@@ -1,9 +1,11 @@
 package com.acatim.acatimver1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.service.CategoriesService;
@@ -56,6 +58,13 @@ public class AdminController {
 	public ModelAndView textEditer() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("admin/tinymc");
+		return modelAndView;
+	}
+	
+	@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "not found")
+	public ModelAndView notFoundException(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("404");
 		return modelAndView;
 	}
 }

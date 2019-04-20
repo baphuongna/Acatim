@@ -480,8 +480,10 @@ public class ProfileController {
 			rating.getRateTeacher().setRateId(rating.getRateId());
 			
 			ratingService.addRateTeacher(rating.getRateTeacher());
-			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
-			
+
+			float rateAvg = ratingService.updateTotalRateStudyCenter(ratingService.getAllRatingTeacherByRecieverName(rating.getRecieverName()));
+
+			ratingService.updateRateTeacher(rateAvg, rating.getRecieverName());
 		}catch (Exception e) {
 			e.fillInStackTrace();
 		}
@@ -508,13 +510,14 @@ public class ProfileController {
 			rating.setRateId(ratingService.genRatingId());
 			
 			ratingService.addRating(rating);
-			
+
 			rating.getRateStudyCenter().setCheckSCNull("not null");
 			rating.getRateStudyCenter().setRateId(rating.getRateId());
 			
 			ratingService.addRateStudyCenter(rating.getRateStudyCenter());
-			ratingService.updateTotalRateStudyCenter(rating.getRecieverName());
 			
+			float rateAvg = ratingService.updateTotalRateStudyCenter(ratingService.getAllRatingStudyCenterByRecieverName(rating.getRecieverName()));
+			ratingService.updateRateStudyCenter(rateAvg, rating.getRecieverName());
 		}catch (Exception e) {
 			e.fillInStackTrace();
 		}

@@ -131,7 +131,21 @@
 		<!-- Content -->
 		<div class="blog-details-area mg-b-15" >
             <div class="container">
-                <div class="row">
+            	<div class="row" th:if="${course == null}">
+					<div class="error-pagewrap">
+						<div class="error-page-int">
+							<div class="content-error">
+								<h1 th:text="'Không Tìm thấy Khóa học'">
+								</h1>
+								<p
+									th:text="'Máy chủ gặp phải điều gì đó bất ngờ không cho phép nó hoàn thành yêu cầu. Chúng tôi xin lỗi.'"></p>
+								<a th:href="@{/}" th:text="'Trang Chủ'"></a> <a
+									th:href="@{/contact}" th:text="'Báo cáo vấn đề'"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+                <div class="row" th:if="${course != null}">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="blog-details-inner" style="justify-content: center;">
                             <div class="row">

@@ -14,8 +14,6 @@ import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.RateStudyCenter;
 import com.acatim.acatimver1.entity.RateTeacher;
 import com.acatim.acatimver1.entity.Rating;
-import com.acatim.acatimver1.entity.StudyCenter;
-import com.acatim.acatimver1.entity.Teacher;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -277,9 +275,7 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public void updateTotalRateTeacher(String userName) {
-		
-		List<Rating> ratings = this.ratingDAO.getAllRatingTeacherByRecieverName(userName);
+	public float updateTotalRateTeacher(List<Rating> ratings) {
 		
 		float totalRate = 0;
 		int count = 0;
@@ -292,19 +288,12 @@ public class RatingServiceImpl implements RatingService {
 		if (count > 0) {
 			rateAvg = totalRate/count;
 		}
-		Teacher teacher = new Teacher();
-		
-		teacher.setUserName(userName);
-		teacher.setRate(rateAvg);
-		
-		this.TeacherDAO.updateTotalRateTeacher(teacher);
-		
+
+		return rateAvg;
 	}
 
 	@Override
-	public void updateTotalRateStudyCenter(String userName) {
-		
-		List<Rating> ratings = this.ratingDAO.getAllRatingStudyCenterByRecieverName(userName);
+	public float updateTotalRateStudyCenter(List<Rating> ratings) {
 		
 		float totalRate = 0;
 		int count = 0;
@@ -317,13 +306,7 @@ public class RatingServiceImpl implements RatingService {
 		if (count > 0) {
 			rateAvg = totalRate/count;
 		}
-		StudyCenter studyCenter = new StudyCenter();
-		
-		studyCenter.setUserName(userName);
-		studyCenter.setRate(rateAvg);
-		
-		this.StudyCenterDAO.updateTotalRateStudyCenter(studyCenter);
-		
+		return rateAvg;
 	}
 
 	@Override
@@ -337,6 +320,16 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public boolean check(String userName, String recieverName) {
 		return this.ratingDAO.check(userName, recieverName);
+	}
+
+	@Override
+	public void updateRateTeacher(float rate, String userName) {
+		this.TeacherDAO.updateRateTeacher(rate, userName);
+	}
+
+	@Override
+	public void updateRateStudyCenter(float rate, String userName) {
+		this.StudyCenterDAO.updateRateStudyCenter(rate, userName);
 	}
 
 }

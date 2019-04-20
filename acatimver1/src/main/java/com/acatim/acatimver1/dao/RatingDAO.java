@@ -40,7 +40,7 @@ public class RatingDAO extends JdbcDaoSupport {
 
 	public List<Rating> getAllRatingTeacherByRecieverName(String recieverName) {
 		String sql = "SELECT * FROM Rating\r\n"
-				+ "INNER JOIN RateTeacher ON Rating.rate_id = RateTeacher.rate_id Where reciever_name = ?";
+				+ "INNER JOIN RateTeacher ON Rating.rate_id = RateTeacher.rate_id Where Rating.reciever_name = ?";
 		Object[] params = new Object[] { recieverName };
 		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingTeacherExtractor());
 		return rating;
@@ -48,7 +48,7 @@ public class RatingDAO extends JdbcDaoSupport {
 
 	public List<Rating> getAllRatingStudyCenterByRecieverName(String recieverName) {
 		String sql = "SELECT * FROM Rating\r\n"
-				+ "INNER JOIN RateStudyCenter ON Rating.rate_id = RateStudyCenter.rate_id Where reciever_name = ?";
+				+ "INNER JOIN RateStudyCenter ON Rating.rate_id = RateStudyCenter.rate_id Where Rating.reciever_name = ?";
 		Object[] params = new Object[] { recieverName };
 		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingStudyCenterExtractor());
 		return rating;
