@@ -156,7 +156,7 @@
 							placeholder="Gõ tên khóa học cần tìm vào đây"
 							style="width: 100%;">
 					</div>
-					<input type="submit" class="btn" value="Tìm kiếm"
+					<input type="submit" class="btn btn-primary" value="Tìm kiếm"
 						style="width: 100px; height: 57px;">
 				</form>
 			</div>
@@ -171,7 +171,7 @@
 						</a> -->
 					</h4>
 					<form th:action="@{course}"
-						th:object="${searchValue}" method="POST" class="form-inline">
+						th:object="${searchValue}" method="POST" class="form-inline" style="padding-top: 10px;">
 						
 						<div class="dropdown" style="margin-right: 1%; height: 58px;">
 							<button class="btn dropdown-toggle" type="button"
@@ -206,7 +206,7 @@
 						</div>
 
 						<div class="d-flex ftco-animate" style="justify-content: center;">
-							<input type="submit" class="btn" value="Lọc"
+							<input type="submit" class="btn btn-primary" value="Lọc"
 								style="height: 58px; width: 100px;">
 						</div>
 					</form>
