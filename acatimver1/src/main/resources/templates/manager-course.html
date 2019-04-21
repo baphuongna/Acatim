@@ -204,7 +204,6 @@
 										<th>Ngày Bắt Đầu</th>
 										<th>Ngày Kết thúc</th>
 										<th>Giá (VND)</th>
-										<th>Người Tạo</th>
 										<th>Ngày Tạo</th>
 										<th>Trạng Thái</th>
 										<th></th>
@@ -218,15 +217,13 @@
 										<td th:text="${course.startDate}"></td>
 										<td th:text="${course.endDate}"></td>
 										<td th:text="${course.price}"></td>
-										<td th:text="${course.userName}"></td>
 										<td th:text="${course.createDate}"></td>
 										
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
 										<a th:href="@{/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
-										<button type="button" class="btn btn-primary"
-							 							th:href="@{/detail-course(courseId=${course.courseId})}">Xem thêm</button>
+										<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Xem thêm</button></a>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
 							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>
 							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${course.active == false}"
@@ -245,15 +242,15 @@
                 </div>
                 <div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
                                   <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
-                                  <a href="" th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
+                                  <a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
                                   <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
                                   <div th:each="totalPage : ${totalPages}">
                                        <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${totalPage}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
-                                       <a href="" th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
+                                       <a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
                                    </div>
                                    <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
                                    <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
-                                   <a href="" th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
+                                   <a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
                             </div>
             </div>
 			            </div>
@@ -261,10 +258,6 @@
 				</div>
 			</div>
 		</div>
-		</main>
-		<!-- End Content -->
-
-		
 		<div th:if="${allCourses != null}" th:id="${course.courseId}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="course : ${allCourses}">
                             <div class="modal-dialog" style="left: 0; right: 0;">
                                 <div class="modal-content">
@@ -285,7 +278,7 @@
                         </div>
                         
         <div th:if="${allCourses != null}" th:id="${course.courseId}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="course : ${allCourses}">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog" style="left: 0; right: 0;">
                                 <div class="modal-content">
                                     <div class="modal-close-area modal-close-df">
                                         <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
@@ -296,12 +289,17 @@
                                         <p>Bạn có chắc muốn MỞ KHÓA khóa học này!</p>
                                     </div>
                                     <div class="modal-footer warning-md">
-                                        <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/unlockCourse(courseId=${course.courseId})}">Đúng</a>
+                                        <a class="btn btn-warning" data-dismiss="modal" href="#">Không</a>
+                                        <a class="btn btn-warning" th:href="@{/unlockCourse(courseId=${course.courseId})}">Đúng</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+		</main>
+		<!-- End Content -->
+
+		
+		
 
 		<!-- Footer -->
 		<div th:replace="footer :: footer"></div>

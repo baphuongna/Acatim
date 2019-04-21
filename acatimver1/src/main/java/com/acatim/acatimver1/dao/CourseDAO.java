@@ -113,7 +113,12 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
 		}
 		
-		sql += " where Course.active = 1 ";
+		if(search.getUserName() != null) {
+			sql += " where Course.user_name = ?";
+			params = append(params, search.getUserName());
+		}else {
+			sql += " where Course.active = 1 ";
+		}
 		
 		if(search.getSubjectId() != null) {
 			sql += " and Course.subject_id = ? ";
@@ -125,10 +130,10 @@ public class CourseDAO extends JdbcDaoSupport {
 			params = append(params, search.getCategoryId());
 		}
 		
-		if(search.getUserName() != null) {
-			sql += " and Course.user_name = ? and Course.active = 0";
-			params = append(params, search.getUserName());
-		}
+//		if(search.getUserName() != null) {
+//			sql += " and Course.user_name = ?";
+//			params = append(params, search.getUserName());
+//		}
 
 		if(search.getSearch() != null) {
 			if(search.getSearch().trim().length() != 0) {
@@ -151,8 +156,13 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
 		
+		if(search.getUserName() != null) {
+			sql += " where Course.user_name = ?";
+			params = append(params, search.getUserName());
+		}else {
+			sql += " where Course.active = 1 ";
+		}
 		
-		sql += " where Course.active = 1 ";
 		
 		if(search.getSubjectId() != null) {
 			sql += " and Course.subject_id = ? ";
@@ -164,10 +174,7 @@ public class CourseDAO extends JdbcDaoSupport {
 			params = append(params, search.getCategoryId());
 		}
 		
-		if(search.getUserName() != null) {
-			sql += " and Course.user_name = ? ";
-			params = append(params, search.getUserName());
-		}
+		
 		
 		if(search.getSearch() != null) {
 			if(search.getSearch().trim().length() != 0) {

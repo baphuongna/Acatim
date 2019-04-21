@@ -338,7 +338,7 @@ public class CourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		modelAndView.setViewName("redirect:/admin/all-courses");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 
@@ -362,7 +362,7 @@ public class CourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		modelAndView.setViewName("redirect:/admin/all-courses");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 	
@@ -387,11 +387,6 @@ public class CourseController {
 		}
 
 		course.setUserName(userName);
-		try {
-			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		if (result.hasErrors()) {
 			modelAndView.setViewName("edit-course");
@@ -408,7 +403,7 @@ public class CourseController {
 
 		try {
 			course.setUpdateDate(dateformat.currentDate());
-			System.out.println(course);
+
 			courseService.updateCourse(course);
 
 			User loginedUser = null;
@@ -427,7 +422,7 @@ public class CourseController {
 			e.printStackTrace();
 		}
 
-		modelAndView.setViewName("redirect:/course");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 
