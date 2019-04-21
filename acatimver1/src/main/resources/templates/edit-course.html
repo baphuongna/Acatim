@@ -146,163 +146,118 @@
 
 					<div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
-                <div class="container-fluid">
-				<form th:action="@{manager-course}" th:object="${searchValue}" method="POST">
-					<div class="row">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div >
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="product-payment-inner-st">
+						<h4>Thay Đổi Thông Tin Khóa Học</h4>
+						<div th:if="${errorMessage != null}"
+           					th:utext="${errorMessage}" class="error">...</div>
+						<br>
+							<form th:action="@{edit-course}" th:object="${course}"
+								method="POST">
 								<div class="row">
-									<!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-										<div class="chosen-select-single mg-b-20">
-											<select class="chosen-select" th:field="*{categoryId}">
-												<option value="0">--Tât Cả--</option>
-												<option th:if="${allCategories != null}" th:each="category : ${allCategories}" th:value="${category.categoryId}">
-												</option>
-											</select>
-										</div>
-									</div> -->
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:if="${allSubjects != null}">
-										<div class="chosen-select-single">
-											<select style="border: 1px solid #d2d2d2; border-radius: 13px; height: 30px; width: 120px;" class="chosen-select" th:field="*{subjectId}">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+										<div class="form-group">
+											<label>Chọn Môn Học</label> 
+											<select class="chosen-select" th:field="*{subjectId}">
 												<option value="0">--Tât Cả--</option>
 												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
 											</select>
+											<div th:if="${errorMessage != null}"
+           												th:utext="${errorMessage}" class="error">...</div>
 										</div>
-									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-										<div class="breadcome-heading">
-											<input type="text" th:field="*{search}" placeholder="Tìm Kiếm" style="width: 100%; height: 34px; border: 1px solid #d4d4d4; padding-left: 10px; padding-right: 10px; border-radius: 40px;"
-												class="search-int">
+										<div class="form-group">
+											<label>Khóa Học Thuộc Người Dùng</label> 
+											<select class="chosen-select" th:field="*{userName}">
+												<option value="0">--Tât Cả--</option>
+												<option th:each="user : ${allTeacherSC}" th:value="${user.userName}">[[${user.fullName}]]</option>
+											</select>
+											<div th:if="${errorUserName != null}"
+           												th:utext="${errorUserName}" class="error">...</div>
 										</div>
+										<div class="form-group" hidden="true">
+											<label>ID Khóa học</label> <input type="text"
+												class="form-control" th:field="*{courseId}"
+												placeholder="Tên Khóa Học"> <span id="error"
+												th:if="${#fields.hasErrors('courseId')}"
+												th:errors="*{courseId}">..</span>
+										</div>
+										<div class="form-group" hidden="true">
+											<label>Ngày Tạo</label> <input type="text"
+												class="form-control" th:field="*{createDate}"
+												placeholder="Tên Khóa Học"> <span id="error"
+												th:if="${#fields.hasErrors('createDate')}"
+												th:errors="*{createDate}">..</span>
+										</div>
+										
+										<div class="form-group">
+											<label>Tên Khóa Học</label> <input type="text"
+												class="form-control" th:field="*{courseName}"
+												placeholder="Tên Khóa Học"> <span id="error"
+												th:if="${#fields.hasErrors('courseName')}"
+												th:errors="*{courseName}">..</span>
+										</div>
+										<div class="form-group">
+											<label>Giờ Bắt Đầu</label> <input type="time"
+												class="form-control example1" th:field="*{startTime}"
+												placeholder="startTime"> <span
+												th:if="${#fields.hasErrors('startTime')}"
+												th:errors="*{startTime}">..</span>
+										</div>
+										<div class="form-group">
+											<label>Giờ Kết thúc</label> <input type="time"
+												class="form-control example1" th:field="*{endTime}"
+												placeholder="endTime"> <span
+												th:if="${#fields.hasErrors('endTime')}"
+												th:errors="*{endTime}">..</span>
+										</div>
+										<div class="form-group data-custon-pick data-custom-mg" id="data_5">
+											<label><b>Thời Gian Học Từ Ngày</b></label> 
+											<div class="input-daterange input-group" id="datepicker">
+                                            	<input type="text" class="form-control" name="start" th:field="*{startDate}"/>
+                                           		 <span class="input-group-addon">Đến</span>
+                                           	 	<input type="text" class="form-control" name="end" th:field="*{endDate}" />
+                                           	 	
+                                        	</div>
+                                        	<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">..</span>
+                                        	<br>
+											<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">..</span>
+										</div>
+										<div class="form-group">
+											<label>Giá (VND)</label> <input type="text"
+												class="form-control" th:field="*{price}" placeholder="Giá Khóa Học"></input>
+											<span th:if="${#fields.hasErrors('price')}"
+												th:errors="*{price}">..</span>
+										</div>
+
+										<div class="form-group res-mg-t-15">
+											<label>Thông Tin Khóa Học</label>
+                                            <textarea name="description" th:field="*{courseDescription}" placeholder="Description"></textarea>
+                                            <span th:if="${#fields.hasErrors('courseDescription')}" th:errors="*{courseDescription}">..</span>
+                                        </div>
 									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-										<div class="breadcome-heading">
+									
+								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="payment-adress">
 											<button type="submit"
-												class="btn btn-primary waves-effect waves-light">Tìm Kiếm</button>
+												class="btn btn-primary waves-effect waves-light">Submit</button>
 										</div>
 									</div>
 								</div>
-							</div>
+							</form>
+
 						</div>
 					</div>
-				</form>
-				<div class="row">
-                    <div style="margin-top: 20px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="product-status-wrap drp-lst">
-                            <h4>Danh Sách Khóa Học</h4>
-                            <div class="add-product">
-                                <a class="btn btn-circle btn-primary" th:href="@{/add-course}">Thêm Khóa Học</a>
-                            </div>
-                            <div class="asset-inner">
-                                <table>
-									<tr>
-										<th>ID Khóa Học</th>
-										<th>Tên Khóa Học</th>
-										<th>Thông Tin Khóa Học</th>
-										<th>Giờ Bắt Đầu</th>
-										<th>Giờ Kết thúc</th>
-										<th>Ngày Bắt Đầu</th>
-										<th>Ngày Kết thúc</th>
-										<th>Giá (VND)</th>
-										<th>Người Tạo</th>
-										<th>Ngày Tạo</th>
-										<th>Trạng Thái</th>
-										<th></th>
-									</tr>
-									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}">
-										<td th:text="${course.courseId}"></td>
-										<td th:text="${course.courseName}"></td>
-										<td th:text="${course.courseDescription}"></td>
-										<td th:text="${course.startTime}"></td>
-										<td th:text="${course.endTime}"></td>
-										<td th:text="${course.startDate}"></td>
-										<td th:text="${course.endDate}"></td>
-										<td th:text="${course.price}"></td>
-										<td th:text="${course.userName}"></td>
-										<td th:text="${course.createDate}"></td>
-										
-										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
-										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
-										<td>
-										<a th:href="@{/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
-										<button type="button" class="btn btn-primary"
-							 							th:href="@{/detail-course(courseId=${course.courseId})}">Xem thêm</button>
-							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
-							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>
-							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${course.active == false}"
-							 								th:attr="data-target='#'+${course.courseId}+'2'">Mở Khóa</button>
-										</td>
-									</tr>
-									<tr th:if="${allCourses == null}">
-										<td>Không Tìm Thấy Khóa Học nào</td>
-									</tr>
-									
-								</table>
-                            </div>
-                            
-                        </div>
-                    </div>
                 </div>
-                <div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
-                                  <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
-                                  <a href="" th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
-                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
-                                  <div th:each="totalPage : ${totalPages}">
-                                       <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${totalPage}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
-                                       <a href="" th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
-                                   </div>
-                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
-                                   <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
-                                   <a href="" th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
-                            </div>
             </div>
-			            </div>
-			        </div>
+        </div>
 				</div>
 			</div>
 		</div>
 		</main>
 		<!-- End Content -->
-
-		
-		<div th:if="${allCourses != null}" th:id="${course.courseId}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="course : ${allCourses}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
-                                        <h2>KHÓA!</h2>
-                                        <p>Bạn có chắc muốn KHÓA khóa học này!</p>
-                                    </div>
-                                    <div class="modal-footer danger-md">
-                                        <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/blockStudent(courseId=${course.courseId})}">Đúng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-        <div th:if="${allCourses != null}" th:id="${course.courseId}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="course : ${allCourses}">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-close-area modal-close-df">
-                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
-                                    </div>
-                                    <div class="modal-body">
-                                        <span class="educate-icon educate-warning modal-check-pro information-icon-pro"></span>
-                                        <h2>MỞ KHÓA!</h2>
-                                        <p>Bạn có chắc muốn MỞ KHÓA khóa học này!</p>
-                                    </div>
-                                    <div class="modal-footer warning-md">
-                                        <a data-dismiss="modal" href="#">Không</a>
-                                        <a th:href="@{/unlockStudent(courseId=${course.courseId})}">Đúng</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
 		<!-- Footer -->
 		<div th:replace="footer :: footer"></div>
 		<!-- End Footer -->

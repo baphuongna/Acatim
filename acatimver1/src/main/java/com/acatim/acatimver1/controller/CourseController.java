@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -361,6 +363,80 @@ public class CourseController {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("redirect:/admin/all-courses");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "edit-course" }, method = RequestMethod.GET)
+	public ModelAndView editCourse(@RequestParam("courseId") String courseId) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("course", courseService.getCourseById(courseId));
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
+
+		modelAndView.setViewName("edit-course");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "edit-course" }, method = RequestMethod.POST)
+	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course, BindingResult result,
+			Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+
+		System.out.println(course);
+
+		try {
+			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (result.hasErrors()) {
+			modelAndView.setViewName("edit-course");
+			modelAndView.addObject("course", course);
+			return modelAndView;
+		}
+
+		if (course.getSubjectId().equals("0")) {
+			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.addObject("course", course);
+			modelAndView.setViewName("edit-course");
+			return modelAndView;
+		}
+
+		if (course.getUserName().equals("0")) {
+			modelAndView.addObject("errorUserName",
+					"Chọn Người dùng có khóa học này trước khi hoàn thành đăng ký thông tin khóa học!");
+			modelAndView.addObject("course", course);
+			modelAndView.setViewName("edit-course");
+			return modelAndView;
+		}
+
+		try {
+			course.setUpdateDate(dateformat.currentDate());
+			System.out.println(course);
+			courseService.updateCourse(course);
+
+			User loginedUser = null;
+			if (principal != null) {
+				loginedUser = (User) ((Authentication) principal).getPrincipal();
+			}
+
+			History history = new History();
+			history.setIdChange(course.getCourseId());
+			history.setValueChanged("Infomation");
+			history.setDateChange(dateformat.currentDate());
+			history.setBy(loginedUser.getUsername());
+			historyService.addHistory(history);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		modelAndView.setViewName("redirect:/course");
 		return modelAndView;
 	}
 
