@@ -3,12 +3,14 @@ package com.acatim.acatimver1.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.acatim.acatimver1.service.CourseService;
@@ -74,6 +76,13 @@ public class MainController {
     public String error(Model model) {
         return "error";
     }
+    
+    @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "not found")
+	public ModelAndView notFoundException(){
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("404");
+		return modelAndView;
+	}
 
 	@RequestMapping("/password-recovery")
 	public String showAllCourse(Model model) {
