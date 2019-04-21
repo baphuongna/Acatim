@@ -42,6 +42,7 @@ public class AppErrorController implements ErrorController{
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
     public ModelAndView errorHtml(HttpServletRequest request) {
+    	System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBB");
         return new ModelAndView("/error", getErrorAttributes(request, false));
     }
 

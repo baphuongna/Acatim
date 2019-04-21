@@ -80,6 +80,7 @@ public class MainController {
     @ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "not found")
 	public ModelAndView notFoundException(){
 		ModelAndView modelAndView = new ModelAndView();
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		modelAndView.setViewName("404");
 		return modelAndView;
 	}
