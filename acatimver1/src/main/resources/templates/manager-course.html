@@ -224,9 +224,9 @@
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
-										<a th:href="@{/admin/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
-										<button type="button" class="btn btn-primary" data-toggle="modal"
-							 							th:attr="data-target='#'+${course.courseId }" onclick="checkCode();">Xem thêm</button>
+										<a th:href="@{/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
+										<button type="button" class="btn btn-primary"
+							 							th:href="@{/detail-course(courseId=${course.courseId})}">Xem thêm</button>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
 							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>
 							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${course.active == false}"
