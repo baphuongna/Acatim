@@ -318,7 +318,7 @@ public class CourseController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = { "blockStudent" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "blockCourse" }, method = RequestMethod.GET)
 	public ModelAndView blockStudent(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
@@ -342,7 +342,7 @@ public class CourseController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = { "unlockStudent" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "unlockCourse" }, method = RequestMethod.GET)
 	public ModelAndView unlockStudent(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		try {
