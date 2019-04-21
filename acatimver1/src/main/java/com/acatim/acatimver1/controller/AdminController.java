@@ -81,4 +81,11 @@ public class AdminController {
 		modelAndView.setViewName("404");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = {"error"}, method = RequestMethod.GET)
+	public ModelAndView error() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("error");
+		return modelAndView;
+	}
 }
