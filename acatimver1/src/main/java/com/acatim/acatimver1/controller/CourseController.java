@@ -369,11 +369,7 @@ public class CourseController {
 	@RequestMapping(value = { "edit-course" }, method = RequestMethod.GET)
 	public ModelAndView editCourse(@RequestParam("courseId") String courseId) {
 		ModelAndView modelAndView = new ModelAndView();
-		try {
-			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 		modelAndView.addObject("course", courseService.getCourseById(courseId));
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 
@@ -385,9 +381,12 @@ public class CourseController {
 	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course, BindingResult result,
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
+		String userName = null;
+		if (principal != null) {
+			userName = principal.getName();
+		}
 
-		System.out.println(course);
-
+		course.setUserName(userName);
 		try {
 			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
 		} catch (Exception e) {
@@ -402,14 +401,6 @@ public class CourseController {
 
 		if (course.getSubjectId().equals("0")) {
 			modelAndView.addObject("errorMessage", "Chọn Môn học trước khi hoàn thành đăng ký thông tin khóa học!");
-			modelAndView.addObject("course", course);
-			modelAndView.setViewName("edit-course");
-			return modelAndView;
-		}
-
-		if (course.getUserName().equals("0")) {
-			modelAndView.addObject("errorUserName",
-					"Chọn Người dùng có khóa học này trước khi hoàn thành đăng ký thông tin khóa học!");
 			modelAndView.addObject("course", course);
 			modelAndView.setViewName("edit-course");
 			return modelAndView;

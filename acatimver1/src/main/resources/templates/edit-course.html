@@ -166,15 +166,7 @@
 											<div th:if="${errorMessage != null}"
            												th:utext="${errorMessage}" class="error">...</div>
 										</div>
-										<div class="form-group">
-											<label>Khóa Học Thuộc Người Dùng</label> 
-											<select class="chosen-select" th:field="*{userName}">
-												<option value="0">--Tât Cả--</option>
-												<option th:each="user : ${allTeacherSC}" th:value="${user.userName}">[[${user.fullName}]]</option>
-											</select>
-											<div th:if="${errorUserName != null}"
-           												th:utext="${errorUserName}" class="error">...</div>
-										</div>
+										
 										<div class="form-group" hidden="true">
 											<label>ID Khóa học</label> <input type="text"
 												class="form-control" th:field="*{courseId}"
