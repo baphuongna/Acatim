@@ -196,6 +196,9 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
 
 		if (page == null) {
@@ -280,6 +283,9 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
 
 		String courseId = courseService.genCourseId();
@@ -367,9 +373,14 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value = { "edit-course" }, method = RequestMethod.GET)
-	public ModelAndView editCourse(@RequestParam("courseId") String courseId) {
+	public ModelAndView editCourse(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		if (principal == null) {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
+		
 		modelAndView.addObject("course", courseService.getCourseById(courseId));
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 
@@ -384,8 +395,11 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
-
+		
 		course.setUserName(userName);
 
 		if (result.hasErrors()) {
