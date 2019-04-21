@@ -98,7 +98,7 @@
 		</aside>
 	</div> -->
 	
-	<header>
+	<header style="margin-top: 95px; ">
   <div style="width: 82%; margin: auto; padding: 17px; background-color: #fff;" id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -156,7 +156,7 @@
 			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 				<form th:action="@{study-center}" th:object="${searchValue}" method="POST" class=" form-inline">
-					<div class="form-group">
+					<div style="margin: auto;" class="form-group">
 						<input type="text" class="form-control" th:field="*{search}" 
 							placeholder="Gõ tên trung tâm vào đây"
 							style="width: 100%;">
@@ -165,7 +165,7 @@
 						<input type="hidden" th:field="*{sortValue}">
 					</div>
 					<input type="submit" class="btn btn-primary" value="Tìm kiếm"
-						style="width: 100px; height: 57px;">
+						style="width: 100px; height: 57px; margin: auto;">
 				</form>
 			</div>
 
@@ -180,7 +180,7 @@
 					<form th:action="@{study-center}" th:object="${searchValue}"
 						method="POST" class=" form-inline" style="padding-top: 10px;">
 						
-						<div class="dropdown" style="margin-right: 1%; height: 58px;">
+						<div class="dropdown" style="margin: auto; height: 58px;">
 							<button class="btn dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255);"></button>
@@ -190,7 +190,7 @@
 							</div>
 						</div>
 
-						<div class="d-flex ftco-animate" style="justify-content: center;">
+						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
 							<div class="chosen-select-single mg-b-20">
 								<select class="form-control" th:field="*{subjectId}">
 									<option value="0" th:text="'-- Lọc Theo Môn Học --'"></option>
@@ -200,7 +200,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="d-flex ftco-animate" style="justify-content: center;">
+						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
 							<div class="chosen-select-single mg-b-20">
 								<select class="form-control" th:field="*{rateFilter}">
 									<option value="0" th:text="'-- Lọc Theo Đánh Giá --'"></option>
@@ -213,17 +213,17 @@
 							</div>
 						</div>
 						
-						<div class="chosen-select-single mg-b-20">
+						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
 							<select class="form-control" th:field="*{sortValue}">
-								<option value="0">-Sắp Xếp theo-</option>
+								<option value="0">-- Sắp Xếp theo --</option>
 								<option value="1">Tên</option>
 								<option value="2">Ngày cập nhật</option>
 								<option value="3">Đánh Giá từ Thấp tới Cao</option>
 								<option value="4">Đánh Giá từ Cao tới Thấp</option>
 							</select>
 						</div>
-						<input type="submit" class="btn btn-primary" value="Lọc"
-							style="height: 58px; width: 100px;">
+						<input type="submit" class="btn btn-primary d-flex ftco-animate" value="Lọc"
+							style="height: 58px; width: 100px; margin: auto; justify-content: center;">
 
 					</form>
 				</div>
