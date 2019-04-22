@@ -196,6 +196,9 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
 
 		if (page == null) {
@@ -280,6 +283,9 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
 
 		String courseId = courseService.genCourseId();
@@ -338,7 +344,7 @@ public class CourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		modelAndView.setViewName("redirect:/admin/all-courses");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 
@@ -362,14 +368,19 @@ public class CourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		modelAndView.setViewName("redirect:/admin/all-courses");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = { "edit-course" }, method = RequestMethod.GET)
-	public ModelAndView editCourse(@RequestParam("courseId") String courseId) {
+	public ModelAndView editCourse(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 
+		if (principal == null) {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
+		
 		modelAndView.addObject("course", courseService.getCourseById(courseId));
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 
@@ -384,14 +395,12 @@ public class CourseController {
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
 		}
-
+		
 		course.setUserName(userName);
-		try {
-			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		if (result.hasErrors()) {
 			modelAndView.setViewName("edit-course");
@@ -408,7 +417,7 @@ public class CourseController {
 
 		try {
 			course.setUpdateDate(dateformat.currentDate());
-			System.out.println(course);
+
 			courseService.updateCourse(course);
 
 			User loginedUser = null;
@@ -427,7 +436,7 @@ public class CourseController {
 			e.printStackTrace();
 		}
 
-		modelAndView.setViewName("redirect:/course");
+		modelAndView.setViewName("redirect:/manager-course");
 		return modelAndView;
 	}
 
