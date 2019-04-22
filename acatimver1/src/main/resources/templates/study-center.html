@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    
+    <link rel="stylesheet" href="css/rating.css">
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
@@ -237,13 +237,12 @@
         				<div class="info ml-4">
         					<h4><a th:href="@{/profileDetail(userName=${studyCenter.userName})}" th:text="${studyCenter.fullName}"></a></h4>
         					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></span>
-        					<p class="ftco-social d-flex">
-		                		<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star"></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
-		                	</p>
+        					<div class="ratingStar">
+									<div class="stars-outer">
+										<p id="a" th:value="${studyCenter.studyCenter.rate}"></p>
+										<div class="stars-inner"></div>
+									</div>
+								</div>
         				</div>
         			</div>
         			<div style="padding-top: 16px;" class="text">
@@ -301,7 +300,7 @@
   <script src="js/main.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/filterbar.js"></script>
-  
+    <script src="js/rating.js"></script>
 
     
   </body>

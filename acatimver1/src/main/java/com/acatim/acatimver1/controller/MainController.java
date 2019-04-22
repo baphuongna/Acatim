@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
@@ -26,13 +24,9 @@ public class MainController {
 	@Autowired
 	private UserInfoService userInfoService;
 
-	@Autowired
-	private CourseService courseService;
-
 	@RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
 	public ModelAndView index(Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("listCourse", courseService.getAllCourse());
 		
 		if (principal != null) {
 			User loginedUser = (User) ((Authentication) principal).getPrincipal();

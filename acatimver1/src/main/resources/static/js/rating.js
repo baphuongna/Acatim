@@ -1,12 +1,8 @@
-/**
- * 
- */
-
 // Initial Ratings
-var b = document.querySelectorAll("#rating");
+var b = document.querySelectorAll("#a");
 var c = b[0].getAttribute('value');
     const ratings = {
-    	ratingStar: c
+      ratingStar: c
     }
 
     // Total Stars
