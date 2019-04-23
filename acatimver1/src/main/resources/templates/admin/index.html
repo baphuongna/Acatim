@@ -10,6 +10,8 @@
     <title th:text="'Acatim-Admin'"></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- favicon
 		============================================ -->
     <link rel="shortcut icon" type="image/x-icon" href="admin/img/favicon.ico">
@@ -65,6 +67,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="admin/js/vendor/modernizr-2.8.3.min.js"></script>
+   
 </head>
 
 <body>
@@ -98,10 +101,10 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                         <ul class="breadcome-menu">
-                                            <h4><a>Home</a> <span class="bread-slash">/</span>
-                                            </h4>
-                                            <h4><span class="bread-blod">Dashboard</span>
-                                            </h4>
+                                            <li><a href="#">Home</a> <span class="bread-slash">/</span>
+                                            </li>
+                                            <li><span class="bread-blod">Dash board</span>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -111,130 +114,160 @@
                 </div>
             </div>
         </div>
-        <div class="analytics-sparkle-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30">
-                            <div class="analytics-content">
-                                <h5>Số lượng học sinh</h5>
-                                <h2><span class="counter" th:utext="${allStudent}">5000</span>  </h2>
-                            </div>
-                        </div>
+        
+        <div style="margin-right: 15px; margin-left: 15px;">
+        	<div class="row" >
+        	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #1cc88a!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-education"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #1cc88a; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số lượng học sinh</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allStudent}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30">
-                            <div class="analytics-content">
-                                <h5>Số lượng trung tâm</h5>
-                                <h2><span class="counter" th:utext="${allStudyCenter}">3000</span>  </h2>
-                            </div>
-                        </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #4e73df!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-home"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #4e73df; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số lượng trung tâm</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allStudyCenter}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <div class="analytics-content">
-                                <h5>Số lượng giáo viên</h5>
-                                <h2><span class="counter" th:utext="${allTeacher}">2000</span> </h2>
-                            </div>
-                        </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #f6c23e!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-user"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #f6c23e; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số lượng giáo viên</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allTeacher}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-                </div>
-            </div>
         </div>
-        <div class="product-sales-area mg-tb-30">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title">Số Thể Loại</h5>
-                            <h2><span class="counter" th:utext="${allCategories}">2000</span> </h2>
-                        </div>
-                    </div>
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title">Số lượng Môn Học </h5>
-                            <h2><span class="counter" th:utext="${allSubject}">2000</span> </h2>
-                        </div>
-                    </div>
-					
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title">Số lượng Khóa Học</h5>
-                            <h2><span class="counter" th:utext="${allCourse}">2000</span> </h2>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-sales-area mg-tb-30">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Học Sinh Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countStudent.byDate}"></span> Học Sinh</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countStudent.byMonth}"></span> Học Sinh</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countStudent.byYear}"></span> Học Sinh</h4>
-                        </div>
-                    </div>
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Giáo Viên Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countTeacher.byDate}"></span> Giáo Viên</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countTeacher.byMonth}"></span> Giáo Viên</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countTeacher.byYear}"></span> Giáo Viên</h4>
-                        </div>
-                    </div>
-					
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Trung Tâm Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countStudyCenter.byDate}"></span> Trung Tâm</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countStudyCenter.byMonth}"></span> Trung Tâm</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countStudyCenter.byYear}"></span> Trung Tâm</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         
-        <div class="product-sales-area mg-tb-30">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Khóa Học Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countCourse.byDate}"></span> Khóa Học</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countCourse.byMonth}"></span> Khóa Học</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countCourse.byYear}"></span> Khóa Học</h4>
-                        </div>
+        <div style="margin-right: 15px; margin-left: 15px;">
+        	<div class="row" >
+        	<div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grid-margin stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #36b9cc!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-calendar"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #36b9cc; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số Thể Loại</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allCategories}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Phản Hồi Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countContact.byDate}"></span> Phản Hồi</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countContact.byMonth}"></span> Phản Hồi</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countContact.byYear}"></span> Phản Hồi</h4>
-                        </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grid-margin stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #f78f8f!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-book"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #f78f8f; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số lượng Môn Học</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allSubject}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-					
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="analytics-sparkle-line reso-mg-b-30 table-mg-t-pro dk-res-t-pro-30">
-                            <h5 class="box-title" th:text="'Số Đánh Giá Mới Trong'"></h5>
-                            <h4>Ngày  : <span class="counter" th:text="${countRating.byDate}"></span> Đánh Giá</h4>
-                            <h4>Tháng : <span class="counter" th:text="${countRating.byMonth}"></span> Đánh Giá</h4>
-                            <h4>Năm   : <span class="counter" th:text="${countRating.byYear}"></span> Đánh Giá</h4>
-                        </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grid-margin stretch-card">
+                    	<div class="card card-statistics" style="border-left: .25rem solid #f30000!important;">
+                    		<div class="card-body" style="padding: 23px 3.81rem;">
+                    			<div class="clearfix">
+                    				<div class="float-left" style="float: left;">
+                    					<i style="font-size: 2.5em; color: #dddfeb;" class="glyphicon glyphicon-list-alt"></i>
+                    				</div>
+                    				<div class="float-right">
+                    					<p style="color: #f30000; font-size: 15px; font-weight: 700; margin-bottom: 5px;" class="mb-0 text-right">Số lượng Khóa Học</p>
+                    					<div class="fluid-container">
+                    						<h3 style="color: #5a5c69;" class="font-weight-medium text-right mb-0 counter" th:utext="${allCourse}"></h3>
+                    					</div>
+                    				</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     </div>
-                </div>
-            </div>
+        </div>
+        </div>
+        
+        
+        
+       
+        <span style="display: none;" id="hsNgay" th:text="${countStudent.byDate}"></span>
+        <span style="display: none;" id="hsThang" th:text="${countStudent.byMonth}"></span>
+        <span style="display: none;" id="hsNam" th:text="${countStudent.byYear}"></span>
+                        
+       
+        <span style="display: none;" id="gvNgay" th:text="${countTeacher.byDate}"></span>
+        <span style="display: none;" id="gvThang" th:text="${countTeacher.byMonth}"></span>
+        <span style="display: none;" id="gvNam" th:text="${countTeacher.byYear}"></span>
+                        
+        
+        <span style="display: none;" id="ttNgay" th:text="${countStudyCenter.byDate}"></span>
+        <span style="display: none;" id="ttThang" th:text="${countStudyCenter.byMonth}"></span>
+        <span style="display: none;" id="ttNam" th:text="${countStudyCenter.byYear}"></span>
+                
+        
+        <div style="margin-right: 15px; margin-left: 15px;">
+        	<div class="row">
+        		<div style="border-radius: 7px;" class="col-xl-8 col-lg-8 col-md-8 col-sm-12 grid-margin">
+					<div style="border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom: 1px solid #d0d0d0;background-color: #dde5ff;padding: 13px 0px 27px 20px;font-size: 18px; height: 49px;">
+						<p style="font-weight: 700!important; color: #4e73df!important; margin-bottom: 0; ">Số Học Sinh Mới Trong:</p>
+					</div>
+					<canvas class="card" style="background-color: #fff; height: 353px !important;" id="myChart"></canvas>
+				</div>
+				<div style="border-radius: 7px;" class="col-xl-4 col-lg-4 col-md-4 col-sm-12 grid-margin">
+					<div>
+						<div style="border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom: 1px solid #d0d0d0;background-color: #dde5ff;padding: 13px 0px 27px 20px;font-size: 18px; height: 49px;">
+							<p style="font-weight: 700!important; color: #4e73df!important; margin-bottom: 0; ">Số Giáo Viên Mới Trong:</p>
+						</div>
+						<canvas class="card" style="background-color: #fff; margin-bottom: 25px;" id="myChart2"></canvas>
+					</div>
+					<div>
+						<div style="border-top-left-radius: 4px;border-top-right-radius: 4px;border-bottom: 1px solid #d0d0d0;background-color: #dde5ff;padding: 13px 0px 27px 20px;font-size: 18px; height: 49px;">
+							<p style="font-weight: 700!important; color: #4e73df!important; margin-bottom: 0; ">Số Trung Tâm Mới Trong:</p>
+						</div>
+						<canvas class="card" style="background-color: #fff;" id="myChart3"></canvas>
+					</div>
+				</div>
+        	</div>
         </div>
         
         <div class="library-book-area mg-t-30">
@@ -375,6 +408,175 @@
     <!-- tawk chat JS
 		============================================ -->
     <script src="admin/js/tawk-chat.js"></script>
+    <script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+    let hsNgay = document.getElementById('hsNgay').innerHTML;
+    let hsThang = document.getElementById('hsThang').innerHTML;
+    let hsNam = document.getElementById('hsNam').innerHTML;
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 16;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+      type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:['Ngày', 'Tháng', 'Năm'],
+        datasets:[{
+          data:[
+        	  hsNgay,
+            hsThang,
+            hsNam
+          ],
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:false,
+          text:'Số Học Sinh Mới Trong: ',
+          fontSize:25
+        },
+        legend:{
+          display:false,
+          position:'right'
+         
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:30
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    let x = document.getElementById('myChart');
+    x.style.height = "425px";
+    </script>
+    <script>
+    let myChart2 = document.getElementById('myChart2').getContext('2d');
+    let myChart3 = document.getElementById('myChart3').getContext('2d');
+    let gvNgay = document.getElementById('gvNgay').innerHTML;
+    let gvThang = document.getElementById('gvThang').innerHTML;
+    let gvNam = document.getElementById('gvNam').innerHTML;
+    let ttNgay = document.getElementById('ttNgay').innerHTML;
+    let ttThang = document.getElementById('ttThang').innerHTML;
+    let ttNam = document.getElementById('ttNam').innerHTML;
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart2 = new Chart(myChart2, {
+      type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:['Ngày', 'Tháng', 'Năm'],
+        datasets:[{
+          data:[
+        	  gvNgay,
+            gvThang,
+            gvNam
+          ],
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)'
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        title:{
+          display:false,
+          text:'Số Giáo Viên Mới Trong:',
+          fontSize:25
+        },
+        legend:{
+          display:false,
+          position:'right'
+         
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:0,
+            bottom:0,
+            top:30
+          }
+        },
+        tooltips:{
+          enabled:true
+        }
+      }
+    });
+    
+    let massPopChart3 = new Chart(myChart3, {
+        type:'horizontalBar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+          labels:['Ngày', 'Tháng', 'Năm'],
+          datasets:[{
+            data:[
+          	  ttNgay,
+              ttThang,
+              ttNam
+            ],
+            //backgroundColor:'green',
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)'
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+          }]
+        },
+        options:{
+          title:{
+            display:false,
+            text:'Số Trung Tâm Mới Trong:',
+            fontSize:25
+          },
+          legend:{
+            display:false,
+            position:'right'
+           
+          },
+          layout:{
+            padding:{
+              left:50,
+              right:0,
+              bottom:0,
+              top:30
+            }
+          },
+          tooltips:{
+            enabled:true
+          }
+        }
+      });
+    </script>
 </body>
 
 </html>
