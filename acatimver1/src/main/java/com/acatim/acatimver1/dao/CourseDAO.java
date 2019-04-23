@@ -14,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.SearchValue;
-import com.acatim.acatimver1.mapper.CourseByName;
-import com.acatim.acatimver1.mapper.CourseExtractor;
 import com.acatim.acatimver1.mapper.CourseMapper;
 import com.acatim.acatimver1.service.PageableService;
 
@@ -34,7 +32,7 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\r\n" +
 				"INNER JOIN User ON Course.user_name = User.user_name";
 
-		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseExtractor());
+		List<Course> courses = this.getJdbcTemplate().query(sql, new CourseMapper());
 		return courses;
 	}
 	
@@ -72,7 +70,7 @@ public class CourseDAO extends JdbcDaoSupport {
 	public List<Course> getCourseByUserNameWithFullInfo(String userName) {
 		String sql = "SELECT * FROM Course,User where (Course.user_name = ?) and (User.user_name = ?);";
 		Object[] params = new Object[] { userName, userName };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseByName());
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
 		return courses;
 	}
 
@@ -81,7 +79,7 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
 				"INNER JOIN User ON Course.user_name = User.user_name where Course.courseName LIKE ?;";
 		Object[] params = new Object[] { "%" + courseName + "%" };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
 		return courses;
 	}
 
@@ -90,7 +88,7 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
 				"INNER JOIN User ON Course.user_name = User.user_name where Subject.subject_name LIKE ?;";
 		Object[] params = new Object[] { "%" + subjectName + "%" };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseExtractor());
+		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
 		return courses;
 	}
 	

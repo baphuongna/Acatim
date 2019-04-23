@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.Rating;
 import com.acatim.acatimver1.mapper.RatingMapper;
-import com.acatim.acatimver1.mapper.RatingStudyCenterExtractor;
-import com.acatim.acatimver1.mapper.RatingTeacherExtractor;
 
 @Repository
 @Transactional
@@ -27,7 +25,7 @@ public class RatingDAO extends JdbcDaoSupport {
 	public List<Rating> getAllRatingTeacher() {
 		String sql = "SELECT * FROM Rating\r\n" + "INNER JOIN RateTeacher ON Rating.rate_id = RateTeacher.rate_id";
 
-		List<Rating> rating = this.getJdbcTemplate().query(sql, new RatingTeacherExtractor());
+		List<Rating> rating = this.getJdbcTemplate().query(sql, new RatingMapper());
 		return rating;
 	}
 
@@ -35,7 +33,7 @@ public class RatingDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM Rating\r\n"
 				+ "INNER JOIN RateStudyCenter ON Rating.rate_id = RateStudyCenter.rate_id";
 
-		List<Rating> rating = this.getJdbcTemplate().query(sql, new RatingStudyCenterExtractor());
+		List<Rating> rating = this.getJdbcTemplate().query(sql, new RatingMapper());
 		return rating;
 	}
 
@@ -43,7 +41,7 @@ public class RatingDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM Rating\r\n"
 				+ "INNER JOIN RateTeacher ON Rating.rate_id = RateTeacher.rate_id Where Rating.reciever_name = ?";
 		Object[] params = new Object[] { recieverName };
-		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingTeacherExtractor());
+		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingMapper());
 		return rating;
 	}
 
@@ -51,7 +49,7 @@ public class RatingDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM Rating\r\n"
 				+ "INNER JOIN RateStudyCenter ON Rating.rate_id = RateStudyCenter.rate_id Where Rating.reciever_name = ?";
 		Object[] params = new Object[] { recieverName };
-		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingStudyCenterExtractor());
+		List<Rating> rating = this.getJdbcTemplate().query(sql, params, new RatingMapper());
 		return rating;
 	}
 

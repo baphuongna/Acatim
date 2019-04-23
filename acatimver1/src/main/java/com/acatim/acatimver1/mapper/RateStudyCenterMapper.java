@@ -14,7 +14,9 @@ public class RateStudyCenterMapper implements RowMapper<RateStudyCenter>{
 	
 	@Override
 	public RateStudyCenter mapRow(ResultSet rs, int rowNum) throws SQLException {
-
+		
+		RateStudyCenter rateStudyCenter = null;
+		
 		String rateId = rs.getString("rate_id");
 		float equipmentQuality = rs.getFloat("equipmentQuality");
 		float staffAttitude = rs.getFloat("staffAttitude");
@@ -25,7 +27,10 @@ public class RateStudyCenterMapper implements RowMapper<RateStudyCenter>{
 		float location = rs.getFloat("location");
 		float teachingQuality = rs.getFloat("teachingQuality");
 		String checkSCNull = rs.getString("checkSCNull");
-		return new RateStudyCenter(rateId, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality, checkSCNull);
+		
+		rateStudyCenter = new RateStudyCenter(rateId, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality, checkSCNull);
+		
+		return rateStudyCenter;
 	}
 
 }

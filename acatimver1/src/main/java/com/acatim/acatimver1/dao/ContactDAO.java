@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.entity.Contact;
 import com.acatim.acatimver1.entity.CountByDate;
-import com.acatim.acatimver1.mapper.ContactExtractor;
 import com.acatim.acatimver1.mapper.ContactMapper;
 
 @Repository
@@ -35,8 +34,9 @@ public class ContactDAO extends JdbcDaoSupport {
 
 	public List<Contact> getAllContact() {
 		try {
+			ContactMapper mapper = new ContactMapper();
 			String sql = ContactMapper.BASE_SQL;
-			List<Contact> contact = this.getJdbcTemplate().query(sql, new ContactExtractor());
+			List<Contact> contact = this.getJdbcTemplate().query(sql, mapper);
 			return contact;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -45,9 +45,10 @@ public class ContactDAO extends JdbcDaoSupport {
 
 	public List<Contact> searchAllContactByUserName(Pageable pageable, String name) {
 		try {
+			ContactMapper mapper = new ContactMapper();
 			String sql = ContactMapper.BASE_SQL + " WHERE name LIKE ? LIMIT ?, ?;";
 			Object[] params = new Object[] { "%" + name + "%", pageable.getOffset(), pageable.getPageSize() };
-			List<Contact> contact = this.getJdbcTemplate().query(sql, params, new ContactExtractor());
+			List<Contact> contact = this.getJdbcTemplate().query(sql, params, mapper);
 			return contact;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -56,9 +57,10 @@ public class ContactDAO extends JdbcDaoSupport {
 
 	public List<Contact> getAllContactPageable(Pageable pageable) {
 		try {
+			ContactMapper mapper = new ContactMapper();
 			String sql = ContactMapper.BASE_SQL + " LIMIT ?, ?;";
 			Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
-			List<Contact> contact = this.getJdbcTemplate().query(sql, params, new ContactExtractor());
+			List<Contact> contact = this.getJdbcTemplate().query(sql, params, mapper);
 			return contact;
 
 		} catch (EmptyResultDataAccessException e) {
@@ -68,9 +70,10 @@ public class ContactDAO extends JdbcDaoSupport {
 
 	public List<Contact> searchAllContactByEmail(Pageable pageable, String email) {
 		try {
+			ContactMapper mapper = new ContactMapper();
 			String sql = ContactMapper.BASE_SQL + " WHERE email LIKE ? LIMIT ?, ?;";
 			Object[] params = new Object[] { "%" + email + "%", pageable.getOffset(), pageable.getPageSize() };
-			List<Contact> contact = this.getJdbcTemplate().query(sql, params, new ContactExtractor());
+			List<Contact> contact = this.getJdbcTemplate().query(sql, params, mapper);
 			return contact;
 		} catch (EmptyResultDataAccessException e) {
 			return null;

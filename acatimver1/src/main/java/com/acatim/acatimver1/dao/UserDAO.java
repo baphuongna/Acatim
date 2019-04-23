@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
-import com.acatim.acatimver1.mapper.UserExtractor;
 import com.acatim.acatimver1.mapper.UserMapper;
 import com.acatim.acatimver1.service.PageableService;
 
@@ -94,12 +93,12 @@ public class UserDAO extends JdbcDaoSupport {
 		try {
 			if (roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 ;";
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new UserMapper());
 				return userInfo;
 			} else {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 and User.role_id = ?;";
 				Object[] params = new Object[] { roleId };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			}
 
@@ -226,13 +225,13 @@ public class UserDAO extends JdbcDaoSupport {
 			if (roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + userName + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			} else {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + userName + "%", roleId, pageable.getOffset(),
 						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			}
 
@@ -248,13 +247,13 @@ public class UserDAO extends JdbcDaoSupport {
 			if (roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + email + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			} else {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + email + "%", roleId, pageable.getOffset(),
 						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			}
 
@@ -270,13 +269,13 @@ public class UserDAO extends JdbcDaoSupport {
 			if (roleId == null) {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + fullName + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			} else {
 				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
 				Object[] params = new Object[] { "%" + fullName + "%", roleId, pageable.getOffset(),
 						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserExtractor());
+				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
 				return userInfo;
 			}
 

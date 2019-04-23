@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.acatim.acatimver1.entity.Categories;
 import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.Subject;
 
@@ -25,6 +26,7 @@ public class SubjectMapper implements RowMapper<Subject> {
 		String updateDate = rs.getString("update_date");
 		boolean active = rs.getBoolean("active");
 		subject = new Subject(subjectId, categoryId, subjectName, createDate, updateDate, active);
+		
 		try {
 			String courseId = rs.getString("course_id");
 			Course course = null;
@@ -43,6 +45,19 @@ public class SubjectMapper implements RowMapper<Subject> {
 					startDate, endDate, price, createDate1, updateDate1, active1);
 			subject.getCourses().add(course);
 		} catch (Exception e) {
+		}
+		
+		try {
+			Categories category = null;
+			String categoryName = rs.getString("category_name");
+			int categoryId1 = rs.getInt("category_id");
+			String createDate1 = rs.getString("create_date");
+			String updateDate1 = rs.getString("update_date");
+			boolean active1 = rs.getBoolean("active");
+			
+			category = new Categories(categoryId1, categoryName, createDate1, updateDate1, active1);
+			subject.setCategory(category);
+		}catch (Exception e) {
 		}
 
 		return subject;
