@@ -44,25 +44,6 @@ public class MainController {
 		modelAndView.setViewName("index");
 		return modelAndView;
 	}
-	
-	
-
-//    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-//    public String adminPage(Model model, Principal principal) {
-//         
-//        User loginedUser = (User) ((Authentication) principal).getPrincipal();
-// 
-//        String userInfo = WebUtils.toString(loginedUser);
-//        model.addAttribute("userInfo", userInfo);
-//         
-//        return "adminPage";
-//    }
-// 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public String loginPage(Model model) {
-// 
-//        return "loginPage";
-//    }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String error(Model model) {
@@ -110,64 +91,13 @@ public class MainController {
 	@RequestMapping(value = "/logoutSuccessful", method = RequestMethod.GET)
 	public String logoutSuccessfulPage(Model model) {
 		model.addAttribute("title", "Logout");
-		return "index";
-	}
-
-//    @RequestMapping(value={"/profileS"}, method = RequestMethod.GET)
-//    public ModelAndView profileS(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("profileS");
-//        return modelAndView;
-//    }
-
-	@RequestMapping(value = { "/about" }, method = RequestMethod.GET)
-	public ModelAndView about() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("about");
-		return modelAndView;
-	}
-
-//	@RequestMapping(value = { "/course" }, method = RequestMethod.GET)
-//	public ModelAndView course() {
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("course");
-//		return modelAndView;
-//	}
-
-
-	@RequestMapping(value = { "/rating" }, method = RequestMethod.GET)
-	public ModelAndView rating() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("rating");
-		return modelAndView;
-	}
-	
-	
-	@RequestMapping(value = { "/blog" }, method = RequestMethod.GET)
-	public ModelAndView blog() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("blog");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = { "/event" }, method = RequestMethod.GET)
-	public ModelAndView event() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("event");
-		return modelAndView;
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = { "/contact" }, method = RequestMethod.GET)
 	public ModelAndView contact() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("contact");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = { "/ratingTeacher" }, method = RequestMethod.GET)
-	public ModelAndView ratingTeacher() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("ratingTeacher");
 		return modelAndView;
 	}
 
