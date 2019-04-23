@@ -17,19 +17,19 @@
 </head>
 <body>
 	<div th:fragment="menu">
-		<nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner" style="position: fixed; top: 0px; height: 80px; background-color: #fff;">
+		<!-- <nav class="navbar navbar-expand-md navbar-dark fixed-top" id="banner" style="position: fixed; top: 0px; height: 80px; background-color: #fff;">
 			<div class="container">
-				<!-- Brand -->
+				Brand
 				<a class="navbar-brand" th:href="@{/}"><span>Acatim</span> Fpt
 					University</a>
 
-				<!-- Toggler/collapsibe Button -->
+				Toggler/collapsibe Button
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#collapsibleNavbar">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<!-- Navbar links -->
+				Navbar links
 				<form th:action="@{/registration}" method="get">
 					<div class="collapse navbar-collapse" id="collapsibleNavbar">
 						<ul class="navbar-nav ml-auto">
@@ -68,6 +68,46 @@
 							style="margin-left: 5px; margin-top: 8px;">Đăng nhập</a>
 					</div>
 				</form>
+			</div>
+		</nav> -->
+
+
+		<nav
+			class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+			id="ftco-navbar" >
+			<div class="container">
+				<a class="navbar-brand" th:href="@{/}"><span>Acatim</span> FPT University</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#ftco-nav" aria-controls="ftco-nav"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="oi oi-menu"></span> Menu
+				</button>
+
+				<div class="collapse navbar-collapse" id="ftco-nav">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item"><a class="nav-link" th:href="@{/}">Trang chủ</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/course}">Khóa học</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/teacher}">Giáo viên/Trung tâm</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/contact}">Liên Hệ</a></li>
+						<li class="nav-item dropdown"
+								th:if="${#request.userPrincipal != null}"><a
+								class="nav-link dropdown-toggle" href="#" id="navbardrop"
+								data-toggle="dropdown" th:utext="${#request.userPrincipal.name}">
+							</a>
+								<div class="dropdown-menu">
+									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" th:href="@{/admin/}" th:text="'Trang Quản lý Web'"></a>
+									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Student', 'Teacher', 'Study Center')" href="profile.html" th:href="@{/profile}" th:text="'Trang cá nhân'"> </a>
+									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Teacher', 'Study Center')"  th:href="@{/manager-course}" th:text="'Quản Lý Khóa Học'"></a>
+									<a class="dropdown-item" th:href="@{/change-password}" th:text="'Đổi Mật Khẩu'"> </a>
+									<a class="dropdown-item" th:href="@{/update-info}" th:text="'Cập Nhật Thông Tin'"> </a>
+									<a class="dropdown-item" th:href="@{/Logout}" th:text="'Đăng xuất'"></a>
+
+								</div></li>
+						
+						<li class="nav-item cta"><a th:href="@{/registration}" th:if="${#request.userPrincipal == null}" class="nav-link" >Đăng ký</a></li>
+						<li class="nav-item cta"><a th:href="@{/loginPage}" th:if="${#request.userPrincipal == null}" class="nav-link">Đăng nhập</a></li>
+					</ul>
+				</div>
 			</div>
 		</nav>
 	</div>
