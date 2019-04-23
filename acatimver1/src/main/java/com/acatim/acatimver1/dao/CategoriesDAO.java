@@ -22,19 +22,26 @@ public class CategoriesDAO extends JdbcDaoSupport {
 	}
 	
 	public List<Categories> getAllCategories() {
-		String sql = CategoriesMapper.BASE_SQL;
-
-		CategoriesMapper mapper = new CategoriesMapper();
-		List<Categories> userList = this.getJdbcTemplate().query(sql, mapper);
-		return userList;
+		try {
+			String sql = CategoriesMapper.BASE_SQL;
+			CategoriesMapper mapper = new CategoriesMapper();
+			List<Categories> userList = this.getJdbcTemplate().query(sql, mapper);
+			return userList;
+		}catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public Categories getCategoriesByCategoryId(String categoryId) {
-		String sql = "SELECT * FROM Categories Where category_id = ?;";
-		Object[] params = new Object[] { categoryId };
-		CategoriesMapper mapper = new CategoriesMapper();
-		Categories categories = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-		return categories;
+		try {
+			String sql = "SELECT * FROM Categories Where category_id = ?;";
+			Object[] params = new Object[] { categoryId };
+			CategoriesMapper mapper = new CategoriesMapper();
+			Categories categories = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return categories;
+		}catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public void addCategories(Categories categories) {

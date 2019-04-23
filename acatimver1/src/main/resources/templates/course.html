@@ -164,19 +164,20 @@
 			<div class="panel panel-default">
 				<div class="panel-heading accordion-head" style="width: 100%; ">
 					<h4 class="panel-title">
-						<span class="glyphicon glyphicon-filter"></span> Bộ lọc
-						<!-- <a data-toggle="collapse" data-parent="#accordion2"
-							href="#collapse5"> <span class="glyphicon glyphicon-filter"></span>
-							Bộ lọc
-						</a> -->
+						<span class="glyphicon glyphicon-filter"></span> Bộ lọc 
+						<span th:if="${category != null}" th:text="' - Thể Loại :' + ${category.categoryName}" style="color: black; font-weight: bold;"></span>
+						<span th:if="${subject != null}" th:text="' - Môn Học :' + ${subject.subjectName}" style="color: black; font-weight: bold;"></span>
+						<span th:if="${sortName != null}" th:text="' - Sắp Xếp theo :' + ${sortName}" style="color: black; font-weight: bold;"></span>
 					</h4>
 					<form th:action="@{course}"
 						th:object="${searchValue}" method="POST" class="form-inline" style="padding-top: 10px;">
+						<input type="hidden" th:field="*{categoryId}">
+						<input type="hidden" th:field="*{search}">
 						<div style="display: flex; margin: auto;">
 						<div class="dropdown" style=" height: 58px;">
 							<button  class="btn dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255); margin-right: 47px;"></button>
+								aria-haspopup="true" aria-expanded="false" th:text="'-- Chọn Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255); margin-right: 47px;"></button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" th:field="*{categoryId}">
 								<a class="dropdown-item" th:href="@{/course(categoryId='0')}" th:text="'-- Tất Cả --'"></a>
 								<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{course(categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
@@ -214,47 +215,21 @@
 
 				</div>
 
-				<!-- <div id="collapse5" class="panel-collapse panel-ic collapse">
-					<div style="padding: 0px;" class="panel-body admin-panel-content">
-						<div class="filter-form" style="justify-content: center;">
-							<form style="width: 50%; margin: auto;" th:action="@{course}" th:object="${searchValue}" method="POST" class=" form-inline">
-							
-								<div class="d-flex ftco-animate" style="justify-content: center;">
-									<div class="chosen-select-single mg-b-20">
-										<select class="form-control" th:field="*{categoryId}">
-											<option value="0">--Tât Cả Các Thể loại--</option>
-												<option th:if="${allCategories != null}" th:each="category : ${allCategories}" th:value="${category.categoryId}">
-												
-												</option>
-										</select>
-									</div>
-								</div>
-								<div class="d-flex ftco-animate" style="justify-content: center;">
-									<div class="chosen-select-single mg-b-20">
-										<select class="form-control" th:field="*{sortValue}">
-											<option value="0">-Sắp Xếp theo-</option>
-											<option value="1">Tên</option>
-											<option value="2">Ngày cập nhật</option>
-											<option value="3">Giá từ Thấp tới Cao</option>
-											<option value="4">Giá từ Cao tới Thấp</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="d-flex ftco-animate" style="justify-content: center;">
-									<input type="submit" class="btn" value="Lọc"
-									style="height: 100%; width: auto;">
-								</div>
-
-							</form>
-						</div>
-
-
-					</div>
-				</div> -->
 			</div>
 			
-			<div class="row">
+			<div th:if="${checknullcourse == 0}" class="search-form wow pulse animated" style="justify-content: center; text-align: center;">
+				<span th:text="'Không Tìm thấy Khóa Học nào.'" style="color: black; font-size: 30px; text-align: center;"></span>
+			</div>
+			
+			<div th:if="${searchValue.search != null}" class="search-form wow pulse animated" style="justify-content: center; text-align: center;">
+				<span th:text="'Tìm kiếm Tên khóa học ('" style="color: black; font-size: 30px;"></span>
+				<span th:text="${searchValue.search}" style="color: green; font-size: 30px;"></span>
+				<span th:text="') Tìm thấy ('" style="color: black; font-size: 30px;"></span>
+				<span th:text="${total}" style="color: green; font-size: 30px;"></span>
+				<span th:text="') Khóa Học.'" style="color: black; font-size: 30px;"></span>
+			</div>
+			
+			<div class="row" th:if="${checknullcourse != 0}">
 				<div class="col-md-4 d-flex ftco-animate" th:each="course,wind : ${allCourses}">
 					<div class="course align-self-stretch" style="width: 100%;">
 						<a th:href="@{/detail-course(courseId=${course.courseId})}" class="img"
@@ -274,7 +249,7 @@
 				</div>
 			</div>
 			
-			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
+			<div th:if="${checknullcourse != 0}" class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>

@@ -73,7 +73,11 @@ public class CourseController {
 		if (page == null) {
 			page = 1 + "";
 		}
-
+		
+		if (search.getSearch() != null && search.getSearch().trim().equals("")) {
+			search.setSearch(null);
+		}
+		
 		if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
 			search.setSubjectId(null);
 		}
@@ -96,32 +100,43 @@ public class CourseController {
 			
 			if (search.getCategoryId() != null) {
 				modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));
+				modelAndView.addObject("category", categoriesService.getCategoriesByCategoryId(search.getCategoryId()));
 			}else {
 				modelAndView.addObject("allSubjects", subjectService.getAllSubject());
 			}
 			
-			
+			if (search.getSubjectId() != null) {
+				modelAndView.addObject("subject", subjectService.getSubjectBySubjectId(search.getSubjectId()));
+			}
 			
 			Sort sort = null;
 
 			if (sortValue != null) {
 				search.setSortValue(sortValue);
 			}
-
+			
+			String sortName = null;
+			
 			if (search.getSortValue() != null) {
 				if (!search.getSortValue().equals("0")) {
 					if (search.getSortValue().equals("1")) {
 						sort = Sort.by("courseName").ascending();
+						sortName = "Tên Khóa Học";
 					} else if (search.getSortValue().equals("2")) {
 						sort = Sort.by("create_date").ascending();
+						sortName = "Ngày tạo";
 					} else if (search.getSortValue().equals("3")) {
 						sort = Sort.by("price").ascending();
+						sortName = "Giá tăng dần";
 					} else if (search.getSortValue().equals("4")) {
 						sort = Sort.by("price").descending();
+						sortName = "Giá giảm dần";
 					}
 				}
 			}
-
+			
+			modelAndView.addObject("sortName", sortName);
+			
 			total = courseService.getAllCourse(search).size();
 			
 			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
@@ -129,7 +144,8 @@ public class CourseController {
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
 			
 			modelAndView.addObject("allCourses", Courses);
-
+			modelAndView.addObject("checknullcourse", Courses.size());
+			
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
 			modelAndView.addObject("hasPrevious", pageableService.hasPrevious());
@@ -139,6 +155,7 @@ public class CourseController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 			modelAndView.addObject("searchValue", search);
+			modelAndView.addObject("total", total);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
