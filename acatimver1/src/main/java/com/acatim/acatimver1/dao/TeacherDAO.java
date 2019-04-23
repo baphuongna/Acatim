@@ -1,6 +1,5 @@
 package com.acatim.acatimver1.dao;
 
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -11,11 +10,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.entity.Teacher;
-import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.TeacherForm;
 import com.acatim.acatimver1.mapper.TeacherFormMapper;
 import com.acatim.acatimver1.mapper.TeacherMapper;
-import com.acatim.acatimver1.mapper.UserMapper;
 
 @Repository
 @Transactional
@@ -39,16 +36,11 @@ public class TeacherDAO extends JdbcDaoSupport {
 		}
 
 	}
-
-	public List<UserModel> getAllUserTeacher() {
-		String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id INNER JOIN Teacher ON User.user_name = Teacher.user_name;";
-		try {
-			UserMapper mapper = new UserMapper();
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, mapper);
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
+	
+	public int countTeacher() {
+		String sqlDate = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name;";
+		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+		return count;
 	}
 
 	public TeacherForm getUserTeacherByUserName(String userName) {

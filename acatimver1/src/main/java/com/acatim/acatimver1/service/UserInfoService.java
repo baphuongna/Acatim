@@ -2,7 +2,6 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
-import org.springframework.data.domain.Pageable;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
@@ -34,27 +33,16 @@ public interface UserInfoService {
 	
 	void changePassword(String userName, String password) throws NotFoundException;
 	boolean checkPassword(String userName, String password);
-	
-	List<UserModel> searchUserByName(String fullName)  throws NotFoundException;
-	List<UserModel> searchUserByEmail(String email)  throws NotFoundException;
 
-	List<UserModel> loadAllUserTeacher() throws NotFoundException;
-	List<UserModel> loadAllUserStudyCenter() throws NotFoundException;
-	List<UserModel> loadAllUserStudent() throws NotFoundException;
 	boolean checkUserExist(String userName) throws NotFoundException;
 	String getRoleName(String userName);
 	
 	StudentForm getUserStudentByUserName(String userName) throws NotFoundException;
 	TeacherForm getUserTeacherByUserName(String userName) throws NotFoundException;
 	StudyCenterForm getUserStudyCenterByUserName(String userName) throws NotFoundException;
-	
-	List<UserModel> getAllUsers(String roleId) throws NotFoundException;
+
 	List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue Search) throws NotFoundException;
 	List<UserModel> getAllUsers(SearchValue search);
-	
-	List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) throws NotFoundException;
-	List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) throws NotFoundException;
-	List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) throws NotFoundException;
 	
 	void removeContact(String userName) throws NotFoundException;
 	void unlockContact(String userName) throws NotFoundException;
@@ -66,4 +54,7 @@ public interface UserInfoService {
 	CountByDate countTeacherByDate();
 	CountByDate countStudyCentertByDate();
 
+	int countTeacher();
+	int countStudent();
+	int countStudyCenter();
 }

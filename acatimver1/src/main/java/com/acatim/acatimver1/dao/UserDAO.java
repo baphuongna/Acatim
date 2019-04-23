@@ -7,7 +7,6 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -89,24 +88,6 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public List<UserModel> getAllUsers(String roleId) {
-		try {
-			if (roleId == null) {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 ;";
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, new UserMapper());
-				return userInfo;
-			} else {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.role_id < 4 and User.role_id = ?;";
-				Object[] params = new Object[] { roleId };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			}
-
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
 	public static <T> T[] append(T[] arr, T element) {
 		final int N = arr.length;
 		arr = Arrays.copyOf(arr, N + 1);
@@ -144,9 +125,30 @@ public class UserDAO extends JdbcDaoSupport {
 				params = append(params, Integer.parseInt(search.getRateFilter())+1);
 			}
 			
-			if(search.getSearch() != null) {
+			if(search.getValue() == null && search.getSearch() != null) {
 				if(search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("userName")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.user_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("fullName")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("email")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
@@ -191,9 +193,30 @@ public class UserDAO extends JdbcDaoSupport {
 				params = append(params, Integer.parseInt(search.getRateFilter())+1);
 			}
 			
-			if(search.getSearch() != null) {
+			if(search.getValue() == null && search.getSearch() != null) {
 				if(search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("userName")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.user_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("fullName")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
+			if(search.getValue() != null && search.getValue().equals("email")) {
+				if(search.getSearch().trim().length() != 0) {
+					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
@@ -216,89 +239,6 @@ public class UserDAO extends JdbcDaoSupport {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-	}
-
-	public List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId) {
-
-		try {
-
-			if (roleId == null) {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + userName + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			} else {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.user_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + userName + "%", roleId, pageable.getOffset(),
-						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			}
-
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	public List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId) {
-
-		try {
-
-			if (roleId == null) {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + email + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			} else {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.email LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + email + "%", roleId, pageable.getOffset(),
-						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			}
-
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	public List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId) {
-
-		try {
-
-			if (roleId == null) {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + fullName + "%", pageable.getOffset(), pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			} else {
-				String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id Where User.full_name LIKE ? and User.role_id < 4 and User.role_id = ? LIMIT ?, ?;";
-				Object[] params = new Object[] { "%" + fullName + "%", roleId, pageable.getOffset(),
-						pageable.getPageSize() };
-				List<UserModel> userInfo = this.getJdbcTemplate().query(sql, params, new UserMapper());
-				return userInfo;
-			}
-
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-	}
-
-	public List<UserModel> searchUserByName(String fullName) {
-		String sql = UserMapper.BASE_SQL + " WHERE full_name LIKE ?";
-		Object[] params = new Object[] { "%" + fullName + "%" };
-		UserMapper mapper = new UserMapper();
-		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
-
-		return user;
-	}
-
-	public List<UserModel> searchUserByEmail(String email) {
-		String sql = UserMapper.BASE_SQL + " WHERE email LIKE ?";
-		Object[] params = new Object[] { "%" + email + "%" };
-		UserMapper mapper = new UserMapper();
-		List<UserModel> user = this.getJdbcTemplate().query(sql, params, mapper);
-		return user;
 	}
 	
 	public CountByDate countStudentByDate() {

@@ -1,13 +1,12 @@
 package com.acatim.acatimver1.controller;
 
 import java.security.Principal;
-import java.util.List;
+
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -67,7 +66,7 @@ public class ManagerUserController {
 			SearchValue searchValue = new SearchValue();
 			searchValue.setRoleId(roleId);
 			
-			int total = userInfoService.getAllUsers(roleId).size();
+			int total = userInfoService.getAllUsers(searchValue).size();
 
 			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
@@ -99,43 +98,23 @@ public class ManagerUserController {
 		}
 		System.out.println(search);
 		try {
-
+			
+			if (search.getRoleId() != null && search.getRoleId().equals("0")) {
+				search.setRoleId(null);
+			}
+			
 			int currentPage = Integer.parseInt(page);
 
 			if (currentPage < 1) {
 				currentPage = 1;
 			}
 
-			@SuppressWarnings("deprecation")
-			Pageable pageable = new PageRequest(currentPage - 1, 8);
-
 			int total = 0;
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
-			if (search.getSearch().trim().length() == 0) {
-				total = userInfoService.getAllUsers(search.getRoleId()).size();
-//				System.out.println(
-//						total + " " + userInfoService.getAllUsersPageable(pageable, search.getRoleId()).size());
-				modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search));
-			} else {
-				List<UserModel> listUser = null;
-				if (search.getValue().equals("userName")) {
-					listUser = userInfoService.searchAllUsersByUserName(pageable, search.getSearch(),
-							search.getRoleId());
-					total = listUser.size();
-					modelAndView.addObject("allUser", listUser);
-				} else if (search.getValue().equals("fullName")) {
-					listUser = userInfoService.searchAllUsersByFullName(pageable, search.getSearch(),
-							search.getRoleId());
-					total = listUser.size();
-					modelAndView.addObject("allUser", listUser);
-				} else if (search.getValue().equals("email")) {
-					listUser = userInfoService.searchAllUsersByEmail(pageable, search.getSearch(), search.getRoleId());
-					total = listUser.size();
-					modelAndView.addObject("allUser", listUser);
-				}
-			}
 
+			total = userInfoService.getAllUsers(search).size();
 			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+
+			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search));
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

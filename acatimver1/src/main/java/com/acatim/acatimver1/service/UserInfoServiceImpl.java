@@ -2,7 +2,6 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,21 +49,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public UserModel loadUserbyEmail(String email) throws NotFoundException {
 		UserModel user = this.UserDAO.findUserAccountByEmail(email);
 		return user;
-	}
-	
-	@Override
-	public List<UserModel> loadAllUserTeacher() throws NotFoundException {
-		return this.TeacherDAO.getAllUserTeacher();
-	}
-
-	@Override
-	public List<UserModel> loadAllUserStudyCenter() throws NotFoundException {
-		return this.StudyCenterDAO.getAllUserStudyCenter();
-	}
-
-	@Override
-	public List<UserModel> loadAllUserStudent() throws NotFoundException {
-		return this.StudentDAO.getAllUserStudent();
 	}
 
 	@Override
@@ -148,16 +132,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserModel> searchUserByName(String fullName) throws NotFoundException {
-		return this.UserDAO.searchUserByName(fullName);
-	}
-
-	@Override
-	public List<UserModel> searchUserByEmail(String email) throws NotFoundException {
-		return this.UserDAO.searchUserByEmail(email);
-	}
-
-	@Override
 	public boolean checkUserExist(String userName) throws NotFoundException {
 		return this.UserDAO.checkUserExist(userName);
 	}
@@ -191,31 +165,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<UserModel> getAllUsers(String roleId) throws NotFoundException {
-		return this.UserDAO.getAllUsers(roleId);
-	}
-
-	@Override
 	public List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue search) throws NotFoundException {
 		return this.UserDAO.getAllUsersPageable(pageable, search);
-	}
-
-	@Override
-	public List<UserModel> searchAllUsersByUserName(Pageable pageable, String userName, String roleId)
-			throws NotFoundException {
-		return this.UserDAO.searchAllUsersByUserName(pageable, userName, roleId);
-	}
-
-	@Override
-	public List<UserModel> searchAllUsersByEmail(Pageable pageable, String email, String roleId)
-			throws NotFoundException {
-		return this.UserDAO.searchAllUsersByEmail(pageable, email, roleId);
-	}
-
-	@Override
-	public List<UserModel> searchAllUsersByFullName(Pageable pageable, String fullName, String roleId)
-			throws NotFoundException {
-		return this.UserDAO.searchAllUsersByFullName(pageable, fullName, roleId);
 	}
 
 	@Override
@@ -270,6 +221,21 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public CountByDate countStudyCentertByDate() {
 		return this.UserDAO.countStudyCentertByDate();
+	}
+
+	@Override
+	public int countTeacher() {
+		return this.TeacherDAO.countTeacher();
+	}
+
+	@Override
+	public int countStudent() {
+		return this.StudentDAO.countStudent();
+	}
+
+	@Override
+	public int countStudyCenter() {
+		return this.StudyCenterDAO.countStudyCenter();
 	}
 
 }

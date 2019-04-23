@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
-import javassist.NotFoundException;
-
 @Controller
 @RequestMapping(value = {""})
 public class MainController {
@@ -37,10 +35,10 @@ public class MainController {
 		}
 
 		try {
-			modelAndView.addObject("numberOfTeacher", userInfoService.loadAllUserTeacher().size());
-			modelAndView.addObject("numberOfStudyCenter", userInfoService.loadAllUserStudyCenter().size());
-			modelAndView.addObject("numberOfStudent", userInfoService.loadAllUserStudent().size());
-		} catch (NotFoundException e) {
+			modelAndView.addObject("numberOfTeacher", userInfoService.countTeacher());
+			modelAndView.addObject("numberOfStudyCenter", userInfoService.countStudyCenter());
+			modelAndView.addObject("numberOfStudent", userInfoService.countStudent());
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("index");

@@ -1,7 +1,5 @@
 package com.acatim.acatimver1.dao;
 
-import java.util.List;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +9,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.acatim.acatimver1.entity.StudyCenter;
-import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.StudyCenterForm;
 import com.acatim.acatimver1.mapper.StudyCenterFormMapper;
 import com.acatim.acatimver1.mapper.StudyCenterMapper;
-import com.acatim.acatimver1.mapper.UserMapper;
 
 @Repository
 @Transactional
@@ -38,18 +34,12 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 
 	}
+	
+	public int countStudyCenter() {
+		String sqlDate = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
+		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
 
-	public List<UserModel> getAllUserStudyCenter() {
-		String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
-
-		try {
-			UserMapper mapper = new UserMapper();
-			List<UserModel> userInfo = this.getJdbcTemplate().query(sql, mapper);
-			return userInfo;
-		} catch (EmptyResultDataAccessException e) {
-			return null;
-		}
-
+		return count;
 	}
 
 	public StudyCenterForm getUserStudyCenterByUserName(String userName) {

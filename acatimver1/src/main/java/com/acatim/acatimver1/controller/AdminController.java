@@ -15,8 +15,6 @@ import com.acatim.acatimver1.service.RatingService;
 import com.acatim.acatimver1.service.SubjectService;
 import com.acatim.acatimver1.service.UserInfoService;
 
-import javassist.NotFoundException;
-
 @Controller
 @RequestMapping(value = {"/admin"})
 public class AdminController {
@@ -45,9 +43,9 @@ public class AdminController {
 		
 		try {
 			
-			modelAndView.addObject("allStudent", userInfoService.loadAllUserStudent().size());
-			modelAndView.addObject("allStudyCenter", userInfoService.loadAllUserStudyCenter().size());
-			modelAndView.addObject("allTeacher", userInfoService.loadAllUserTeacher().size());
+			modelAndView.addObject("allStudent", userInfoService.countStudent());
+			modelAndView.addObject("allStudyCenter", userInfoService.countStudyCenter());
+			modelAndView.addObject("allTeacher", userInfoService.countTeacher());
 			modelAndView.addObject("allCourse", courseService.getAllCourse().size());
 			modelAndView.addObject("allSubject", subjectService.getListSubject().size());
 			modelAndView.addObject("allCategories", categoriesService.getAllCategories().size());
@@ -60,7 +58,7 @@ public class AdminController {
 			modelAndView.addObject("countContact", contactService.countContactUsByDate());
 			modelAndView.addObject("countRating", ratingService.countRatingByDate());
 			
-		} catch (NotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
