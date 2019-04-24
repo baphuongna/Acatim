@@ -2472,7 +2472,7 @@ input[type="button"].btn-block {
     opacity: 0; }
 
 .collapse:not(.show) {
-  display: none; }
+  display: none !important; }
 
 .collapsing {
   position: relative;
