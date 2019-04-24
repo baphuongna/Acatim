@@ -42,17 +42,16 @@
 		style="background-image: url('images/bg_1.jpg'); background-attachment: fixed;">
 		<div class="overlay"></div>
 		<div class="container">
-			<div
-				class="row no-gutters slider-text align-items-center justify-content-center"
+			<div class="row no-gutters slider-text align-items-center justify-content-center"
 				data-scrollax-parent="true">
-				<div class="col-md-5 ftco-animate text-left">
+				<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 ftco-animate text-left">
 					<h1 class="mb-4" th:text="${T(com.acatim.acatimver1.constants.Constants).chao_mung}"></h1>
 					<p th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text}"></p>
 					<p>
 						<a href="course.html" th:href="@{/course}" class="btn btn-primary px-4 py-3" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_tim_khoa_hoc}"></a>
 					</p>
 				</div>
-				<div class="col-md-7" style="text-align: right;">
+				<div class="col-xl-7 col-lg-7 col-md-7 col-sm-12" style="text-align: right;">
 
 
 					<!-- Show popup dialog -->
@@ -62,12 +61,12 @@
 					<!-- module login -->
 
 					<div class="container" th:if="${#request.userPrincipal == null}">
-						<form style="max-height: 400px;" th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
-							<h3 class="form-signin-heading" th:text="'Đăng Nhập'"></h3>
+						<form style="max-height: 400px; margin: auto;" th:action="@{/j_spring_security_check}" method="POST" class="form-signin">
+							
 							<br /> <input type="text" id="username" name="username"
 								placeholder="Tên đăng nhập" class="form-control" /> <br /> <input
 								type="password" placeholder="Mật khẩu" id="password"
-								name="password" class="form-control" />
+								name="password" class="form-control" style="margin-bottom: 50px;"/>
 							
 							<div align="center" th:if="${param.error}">
 								<p style="font-size: 15px; color: #FF1C19;" th:text="${T(com.acatim.acatimver1.constants.Constants).msg_login_invalid}"></p>
@@ -84,7 +83,7 @@
 							</div>
 							
 							<button class="btn btn-lg btn-primary btn-block" name="Submit"
-								value="Login" type="Submit" th:text="'Đăng Nhập'"></button>
+								value="Login" type="Submit" th:text="'Đăng nhập'"></button>
 						</form>
 					</div>
 

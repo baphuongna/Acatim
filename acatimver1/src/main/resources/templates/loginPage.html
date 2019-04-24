@@ -78,11 +78,11 @@
 
 					<div class="container" th:if="${#request.userPrincipal == null}">
 						<form th:action="@{/j_spring_security_check}" method="POST" style="margin: auto; max-height: 400px;" class="form-signin">
-							<h3 class="form-signin-heading" th:text="'Đăng Nhập'"></h3>
+							
 							<br /> <input type="text" id="username" name="username"
 								placeholder="Tên đăng nhập" class="form-control" /> <br /> <input
 								type="password" placeholder="Mật khẩu" id="password"
-								name="password" class="form-control" />
+								name="password" class="form-control" style="margin-bottom: 50px;"/>
 							
 							<div align="center" th:if="${param.error}">
 								<p style="font-size: 15px; color: #FF1C19;" th:text="${T(com.acatim.acatimver1.constants.Constants).msg_login_invalid}"></p>
