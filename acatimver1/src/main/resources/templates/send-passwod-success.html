@@ -71,24 +71,15 @@
 		<div class="error-page-int">
 			<div class="text-center ps-recovered">
 				<h3 th:text="'PHỤC HỒI MẬT KHẨU'">PASSWORD RECOVER</h3>
-				<p th:text="'Vui lòng điền vào mẫu để khôi phục mật khẩu của bạn'">Please fill the form to recover your password</p>
 			</div>
 			<div class="content-error">
 				<div class="hpanel">
                     <div class="panel-body poss-recover">
-                        <p th:text="'Nhập địa chỉ email của bạn và mật khẩu của bạn sẽ được đặt lại và gửi qua email cho bạn'">
+                        <p th:text="'Yêu cầu phục hồi mật khẩu thành công, mật khẩu đã được gửi vào email cho bạn'">
                             Enter your email address and your password will be reset and emailed to you.
                         </p>
-                        <form th:action="@{teacher}" th:object="${searchValue}" method="POST" id="loginForm">
-                            <div class="form-group">
-                                <label class="control-label" for="username">Email</label>
-                                <input type="text" placeholder="example@gmail.com" title="'Hãy điền địa chỉ email của bạn'" required="" th:field="*{search}" name="username" id="username" class="form-control">
-                                <span class="help-block small" th:text="'Địa chỉ email đã đăng ký của bạn'">Your registered email address</span>
-                                <div th:if="${error != null}" th:utext="${error}" class="error">...</div>
-                            </div>
-
-                            <button class="btn btn-success btn-block" th:text="'Đặt lại mật khẩu'">Reset password</button>
-                        </form>
+                        <a th:href="@{/}" th:text="'Trang Chủ'"></a>
+						<a th:href="@{/contact}" th:text="'Báo cáo vấn đề'"></a>
                     </div>
                 </div>
 			</div>

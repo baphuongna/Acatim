@@ -63,5 +63,17 @@ public class DateFormat {
 	    
 		return code;
 	}
+	
+	public String RandomPassword() {
+		Random r = new Random();
+
+	    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	    String code = "";
+	    for (int i = 0; i < 9; i++) {
+	    	code += alphabet.charAt(r.nextInt(alphabet.length()));
+	    }
+	    
+		return code;
+	}
 
 }
