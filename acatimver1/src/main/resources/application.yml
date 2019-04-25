@@ -1,0 +1,5 @@
+amazonProperties:
+  endpointUrl: https://s3.ap-southeast-1.amazonaws.com
+  accessKey: AKIAW4ZW5Y6JDNDDAY7G
+  secretKey: 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
+  bucketName: acatim
