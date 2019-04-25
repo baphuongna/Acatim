@@ -4,6 +4,9 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
 public class FTPProperties {
 	 private String server = "156.67.222.210";
 	    private String username = "u179631086";
