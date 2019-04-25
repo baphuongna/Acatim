@@ -4,19 +4,14 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-@ConfigurationProperties(prefix = "ftp")
 public class FTPProperties {
-	 private String server;
-	    private String username;
-	    private String password;
+	 private String server = "156.67.222.210";
+	    private String username = "u179631086";
+	    private String password = "lala123";
 	    @Min(0)
 	    @Max(65535)
-	    private int port;
-	    private int keepAliveTimeout;
+	    private int port = 21;
+	    private int keepAliveTimeout = 15;
 	    private boolean autoStart;
 
 	    @PostConstruct
