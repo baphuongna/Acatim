@@ -205,10 +205,13 @@ public class MainController {
 			System.out.println("Start uploading first file");
 			boolean done = ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
 //			inputStream.close();
+			System.out.println(done);
 			if (done) {
 				System.out.println("The first file is uploaded successfully.");
 				redirectAttributes.addFlashAttribute("message",
 	                    "You successfully uploaded " + file.getOriginalFilename() + "!");
+			}else {
+				System.out.println("Start uploading first file success");
 			}
 
 			// APPROACH #2: uploads second file using an OutputStream
@@ -216,7 +219,7 @@ public class MainController {
 //			String secondRemoteFile = "test/Report.doc";
 //			inputStream = new FileInputStream(secondLocalFile);
 
-			System.out.println("Start uploading second file");
+//			System.out.println("Start uploading second file");
 //			OutputStream outputStream = ftpClient.storeFileStream(secondRemoteFile);
 //	        byte[] bytesIn = new byte[4096];
 //	        int read = 0;
