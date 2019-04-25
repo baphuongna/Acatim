@@ -204,8 +204,8 @@ public class MainController {
 //			InputStream inputStream = new FileInputStream(firstLocalFile);
 
 			System.out.println("Start uploading first file");
-			ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
-			System.out.println(ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream()));
+			ftpClient.storeFile(file.getOriginalFilename(), inputStream);
+			System.out.println(ftpClient.storeFile(file.getOriginalFilename(), inputStream));
 //			inputStream.close();
 //			System.out.println(done);
 //			if (done) {
