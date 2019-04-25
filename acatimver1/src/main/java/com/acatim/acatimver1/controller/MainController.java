@@ -1,5 +1,6 @@
 package com.acatim.acatimver1.controller;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -173,7 +174,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
-	public ModelAndView fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public ModelAndView fileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
 		ModelAndView modelAndView = new ModelAndView();
 //		String FTP_ADDRESS = "https://sg-files.hostinger.vn/";
 //	    String LOGIN = "u179631086";
@@ -183,13 +184,13 @@ public class MainController {
 		int port = 21;
 		String user = "	u179631086";
 		String pass = "lala123";
-	    
-	    
 //	    FTPClient con = null;
 	    FTPClient ftpClient = new FTPClient();
 	    
 	    try {
-
+	    	
+	    	InputStream inputStream =  new BufferedInputStream(file.getInputStream());
+	    	System.out.println(file.getOriginalFilename() + "! " + inputStream.toString().substring(1));
 			ftpClient.connect(server, port);
 			ftpClient.login(user, pass);
 			ftpClient.enterLocalPassiveMode();
@@ -203,16 +204,17 @@ public class MainController {
 //			InputStream inputStream = new FileInputStream(firstLocalFile);
 
 			System.out.println("Start uploading first file");
-			boolean done = ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
+			ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream());
+			System.out.println(ftpClient.storeFile(file.getOriginalFilename(), file.getInputStream()));
 //			inputStream.close();
-			System.out.println(done);
-			if (done) {
-				System.out.println("The first file is uploaded successfully.");
-				redirectAttributes.addFlashAttribute("message",
-	                    "You successfully uploaded " + file.getOriginalFilename() + "!");
-			}else {
-				System.out.println("Start uploading first file success");
-			}
+//			System.out.println(done);
+//			if (done) {
+//				System.out.println("The first file is uploaded successfully.");
+//				redirectAttributes.addFlashAttribute("message",
+//	                    "You successfully uploaded " + file.getOriginalFilename() + "!");
+//			}else {
+//				System.out.println("Start uploading first file success");
+//			}
 
 			// APPROACH #2: uploads second file using an OutputStream
 //			File secondLocalFile = new File("E:/Test/Report.doc");
@@ -241,7 +243,7 @@ public class MainController {
 			System.out.println("Error: " + ex.getMessage());
 			ex.printStackTrace();
 			redirectAttributes.addFlashAttribute("message",
-	                "Could not upload " + file.getOriginalFilename() + "!");
+	                "Could not upload " + file.getOriginalFilename() + "! " + file.getInputStream().toString().indexOf(0));
 		} finally {
 			try {
 				if (ftpClient.isConnected()) {
