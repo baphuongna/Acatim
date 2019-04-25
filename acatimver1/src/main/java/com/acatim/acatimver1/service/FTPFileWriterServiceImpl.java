@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.stereotype.Component;
 
 import com.acatim.acatimver1.entity.FTPProperties;
 
+@Component
 public class FTPFileWriterServiceImpl implements FTPFileWriterService {
 
     private static final Logger logger = LoggerFactory.getLogger(FTPFileWriterServiceImpl.class);
