@@ -30,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.format.DateFormat;
+import com.acatim.acatimver1.service.FTPFileWriterService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
@@ -44,6 +45,9 @@ public class MainController {
 	
 	@Autowired
     public JavaMailSender emailSender;
+	
+	@Autowired
+	public FTPFileWriterService ftpFileWriterService;
 	
 	private DateFormat dateformat = new DateFormat();
 
@@ -180,22 +184,33 @@ public class MainController {
 //	    String LOGIN = "u179631086";
 //	    String PSW = "lala123";
 	    
-	    String server = "srv179.main-hosting.eu";
-		int port = 21;
-		String user = "	u179631086";
-		String pass = "lala123";
+//	    String server = "srv179.main-hosting.eu";
+//		int port = 21;
+//		String user = "	u179631086";
+//		String pass = "lala123";
 //	    FTPClient con = null;
-	    FTPClient ftpClient = new FTPClient();
-	    
+//	    FTPClient ftpClient = new FTPClient();
+	    String mess = null;
 	    try {
 	    	
-	    	InputStream inputStream =  new BufferedInputStream(file.getInputStream());
-	    	System.out.println(file.getOriginalFilename() + "! " + inputStream.toString().substring(1));
-			ftpClient.connect(server, port);
-			ftpClient.login(user, pass);
-			ftpClient.enterLocalPassiveMode();
-			ftpClient.changeWorkingDirectory("/home/u179631086/domains/acatim.esy.es/public_html/Acatim");
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+	    	if(ftpFileWriterService.open()) {
+	    		if(ftpFileWriterService.saveFile(file.getInputStream(), file.getOriginalFilename(), false)) {
+	    			mess += "You successfully uploaded " + file.getOriginalFilename();
+	    			
+	    		}else {
+	    			mess +=  "Could not upload " + file.getOriginalFilename() + "! ";
+	    		}
+	    	}else {
+	    		mess +=  "Open error, Could not upload " + file.getOriginalFilename() + "! ";
+	    	}
+	    	
+//	    	InputStream inputStream =  new BufferedInputStream(file.getInputStream());
+//	    	System.out.println(file.getOriginalFilename() + "! " + inputStream.toString().substring(1));
+//			ftpClient.connect(server, port);
+//			ftpClient.login(user, pass);
+//			ftpClient.enterLocalPassiveMode();
+//			ftpClient.changeWorkingDirectory("/home/u179631086/domains/acatim.esy.es/public_html/Acatim");
+//			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
 			// APPROACH #1: uploads first file using an InputStream
 //			File firstLocalFile = new File("D:/Test/Projects.zip");
@@ -203,9 +218,9 @@ public class MainController {
 //			String firstRemoteFile = "Projects.zip";
 //			InputStream inputStream = new FileInputStream(firstLocalFile);
 
-			System.out.println("Start uploading first file");
-			ftpClient.storeFile(file.getOriginalFilename(), inputStream);
-			System.out.println(ftpClient.storeFile(file.getOriginalFilename(), inputStream));
+//			System.out.println("Start uploading first file");
+//			ftpClient.storeFile(file.getOriginalFilename(), inputStream);
+//			System.out.println(ftpClient.storeFile(file.getOriginalFilename(), inputStream));
 //			inputStream.close();
 //			System.out.println(done);
 //			if (done) {
@@ -239,21 +254,22 @@ public class MainController {
 //		                    "You successfully uploaded " + file.getOriginalFilename() + "!");
 //			}
 			
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			System.out.println("Error: " + ex.getMessage());
 			ex.printStackTrace();
-			redirectAttributes.addFlashAttribute("message",
-	                "Could not upload " + file.getOriginalFilename() + "! " + file.getInputStream().toString().indexOf(0));
+			mess +=  "Could not upload " + file.getOriginalFilename() + "! ";
 		} finally {
 			try {
-				if (ftpClient.isConnected()) {
-					ftpClient.logout();
-					ftpClient.disconnect();
+//				if (ftpClient.isConnected()) {
+//					ftpClient.logout();
+//					ftpClient.disconnect();
+//				}
+				if (ftpFileWriterService.isConnected()) {
+					ftpFileWriterService.close();
 				}
-			} catch (IOException ex) {
+			} catch (Exception ex) {
 				ex.printStackTrace();
-				redirectAttributes.addFlashAttribute("message",
-		                "Could not upload " + file.getOriginalFilename() + "!");
+				mess +=  "Close Error, Could not upload " + file.getOriginalFilename() + "! ";
 			}
 		}
 	    
@@ -283,6 +299,10 @@ public class MainController {
 //	                "Could not upload " + file.getOriginalFilename() + "!");
 //	        
 //	    }
+	    
+	    redirectAttributes.addFlashAttribute("message",
+                "Could not upload " + file.getOriginalFilename() + "! ");
+	    
 	    modelAndView.setViewName("redirect:/upload");
 	    return modelAndView;
 	}
