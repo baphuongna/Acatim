@@ -71,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/", "/index", "/rating", "/ratingTeacher", "/test", "registration", "/loginPage",
 						"/profileDetail", "/study-center", "/detail-course", "/profile-student",
-						"/profile-teacher", "/profile-study-center")
+						"/profile-teacher", "/profile-study-center", "/upload")
 				.permitAll();
 
 		// Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
