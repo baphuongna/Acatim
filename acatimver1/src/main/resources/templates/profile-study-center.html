@@ -151,7 +151,11 @@
 		                        </div>
 	                        </div>
                             <div class="profile-img">
-                                <img src="admin/admin/img/profile/1.jpg" alt="" />
+                                <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
+                                <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />
+                            </div>
+                             <div th:if="${showDetailMySelf != false}" class="profile-img" style="text-align: center; margin-top: 10px;">
+                                <a th:href="@{/upload-avatar}"><button type="submit" class="btn btn-primary">Thay Đổi Hình Đại Diện</button></a>
                             </div>
                             <div class="profile-details-hr">
                                 <div class="row">

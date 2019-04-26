@@ -315,6 +315,12 @@ public class UserDAO extends JdbcDaoSupport {
 		this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getPhone(), user.getAddress(),
 				user.getUserName());
 	}
+	
+	public void updateAvatar(String userName, String avatar) {
+			String sql = "UPDATE User SET avatar = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, avatar, userName);
+	}
+
 
 	public void changePassword(String userName, String password) {
 		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";

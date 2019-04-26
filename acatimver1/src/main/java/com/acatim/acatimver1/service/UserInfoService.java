@@ -57,4 +57,6 @@ public interface UserInfoService {
 	int countTeacher();
 	int countStudent();
 	int countStudyCenter();
+	
+	void updateAvatar(String userName, String avatar);
 }

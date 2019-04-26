@@ -28,9 +28,10 @@ public class UserMapper implements RowMapper<UserModel> {
 		String createDate = rs.getString("create_date");
 		String phone = rs.getString("phone");
 		String address = rs.getString("address");
+		String avatar = rs.getString("avatar");
 		boolean active = rs.getBoolean("active");
 		
-		user = new UserModel(userName, roleId, fullName, email, password, createDate, phone, address, active);
+		user = new UserModel(userName, roleId, fullName, email, password, createDate, phone, address, avatar, active);
 		
 		try {
 			Role role = new Role();

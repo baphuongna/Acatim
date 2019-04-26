@@ -238,4 +238,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return this.StudyCenterDAO.countStudyCenter();
 	}
 
+	@Override
+	public void updateAvatar(String userName, String avatar) {
+		this.UserDAO.updateAvatar(userName, avatar);
+	}
+
 }

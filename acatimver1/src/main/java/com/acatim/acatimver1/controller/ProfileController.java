@@ -1,5 +1,6 @@
 package com.acatim.acatimver1.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +32,7 @@ import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.form.PasswordForm;
 import com.acatim.acatimver1.format.DateFormat;
+import com.acatim.acatimver1.service.AmazonClient;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.RatingService;
 import com.acatim.acatimver1.service.UserInfoService;
@@ -50,6 +54,13 @@ public class ProfileController {
 	private RatingService ratingService;
 	
 	private DateFormat dateformat = new DateFormat();
+	
+	private AmazonClient amazonClient;
+	
+	@Autowired
+	ProfileController(AmazonClient amazonClient) {
+        this.amazonClient = amazonClient;
+    }
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
@@ -653,5 +664,53 @@ public class ProfileController {
 
 		modelAndView.setViewName("redirect:/update-info");
 		return modelAndView;
+	}
+	
+	@RequestMapping("/upload-avatar")
+	public ModelAndView showUpload(@RequestParam(required = false, name = "message") String message, Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+		try {
+			UserModel currentUser = userInfoService.loadUserByUsername(curentUserName);
+			System.out.println(currentUser);
+			modelAndView.addObject("user", currentUser);
+			System.out.println(currentUser.getAvatar());
+			
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+		}
+		modelAndView.addObject("message", message);
+		modelAndView.setViewName("upload-avatar");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "/upload-avatar" }, method = RequestMethod.POST)
+	public ModelAndView fileUpload(@RequestPart(value = "file") MultipartFile file, RedirectAttributes redirectAttributes, Principal principal) throws IOException {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		String curentUserName = null;
+		if (principal != null) {
+			curentUserName = principal.getName();
+		}
+
+		this.amazonClient.deleteFolder(curentUserName+"/avatar");
+		
+		String avatar = this.amazonClient.uploadFile(curentUserName+"/avatar" ,file);
+		try {
+			System.out.println(avatar);
+			userInfoService.updateAvatar(curentUserName, avatar);
+			redirectAttributes.addFlashAttribute("message",
+	                "Upload Successful file " + file.getOriginalFilename() + "!");
+		}catch (Exception e) {
+			e.fillInStackTrace();
+			redirectAttributes.addFlashAttribute("message",
+	                "Could not upload " + file.getOriginalFilename() + "!");
+		}
+		
+	    modelAndView.setViewName("redirect:/upload-avatar");
+	    return modelAndView;
 	}
 }

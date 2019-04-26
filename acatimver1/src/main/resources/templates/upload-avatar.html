@@ -6,8 +6,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="M_Adnan" />
 <!-- Document Title -->
-<title th:text="'Acatim - Thông Tin Chi Tiết'"></title>
+<title th:text="'Acatim - Thay Đổi Mật Khẩu'"></title>
 <link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
 <!-- StyleSheets -->
 
@@ -30,7 +31,9 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/Menu.css">
-
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script
@@ -38,7 +41,18 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 <link rel="stylesheet" href="css/rating.css">
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script type="text/javascript" src="magicRating.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	
 
 
 <!-- FontsOnline -->
@@ -46,6 +60,12 @@
 	href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
 	rel="stylesheet">
 
+<!-- JavaScripts -->
+<script src="js/vendors/modernizr.js"></script>
+
+<!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -131,11 +151,7 @@
 		                        </div>
 	                        </div>
                             <div class="profile-img">
-                                <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
-                                <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />
-                            </div>
-                             <div th:if="${showDetailMySelf != false}" class="profile-img" style="text-align: center; margin-top: 10px;">
-                                <a th:href="@{/upload-avatar}"><button type="submit" class="btn btn-primary">Thay Đổi Hình Đại Diện</button></a>
+                                <img src="admin/admin/img/profile/1.jpg" alt="" />
                             </div>
                             <div class="profile-details-hr">
                                 <div class="row">
@@ -200,136 +216,36 @@
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description">Hồ sơ</a></li>
-                                <li><a href="#reviews">Bình Luận</a></li>
-                                <li th:if="${checkDetail == false or showDetailMySelf == true}"><a href="#INFORMATION">Cập nhật thông tin</a></li>
+                                <li class="active"><a href="#description" th:text="'Thay Đổi Hình Đại Diện'"></a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="row">
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <b>Tên</b>
-                                            				<p th:text="${useInfo.fullName}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <b>Điện thoại</b>
-	                                        				<p th:text="${useInfo.phone}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <b>Địa chỉ Email</b>
-                                            				<p th:text="${useInfo.email}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                                        <div class="address-hr biography">
-                                                            <b>Chức vụ</b>
-				                                            <p th:if="${roleName == 'Student'}">Học viên</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row" >
-                                                    <div class="col-lg-3">
-                                                        <div class="content-profile">
-                                                            <b>Địa chỉ</b>
-                                                            <p th:text="${useInfo.address}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="content-profile">
-                                                            <b>Ngày sinh</b>
-                                                            <p th:text="${studentInfo.dob}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="content-profile">
-                                                            <b>Giới tính</b>
-                                                            <p th:text="${gender}"></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-tab-list tab-pane fade" id="reviews">
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="review-content-section">
-                                                <div class="chat-discussion" style="height: auto">
-                                                <p th:if="${ratings.size() == 0 }">Chưa có bình luận nào...</p>
-                                                    <div class="chat-message" th:each="rating : ${ratings}">
-                                                   
-														<div class="profile-hdtc">
-															  <img class="message-avatar" src="admin/admin/img/contact/1.jpg" alt="">
+                                	<form method="POST" th:action="@{/upload-avatar}" enctype="multipart/form-data">
+												<div class="row">
+													<div class="sparkline11-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="sparkline11-graph">
+															<div id="pwd-container2">
+																<div class="form-group">
+																	<!-- <img id="blah" src="admin/admin/img/profile/1.jpg" alt="your image" /> -->
+																	<img id="blah" th:if="${user.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="your image" />
+                                									<img id="blah" th:if="${user.avatar != null}" th:src="${user.avatar}" alt="your image" />
+																</div>
+															</div>
 														</div>
-                                                        <div class="message">
-                                                         
-                                                            <div th:if="${roleName == 'Student'}">
-                                                            	<a class="message-author" href="#" th:text="${rating.userName}"></a> > <a class="message-author" href="#" th:text="${rating.recieverName}"></a>
-                                                            </div>
-                                                            <span class="message-date" th:text="${rating.createDate}"></span>
-                                                            <span class="message-content" th:text="${rating.comment}"></span>
-                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate <= 1}">
-                                                                <span class="fa fa-star checked"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
-                                                            </div>
-                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 1 and rating.rate <=2}">
-                                                                <span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
-                                                            </div>
-                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 2 and rating.rate <=3}">
-                                                            	
-                                                                <span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star"></span>
-																<span class="fa fa-star"></span>
-																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
-                                                            </div>
-                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 3 and rating.rate <=4}">
-                                                                <span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star"></span>
-																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
-                                                            </div>
-                                                            <div class="m-t-md mg-t-10" th:if="${rating.rate > 4 and rating.rate <=5}">
-                                                                <span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<span class="fa fa-star checked"></span>
-																<p style="display: inline; margin-left: 20px; color: #847b7b;">[[${rating.rate}]] star</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                
-			                                
+														<div class="sparkline11-graph">
+															<div id="pwd-container2">
+																<div class="form-group">
+																	<input type='file' name="file" onchange="readURL(this);" />
+																</div>
+																<p th:if="${message != null}" th:text="${message}"></p>
+															</div>
+														</div>
+														<button type="submit" class="btn btn-primary waves-effect waves-light" th:text="'Thay Đổi'">Send</button>
+													</div>
+												</div>
+												
+												</form>
+											</div>
 			                            </div>
 			                        </div>
 			                    </div>
@@ -350,14 +266,22 @@
 	<!-- End Page Wrapper -->
 
 	<!-- JavaScripts -->
-
+	    <!-- pwstrength JS
+		============================================ -->
+    <script src="admin/admin/js/password-meter/pwstrength-bootstrap.min.js"></script>
+    <script src="admin/admin/js/password-meter/zxcvbn.js"></script>
+    <script src="admin/admin/js/password-meter/password-meter-active.js"></script>
+    <script src="js/loadavatar.js"></script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.isotope.min.js"></script>
 	<script src="js/mainProfile.js"></script>
 	<script src="js/rating.js"></script>
-	
+	<!-- Begin Map Script-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/map.js"></script>
+	<!-- jquery
 		============================================ -->
     <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
     <!-- bootstrap JS
@@ -407,6 +331,9 @@
     <!-- main JS
 		============================================ -->
     <script src="admin/admin/js/main.js"></script>
+    <!-- tawk chat JS
+		============================================ -->
+    <script src="admin/admin/js/tawk-chat.js"></script>
 
 </body>
 </html>

@@ -177,8 +177,10 @@
 					th:each="teacher : ${listTeacher}">
 					<div class="staff min_height_222">
 						<div class="d-flex mb-4">
-							<div class="img"
+							<div th:if="${teacher.avatar == null}" class="img"
 								style="background-image: url(images/person_1.jpg);"></div>
+							<div th:if="${teacher.avatar != null}" class="img"
+								th:style="'background:url(' + ${teacher.avatar} + ');'"></div>
 							<div class="info ml-4">
 								<h4>
 									<a th:href="@{/profileDetail(userName=${teacher.userName})}"
