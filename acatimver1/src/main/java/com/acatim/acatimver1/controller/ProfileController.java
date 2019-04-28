@@ -183,7 +183,6 @@ public class ProfileController {
 			page = 1 + "";
 		}
 		
-		
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
@@ -202,6 +201,7 @@ public class ProfileController {
 			List<Course> courses = courseService.getCourseByUserNameWithFullInfo(userName);
 
 			Teacher teacher = userInfoService.loadTeacherByUsername(userName);
+			
 			int totalImage = imagesService.countImagesByUserName(userName);
 			
 			Sort sort =  Sort.by("create_date").ascending();
@@ -240,7 +240,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/profile-study-center", method = RequestMethod.GET)
-	public ModelAndView profileStudyCenter(Model model, Principal principal) throws NotFoundException {
+	public ModelAndView profileStudyCenter(Model model, Principal principal, @RequestParam(required = false, name = "page") String page) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
 		boolean checkDetail = false;
 		String userName = principal.getName();
@@ -252,13 +252,24 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		float rateAverage = 0;
-
+		
+		if (page == null) {
+			page = 1 + "";
+		}
+		
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
 			throw new NotFoundException("User " + userName + " was not found in the database");
 
 		} else {
+			
+			int currentPage = Integer.parseInt(page);
+
+			if (currentPage < 1) {
+				currentPage = 1;
+			}
+			
 			model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
 			model.addAttribute("checkDetail", checkDetail);
@@ -273,6 +284,16 @@ public class ProfileController {
 
 			CountRate count = ratingService.countRatingStudyCenter(userName);
 			RateStudyCenter caculater = ratingService.caculaterRateStudyCenter(userName);
+			
+			int totalImage = imagesService.countImagesByUserName(userName);
+			
+			Sort sort =  Sort.by("create_date").ascending();
+			
+			pageableService = new PageableServiceImpl(6, totalImage, currentPage, sort);
+			
+			List<Images> images = imagesService.getImagesByUserName(pageableService , userName);
+			
+			model.addAttribute("images", images);
 			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
@@ -345,7 +366,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/DetailTeacher", method = RequestMethod.GET)
-	public ModelAndView detailTeacher(@RequestParam("userName") String name, Model model, Principal principal)
+	public ModelAndView detailTeacher(@RequestParam("userName") String name, Model model, Principal principal, @RequestParam(required = false, name = "page") String page)
 			throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
@@ -370,6 +391,17 @@ public class ProfileController {
 
 		float rateAverage = 0;
 
+		if (page == null) {
+			page = 1 + "";
+		}
+		
+		int currentPage = Integer.parseInt(page);
+
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		
+		
 		String gender = null;
 		if (useInfo == null) {
 			System.out.println("User not found! " + name);
@@ -406,6 +438,18 @@ public class ProfileController {
 			CountRate count = ratingService.countRatingTeacher(name);
 			RateTeacher caculater = ratingService.caculaterRateTeacher(name);
 
+			
+			int totalImage = imagesService.countImagesByUserName(name);
+			
+			Sort sort =  Sort.by("create_date").ascending();
+			
+			pageableService = new PageableServiceImpl(6, totalImage, currentPage, sort);
+			
+			List<Images> images = imagesService.getImagesByUserName(pageableService , name);
+			
+			model.addAttribute("images", images);
+			
+			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
 			model.addAttribute("ratings", ratings);
@@ -425,7 +469,7 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/DetailStudyCenter", method = RequestMethod.GET)
-	public ModelAndView dettailStudyCenter(@RequestParam("userName") String name, Model model, Principal principal)
+	public ModelAndView dettailStudyCenter(@RequestParam("userName") String name, Model model, Principal principal, @RequestParam(required = false, name = "page") String page)
 			throws NotFoundException {
 
 		// Sau khi user login thanh cong se co principal
@@ -449,7 +493,17 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 
 		float rateAverage = 0;
+		
+		if (page == null) {
+			page = 1 + "";
+		}
+		
+		int currentPage = Integer.parseInt(page);
 
+		if (currentPage < 1) {
+			currentPage = 1;
+		}
+		
 		if (useInfo == null) {
 			System.out.println("User not found! " + name);
 			modelAndView.setViewName("index");
@@ -479,6 +533,17 @@ public class ProfileController {
 			CountRate count = ratingService.countRatingStudyCenter(name);
 			
 			RateStudyCenter caculater = ratingService.caculaterRateStudyCenter(name);
+			
+			int totalImage = imagesService.countImagesByUserName(name);
+			
+			Sort sort =  Sort.by("create_date").ascending();
+			
+			pageableService = new PageableServiceImpl(6, totalImage, currentPage, sort);
+			
+			List<Images> images = imagesService.getImagesByUserName(pageableService , name);
+			
+			model.addAttribute("images", images);
+			
 			
 			model.addAttribute("rateAverage", rateAverage);
 			model.addAttribute("courses", courses);
