@@ -1,0 +1,346 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="M_Adnan" />
+<!-- Document Title -->
+<title th:text="'Acatim - Thay Đổi Mật Khẩu'"></title>
+<link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
+<!-- StyleSheets -->
+
+<link rel="stylesheet" type="text/css"
+	href="@{/css/open-iconic-bootstrap.min.css}">
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/Menu.css">
+<link
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css" th:href="@{/css/login.css}" />
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="css/rating.css">
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script type="text/javascript" src="magicRating.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	
+
+
+<!-- FontsOnline -->
+<link
+	href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+
+<!-- JavaScripts -->
+<script src="js/vendors/modernizr.js"></script>
+
+<!-- favicon
+		============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/owl.carousel.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.theme.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.transitions.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/normalize.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/main.css">
+    <!-- educate icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/educate-custon-icon.css">
+    <!-- morrisjs CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/morrisjs/morris.css">
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="admin/admin/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/calendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="admin/admin/css/calendar/fullcalendar.print.min.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/form/all-type-forms.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/responsive.css">
+    <!-- modernizr JS
+		============================================ -->
+    <script src="admin/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
+
+</head>
+<body>
+
+	<!-- Page Wrapper -->
+	<div id="wrap">
+
+		<!-- Header -->
+		<div th:replace="menu :: menu"></div>
+		<!-- End Header -->
+
+		<!-- Content -->
+		<main class="cd-main-content" style="margin-top: 95px;">
+		<div id="content">
+			<div class="resume">
+				<div class="container">
+
+					<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                        <div class="profile-info-inner">
+                        	<div class="row">
+		                    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
+		                        	<b>Liên hệ với chúng tôi</b>
+		                        </div>
+	                        </div>
+                            <div class="profile-img">
+                                <img src="admin/admin/img/profile/1.jpg" alt="" />
+                            </div>
+                            <div class="profile-details-hr">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                        	<b>Tên</b>
+                                            <p>Acatim</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        	<b>Website</b>
+                                            <p>http://acatim.edu.vn</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr">
+                                        	<b>Địa chỉ Email</b>
+                                            <p>acatim@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+	                                        <b>Điện thoại</b>
+	                                        <p>1900-666-888</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="address-hr">
+                                        	<b>Địa chỉ</b>
+                                            <p>Đại học FPT - Khu công nghệ cao Hòa Lạc</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="address-hr">
+                                            <a href="#"><i class="fa fa-facebook"></i></a>
+                                            <h3>500</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="address-hr">
+                                            <a href="#"><i class="fa fa-twitter"></i></a>
+                                            <h3>900</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <div class="address-hr">
+                                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            <h3>600</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                        <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                            <ul id="myTabedu1" class="tab-review-design">
+                                <li class="active"><a href="#description" th:text="'Thay Đổi Hình Đại Diện'"></a></li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+                                <div class="product-tab-list tab-pane fade active in" id="description">
+                                	<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
+                                	<form method="POST" th:action="@{/add-image}" enctype="multipart/form-data">
+												<div class="row">
+													<div class="sparkline11-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div class="sparkline11-graph">
+															<div id="pwd-container2">
+																<div class="form-group">
+																	<img id="blah" src="admin/admin/img/profile/1.jpg" alt="your image" />
+																</div>
+															</div>
+														</div>
+														<div class="sparkline11-graph">
+															<div id="pwd-container2">
+																<div class="form-group">
+																	<input type='file' name="file" onchange="readURL(this);" />
+																</div>
+																<p th:if="${message != null}" th:text="${message}"></p>
+															</div>
+														</div>
+														<div class="sparkline11-graph">
+															<div id="pwd-container2">
+																<div class="form-group res-mg-t-15">
+																	<label th:text="'Thông Tin Ảnh'"></label>
+                                           							<textarea name="description" placeholder="description"></textarea>
+																</div>
+															</div>
+														</div>
+														<button type="submit" class="btn btn-primary waves-effect waves-light" th:text="'Thêm'"></button>
+													</div>
+												</div>
+												
+												</form>
+											</div>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</div>
+		</main>
+		<!-- End Content -->
+
+		<!-- Footer -->
+		<div th:replace="footer :: footer"></div>
+		<!-- End Footer -->
+
+	</div>
+	<!-- End Page Wrapper -->
+
+	<!-- JavaScripts -->
+	    <!-- pwstrength JS
+		============================================ -->
+    <script src="admin/admin/js/password-meter/pwstrength-bootstrap.min.js"></script>
+    <script src="admin/admin/js/password-meter/zxcvbn.js"></script>
+    <script src="admin/admin/js/password-meter/password-meter-active.js"></script>
+    <script src="js/loadavatar.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/mainProfile.js"></script>
+	<script src="js/rating.js"></script>
+	<!-- Begin Map Script-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/map.js"></script>
+	<!-- jquery
+		============================================ -->
+    <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="admin/admin/js/bootstrap.min.js"></script>
+    <!-- wow JS
+		============================================ -->
+    <script src="admin/admin/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="admin/admin/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="admin/admin/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="admin/admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="admin/admin/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="admin/admin/js/metisMenu/metisMenu.min.js"></script>
+    <script src="admin/admin/js/metisMenu/metisMenu-active.js"></script>
+    <!-- morrisjs JS
+		============================================ -->
+    <script src="admin/admin/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="admin/admin/js/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- calendar JS
+		============================================ -->
+    <script src="admin/admin/js/calendar/moment.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="admin/admin/js/tab.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="admin/admin/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="admin/admin/js/main.js"></script>
+    <!-- tawk chat JS
+		============================================ -->
+    <script src="admin/admin/js/tawk-chat.js"></script>
+
+</body>
+</html>

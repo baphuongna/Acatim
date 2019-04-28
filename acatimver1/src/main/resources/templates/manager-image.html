@@ -1,0 +1,313 @@
+<!doctype html>
+<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="author" content="M_Adnan" />
+<!-- Document Title -->
+<title th:text="'Acatim - Quản Lý Khóa Học'"></title>
+<link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
+<!-- StyleSheets -->
+
+
+<link rel="stylesheet" href="css/animate.css">
+
+<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="css/owl.theme.default.min.css">
+<link rel="stylesheet" href="css/magnific-popup.css">
+
+<link rel="stylesheet" href="css/aos.css">
+
+<link rel="stylesheet" href="css/ionicons.min.css">
+
+<link rel="stylesheet" href="css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="css/jquery.timepicker.css">
+
+
+<link rel="stylesheet" href="css/icomoon.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/Menu.css">
+<link rel="stylesheet" href="css/filterbar.css">
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="css/rating.css">
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,vietnamese" rel="stylesheet">
+	
+
+
+<!-- FontsOnline -->
+<link
+	href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900"
+	rel="stylesheet">
+
+
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/font-awesome.min.css">
+    <!-- owl.carousel CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/owl.carousel.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.theme.css">
+    <link rel="stylesheet" href="admin/admin/css/owl.transitions.css">
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/animate.css">
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/normalize.css">
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/main.css">
+    <!-- educate icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/educate-custon-icon.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/form/all-type-forms.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="admin/admin/css/responsive.css">
+
+
+
+</head>
+<body>
+
+	<!-- Page Wrapper -->
+	<div id="wrap">
+
+		<!-- Header -->
+		<div th:replace="menu :: menu"></div>
+		<!-- End Header -->
+
+		<!-- Content -->
+		<main class="cd-main-content" style="margin-top: 95px;">
+		<div id="content">
+			<div class="resume">
+				<div class="container">
+
+					<div class="single-pro-review-area mt-t-30 mg-b-15">
+            <div class="container-fluid">
+                <div class="container-fluid">
+				<form th:action="@{manager-images}" th:object="${searchValue}" method="POST">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							<div >
+								<div class="row">
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+										<div class="breadcome-heading">
+											<input type="text" th:field="*{search}" placeholder="Tìm Kiếm" style="width: 100%; height: 34px; border: 1px solid #d4d4d4; padding-left: 10px; padding-right: 10px; border-radius: 40px;"
+												class="search-int">
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+										<div class="breadcome-heading">
+											<button type="submit"
+												class="btn btn-primary waves-effect waves-light">Tìm Kiếm</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="row">
+                    <div style="margin-top: 20px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap drp-lst">
+                            <h4>Danh Sách Ảnh</h4>
+                            <div class="add-product">
+                                <a class="btn btn-circle btn-primary" th:href="@{/add-image}">Thêm Ảnh</a>
+                            </div>
+                            <div class="asset-inner" th:if="${#lists.isEmpty(images) == true}">
+								<p th:text="'Không Tìm Thấy Ảnh nào'"></p>
+                            </div>
+                            
+                            <div class="asset-inner" th:if="${#lists.isEmpty(images) == false}">
+                                <table>
+									<tr>
+										<th>#</th>
+										<th>Hình Ảnh</th>
+										<th>Thông Tin Ảnh</th>
+										<th>Ngày Tạo</th>
+										<th>Trạng Thái</th>
+										<th></th>
+									</tr>
+									<tr th:if="${images != null}" th:each="image : ${images}">
+										<td th:text="${image.id}"></td>
+										<td> <img th:src="${image.linkimage}"></td>
+										<td th:text="${image.description}"></td>
+										<td th:text="${image.createDate}"></td>
+										
+										<td th:if="${image.active == true}" style="color: green;"><b>Active</b></td>
+										<td th:if="${image.active == false}" style="color: red;" ><b>Blocked</b></td>
+										<td>
+										<a th:href="@{/edit-image(id=${image.id})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
+							 			<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${image.active == true}"
+							 								th:attr="data-target='#'+${image.id}+'1'"  th:text="'Khóa'"></button>
+							 			<button type="button" class="btn btn-success" data-toggle="modal" th:if="${image.active == false}"
+							 								th:attr="data-target='#'+${image.id}+'2'" th:text="'Mở Khóa'"></button>
+							 			<button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#'+${image.id}+'3'" th:text="'Xóa'"></button>
+										</td>
+									</tr>
+								</table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
+                                  <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-image(page=${first})}" th:text="'Trang Đầu'"></a>
+                                  <a th:if="${currentPage == first}" class="btn btn-circle btn-primary"  th:text="'Trang Đầu'"></a>
+                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-image(page=${previous})}" th:text="'<'"></a>
+                                  <div th:each="totalPage : ${totalPages}">
+                                       <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-image(page=${totalPage})}" th:text="${totalPage}">1</a>
+                                       <a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
+                                   </div>
+                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-image(page=${next})}" th:text="'>'"></a>
+                                   <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-image(page=${last})}" th:text="'Trang Cuối'"></a>
+                                   <a th:if="${currentPage == last}" class="btn btn-circle btn-primary" th:text="'Trang Cuối'"></a>
+                            </div>
+            </div>
+			            </div>
+			        </div>
+				</div>
+			</div>
+		</div>
+		<div th:if="${images != null}" th:id="${image.id}+'1'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="image : ${images}">
+                            <div class="modal-dialog" style="left: 0; right: 0;">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                                        <h2 th:text="'KHÓA!'"></h2>
+                                        <p th:text="'Bạn có chắc muốn KHÓA khóa học này!'"></p>
+                                    </div>
+                                    <div class="modal-footer danger-md">
+                                        <a class="btn btn-primary" data-dismiss="modal" href="#" th:text="'Không'"></a>
+                                        <a class="btn btn-primary" th:href="@{/blockimage(id=${image.id})}" th:text="'Khóa'"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+        <div th:if="${images != null}" th:id="${image.id}+'2'" class="modal modal-edu-general Customwidth-popup-WarningModal fade" role="dialog"  th:each="image : ${images}">
+                            <div class="modal-dialog" style="left: 0; right: 0;">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-warning modal-check-pro information-icon-pro"></span>
+                                        <h2 th:text="'MỞ KHÓA!'"></h2>
+                                        <p th:text="'Bạn có chắc muốn MỞ KHÓA khóa học này!'"></p>
+                                    </div>
+                                    <div class="modal-footer warning-md">
+                                        <a class="btn btn-warning" data-dismiss="modal" href="#"  th:text="'Không'"></a>
+                                        <a class="btn btn-warning" th:href="@{/unlockimage(id=${image.id})}" th:text="'Mở Khóa'"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+        <div th:if="${images != null}" th:id="${image.id}+'3'" class="modal modal-edu-general FullColor-popup-DangerModal fade" role="dialog" th:each="image : ${images}">
+                            <div class="modal-dialog" style="left: 0; right: 0;">
+                                <div class="modal-content">
+                                    <div class="modal-close-area modal-close-df">
+                                        <a class="close" data-dismiss="modal" href="#"><i class="fa fa-close"></i></a>
+                                    </div>
+                                    <div class="modal-body">
+                                        <span class="educate-icon educate-danger modal-check-pro information-icon-pro"></span>
+                                        <h2 th:text="'XÓA!'"></h2>
+                                        <p th:text="'Bạn có chắc muốn XÓA ảnh này vĩnh viễn'"></p>
+                                    </div>
+                                    <div class="modal-footer danger-md">
+                                        <a class="btn btn-primary" data-dismiss="modal" href="#" th:text="'Không'"></a>
+                                        <a class="btn btn-primary" th:href="@{/deleteimage(id=${image.id})}" th:text="'Xóa'"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        
+		</main>
+		<!-- End Content -->
+
+		
+		
+
+		<!-- Footer -->
+		<div th:replace="footer :: footer"></div>
+		<!-- End Footer -->
+
+	</div>
+	<!-- End Page Wrapper -->
+
+	<!-- JavaScripts -->
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.isotope.min.js"></script>
+	<script src="js/mainProfile.js"></script>
+	<script src="js/rating.js"></script>
+	<!-- Begin Map Script-->
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+	<script src="js/map.js"></script>
+	
+    <!-- wow JS
+		============================================ -->
+    <script src="admin/admin/js/wow.min.js"></script>
+    <!-- price-slider JS
+		============================================ -->
+    <script src="admin/admin/js/jquery-price-slider.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+		============================================ -->
+    <script src="admin/admin/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="admin/admin/js/jquery.scrollUp.min.js"></script>
+    <!-- metisMenu JS
+		============================================ -->
+    <script src="admin/admin/js/metisMenu/metisMenu.min.js"></script>
+    <script src="admin/admin/js/metisMenu/metisMenu-active.js"></script>
+    <!-- calendar JS
+		============================================ -->
+    <script src="admin/admin/js/calendar/moment.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar.min.js"></script>
+    <script src="admin/admin/js/calendar/fullcalendar-active.js"></script>
+    <!-- tab JS
+		============================================ -->
+    <script src="admin/admin/js/tab.js"></script>
+    <!-- plugins JS
+		============================================ -->
+    <script src="admin/admin/js/plugins.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="admin/admin/js/main.js"></script>
+
+</body>
+</html>

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acatim.acatimver1.entity.CountRate;
 import com.acatim.acatimver1.entity.Course;
+import com.acatim.acatimver1.entity.Images;
 import com.acatim.acatimver1.entity.RateStudyCenter;
 import com.acatim.acatimver1.entity.RateTeacher;
 import com.acatim.acatimver1.entity.Rating;
@@ -34,6 +36,9 @@ import com.acatim.acatimver1.form.PasswordForm;
 import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.AmazonClient;
 import com.acatim.acatimver1.service.CourseService;
+import com.acatim.acatimver1.service.ImagesService;
+import com.acatim.acatimver1.service.PageableService;
+import com.acatim.acatimver1.service.PageableServiceImpl;
 import com.acatim.acatimver1.service.RatingService;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
@@ -52,6 +57,11 @@ public class ProfileController {
 
 	@Autowired
 	private RatingService ratingService;
+	
+	@Autowired
+	private ImagesService imagesService;
+	
+	private PageableService pageableService;
 	
 	private DateFormat dateformat = new DateFormat();
 	
@@ -154,7 +164,8 @@ public class ProfileController {
 	}
 
 	@RequestMapping(value = "/profile-teacher", method = RequestMethod.GET)
-	public ModelAndView profileTeacher(Model model, Principal principal) throws NotFoundException {
+	public ModelAndView profileTeacher(Model model, Principal principal,
+			@RequestParam(required = false, name = "page") String page) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
 		boolean checkDetail = false;
 		String userName = principal.getName();
@@ -164,22 +175,43 @@ public class ProfileController {
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
 		ModelAndView modelAndView = new ModelAndView();
-
+		
 		String gender = null;
 		float rateAverage = 0;
-
+		
+		if (page == null) {
+			page = 1 + "";
+		}
+		
+		
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
 			throw new NotFoundException("User " + userName + " was not found in the database");
 
 		} else {
+			int currentPage = Integer.parseInt(page);
+
+			if (currentPage < 1) {
+				currentPage = 1;
+			}
+			
 			model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
 			model.addAttribute("checkDetail", checkDetail);
 			List<Course> courses = courseService.getCourseByUserNameWithFullInfo(userName);
 
 			Teacher teacher = userInfoService.loadTeacherByUsername(userName);
+			int totalImage = imagesService.countImagesByUserName(userName);
+			
+			Sort sort =  Sort.by("create_date").ascending();
+			
+			pageableService = new PageableServiceImpl(6, totalImage, currentPage, sort);
+			
+			List<Images> images = imagesService.getImagesByUserName(pageableService , userName);
+			
+			model.addAttribute("images", images);
+			
 			model.addAttribute("teacherInfo", teacher);
 
 			rateAverage = teacher.getRate();
