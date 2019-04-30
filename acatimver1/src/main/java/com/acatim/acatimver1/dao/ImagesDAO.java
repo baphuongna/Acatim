@@ -95,8 +95,8 @@ public class ImagesDAO extends JdbcDaoSupport {
 	}
 	
 	public void updateImages(Images images) {
-		String sql = "UPDATE images SET user_name = ?, linkimage = ?, description = ?, update_date = ? WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, images.getUserName(), images.getLinkimage(), images.getDescription(), images.getUpdateDate(), images.getId());
+		String sql = "UPDATE images SET linkimage = ?, description = ?, update_date = ? WHERE id = ?;";
+		this.getJdbcTemplate().update(sql, images.getLinkimage(), images.getDescription(), images.getUpdateDate(), images.getId());
 	}
 	
 	public void activeImages(String id, boolean active) {
@@ -105,7 +105,7 @@ public class ImagesDAO extends JdbcDaoSupport {
 	}
 	
 	public void deleteImages(String id) {
-		String sql = "UPDATE images SET isActive = ? WHERE id = ?;";
+		String sql = "DELETE FROM images WHERE id = ?;";
 		this.getJdbcTemplate().update(sql, id);
 	}
 	

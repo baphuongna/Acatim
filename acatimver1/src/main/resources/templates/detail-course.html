@@ -149,21 +149,21 @@
                         <div class="blog-details-inner" style="justify-content: center;">
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="latest-blog-single blog-single-full-view">
+                                    <div class="latest-blog-single blog-single-full-view" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}, times = ${new java.text.SimpleDateFormat('HH:mm')}">
                                         <div class="blog-image">
                                             <a href="#"><img src="admin/admin/img/blog-details/1.jpg" alt="" />
 												</a>
-                                            <div class="blog-date">
-                                                <p style="color: white;"><span class="blog-day" style="color: white;" th:text="${course.createDate}">20</span></p>
+                                            <div class="blog-date" >
+                                                <p style="color: white;"><span class="blog-day" style="color: white;" th:text="${#dates.format(sdf.parse(course.createDate), 'dd-MM-yyyy')}">20</span></p>
                                             </div>
                                         </div>
                                         <div class="blog-details blog-sig-details">
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span style="color: black;"><i class="fa fa-user"></i> <b>Tên Khóa Học:</b> [[${course.courseName}]]</span>
-                                                <span style="color: black;"><i class="fa fa-heart"></i> <b>Giá Khóa Học:</b> [[${course.price}]] VND</span>
-                                                <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-comments-o" ></i> <b style="color: black;">Người Tạo:</b> [[${creater.fullName}]]</a></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span th:text="${course.startDate}"></span><b> đến </b><span th:text="${course.endDate}"></span></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span th:text="${course.startTime}"></span><b> đến </b><span th:text="${course.endTime}"></span></span>
+                                                <span style="color: black;"><i class="fa fa-user"></i> <b th:text="'Tên Khóa Học: ' + ${course.courseName}"></b></span>
+                                                <span style="color: black;"><i class="fa fa-heart"></i> <b th:text="'Giá Khóa Học: ' + ${#numbers.formatCurrency(course.price)}"></b></span>
+                                                <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-comments-o" ></i> <b style="color: black;" th:text="'Người Tạo: ' + ${creater.fullName}"></b></a></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></span><b> đến </b><span th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></span></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></span><b> đến </b><span th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></span></span>
                                             </div>
                                             <h1><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
                                             <p th:text="${course.courseDescription}"></p>

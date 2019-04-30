@@ -1,6 +1,5 @@
 package com.acatim.acatimver1.controller;
 
-import java.io.IOException;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
 import com.acatim.acatimver1.format.DateFormat;
-import com.acatim.acatimver1.service.AmazonClient;
 import com.acatim.acatimver1.service.UserInfoService;
 import com.acatim.acatimver1.utils.WebUtils;
 
@@ -39,13 +33,6 @@ public class MainController {
 	
 	@Autowired
     public JavaMailSender emailSender;
-	
-	private AmazonClient amazonClient;
-	
-	@Autowired
-	MainController(AmazonClient amazonClient) {
-        this.amazonClient = amazonClient;
-    }
 	
 	private DateFormat dateformat = new DateFormat();
 
@@ -166,23 +153,6 @@ public class MainController {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("contact");
 		return modelAndView;
-	}
-	
-	@RequestMapping("/upload")
-	public ModelAndView showUpload(@RequestParam(required = false, name = "message") String message) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("message", message);
-		return new ModelAndView("testUpload");
-	}
-	
-	@RequestMapping(value = { "/upload" }, method = RequestMethod.POST)
-	public ModelAndView fileUpload(@RequestPart(value = "file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
-		ModelAndView modelAndView = new ModelAndView();
-		//Good
-//		this.amazonClient.createFolder("testfolder");
-		this.amazonClient.uploadFile("testfolder/avatar" ,file);
-	    modelAndView.setViewName("redirect:/upload");
-	    return modelAndView;
 	}
 
 }

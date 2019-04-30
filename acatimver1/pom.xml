@@ -14,7 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>acatimver1</name>
 	<description>Spring Boot</description>
-<!-- 	<packaging>war</packaging> -->
+	<!-- <packaging>war</packaging> -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -43,9 +43,9 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
-    		<groupId>commons-net</groupId>
-    		<artifactId>commons-net</artifactId>
-    		<version>3.6</version>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
@@ -92,15 +92,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-autoconfigure</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-java8time</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-	<plugin>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-maven-plugin</artifactId>
-	</plugin>
-</plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 </project>
