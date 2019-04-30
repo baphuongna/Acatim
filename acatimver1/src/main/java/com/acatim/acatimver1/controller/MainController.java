@@ -113,10 +113,10 @@ public class MainController {
 					
 					message.setTo(user.getEmail());
 				    message.setSubject("Yêu cầu thay đổi mật khẩu Acatim");
-				    message.setText("Xin Chào,"
-				     		+ "<br> Bạn đã yêu cầu lấy lại mật khẩu trên hệ thống website Acatim.online "
-				     		+ "<br> Mật Khẩu Mới Của Bạn Là : <p>" + newPass + "</p>"
-				     		+ "<br> ACATIM.");
+				    message.setText("Xin Chào, \r\n \r\n"
+				     		+ "Bạn đã yêu cầu cấp lại mật khẩu trên hệ thống Acatim\r\n"
+				     		+ "Mật khẩu mới của bạn là: " + newPass + "\r\n \r\n"
+				     		+ "ACATIM.");
 				     // Send Message!
 				     this.emailSender.send(message);
 				     modelAndView.setViewName("send-passwod-success");
