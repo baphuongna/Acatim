@@ -46,9 +46,13 @@
 				data-scrollax-parent="true">
 				<div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 ftco-animate text-left">
 					<h1 class="mb-4" th:text="${T(com.acatim.acatimver1.constants.Constants).chao_mung}"></h1>
-					<p th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text}"></p>
-					<p>
+					<p th:if="${#request.userPrincipal == null}"  th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text}"></p>
+					<p sec:authorize="hasAnyAuthority('Teacher', 'Study Center')" th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text_teacher_studyCenter}"></p>
+					<p th:if="${#request.userPrincipal == null}">
 						<a href="course.html" th:href="@{/course}" class="btn btn-primary px-4 py-3" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_tim_khoa_hoc}"></a>
+					</p>
+					<p sec:authorize="hasAnyAuthority('Teacher', 'Study Center')">
+						<a href="add-course.html" th:href="@{/add-course}" class="btn btn-primary px-4 py-3" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_them_khoa_hoc}"></a>
 					</p>
 				</div>
 				<div class="col-xl-7 col-lg-7 col-md-7 col-sm-12" style="text-align: right;">
@@ -218,95 +222,7 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- <section class="ftco-section testimony-section">
-		<div class="container">
-			<div class="row justify-content-center mb-5 pb-3">
-				<div class="col-md-7 heading-section ftco-animate text-center">
-					<h2 class="mb-4">Một số những đánh giá từ người dùng</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 ftco-animate">
-					<div class="carousel-testimony owl-carousel">
-						<div class="item">
-							<div class="testimony-wrap text-center">
-								<div class="user-img mb-5"
-									style="background-image: url(images/person_1.jpg)">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="icon-quote-left"></i>
-									</span>
-								</div>
-								<div class="text">
-									<p class="mb-5">Cái định con mẹ Acatim đỉnh vkl, pass đồ án
-										esay vkl, tưởng cái éo gì chứ làm dăm ba cái website vớ vẩn
-										thì ok hết, chào bé Lê Văn Đạt, em còn làm ở đó không ta?</p>
-									<p class="name">Vũ Văn Phong</p>
-									<span class="position">Học Sinh</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap text-center">
-								<div class="user-img mb-5"
-									style="background-image: url(images/person_2.jpg)">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="icon-quote-left"></i>
-									</span>
-								</div>
-								<div class="text">
-									<p class="mb-5">Cái định con mẹ Acatim đỉnh vkl, pass đồ án
-										esay vkl, tưởng cái éo gì chứ làm dăm ba cái website vớ vẩn
-										thì ok hết, chào bé Lê Văn Đạt, em còn làm ở đó không ta?</p>
-									<p class="name">Vũ Văn Phong</p>
-									<span class="position">Học Sinh</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap text-center">
-								<div class="user-img mb-5"
-									style="background-image: url(images/person_3.jpg)">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="icon-quote-left"></i>
-									</span>
-								</div>
-								<div class="text">
-									<p class="mb-5">Cái định con mẹ Acatim đỉnh vkl, pass đồ án
-										esay vkl, tưởng cái éo gì chứ làm dăm ba cái website vớ vẩn
-										thì ok hết, chào bé Lê Văn Đạt, em còn làm ở đó không ta?</p>
-									<p class="name">Vũ Văn Phong</p>
-									<span class="position">Học Sinh</span>
-								</div>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimony-wrap text-center">
-								<div class="user-img mb-5"
-									style="background-image: url(images/person_3.jpg)">
-									<span
-										class="quote d-flex align-items-center justify-content-center">
-										<i class="icon-quote-left"></i>
-									</span>
-								</div>
-								<div class="text">
-									<p class="mb-5">Cái định con mẹ Acatim đỉnh vkl, pass đồ án
-										esay vkl, tưởng cái éo gì chứ làm dăm ba cái website vớ vẩn
-										thì ok hết, chào bé Lê Văn Đạt, em còn làm ở đó không ta?</p>
-									<p class="name">Vũ Văn Phong</p>
-									<span class="position">Học Sinh</span>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
- -->
+	
 	<section class="ftco-section bg-light">
 		<div class="container">
 			<div class="row justify-content-center mb-5 pb-3">

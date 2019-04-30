@@ -135,7 +135,7 @@
 		<!-- End Header -->
 
 		<!-- Content -->
-		<main class="cd-main-content" style="margin-top: 95px;">
+		<main class="cd-main-content">
 		<div id="content">
 			<div class="resume">
 				<div class="container">
@@ -145,11 +145,6 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
-                        	<div class="row">
-		                    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
-		                        	<b>Liên hệ với chúng tôi</b>
-		                        </div>
-	                        </div>
                             <div class="profile-img">
                                 <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
                                 <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />
@@ -157,8 +152,12 @@
                              <div th:if="${showDetailMySelf != false}" class="profile-img" style="text-align: center; margin-top: 10px;">
                                 <a th:href="@{/upload-avatar}"><button type="submit" class="btn btn-primary">Thay Đổi Hình Đại Diện</button></a>
                             </div>
-                            <div class="profile-details-hr">
+                            <hr>
+                            <div class="profile-details-hr" style="background-color: whitesmoke; padding: 20px;">
                                 <div class="row">
+                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
+		                        		<b>Liên hệ với chúng tôi</b>
+		                       		</div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
                                         	<b>Tên</b>
@@ -168,7 +167,7 @@
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
                                         	<b>Website</b>
-                                            <p>http://acatim.edu.vn</p>
+                                            <p>http://acatim.online</p>
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +309,7 @@
                                                         </div>
                                                         <div class="ex-pro">
                                                         	<div class="row">
-														        <div class="col-xs-12 col-md-12">
+														        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 														            <div class="well well-sm">
 														                <div class="row">
 														                    <div class="col-xs-12 col-md-6 text-center">
@@ -457,7 +456,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="progress-skill">
-                                                            <h2 style="text-transform: none; float: left;">Kiến thức giáo viên</h2>
+                                                            <h2 style="text-transform: none; float: left;">Trình độ chuyên môn</h2>
                                                             <p style="float: right; margin-right: 25px; margin-bottom: 0px;" th:text="${caculater.knowledgeable} + '/5'"></p>
                                                             <div style="clear: both;" class="progress progress-mini" th:with="result=${caculater.knowledgeable * 20}">
                                                                 <div th:style="'width: ' + ${result} + '%;'" class="progress-bar progress-phong"></div>
@@ -490,7 +489,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11">
 															                                    <h5>
-															                                        Bạn thấy các mức học của chương trình dạy thế nào?
+															                                        Chất lượng các mức độ môn học
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="easyLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="easyLevel" type="hidden" th:field="*{rateTeacher.easyLevel}" readonly>
@@ -501,7 +500,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11 hidden-xs">
 															                                    <h5>
-															                                        Độ khó của các khung chương trình dạy?
+															                                        Mức độ khó môn học
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="examDifficulty" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="examDifficulty" type="hidden" th:field="*{rateTeacher.examDifficulty}" readonly>
@@ -513,7 +512,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11">
 															                                    <h5>
-															                                        Giáo án có hữu ích với bạn không?
+															                                        Giáo án
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="textbookUse" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="textbookUse" type="hidden" th:field="*{rateTeacher.textbookUse}" readonly>
@@ -524,7 +523,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11 hidden-xs">
 															                                    <h5>
-															                                        Sự nhiệt tình trợ giúp, giảng giải của giáo viên thế nào?
+															                                        Thái độ giảng dạy
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="helpfulLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="helpfulLevel" type="hidden" th:field="*{rateTeacher.helpfulLevel}" readonly>
@@ -536,7 +535,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11">
 															                                    <h5>
-															                                        Mức độ ghê gớm của giáo viên thế nào?
+															                                        Cách thức giảng dạy
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="clarityLevel" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="clarityLevel" type="hidden" th:field="*{rateTeacher.clarityLevel}" readonly>
@@ -547,7 +546,7 @@
 															                            <div class="col-md-6">
 															                                <div class="col-md-11 hidden-xs">
 															                                    <h5>
-															                                        Đánh giá kiến thức của giáo viên?
+															                                        Trình độ chuyên môn
 															                                    </h5>
 															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="knowledgeable" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                    <input id="knowledgeable" type="hidden" th:field="*{rateTeacher.knowledgeable}" readonly>
@@ -712,17 +711,13 @@
 			                     </div>
 			                     
 			                     <div class="product-tab-list tab-pane fade" id="images">
+			                     	<div class="row" th:if="${checkDetail == false or showDetailMySelf == true}" style="justify-content: center; margin-bottom: 10px;">
+                                		<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
+                                		<a th:href="@{/add-image}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Thêm ảnh'"></button></a>
+                                	</div>
                                     <div class="row">
+                                    	<p style="margin: 15px; color: #303030; line-height: 24px;" th:if="${#lists.isEmpty(images) == true}">Chưa có hình ảnh nào...</p>
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<div class="row" th:if="${checkDetail == false or showDetailMySelf == true}" style="justify-content: center; margin-bottom: 10px;">
-                                				<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
-                                				<a th:href="@{/add-image}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Thêm ảnh'"></button></a>
-                                			</div>
-											
-											<div class="row" th:if="${#lists.isEmpty(images) == true}" style="justify-content: center;">
-												<p th:text="'không Có hình ảnh nào'" style="font-size: 50px;"></p>
-											</div>
-											
 											<div th:if="${#lists.isEmpty(images) == false}" class="container1">
 
 												<!-- Full-width images with number text -->

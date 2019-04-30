@@ -202,14 +202,14 @@ input[type="date"]:valid::before {
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<input type="password" th:field="*{password}" id="pass"
-															placeholder="Mật khẩu" class="form-control" style="margin-bottom: 0px;" /> <label
+															placeholder="Mật khẩu" class="form-control" style="margin-bottom: 0px !important;" /> <label
 															th:if="${#fields.hasErrors('password')}"
 															th:errors="*{password}" class="validation-message"></label>
 													</div>
 												</div>
 												<div class="form-group row">
 													<div class="col-sm-11" style="margin-left: 30px;">
-														<input type="password" id="passConfirm" onkeyup='check();' style="margin-bottom: 5px;"
+														<input type="password" id="passConfirm" onkeyup='check();' style="margin-bottom: 5px !important;"
 															placeholder="Nhập lại mật khẩu" class="form-control" /><label style="display: block; margin-bottom: 0px;" id='message'></label>
 													</div>
 												</div>

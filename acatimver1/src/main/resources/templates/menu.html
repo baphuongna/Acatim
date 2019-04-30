@@ -92,7 +92,7 @@
 								class="nav-link dropdown-toggle" href="#" id="navbardrop"
 								data-toggle="dropdown" th:utext="${#request.userPrincipal.name}">
 							</a>
-								<div class="dropdown-menu">
+								<div class="dropdown-menu" style="top: 95%;">
 									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Admin', 'Manager')" th:href="@{/admin/}" th:text="'Trang Quản lý Web'"></a>
 									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Student', 'Teacher', 'Study Center')" href="profile.html" th:href="@{/profile}" th:text="'Trang cá nhân'"> </a>
 									<a class="dropdown-item" sec:authorize="hasAnyAuthority('Teacher', 'Study Center')"  th:href="@{/manager-course}" th:text="'Quản Lý Khóa Học'"></a>

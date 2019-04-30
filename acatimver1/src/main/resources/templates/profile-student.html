@@ -115,7 +115,7 @@
 		<!-- End Header -->
 
 		<!-- Content -->
-		<main class="cd-main-content" style="margin-top: 95px;">
+		<main class="cd-main-content">
 		<div id="content">
 			<div class="resume">
 				<div class="container">
@@ -125,11 +125,6 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
-                        	<div class="row">
-		                    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
-		                        	<b>Liên hệ với chúng tôi</b>
-		                        </div>
-	                        </div>
                             <div class="profile-img">
                                 <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
                                 <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />
@@ -137,8 +132,12 @@
                              <div th:if="${showDetailMySelf != false}" class="profile-img" style="text-align: center; margin-top: 10px;">
                                 <a th:href="@{/upload-avatar}"><button type="submit" class="btn btn-primary">Thay Đổi Hình Đại Diện</button></a>
                             </div>
-                            <div class="profile-details-hr">
+                            <hr>
+                            <div class="profile-details-hr" style="background-color: whitesmoke; padding: 20px;">
                                 <div class="row">
+                                	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
+		                        		<b>Liên hệ với chúng tôi</b>
+		                        	</div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
                                         	<b>Tên</b>
@@ -202,7 +201,6 @@
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#description">Hồ sơ</a></li>
                                 <li><a href="#reviews">Bình Luận</a></li>
-                                <li th:if="${checkDetail == false or showDetailMySelf == true}"><a href="#INFORMATION">Cập nhật thông tin</a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
