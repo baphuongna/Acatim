@@ -730,48 +730,42 @@
 			                                </div>
 			                                
 			                                <div class="product-tab-list tab-pane fade" id="images">
-                                    <div class="row">
-										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											<div class="row" th:if="${checkDetail == false or showDetailMySelf == true}" style="justify-content: center; margin-bottom: 10px;">
-                                				<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
-                                				<a th:href="@{/add-image}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Thêm ảnh'"></button></a>
-                                			</div>
-											
-											<div class="row" th:if="${#lists.isEmpty(images) == true}" style="justify-content: center;">
-												<p th:text="'không Có hình ảnh nào'" style="font-size: 50px;"></p>
-											</div>
-											
-											<div th:if="${#lists.isEmpty(images) == false}" class="container1">
-
-												<!-- Full-width images with number text -->
-												<div class="mySlides" th:each="image : ${images}">
-													<div class="numbertext" th:text="${image.createDate}"></div>
-													<img th:src="${image.linkimage}" style="width: 100%" >
-												</div>
-
-												<!-- Next and previous buttons -->
-												<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-												<a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-												<!-- Image text -->
-												<div class="caption-container">
-													<p id="caption" style="color: white;"></p>
-												</div>
-
-												<!-- Thumbnail images -->
-												<div class="row">
-													<div class="column" th:each="image,i : ${images}">
-														<img class="demo cursor" th:src="${image.linkimage}"
-																		th:onclick="'currentSlide(' + ${i.index + 1} + ')'"
-																		th:alt="${image.description}" style="width: 100%; height: auto;" >
+			                                    <div class="row" th:if="${checkDetail == false or showDetailMySelf == true}" style="justify-content: center; margin-bottom: 10px;">
+			                                		<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
+			                                		<a th:href="@{/add-image}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Thêm ảnh'"></button></a>
+			                                	</div>
+			                                    <div class="row">
+			                                    	<p style="margin: 15px; color: #303030; line-height: 24px;" th:if="${#lists.isEmpty(images) == true}">Chưa có hình ảnh nào...</p>
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														<div th:if="${#lists.isEmpty(images) == false}" class="container1">
+			
+															<!-- Full-width images with number text -->
+															<div class="mySlides" th:each="image : ${images}">
+																<div class="numbertext" th:text="${image.createDate}"></div>
+																<img th:src="${image.linkimage}" style="width: 100%" >
+															</div>
+			
+															<!-- Next and previous buttons -->
+															<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+															<a class="next" onclick="plusSlides(1)">&#10095;</a>
+			
+															<!-- Image text -->
+															<div class="caption-container">
+																<p id="caption" style="color: white;"></p>
+															</div>
+			
+															<!-- Thumbnail images -->
+															<div class="row">
+																<div class="column" th:each="image,i : ${images}">
+																	<img class="demo cursor" th:src="${image.linkimage}"
+																					th:onclick="'currentSlide(' + ${i.index + 1} + ')'"
+																					th:alt="${image.description}" style="width: 100%; height: auto;" >
+																</div>
+															</div>
+														</div>
 													</div>
 												</div>
-											</div>
-											
-											
-										</div>
-									</div>
-                                </div>
+			                                </div>
 			                            </div>
 			                        </div>
 			                    </div>

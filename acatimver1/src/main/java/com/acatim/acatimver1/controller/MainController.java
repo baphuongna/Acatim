@@ -114,8 +114,8 @@ public class MainController {
 					message.setTo(user.getEmail());
 				    message.setSubject("Yêu cầu thay đổi mật khẩu Acatim");
 				    message.setText("Xin Chào,"
-				     		+ "<br> Để thiết lập lại mật khẩu tài khoản Ubisoft của bạn xin vui lòng bấm vào địa chỉ sau "
-				     		+ "<br> Mật Khẩu Mới : <p>" + newPass + "</p>"
+				     		+ "<br> Bạn đã yêu cầu lấy lại mật khẩu trên hệ thống website Acatim.online "
+				     		+ "<br> Mật Khẩu Mới Của Bạn Là : <p>" + newPass + "</p>"
 				     		+ "<br> ACATIM.");
 				     // Send Message!
 				     this.emailSender.send(message);
