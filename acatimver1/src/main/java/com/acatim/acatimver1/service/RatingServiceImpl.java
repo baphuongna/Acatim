@@ -338,4 +338,78 @@ public class RatingServiceImpl implements RatingService {
 		return this.ratingDAO.countRatingByDate();
 	}
 
+	@Override
+	public Rating setRateNull(Rating rating) {
+		
+		if(rating.getRate() == 0) {
+			rating.setRate(1);
+		}
+		
+		if(rating.getRateTeacher() != null) {
+			if(rating.getRateTeacher().getClarityLevel() == 0) {
+				rating.getRateTeacher().setClarityLevel(1);
+			}
+			
+			if(rating.getRateTeacher().getEasyLevel() == 0) {
+				rating.getRateTeacher().setEasyLevel(1);
+			}
+			
+			if(rating.getRateTeacher().getExamDifficulty() == 0) {
+				rating.getRateTeacher().setExamDifficulty(1);
+			}
+			
+			if(rating.getRateTeacher().getHelpfulLevel() == 0) {
+				rating.getRateTeacher().setHelpfulLevel(1);
+			}
+			
+			if(rating.getRateTeacher().getKnowledgeable() == 0) {
+				rating.getRateTeacher().setKnowledgeable(1);
+			}
+			
+			if(rating.getRateTeacher().getTextbookUse() == 0) {
+				rating.getRateTeacher().setTextbookUse(1);
+			}
+			
+			if(rating.getRateTeacher().getClarityLevel() == 0) {
+				rating.getRateTeacher().setClarityLevel(1);
+			}
+		}
+		
+		if(rating.getRateStudyCenter() != null) {
+			if(rating.getRateStudyCenter().getEquipmentQuality() == 0) {
+				rating.getRateStudyCenter().setEquipmentQuality(1);
+			}
+			
+			if(rating.getRateStudyCenter().getHappiness() == 0) {
+				rating.getRateStudyCenter().setHappiness(1);
+			}
+			
+			if(rating.getRateStudyCenter().getInternet() == 0) {
+				rating.getRateStudyCenter().setInternet(1);
+			}
+			
+			if(rating.getRateStudyCenter().getLocation() == 0) {
+				rating.getRateStudyCenter().setLocation(1);
+			}
+			
+			if(rating.getRateStudyCenter().getReputation() == 0) {
+				rating.getRateStudyCenter().setReputation(1);
+			}
+			
+			if(rating.getRateStudyCenter().getSafety() == 0) {
+				rating.getRateStudyCenter().setSafety(1);
+			}
+			
+			if(rating.getRateStudyCenter().getStaffAttitude() == 0) {
+				rating.getRateStudyCenter().setStaffAttitude(1);
+			}
+			
+			if(rating.getRateStudyCenter().getTeachingQuality() == 0) {
+				rating.getRateStudyCenter().setTeachingQuality(1);
+			}
+		}
+		
+		return rating;
+	}
+
 }

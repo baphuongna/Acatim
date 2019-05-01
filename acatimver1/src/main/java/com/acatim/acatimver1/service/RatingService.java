@@ -61,4 +61,6 @@ public interface RatingService {
 	boolean check(String userName, String recieverName);
 	
 	CountByDate countRatingByDate();
+	
+	Rating setRateNull(Rating rating);
 }

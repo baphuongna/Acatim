@@ -609,6 +609,8 @@ public class ProfileController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
+		rating = ratingService.setRateNull(rating);
+		
 		try {
 			rating.setUserName(curentUserName);
 			rating.setCreateDate(dateformat.currentDate());
@@ -643,6 +645,8 @@ public class ProfileController {
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();
+		
+		rating = ratingService.setRateNull(rating);
 		
 		try {
 			rating.setUserName(curentUserName);

@@ -485,7 +485,7 @@
 															                                    <h5>
 															                                        Chất lượng dạy học của Trung tâm
 															                                    </h5>
-															                                    <span th:field="*{rateStudyCenter.teachingQuality}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Teaching quality" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.teachingQuality}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Teaching quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 																								<input id="Teaching quality" type="hidden" th:field="*{rateStudyCenter.teachingQuality}" readonly>
 																								<label th:if="${#fields.hasErrors('rateStudyCenter.teachingQuality')}" th:errors="*{rateStudyCenter.teachingQuality}" class="validation-message"></label>
 																							</div>
@@ -496,7 +496,7 @@
 															                                    <h5>
 															                                        Vị trí
 															                                    </h5>
-															                                    <span th:field="*{rateStudyCenter.location}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Location" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.location}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Location" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="Location" type="hidden" th:field="*{rateStudyCenter.location}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.location')}" th:errors="*{rateStudyCenter.location}" class="validation-message"></label>
 															                                </div>
@@ -508,7 +508,7 @@
 															                                    <h5>
 															                                        Chất lượng Internet
 															                                    </h5>
-															                                    <span th:field="*{rateStudyCenter.internet}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Internet" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.internet}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Internet" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="Internet" type="hidden" th:field="*{rateStudyCenter.internet}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.internet')}" th:errors="*{rateStudyCenter.internet}" class="validation-message"></label>
 															                                </div>
@@ -519,7 +519,7 @@
 															                                    <h5>
 															                                        Sự thoải mái trong học tập
 															                                    </h5>
-															                                    <span th:field="*{rateStudyCenter.safety}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="safety" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span th:field="*{rateStudyCenter.safety}" onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="safety" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="safety" type="hidden" th:field="*{rateStudyCenter.safety}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.safety')}" th:errors="*{rateStudyCenter.safety}" class="validation-message"></label>
 															                                </div>
@@ -531,7 +531,7 @@
 															                                    <h5>
 															                                        Chỉ số hạnh phúc
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Happiness" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Happiness" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="Happiness" type="hidden" th:field="*{rateStudyCenter.happiness}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.happiness')}" th:errors="*{rateStudyCenter.happiness}" class="validation-message"></label>
 															                                </div>
@@ -542,7 +542,7 @@
 															                                    <h5>
 															                                        Sự tin tưởng về uy tín
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Reputation" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Reputation" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="Reputation" type="hidden" th:field="*{rateStudyCenter.reputation}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.reputation')}" th:errors="*{rateStudyCenter.reputation}" class="validation-message"></label>
 															                                </div>
@@ -556,7 +556,7 @@
 															                                    <h5>
 															                                        Thái độ của nhân viên Trung tâm
 															                                    </h5>
-															                                    <span  onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Staff attitude" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span  onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="Staff attitude" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="Staff attitude" type="hidden" th:field="*{rateStudyCenter.staffAttitude}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.staffAttitude')}" th:errors="*{rateStudyCenter.staffAttitude}" class="validation-message"></label>
 															                                </div>
@@ -567,7 +567,7 @@
 															                                    <h5>
 															                                        Cơ sở vật chất
 															                                    </h5>
-															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="equipment quality" data-current-rating=0 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
+															                                    <span onclick="myFunction(this)" style="color:orange; font-size: 25px;" id="rating" class="rating" name="equipment quality" data-current-rating=1 data-icon-bad='fa fa-star-o' data-icon-good='fa fa-star'></span>
 															                                	<input id="equipment quality" type="hidden" th:field="*{rateStudyCenter.equipmentQuality}" readonly>
 															                                	<label th:if="${#fields.hasErrors('rateStudyCenter.equipmentQuality')}" th:errors="*{rateStudyCenter.equipmentQuality}" class="validation-message"></label>
 															                                </div>
@@ -581,7 +581,7 @@
 															                                                <label style="font-size: 15px; line-height: 20px;">
 															                                                	Bạn có bất kỳ ý kiến hoặc đề xuất nào bạn muốn chia sẻ với Trung tâm này không?
 															                                                </label>
-															                                                <input th:field="*{comment}" style="height:90px; width: 100%;" type="text" autocomplete="off" />
+															                                                <input th:field="*{comment}" style="height:90px; width: 100%;" type="text" autocomplete="off" required="required"/>
 															                                                <label th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}" class="validation-message"></label>
 															                                            </div>
 															                                        </div>
@@ -593,12 +593,13 @@
 															                        <div class="row">
 															                            <div style="font-size: 18px;" class="col-lg-6 col-sm-6 col-md-6 text-left hidden-xs">
 															                                <strong>Tổng đánh giá của bạn: </strong>
-															                                <label id="demo" style="color:red">0</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
-															                            	<input id="total" type="hidden"  th:field="*{rate}" readonly>
+															                                <label id="demo" style="color:red">1</label><i class="magic-rating-icon fa fa-star" style="color: orange;" aria-hidden="true" data-default="false" data-rating="5"></i>
+															                            	<input id="total" type="hidden" th:field="*{rate}">
+															                            	<label id="demo1" style="color:red"></label>
 															                            </div>
 															                            <div class="col-lg-6 col-sm-6 col-md-6 hidden-xs">
 																                             <div class="col-md-4 hidden-xs">
-																                                   <button type="submit" id="ok2" class="btn btn-default ok" data-dismiss="">Gửi  <span class="glyphicon glyphicon-ok"></span></button>
+																                                   <button type="submit" class="btn btn-default ok" data-dismiss="">Gửi  <span class="glyphicon glyphicon-ok"></span></button>
 																                             </div>
 															                            </div>
 															                        </div>
@@ -1075,7 +1076,6 @@ $.fn.magicRatingInit = function(config) {
 			 document.getElementById("Reputation").value = hash['Reputation'];
 			 document.getElementById("Staff attitude").value = hash['Staff attitude'];
 			 document.getElementById("equipment quality").value = hash['equipment quality'];
-
             
             // Update rating
             widget.children().each(function() {

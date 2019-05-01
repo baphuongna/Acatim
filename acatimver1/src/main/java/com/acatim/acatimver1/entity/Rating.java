@@ -2,6 +2,7 @@ package com.acatim.acatimver1.entity;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +24,9 @@ public class Rating {
 	private String createDate;
 	
 	private String updateDate;
-	
+
 	private float rate;
-	
+
 	private String comment;
 	
 	private boolean active;
