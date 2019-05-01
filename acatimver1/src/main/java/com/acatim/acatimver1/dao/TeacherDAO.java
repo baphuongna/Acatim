@@ -1,6 +1,5 @@
 package com.acatim.acatimver1.dao;
 
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +35,15 @@ public class TeacherDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public int countTeacher() {
 		String sqlDate = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name;";
-		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		return count;
+		try {
+			int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+			return count;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public TeacherForm getUserTeacherByUserName(String userName) {

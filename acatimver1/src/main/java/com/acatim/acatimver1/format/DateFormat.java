@@ -20,12 +20,7 @@ public class DateFormat {
 		String formatedDate;
 		try {
 			Date initDate = new SimpleDateFormat("MM/dd/yy").parse(date);
-
-//			SimpleDateFormat formatter = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
-//			Date date1 = (Date) formatter.parse(initDate.toString());
-
 			Calendar cal = Calendar.getInstance();
-			
 			cal.setTime(initDate);
 			
 			formatedDate = cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-"
@@ -75,5 +70,14 @@ public class DateFormat {
 	    
 		return code;
 	}
+	
+	public boolean isNumeric(String str) { 
+		  try {  
+		    Integer.parseInt(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 
 }

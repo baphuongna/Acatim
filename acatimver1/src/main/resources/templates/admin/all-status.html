@@ -144,7 +144,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
                             <h4>Danh Sách Lịch Sử thay Đổi</h4>
-                            <div class="asset-inner" th:if="${checklist == true}"><h1>Not Found!</h1></div>
+                            <div class="asset-inner" th:if="${checklist == true}"><h1 th:text="'Không có thông tin nào.'">Not Found!</h1></div>
                             <div class="asset-inner" th:if="${checklist == false}">
                                 <table >
 									<tr>
@@ -153,17 +153,17 @@
 										<th>Giá Trị Thay Đổi</th>
 										<th>Người Sửa</th>
 										<th>Ngày Sửa</th>
-										<th></th>
+										<!-- <th></th> -->
 									</tr>
-									<tr th:each="status : ${allStatus}">
+									<tr th:each="status : ${allStatus}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}">
 										<td th:text="${status.id}"></td>
 										<td th:text="${status.idChange}"></td>
 										<td th:text="${status.valueChanged}"></td>
 										<td th:text="${status.by}"></td>
-										<td th:text="${status.dateChange}"></td>
-										<td>
+										<td th:text="${#dates.format(sdf.parse(status.dateChange), 'dd-MM-yyyy')}"></td>
+										<!-- <td>
 										<a th:href="@{/admin/editStatus(id=${status.id})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
-										</td>
+										</td> -->
 									</tr>
 								</table>
                             </div>
@@ -171,22 +171,22 @@
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination" >
                                     	<li class="page-item" >
-                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/allStatus(page=${first}}">Trang Đầu</a>
-                                        	<a th:if="${currentPage == first}" class="page-link" >Trang Đầu</a>
+                                        	<a th:if="${currentPage != first}" class="page-link" th:href="@{/admin/allStatus(page=${first}, search=${searchValue.search})}" th:text="'Trang Đầu'"></a>
+                                        	<a th:if="${currentPage == first}" class="page-link" th:text="'Trang Đầu'"></a>
                                         </li>
                                     	<li class="page-item"  th:if="${hasPrevious == true}">
-                                        	<a class="page-link" th:href="@{/admin/allStatus(page=${previous}}" >Trang trước</a>
+                                        	<a class="page-link" th:href="@{/admin/allStatus(page=${previous}, search=${searchValue.search})}" th:text="'<'"></a>
                                         </li>
                                         <li class="page-item" th:each="totalPage : ${totalPages}">
-                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/allStatus(page=${totalPage}}" th:text="${totalPage}">1</a>
-                                        	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}">1</a>
+                                        	<a th:if="${currentPage != totalPage}" class="page-link" th:href="@{/admin/allStatus(page=${totalPage}, search=${searchValue.search})}" th:text="${totalPage}"></a>
+                                        	<a th:if="${currentPage == totalPage}" class="page-link" th:text="${totalPage}"></a>
                                         </li>
                                         <li class="page-item"  th:if="${hasNext == true}">
-                                        	<a class="page-link" th:href="@{/admin/allStatus(page=${next}}">Trang Sau</a>
+                                        	<a class="page-link" th:href="@{/admin/allStatus(page=${next})}" th:text="'>'"></a>
                                         </li>
                                         <li class="page-item">
-                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/allStatus(page=${last}}">Trang Cuối</a>
-                                        	<a th:if="${currentPage == last}" class="page-link" >Trang Cuối</a>
+                                        	<a th:if="${currentPage != last}" class="page-link" th:href="@{/admin/allStatus(page=${last}, search=${searchValue.search})}" th:text="'Trang Cuối'"></a>
+                                        	<a th:if="${currentPage == last}" class="page-link" th:text="'Trang Cuối'"></a>
                                         </li>
                                     </ul>
                                 </nav>

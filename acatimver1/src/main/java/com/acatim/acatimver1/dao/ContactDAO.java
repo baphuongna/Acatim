@@ -18,18 +18,19 @@ import com.acatim.acatimver1.mapper.ContactMapper;
 @Repository
 @Transactional
 public class ContactDAO extends JdbcDaoSupport {
-	
+
 	@Autowired
 	public ContactDAO(DataSource dataSource) {
 		this.setDataSource(dataSource);
 	}
-	
+
 	public void addContact(Contact contact) {
-		String sql = "INSERT INTO ContactUs (name, email, title, message, create_date, isActive)\r\n" + 
-				"VALUES (?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, contact.getName(), contact.getEmail(), contact.getTitle(),contact.getMessage(),contact.getCreateDate(),contact.isActive());
+		String sql = "INSERT INTO ContactUs (name, email, title, message, create_date, isActive)\r\n"
+				+ "VALUES (?, ?, ?, ?, ?, ?);";
+		this.getJdbcTemplate().update(sql, contact.getName(), contact.getEmail(), contact.getTitle(),
+				contact.getMessage(), contact.getCreateDate(), contact.isActive());
 	}
-	
+
 	// contact
 
 	public List<Contact> getAllContact() {
@@ -79,23 +80,26 @@ public class ContactDAO extends JdbcDaoSupport {
 			return null;
 		}
 	}
-	
+
 	public CountByDate countContactUsByDate() {
 		CountByDate count = new CountByDate();
-		
-		String sqlDate = "select count(*) from ContactUs where date(create_date)=date(date_sub(now(),interval 1 day));";
-		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		
-		String sqlMonth = "select count(*) from ContactUs where month(create_date)=month(date_sub(now(),interval 1 day));";
-		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
-		
-		String sqlYear = "select count(*) from ContactUs where year(create_date)=year(now());";
-		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
-		
-		count.setByDate(countDate);
-		count.setByMonth(countMonth);
-		count.setByYear(countYear);
-		
-		return count;
+		try {
+			String sqlDate = "select count(*) from ContactUs where date(create_date)=date(date_sub(now(),interval 1 day));";
+			int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+
+			String sqlMonth = "select count(*) from ContactUs where month(create_date)=month(date_sub(now(),interval 1 day));";
+			int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+
+			String sqlYear = "select count(*) from ContactUs where year(create_date)=year(now());";
+			int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+
+			count.setByDate(countDate);
+			count.setByMonth(countMonth);
+			count.setByYear(countYear);
+
+			return count;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 }

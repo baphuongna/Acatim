@@ -47,8 +47,15 @@ public class RegistrationController {
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
 		if (userExists == true) {
 			bindingResult.rejectValue("userName", "error.user",
-					"Tài khoản email này đã tồn tại, vui lòng nhập một địa chỉ email khác");
+					"Tên Tài khoản này đã tồn tại, vui lòng nhập một Tên Tài khoản khác !");
 		}
+		
+		UserModel checkEmail = userInfoService.loadUserbyEmail(data.getEmail());
+		
+		if(checkEmail != null) {
+			bindingResult.rejectValue("email", "error.email", "Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+		}
+		
 		if (bindingResult.hasErrors()) {
 			modelAndView.addObject("erorrMessage", "Bạn đã nhập sai một số thông tin, vui lòng kiểm tra lại");
 			modelAndView.setViewName("registration");
@@ -83,8 +90,10 @@ public class RegistrationController {
 					System.out.println("trung tam thanh cong");
 				}
 			} catch (NotFoundException e) {
-				System.out.println("error regitration");
 				e.printStackTrace();
+				modelAndView.addObject("erorrMessage", "đăng kí thất bại, vui lòng kiểm tra lại!");
+				modelAndView.setViewName("registration");
+				return modelAndView;
 			}
 			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công tài khoản");
 			modelAndView.setViewName("registration");

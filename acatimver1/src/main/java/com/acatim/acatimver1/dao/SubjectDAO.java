@@ -24,48 +24,69 @@ public class SubjectDAO extends JdbcDaoSupport {
 
 	public List<Subject> getAllSubject() {
 		String sql = "SELECT * FROM Subject;";
-
-		List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectMapper());
-		return subjects;
+		try {
+			List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectMapper());
+			return subjects;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public List<Subject> getListSubject() {
 		String sql = "SELECT * FROM Subject INNER JOIN Categories ON Subject.category_id = Categories.category_id";
-		List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectMapper());
-		return subjects;
+		try {
+			List<Subject> subjects = this.getJdbcTemplate().query(sql, new SubjectMapper());
+			return subjects;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public Subject getSubjectBySubjectId(String subjectId) {
 		String sql = "SELECT * FROM Subject Where subject_id = ?;";
 		Object[] params = new Object[] { subjectId };
 		SubjectMapper mapper = new SubjectMapper();
-		Subject subject = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-		return subject;
+		try {
+			Subject subject = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return subject;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public List<Subject> getSubjectByCategoryId(String categoryId) {
 		String sql = "SELECT * FROM Subject INNER JOIN Categories ON Subject.category_id = Categories.category_id Where Subject.category_id = ?;";
 		Object[] params = new Object[] { categoryId };
-		List<Subject> subject = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
-		return subject;
+		try {
+			List<Subject> subject = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
+			return subject;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public List<Subject> getListSubjectPageable(Pageable pageable) {
 		String sql = "SELECT * FROM Subject INNER JOIN Categories ON Subject.category_id = Categories.category_id LIMIT ?, ?;";
 		Object[] params = new Object[] { pageable.getOffset(), pageable.getPageSize() };
-		List<Subject> subjects = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
-		return subjects;
+		try {
+			List<Subject> subjects = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
+			return subjects;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public List<Subject> getSubjectByCategoryIdPageable(Pageable pageable, String categoryId) {
 		String sql = "SELECT * FROM Subject INNER JOIN Categories ON Subject.category_id = Categories.category_id Where Subject.category_id = ? LIMIT ?, ?;";
 		Object[] params = new Object[] { categoryId, pageable.getOffset(), pageable.getPageSize() };
-		List<Subject> subject = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
-		return subject;
+		try {
+			List<Subject> subject = this.getJdbcTemplate().query(sql, params, new SubjectMapper());
+			return subject;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
-	
-	
+
 	public void addSubject(Subject subject) {
 		String sql = "INSERT INTO Subject (subject_id, category_id, subject_name, create_date, update_date, active)\r\n"
 				+ "VALUES (?, ?, ?, ?, ?, ?);";
@@ -74,11 +95,10 @@ public class SubjectDAO extends JdbcDaoSupport {
 	}
 
 	public void updateSubject(Subject subject) {
-		String sql = "UPDATE Subject\r\n"
-				+ "SET category_id = ?, subject_name = ?, update_date = ?\r\n"
+		String sql = "UPDATE Subject\r\n" + "SET category_id = ?, subject_name = ?, update_date = ?\r\n"
 				+ "WHERE subject_id = ?;";
-		this.getJdbcTemplate().update(sql, subject.getCategoryId(), subject.getSubjectName(),
-				subject.getUpdateDate(), subject.getSubjectId());
+		this.getJdbcTemplate().update(sql, subject.getCategoryId(), subject.getSubjectName(), subject.getUpdateDate(),
+				subject.getSubjectId());
 	}
 
 	public void removeSubject(String subjectId, boolean active) {

@@ -3,11 +3,11 @@ package com.acatim.acatimver1.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.acatim.acatimver1.dao.HistoryDAO;
 import com.acatim.acatimver1.entity.History;
+import com.acatim.acatimver1.entity.SearchValue;
 
 @Service
 public class HistoryServiceImpl implements HistoryService{
@@ -28,7 +28,14 @@ public class HistoryServiceImpl implements HistoryService{
 	}
 
 	@Override
-	public List<History> getAllHistoryPageble(Pageable pageable) {
-		return this.statusDAO.getAllHistoryPageble(pageable);
+	public int countAllHistory(SearchValue search) {
+		return this.statusDAO.countAllHistory(search);
 	}
+
+	@Override
+	public List<History> getAllHistoryPageble(PageableService pageable, SearchValue search) {
+		return this.statusDAO.getAllHistoryPageble(pageable, search);
+	}
+
+	
 }

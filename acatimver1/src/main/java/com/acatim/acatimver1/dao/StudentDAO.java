@@ -34,36 +34,36 @@ public class StudentDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public int countStudent() {
 		String sqlDate = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name;";
-		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-
-		return count;
+		try {
+			int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+			return count;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
-	
+
 	public StudentForm getUserStudentByUserName(String userName) {
 		String sql = "SELECT * FROM User INNER JOIN Student ON User.user_name = Student.user_name Where User.user_name = ?;";
 		Object[] params = new Object[] { userName };
 		StudentFormMapper mapper = new StudentFormMapper();
 		try {
-			
 			StudentForm student = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 			return student;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
-	
+
 	public void updateStudentInfo(Student student) {
 		String sql = "UPDATE Student SET DOB = ?, gender = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(),
-				student.getUserName());
+		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(), student.getUserName());
 	}
-	
+
 	public void addStudentInfo(Student student) {
-		String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + 
-				"VALUES (?, ?, ?);";
+		String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + "VALUES (?, ?, ?);";
 		this.getJdbcTemplate().update(sql, student.getUserName(), student.getDob(), student.isGender());
 	}
 }

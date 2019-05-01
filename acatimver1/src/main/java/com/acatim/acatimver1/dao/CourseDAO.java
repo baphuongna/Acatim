@@ -47,31 +47,50 @@ public class CourseDAO extends JdbcDaoSupport {
 		String sql = "SELECT * FROM Course where course_id = ?;";
 		Object[] params = new Object[] { courseId };
 		CourseMapper mapper = new CourseMapper();
-		Course course = this.getJdbcTemplate().queryForObject(sql, params, mapper);
-		return course;
+		try {
+			Course course = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return course;
+		}catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Course> getCourseBySubjectId(String subjectId) {
 		String sql = "SELECT * FROM Course where subject_id = ?;";
 		Object[] params = new Object[] { subjectId };
 		CourseMapper mapper = new CourseMapper();
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
+		
 	}
 	
 	public List<Course> getCourseByUserName(String userName) {
 		String sql = "SELECT * FROM Course where user_name = ?;";
 		Object[] params = new Object[] { userName };
 		CourseMapper mapper = new CourseMapper();
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
 	}
 	
 	public List<Course> getCourseByUserNameWithFullInfo(String userName) {
 		String sql = "SELECT * FROM Course,User where (Course.user_name = ?) and (User.user_name = ?);";
 		Object[] params = new Object[] { userName, userName };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public List<Course> searchCourseByCourseName(String courseName) {
@@ -79,8 +98,13 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
 				"INNER JOIN User ON Course.user_name = User.user_name where Course.courseName LIKE ?;";
 		Object[] params = new Object[] { "%" + courseName + "%" };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 
 	public List<Course> searchCourseBySubjectName(String subjectName) {
@@ -88,8 +112,13 @@ public class CourseDAO extends JdbcDaoSupport {
 				"INNER JOIN Subject ON Course.subject_id = Subject.subject_id\n" + 
 				"INNER JOIN User ON Course.user_name = User.user_name where Subject.subject_name LIKE ?;";
 		Object[] params = new Object[] { "%" + subjectName + "%" };
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, new CourseMapper());
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 	/* _______________________________________ */
@@ -141,8 +170,13 @@ public class CourseDAO extends JdbcDaoSupport {
 		}
 
 		CourseMapper mapper = new CourseMapper();
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 	
@@ -193,27 +227,36 @@ public class CourseDAO extends JdbcDaoSupport {
 		params = append(params, pageable.getPageSize());
 		
 		CourseMapper mapper = new CourseMapper();
-		List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
-		return courses;
+		try {
+			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
+			return courses;
+		}catch (Exception e) {
+			return null;
+		}
+		
 	}
 	
 	public CountByDate countCourseByDate() {
 		CountByDate count = new CountByDate();
+		try {
+			String sqlDate = "select count(*) from Course where date(create_date)=date(date_sub(now(),interval 1 day));";
+			int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+			
+			String sqlMonth = "select count(*) from Course where month(create_date)=month(date_sub(now(),interval 1 day));";
+			int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+			
+			String sqlYear = "select count(*) from Course where year(create_date)=year(now());";
+			int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+			
+			count.setByDate(countDate);
+			count.setByMonth(countMonth);
+			count.setByYear(countYear);
+			
+			return count;
+		}catch (Exception e) {
+			return null;
+		}
 		
-		String sqlDate = "select count(*) from Course where date(create_date)=date(date_sub(now(),interval 1 day));";
-		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		
-		String sqlMonth = "select count(*) from Course where month(create_date)=month(date_sub(now(),interval 1 day));";
-		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
-		
-		String sqlYear = "select count(*) from Course where year(create_date)=year(now());";
-		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
-		
-		count.setByDate(countDate);
-		count.setByMonth(countMonth);
-		count.setByYear(countYear);
-		
-		return count;
 	}
 	
 	/* _______________________________________ */

@@ -13,7 +13,7 @@
     <div class="left-sidebar-pro">
         <nav id="sidebar" class="">
             <div class="sidebar-header" style="padding-top: 20px;">
-                <a href="index.html" th:href="@{/index}"><h1>Acatim</h1></a>
+                <h1 ><a href="index.html" th:href="@{/index}" th:text="'Acatim'"></a></h1>
                 <strong><a href="index.html" th:href="@{/index}"><img src="admin/img/logo/logosn.png" alt="" /></a></strong>
             </div>
             <div class="left-custom-menu-adp-wrap comment-scrollbar">
@@ -77,18 +77,71 @@
                                 <li><a title="All Courses" th:href="@{/admin/allStatus}"><span class="mini-sub-pro">Lịch Sử Thay Đổi</span></a></li>
                             </ul>
                         </li>
-                       
-                        <li>
-                            <a class="has-arrow" th:href="@{/admin/tinymc}" aria-expanded="false"><span class="educate-icon educate-form icon-wrap"></span> <span class="mini-click-non">Forms Elements</span></a>
-                            <ul class="submenu-angle form-mini-nb-dp" aria-expanded="false">
-                                <li><a title="Text Editor" th:href="@{/admin/tinymc}" ><span class="mini-sub-pro">Text Editor</span></a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </nav>
             </div>
         </nav>
     </div>
+    
+    <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                    	<li><a data-toggle="collapse" data-target="#Charts" th:href="@{/index}">Trang Chủ <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Charts" th:href="@{/admin/}">Trang Quản Lý <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        </li>
+                                        <li sec:authorize="hasAnyAuthority('Admin')">
+                                        <a data-toggle="collapse" data-target="#demoevent" th:href="@{/admin/all-managers}">Quản Lý Nhân Viên <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demoevent" class="collapse dropdown-header-top">
+                                                <li><a title="All Professors" th:href="@{/admin/all-managers}"><span class="mini-sub-pro">Danh Sách Nhân Viên</span></a></li>
+                               					 <li><a title="Add Professor"  th:href="@{/admin/add-manager}"><span class="mini-sub-pro">Thêm Nhân Viên</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demopro" th:href="@{/admin/allUser}">Người Dùng <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demopro" class="collapse dropdown-header-top">
+                                                <li><a title="All Teachers" th:href="@{/admin/allUser}"><span class="mini-sub-pro">Danh Sách Người Dùng</span></a></li>
+                                				<li><a title="Add Teacher" th:href="@{/admin/addStudent}"><span class="mini-sub-pro">Thêm Học Sinh</span></a></li>
+                                				<li><a title="Add Teacher" th:href="@{/admin/addTeacher}"><span class="mini-sub-pro">Thêm Giáo Viên</span></a></li>
+                                				<li><a title="Add Teacher" th:href="@{/admin/addStudyCenter}"><span class="mini-sub-pro">Thêm Trung Tâm</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#democrou" th:href="@{/admin/all-courses}">Khóa Học <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="democrou" class="collapse dropdown-header-top">
+                                                <li><a title="All Courses" th:href="@{/admin/all-courses}"><span class="mini-sub-pro">Danh Sách Khóa Học</span></a></li>
+                                				<li><a title="Add Courses" th:href="@{/admin/add-course}"><span class="mini-sub-pro">Thêm Khóa Học</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demolibra" th:href="@{/admin/all-subjects}">Môn Học <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demolibra" class="collapse dropdown-header-top">
+                                                <li><a title="All Courses" th:href="@{/admin/all-subjects}"><span class="mini-sub-pro">Danh Sách Môn Học</span></a></li>
+                                				<li><a title="Add Courses" th:href="@{/admin/add-subject}"><span class="mini-sub-pro">Thêm Môn Học</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demodepart"th:href="@{/admin/all-categories}">Thể Loại <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demodepart" class="collapse dropdown-header-top">
+                                                <li><a title="All Courses" th:href="@{/admin/all-categories}"><span class="mini-sub-pro">Danh Sách Thể Loại</span></a></li>
+                                				<li><a title="Add Courses" th:href="@{/admin/add-category}"><span class="mini-sub-pro">Thêm Thể Loại</span></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demomi" th:href="@{/admin/allContact}">Danh Sách Phản Hồi <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#Miscellaneousmob" th:href="@{/admin/allStatus}">Lịch Sử Thay Đổi <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
+    
+    
     </div>
     <!-- End Left menu area -->
 </body>

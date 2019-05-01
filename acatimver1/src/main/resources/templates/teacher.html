@@ -123,7 +123,7 @@
 					<form th:action="@{teacher}" th:object="${searchValue}"
 						method="POST" class=" form-inline" style="padding-top: 10px;">
 						
-						<div class="dropdown" style="margin: auto; height: 58px;">
+						<!-- <div class="dropdown" style="margin: auto; height: 58px;">
 							<button class="btn dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255);"></button>
@@ -142,7 +142,7 @@
 										th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
 							<div class="chosen-select-single mg-b-20">
 								<select class="form-control" th:field="*{rateFilter}">
@@ -172,7 +172,12 @@
 				</div>
 
 			</div>
-			<div class="row">
+			
+			<div th:if="${#lists.isEmpty(listTeacher) == true}" class="search-form wow pulse animated" style="justify-content: center; text-align: center;">
+				<span th:text="'Không Tìm thấy Giáo Viên nào.'" style="color: black; font-size: 30px; text-align: center;"></span>
+			</div>
+			
+			<div class="row" th:if="${#lists.isEmpty(listTeacher) == false}">
 				<div class="col-lg-4 mb-sm-4 ftco-animate"
 					th:each="teacher : ${listTeacher}">
 					<div class="staff min_height_222">
@@ -194,13 +199,6 @@
 										<div class="stars-inner"></div>
 									</div>
 								</div>
-<!-- 								<p class="ftco-social d-flex">
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star"></span>
-									<span class="glyphicon glyphicon-star-empty"></span>
-								</p> -->
 							</div>
 						</div>
 						<div style="padding-top: 16px;" class="text">
@@ -212,7 +210,7 @@
 			</div>
 
 
-			<div class="search-form wow pulse animated" data-wow-delay="0.8s"
+			<div th:if="${#lists.isEmpty(listTeacher) == false}" class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
 				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary"
 				 th:href="@{/teacher(page=${first}, sortValue=${searchValue.sortValue}, rateFilter=${searchValue.rateFilter})}">Trang Đầu</a>

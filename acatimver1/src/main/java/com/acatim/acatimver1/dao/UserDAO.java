@@ -94,12 +94,12 @@ public class UserDAO extends JdbcDaoSupport {
 		arr[N] = element;
 		return arr;
 	}
-	
+
 	public List<UserModel> getAllUsers(SearchValue search) {
 
 		try {
 			String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id ";
-			
+
 			Object[] params = new Object[] {};
 			UserMapper mapper = new UserMapper();
 			if (search.getRoleId() != null) {
@@ -111,52 +111,52 @@ public class UserDAO extends JdbcDaoSupport {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
-			
+
 			sql += " Where User.role_id < 4 ";
 
 			if (search.getRoleId() != null) {
- 				sql += " and User.role_id = ? ";
+				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
 			}
-			
+
 			if (search.getRateFilter() != null) {
 				sql += " and rate >= ? and rate < ?";
 				params = append(params, search.getRateFilter());
-				params = append(params, Integer.parseInt(search.getRateFilter())+1);
+				params = append(params, Integer.parseInt(search.getRateFilter()) + 1);
 			}
-			
-			if(search.getValue() == null && search.getSearch() != null) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() == null && search.getSearch() != null) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("userName")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("userName")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.user_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("fullName")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("fullName")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("email")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("email")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
 
 			List<UserModel> userInfo = null;
-			
+
 			userInfo = this.getJdbcTemplate().query(sql, params, mapper);
-			
+
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
@@ -167,7 +167,7 @@ public class UserDAO extends JdbcDaoSupport {
 
 		try {
 			String sql = "SELECT * FROM User INNER JOIN Role ON User.role_id = Role.role_id ";
-			
+
 			Object[] params = new Object[] {};
 			UserMapper mapper = new UserMapper();
 			if (search.getRoleId() != null) {
@@ -179,43 +179,43 @@ public class UserDAO extends JdbcDaoSupport {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
-			
+
 			sql += " Where User.role_id < 4 ";
 
 			if (search.getRoleId() != null) {
- 				sql += " and User.role_id = ? ";
+				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
 			}
-			
+
 			if (search.getRateFilter() != null) {
 				sql += " and rate >= ? and rate < ?";
 				params = append(params, search.getRateFilter());
-				params = append(params, Integer.parseInt(search.getRateFilter())+1);
+				params = append(params, Integer.parseInt(search.getRateFilter()) + 1);
 			}
-			
-			if(search.getValue() == null && search.getSearch() != null) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() == null && search.getSearch() != null) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("userName")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("userName")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.user_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("fullName")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("fullName")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
-			if(search.getValue() != null && search.getValue().equals("email")) {
-				if(search.getSearch().trim().length() != 0) {
+
+			if (search.getValue() != null && search.getValue().equals("email")) {
+				if (search.getSearch().trim().length() != 0) {
 					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
@@ -232,72 +232,80 @@ public class UserDAO extends JdbcDaoSupport {
 			params = append(params, pageable.getPageSize());
 
 			List<UserModel> userInfo = null;
-			
+
 			userInfo = this.getJdbcTemplate().query(sql, params, mapper);
-			
+
 			return userInfo;
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
 	}
-	
+
 	public CountByDate countStudentByDate() {
 		CountByDate count = new CountByDate();
-		
-		String sqlDate = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
-		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		
-		String sqlMonth = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
-		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
-		
-		String sqlYear = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where year(create_date)=year(now());";
-		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
-		
-		count.setByDate(countDate);
-		count.setByMonth(countMonth);
-		count.setByYear(countYear);
-		
-		return count;
+		try {
+			String sqlDate = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
+			int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+
+			String sqlMonth = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
+			int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+
+			String sqlYear = "select count(*) from User INNER JOIN Student ON User.user_name = Student.user_name where year(create_date)=year(now());";
+			int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+
+			count.setByDate(countDate);
+			count.setByMonth(countMonth);
+			count.setByYear(countYear);
+
+			return count;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public CountByDate countTeacherByDate() {
 		CountByDate count = new CountByDate();
-		
-		String sqlDate = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
-		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		
-		String sqlMonth = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
-		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
-		
-		String sqlYear = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where year(create_date)=year(now());";
-		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
-		
-		count.setByDate(countDate);
-		count.setByMonth(countMonth);
-		count.setByYear(countYear);
-		
-		return count;
+		try {
+			String sqlDate = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
+			int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+
+			String sqlMonth = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
+			int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+
+			String sqlYear = "select count(*) from User INNER JOIN Teacher ON User.user_name = Teacher.user_name where year(create_date)=year(now());";
+			int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+
+			count.setByDate(countDate);
+			count.setByMonth(countMonth);
+			count.setByYear(countYear);
+
+			return count;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public CountByDate countStudyCentertByDate() {
 		CountByDate count = new CountByDate();
-		
-		String sqlDate = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
-		int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		
-		String sqlMonth = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
-		int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
-		
-		String sqlYear = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where year(create_date)=year(now());";
-		int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
-		
-		count.setByDate(countDate);
-		count.setByMonth(countMonth);
-		count.setByYear(countYear);
-		
-		return count;
+		try {
+			String sqlDate = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where date(create_date)=date(date_sub(now(),interval 1 day));";
+			int countDate = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+
+			String sqlMonth = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where month(create_date)=month(date_sub(now(),interval 1 day));";
+			int countMonth = this.getJdbcTemplate().queryForObject(sqlMonth, Integer.class);
+
+			String sqlYear = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name where year(create_date)=year(now());";
+			int countYear = this.getJdbcTemplate().queryForObject(sqlYear, Integer.class);
+
+			count.setByDate(countDate);
+			count.setByMonth(countMonth);
+			count.setByYear(countYear);
+
+			return count;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
 
 	public void addUser(UserModel user) {
 		String sql = "INSERT INTO User (user_name,role_id,full_name,email,password,create_date,phone,address,active) VALUES (?,?,?,?,?,?,?,?,?);";
@@ -315,18 +323,16 @@ public class UserDAO extends JdbcDaoSupport {
 		this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getPhone(), user.getAddress(),
 				user.getUserName());
 	}
-	
-	public void updateAvatar(String userName, String avatar) {
-			String sql = "UPDATE User SET avatar = ? WHERE user_name = ?;";
-			this.getJdbcTemplate().update(sql, avatar, userName);
-	}
 
+	public void updateAvatar(String userName, String avatar) {
+		String sql = "UPDATE User SET avatar = ? WHERE user_name = ?;";
+		this.getJdbcTemplate().update(sql, avatar, userName);
+	}
 
 	public void changePassword(String userName, String password) {
 		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, password, userName);
 	}
-
 
 	public void removeContact(String userName, boolean active) {
 		String sql = "UPDATE ContactUs SET isActive = ? WHERE id = ?;";

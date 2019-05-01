@@ -633,7 +633,7 @@
 														</div>
                                                         <div class="message">
                                                          
-                                                            <a class="message-author" href="#" th:text="${rating.userName}"></a>
+                                                            <a class="message-author" th:href="@{/profileDetail(userName=${rating.userName})}" th:text="${rating.userName}"></a>
                                                             <span class="message-date" th:text="${rating.createDate}"></span>
                                                             <span class="message-content" th:text="${rating.comment}"></span>
                                                             <div class="m-t-md mg-t-10" th:if="${rating.rate <= 1}">
@@ -697,7 +697,7 @@
 														<div class="text p-4" style="border: 1px solid #e0dfdf; border-radius: 11px; background-color: #f7f7f7;">
 															<p class="category" >
 																<span th:text="${course.courseName}"></span> 
-																<span class="price"><span class="price" th:text="${course.price}"></span>VND</span>
+																<span class="price"><span class="price" th:text="${#numbers.formatCurrency(course.price)}"></span></span>
 															</p>
 															<h3 class="mb-3">
 																<a href="#" th:text="${course.courseName}"></a>

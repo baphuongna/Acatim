@@ -22,7 +22,7 @@ import com.acatim.acatimver1.service.AmazonClient;
 import com.acatim.acatimver1.service.ImagesService;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
-import com.acatim.acatimver1.service.UserInfoService;
+//import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
 
@@ -30,8 +30,8 @@ import javassist.NotFoundException;
 @RequestMapping(value = { "" })
 public class ImagesController {
 
-	@Autowired
-	private UserInfoService userInfoService;
+//	@Autowired
+//	private UserInfoService userInfoService;
 
 	@Autowired
 	private ImagesService imagesService;

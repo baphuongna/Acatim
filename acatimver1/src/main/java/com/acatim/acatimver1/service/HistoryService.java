@@ -1,16 +1,16 @@
 package com.acatim.acatimver1.service;
 
 import java.util.List;
-
-import org.springframework.data.domain.Pageable;
-
 import com.acatim.acatimver1.entity.History;
+import com.acatim.acatimver1.entity.SearchValue;
 
 public interface HistoryService {
 	
 	List<History> getAllHistory();
 	
-	List<History> getAllHistoryPageble(Pageable pageable);
+	int countAllHistory(SearchValue search);
+	
+	List<History> getAllHistoryPageble(PageableService pageable, SearchValue search);
 	
 	void addHistory(History status);
 	

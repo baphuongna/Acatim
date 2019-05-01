@@ -78,8 +78,12 @@ public class PostsDAO extends JdbcDaoSupport {
 
 	public int countPosts() {
 		String sqlDate = "select count(*) from posts";
-		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
-		return count;
+		try {
+			int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+			return count;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public void addPost(Posts posts) {

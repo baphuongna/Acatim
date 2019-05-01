@@ -22,8 +22,12 @@ public class RateTeacherDAO extends JdbcDaoSupport {
 	public RateTeacher getRateTeacherByUserName(String rateId) {
 		String sql = "SELECT * FROM RateTeacher Where rate_id = ?";
 		Object[] params = new Object[] { rateId };
-		RateTeacher rating = this.getJdbcTemplate().queryForObject(sql, params, new RateTeacherMapper());
-		return rating;
+		try {
+			RateTeacher rating = this.getJdbcTemplate().queryForObject(sql, params, new RateTeacherMapper());
+			return rating;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public void addRateTeacher(RateTeacher rateTeacher) {

@@ -34,12 +34,16 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 
 	}
-	
+
 	public int countStudyCenter() {
 		String sqlDate = "select count(*) from User INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name;";
-		int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
+		try {
+			int count = this.getJdbcTemplate().queryForObject(sqlDate, Integer.class);
 
-		return count;
+			return count;
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public StudyCenterForm getUserStudyCenterByUserName(String userName) {

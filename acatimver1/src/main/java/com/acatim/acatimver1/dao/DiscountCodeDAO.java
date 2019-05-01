@@ -23,21 +23,25 @@ public class DiscountCodeDAO extends JdbcDaoSupport {
 
 	public List<DiscountCode> getAllDiscountCode() {
 		String sql = "SELECT * FROM DiscountCode";
-		List<DiscountCode> discountCode = this.getJdbcTemplate().query(sql, new DiscountCodeMapper());
-		return discountCode;
+		try {
+			List<DiscountCode> discountCode = this.getJdbcTemplate().query(sql, new DiscountCodeMapper());
+			return discountCode;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	public DiscountCode getDiscountCodeByUserName(String userName, String courseId) {
 		String sql = "SELECT * FROM DiscountCode Where user_name = ? and course_id = ?";
-		Object[] params = new Object[] {userName, courseId};
+		Object[] params = new Object[] { userName, courseId };
 		DiscountCode discountCode = null;
 		try {
 			discountCode = this.getJdbcTemplate().queryForObject(sql, params, new DiscountCodeMapper());
 			return discountCode;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
-		
+
 	}
 
 	public void addDiscountCode(DiscountCode discountCode) {
@@ -55,11 +59,11 @@ public class DiscountCodeDAO extends JdbcDaoSupport {
 	}
 
 	public void updateDiscountCode(DiscountCode discountCode) {
-		String sql = "UPDATE DiscountCode\r\n" + 
-				"SET user_name = ?, course_id = ?, create_date = ?, expire_date = ?, status = ?\r\n" + 
-				"WHERE code_id = ?;";
-		this.getJdbcTemplate().update(sql, discountCode.getUserName(),
-				discountCode.getCodeId(), discountCode.getCreateDate(), discountCode.getExpireDate(),
-				discountCode.getStatus(),  discountCode.getCodeId());
+		String sql = "UPDATE DiscountCode\r\n"
+				+ "SET user_name = ?, course_id = ?, create_date = ?, expire_date = ?, status = ?\r\n"
+				+ "WHERE code_id = ?;";
+		this.getJdbcTemplate().update(sql, discountCode.getUserName(), discountCode.getCodeId(),
+				discountCode.getCreateDate(), discountCode.getExpireDate(), discountCode.getStatus(),
+				discountCode.getCodeId());
 	}
 }

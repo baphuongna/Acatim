@@ -184,7 +184,12 @@ public class CourseController {
 
 		try {
 			Course course = courseService.getCourseById(courseId);
-
+			if(course == null) {
+				modelAndView.addObject("errortitle", "Không Tìm Thấy Khóa Học Nào Với Mã Khóa Học (" + courseId + ")");
+				modelAndView.addObject("messenger", "Không Tìm Thấy Khóa Học Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+				modelAndView.setViewName("notfound");
+				return modelAndView;
+			}
 			UserModel user = userInfoService.loadUserByUsername(course.getUserName());
 
 			modelAndView.addObject("course", course);

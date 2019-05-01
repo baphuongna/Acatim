@@ -75,13 +75,19 @@ public class ProfileController {
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public ModelAndView userInfo(Model model, Principal principal) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
-		String userName = principal.getName();
-
+		ModelAndView modelAndView = new ModelAndView();
+		String userName = null;
+		if (principal != null) {
+			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
-		ModelAndView modelAndView = new ModelAndView();
+		
 		if (useInfo == null) {
 			System.out.println("User not found! " + userName);
 			modelAndView.setViewName("index");
@@ -101,15 +107,20 @@ public class ProfileController {
 	@RequestMapping(value = "/profileDetail", method = RequestMethod.GET)
 	public ModelAndView profile(@RequestParam("userName") String name, Model model, Principal principal, RedirectAttributes redirectAttributes)
 			throws NotFoundException {
+		ModelAndView modelAndView = new ModelAndView();
 
 		String roleName = userInfoService.getRoleName(name);
 		UserModel useInfo = userInfoService.loadUserByUsername(name);
-		ModelAndView modelAndView = new ModelAndView();
-
+		
+		System.out.println(name);
 		if (useInfo == null) {
-			System.out.println("User not found! " + name);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + name + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + name + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
+//			System.out.println("User not found! " + name);
+//			modelAndView.setViewName("index");
+//			throw new NotFoundException("User " + name + " was not found in the database");
 		} else {
 			redirectAttributes.addAttribute("userName", name);
 			if (roleName.equals("Student")) {
@@ -126,19 +137,26 @@ public class ProfileController {
 	@RequestMapping(value = "/profile-student", method = RequestMethod.GET)
 	public ModelAndView profileStudent(Model model, Principal principal) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
+		ModelAndView modelAndView = new ModelAndView();
 		boolean checkDetail = false;
-		String userName = principal.getName();
-
+		String userName = null;
+		if (principal != null) {
+			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
-		ModelAndView modelAndView = new ModelAndView();
+		
 		String gender = null;
 		if (useInfo == null) {
-			System.out.println("User not found! " + userName);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + userName + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + userName + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 
 		} else {
 			model.addAttribute("useInfo", useInfo);
@@ -167,14 +185,20 @@ public class ProfileController {
 	public ModelAndView profileTeacher(Model model, Principal principal,
 			@RequestParam(required = false, name = "page") String page) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
+		ModelAndView modelAndView = new ModelAndView();
 		boolean checkDetail = false;
-		String userName = principal.getName();
-
+		String userName = null;
+		if (principal != null) {
+			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
 
-		ModelAndView modelAndView = new ModelAndView();
+		
 		
 		String gender = null;
 		float rateAverage = 0;
@@ -184,9 +208,10 @@ public class ProfileController {
 		}
 		
 		if (useInfo == null) {
-			System.out.println("User not found! " + userName);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + userName + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + userName + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 
 		} else {
 			int currentPage = Integer.parseInt(page);
@@ -242,14 +267,18 @@ public class ProfileController {
 	@RequestMapping(value = "/profile-study-center", method = RequestMethod.GET)
 	public ModelAndView profileStudyCenter(Model model, Principal principal, @RequestParam(required = false, name = "page") String page) throws NotFoundException {
 		// Sau khi user login thanh cong se co principal
+		ModelAndView modelAndView = new ModelAndView();
 		boolean checkDetail = false;
-		String userName = principal.getName();
-
+		String userName = null;
+		if (principal != null) {
+			userName = principal.getName();
+		}else {
+			modelAndView.setViewName("redirect:/index");
+			return modelAndView;
+		}
 		User loginedUser = (User) ((Authentication) principal).getPrincipal();
 		String roleName = WebUtils.toString(loginedUser);
 		UserModel useInfo = userInfoService.loadUserByUsername(userName);
-
-		ModelAndView modelAndView = new ModelAndView();
 
 		float rateAverage = 0;
 		
@@ -258,9 +287,10 @@ public class ProfileController {
 		}
 		
 		if (useInfo == null) {
-			System.out.println("User not found! " + userName);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + userName + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + userName + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 
 		} else {
 			
@@ -331,10 +361,10 @@ public class ProfileController {
 
 		String gender = null;
 		if (useInfo == null) {
-			System.out.println("User not found! " + name);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + name + " was not found in the database");
-
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + name + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 		} else {
 			model.addAttribute("useInfo", useInfo);
 			model.addAttribute("roleName", roleName);
@@ -404,9 +434,10 @@ public class ProfileController {
 		
 		String gender = null;
 		if (useInfo == null) {
-			System.out.println("User not found! " + name);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + name + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + name + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 
 		} else {
 			model.addAttribute("useInfo", useInfo);
@@ -505,9 +536,10 @@ public class ProfileController {
 		}
 		
 		if (useInfo == null) {
-			System.out.println("User not found! " + name);
-			modelAndView.setViewName("index");
-			throw new NotFoundException("User " + name + " was not found in the database");
+			modelAndView.addObject("errortitle", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Nào (" + name + ")");
+			modelAndView.addObject("messenger", "Không Tìm Thấy Giáo Viên Hoặc Trung Tâm Này. Bạn có thể quay lại trang chủ hoặc báo cáo cho chúng tôi lỗi này!");
+			modelAndView.setViewName("notfound");
+			return modelAndView;
 
 		} else {
 			model.addAttribute("useInfo", useInfo);
@@ -772,10 +804,8 @@ public class ProfileController {
 		}
 		try {
 			UserModel currentUser = userInfoService.loadUserByUsername(curentUserName);
-			System.out.println(currentUser);
 			modelAndView.addObject("user", currentUser);
-			System.out.println(currentUser.getAvatar());
-			
+
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}
@@ -797,7 +827,6 @@ public class ProfileController {
 		
 		String avatar = this.amazonClient.uploadFile(curentUserName+"/avatar" ,file);
 		try {
-			System.out.println(avatar);
 			userInfoService.updateAvatar(curentUserName, avatar);
 			redirectAttributes.addFlashAttribute("message",
 	                "Upload Successful file " + file.getOriginalFilename() + "!");
@@ -807,7 +836,7 @@ public class ProfileController {
 	                "Could not upload " + file.getOriginalFilename() + "!");
 		}
 		
-	    modelAndView.setViewName("redirect:/upload-avatar");
+	    modelAndView.setViewName("redirect:/profile");
 	    return modelAndView;
 	}
 }

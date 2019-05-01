@@ -65,13 +65,6 @@ public class AdminController {
 		modelAndView.setViewName("admin/index");
 		return modelAndView;
 	}
-
-	@RequestMapping(value = {"tinymc"}, method = RequestMethod.GET)
-	public ModelAndView textEditer() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/tinymc");
-		return modelAndView;
-	}
 	
 	@ResponseStatus(code = HttpStatus.NOT_FOUND, reason = "not found")
 	public ModelAndView notFoundException(){

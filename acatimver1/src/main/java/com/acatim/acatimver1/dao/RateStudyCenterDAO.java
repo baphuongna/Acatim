@@ -22,8 +22,12 @@ public class RateStudyCenterDAO extends JdbcDaoSupport {
 	public RateStudyCenter getRateStudyCenterByUserName(String rateId) {
 		String sql = "SELECT * FROM RateStudyCenter Where rate_id = ?";
 		Object[] params = new Object[] { rateId };
-		RateStudyCenter rating = this.getJdbcTemplate().queryForObject(sql, params, new RateStudyCenterMapper());
-		return rating;
+		try {
+			RateStudyCenter rating = this.getJdbcTemplate().queryForObject(sql, params, new RateStudyCenterMapper());
+			return rating;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public void addRateStudyCenter(RateStudyCenter rateStudyCenter) {
@@ -39,9 +43,9 @@ public class RateStudyCenterDAO extends JdbcDaoSupport {
 		String sql = "UPDATE RateStudyCenter\r\n"
 				+ "SET equipmentQuality = ?, staffAttitude = ?, reputation =?, happiness = ?, safety = ?, internet = ?, location = ?, teachingQuality = ?\r\n"
 				+ "WHERE rate_id = ?;";
-		this.getJdbcTemplate().update(sql, rateStudyCenter.getEquipmentQuality(),
-				rateStudyCenter.getStaffAttitude(), rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(),
-				rateStudyCenter.getSafety(), rateStudyCenter.getInternet(), rateStudyCenter.getLocation(),
-				rateStudyCenter.getTeachingQuality(), rateStudyCenter.getRateId());
+		this.getJdbcTemplate().update(sql, rateStudyCenter.getEquipmentQuality(), rateStudyCenter.getStaffAttitude(),
+				rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(), rateStudyCenter.getSafety(),
+				rateStudyCenter.getInternet(), rateStudyCenter.getLocation(), rateStudyCenter.getTeachingQuality(),
+				rateStudyCenter.getRateId());
 	}
 }

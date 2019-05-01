@@ -28,10 +28,13 @@ public class RoleDAO extends JdbcDaoSupport {
 				+ " where ur.role_id = r.role_id and ur.user_name = ? ";
 
 		Object[] params = new Object[] { id };
+		try {
+			List<String> roles = this.getJdbcTemplate().queryForList(sql, params, String.class);
 
-		List<String> roles = this.getJdbcTemplate().queryForList(sql, params, String.class);
-
-		return roles;
+			return roles;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public String getRoleNameByUserName(String userName) {
