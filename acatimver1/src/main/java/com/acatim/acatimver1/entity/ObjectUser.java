@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -26,6 +27,7 @@ import lombok.Setter;
 public class ObjectUser {
 	
 	@Id
+	@Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5 ký tự")
     @NotEmpty(message = "*Tên của bạn không được để trống")
     private String userName;
     
@@ -38,13 +40,14 @@ public class ObjectUser {
     @NotEmpty(message = "*Email không được để trống")
     private String email;
    
-    @Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5")
+    @Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5 ký tự")
     @NotEmpty(message = "*Mật khẩu không được để trống")
     private String password;
     
     private String createDate;
     
-    @Digits(fraction = 0, integer = 11, message ="Số điện thoại có độ dài tối đa là 11")
+//    @Digits(fraction = 0, integer = 11, message ="Số điện thoại có độ dài tối đa là 11")
+    @Pattern(regexp = "[0-9]{10,11}", message="*Số điện thoại có độ dài tối đa là 11")
     @NotEmpty(message = "*Số điện thoại không được bỏ trống")
     private String phone;
     

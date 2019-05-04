@@ -75,9 +75,9 @@ public class AmazonClient {
 				new PutObjectRequest(bucketName, fileName, file).withCannedAcl(CannedAccessControlList.PublicRead));
 	}
 
-	public String deleteFileFromS3Bucket(String fileUrl) {
+	public String deleteFileFromS3Bucket(String folderName, String fileUrl) {
 		String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-		s3client.deleteObject(new DeleteObjectRequest(bucketName, fileName));
+		s3client.deleteObject(new DeleteObjectRequest(bucketName + "/" + folderName, fileName));
 		return "Successfully deleted";
 	}
 	

@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acatim.acatimver1.entity.ConfirmEmail;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
@@ -332,6 +333,43 @@ public class UserDAO extends JdbcDaoSupport {
 	public void changePassword(String userName, String password) {
 		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
 		this.getJdbcTemplate().update(sql, password, userName);
+	}
+
+	public UserModel findAccConfirm(String userName, String email) {
+		String sql = "Select * From User "
+				+ " INNER JOIN confirmemail ON User.user_name = confirmemail.user_name where User.user_name = ? and User.email = ?;";
+
+		Object[] params = new Object[] { userName , email};
+		UserMapper mapper = new UserMapper();
+		try {
+			UserModel userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+
+	public boolean addConfirm(ConfirmEmail confirmEmail) {
+		try {
+			String sql = "INSERT INTO confirmemail (`user_name`, `key`, `status`) VALUES (?,?,?);";
+			this.getJdbcTemplate().update(sql, confirmEmail.getUserName(), confirmEmail.getKey(),
+					confirmEmail.isStatus());
+			return true;
+		} catch (Exception e) {
+			throw e;
+//			return false;
+		}
+
+	}
+
+	public boolean updateConfirm(String userName, boolean status) {
+		try {
+			String sql = "UPDATE confirmemail SET status = ? WHERE user_name = ?;;";
+			this.getJdbcTemplate().update(sql, status, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public void removeContact(String userName, boolean active) {

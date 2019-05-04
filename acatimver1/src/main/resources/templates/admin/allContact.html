@@ -171,7 +171,7 @@
 										<th>Tiêu đề</th>
 										<th>Nội dung tin nhắn</th>
 										<th>Ngày tạo</th>
-										<th>Trạng thái</th>
+
 									</tr>
 									<tr th:each="user : ${allContact}">
 										<td th:text="${user.id}"></td>
@@ -180,16 +180,7 @@
 										<td th:text="${user.title}"></td>
 										<td th:text="${user.message}"></td>
 										<td th:text="${user.createDate}"></td>
-										
-										
-										<!-- <td th:if="${user.isActive == true}" style="color: green;"><b>Active</b></td>
-										<td th:if="${user.isActive == false}" style="color: red;" ><b>Blocked</b></td>
-										<td>
-							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${user.active == true}"
-							 								th:attr="data-target='#'+${user.id}+'1'">Khóa</button>
-							 						<button type="button" class="btn btn-success" data-toggle="modal" th:if="${user.active == false}"
-							 								th:attr="data-target='#'+${user.id}+'2'">Mở Khóa</button>
-										</td> -->
+
 									</tr>
 								</table>
                             </div>

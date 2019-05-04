@@ -1,24 +1,27 @@
 package com.acatim.acatimver1.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.acatim.acatimver1.entity.ConfirmEmail;
 import com.acatim.acatimver1.entity.ObjectUser;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
 import com.acatim.acatimver1.entity.Teacher;
 import com.acatim.acatimver1.entity.UserModel;
+import com.acatim.acatimver1.format.DateFormat;
 import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
@@ -29,6 +32,11 @@ public class RegistrationController {
 
 	@Autowired
 	private UserInfoService userInfoService;
+	
+	@Autowired
+    public JavaMailSender emailSender;
+	
+	private DateFormat dateformat = new DateFormat();
 
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public ModelAndView registration() {
@@ -40,10 +48,10 @@ public class RegistrationController {
 	}
 
 	@RequestMapping(value = "/registration", method = RequestMethod.POST)
-	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult)
+	public ModelAndView createNewUser(@Valid @ModelAttribute("user") ObjectUser data, BindingResult bindingResult, RedirectAttributes redirectAttributes)
 			throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println("data   " + data);
+		SimpleMailMessage message = new SimpleMailMessage();
 		boolean userExists = userInfoService.checkUserExist(data.getUserName());
 		if (userExists == true) {
 			bindingResult.rejectValue("userName", "error.user",
@@ -61,14 +69,12 @@ public class RegistrationController {
 			modelAndView.setViewName("registration");
 		} else {
 			try {
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-				Date date = new Date();
-				String dateCurent = (String) dateFormat.format(date);
-				data.setCreateDate(dateCurent);
+				data.setCreateDate(dateformat.currentDate());
+				
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
-						true);
-				System.out.println("hhhhhieu  " + user);
+						false);
+				
 				if (data.getRole_id() == 1) {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
 					System.out.println("student" + newStudent);
@@ -89,16 +95,67 @@ public class RegistrationController {
 					userInfoService.addStudyCenterInfo(newStudyCenter);
 					System.out.println("trung tam thanh cong");
 				}
+				
+				String key = dateformat.RandomKeyConfirm();
+				
+				if(userInfoService.addConfirm(new ConfirmEmail(data.getUserName(), key, false))) {
+					
+					message.setTo(user.getEmail());
+				    message.setSubject("Xác Nhận Đăng Ký Tài Khoản Acatim");
+				    message.setText("Xin Chào, \r\n \r\n"
+				     		+ "Chúng tôi cần xác minh Email đúng hay không. Vui lòng bạn xác nhận Email và bắt đầu sử dụng tài khoản Website chúng tôi.\r\n"
+				     		+ "Click vào địa Chỉ sau : http://acatim.online/confirm-account?userName="+ data.getUserName()+"&email="+ user.getEmail() +"&key=" + key + "\r\n \r\n"
+				     		+ "ACATIM.");
+				     // Send Message!
+				     this.emailSender.send(message);
+				     redirectAttributes.addAttribute("message", "Chúc mừng bạn đã đăng kí thành công tài khoản. Để Hoàn tất phần đăng ký bạn vào Email "+ data.getUserName() +" để xác minh.");
+				}else {
+					redirectAttributes.addAttribute("message", "Gửi mã xác nhận không thành công, vui lòng kiểm tra lại hoặc liên hệ với chúng tôi!");
+				}
+				
 			} catch (NotFoundException e) {
 				e.printStackTrace();
 				modelAndView.addObject("erorrMessage", "đăng kí thất bại, vui lòng kiểm tra lại!");
 				modelAndView.setViewName("registration");
 				return modelAndView;
 			}
-			modelAndView.addObject("successMessage", "Chúc mừng bạn đã đăng kí thành công tài khoản");
-			modelAndView.setViewName("registration");
+			
+			modelAndView.setViewName("redirect:/active-acc");
 
 		}
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/active-acc", method = RequestMethod.GET)
+	public ModelAndView sendVerification(@RequestParam("message") String message) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("message", message);
+		modelAndView.setViewName("active-acc");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView verification(@RequestParam("userName") String userName, @RequestParam("email") String email, @RequestParam("key") String key, RedirectAttributes redirectAttributes) throws Exception {
+		ModelAndView modelAndView = new ModelAndView();
+		
+		UserModel user = userInfoService.findAccConfirm(userName, email);
+
+		if(user != null) {
+			if(user.getConfirmEmail() != null && key.equals(user.getConfirmEmail().getKey())) {
+				if(user.getConfirmEmail().isStatus() == false) {
+					userInfoService.unlockUser(userName);
+					userInfoService.updateConfirm(userName, true);
+					redirectAttributes.addAttribute("message", "Chúc mừng bạn đã xác minh Email thành công tài khoản. Hiện tại bạn có thể đăng nhập vào website Acatim.");
+				}else {
+					redirectAttributes.addAttribute("message", "Bạn đã xác minh Email tài khoản. Bạn có thể đăng nhập vào website Acatim.");
+				}
+			}else {
+				redirectAttributes.addAttribute("message", "mã xác nhận không Chính xác, vui lòng kiểm tra lại hoặc liên hệ với chúng tôi!");
+			}
+		}else {
+			redirectAttributes.addAttribute("message", "xác nhận không thành công, vui lòng kiểm tra lại hoặc liên hệ với chúng tôi!");
+		}
+		modelAndView.setViewName("redirect:/active-acc");
 		return modelAndView;
 	}
 

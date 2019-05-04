@@ -144,7 +144,6 @@ public class CourseController {
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
 			
 			modelAndView.addObject("allCourses", Courses);
-			modelAndView.addObject("checknullcourse", Courses.size());
 			
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

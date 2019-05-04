@@ -152,4 +152,55 @@ public class ImagesController {
 		modelAndView.setViewName("redirect:/add-image");
 		return modelAndView;
 	}
+	
+	@RequestMapping(value = { "blockimage" }, method = RequestMethod.GET)
+	public ModelAndView blockImage(@RequestParam("id") String id, Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			
+			imagesService.activeImages(id, false);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.setViewName("redirect:/manager-images");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "unlockimage" }, method = RequestMethod.GET)
+	public ModelAndView unlockImage(@RequestParam("id") String id, Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			imagesService.activeImages(id, true);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.setViewName("redirect:/manager-images");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = { "deleteimage" }, method = RequestMethod.GET)
+	public ModelAndView deleteImage(@RequestParam("id") String id, Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		try {
+			
+			String curentUserName = null;
+			if (principal != null) {
+				curentUserName = principal.getName();
+			}
+			
+			Images image = imagesService.getImagesById(id);
+			if(image != null) {
+				String imageUrl = image.getLinkimage();
+				imagesService.deleteImages(id);
+				this.amazonClient.deleteFileFromS3Bucket(curentUserName+"/images", imageUrl);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		modelAndView.setViewName("redirect:/manager-images");
+		return modelAndView;
+	}
+
 }

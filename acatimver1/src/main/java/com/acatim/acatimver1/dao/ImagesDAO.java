@@ -106,7 +106,7 @@ public class ImagesDAO extends JdbcDaoSupport {
 	}
 
 	public void activeImages(String id, boolean active) {
-		String sql = "UPDATE images SET isActive = ? WHERE id = ?;";
+		String sql = "UPDATE images SET active = ? WHERE id = ?;";
 		this.getJdbcTemplate().update(sql, active, id);
 	}
 

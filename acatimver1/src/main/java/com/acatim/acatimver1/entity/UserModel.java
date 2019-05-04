@@ -63,6 +63,10 @@ public class UserModel {
     @OneToOne
     @JoinColumn
     private Role role;
+    
+    @OneToOne
+    @JoinColumn
+    private ConfirmEmail confirmEmail;
 
 	public UserModel(@NotEmpty(message = "*Please provide your user name") String userName, int role_id,
 			@NotEmpty(message = "*Please provide your full name") String fullName,

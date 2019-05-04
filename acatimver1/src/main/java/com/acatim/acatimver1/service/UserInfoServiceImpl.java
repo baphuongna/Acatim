@@ -10,6 +10,7 @@ import com.acatim.acatimver1.dao.StudentDAO;
 import com.acatim.acatimver1.dao.StudyCenterDAO;
 import com.acatim.acatimver1.dao.TeacherDAO;
 import com.acatim.acatimver1.dao.UserDAO;
+import com.acatim.acatimver1.entity.ConfirmEmail;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
@@ -241,6 +242,21 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public void updateAvatar(String userName, String avatar) {
 		this.UserDAO.updateAvatar(userName, avatar);
+	}
+
+	@Override
+	public UserModel findAccConfirm(String userName, String email) {
+		return this.UserDAO.findAccConfirm(userName, email);
+	}
+
+	@Override
+	public boolean addConfirm(ConfirmEmail confirmEmail) {
+		return this.UserDAO.addConfirm(confirmEmail);
+	}
+
+	@Override
+	public boolean updateConfirm(String userName, boolean status) {
+		return this.UserDAO.updateConfirm(userName, status);
 	}
 
 }

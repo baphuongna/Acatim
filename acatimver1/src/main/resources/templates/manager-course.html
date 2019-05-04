@@ -141,6 +141,9 @@
 										</div>
 									</div>
 								</div>
+								<div class="add-product">
+                                	<a class="btn btn-circle btn-primary" th:href="@{/profile}">Quay Lại Trang Cá Nhân</a>
+                            	</div>
 							</div>
 						</div>
 					</div>
@@ -155,7 +158,7 @@
                             <div class="asset-inner">
                                 <table>
 									<tr>
-										<th>ID Khóa Học</th>
+										<th>#</th>
 										<th>Tên Khóa Học</th>
 										<th>Thông Tin Khóa Học</th>
 										<th>Giờ Bắt Đầu</th>
@@ -167,16 +170,16 @@
 										<th>Trạng Thái</th>
 										<th></th>
 									</tr>
-									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}">
+									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}, times = ${new java.text.SimpleDateFormat('HH:mm')}">
 										<td th:text="${course.courseId}"></td>
 										<td th:text="${course.courseName}"></td>
-										<td th:text="${course.courseDescription}"></td>
-										<td th:text="${course.startTime}"></td>
-										<td th:text="${course.endTime}"></td>
-										<td th:text="${course.startDate}"></td>
-										<td th:text="${course.endDate}"></td>
-										<td th:text="${course.price}"></td>
-										<td th:text="${course.createDate}"></td>
+										<td th:text="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
+										<td th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></td>
+										<td th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></td>
+										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></td>
+										<td th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></td>
+										<td th:text="${#numbers.formatCurrency(course.price)}" ></td>
+										<td th:text="${#dates.format(sdf.parse(course.createDate), 'dd-MMMMM-yyyy')}"></td>
 										
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>

@@ -2,6 +2,7 @@ package com.acatim.acatimver1.service;
 
 import java.util.List;
 
+import com.acatim.acatimver1.entity.ConfirmEmail;
 import com.acatim.acatimver1.entity.CountByDate;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.Student;
@@ -59,4 +60,9 @@ public interface UserInfoService {
 	int countStudyCenter();
 	
 	void updateAvatar(String userName, String avatar);
+	
+	UserModel findAccConfirm(String userName, String email);
+	boolean addConfirm(ConfirmEmail confirmEmail);
+	boolean updateConfirm(String userName,  boolean status);
+	
 }

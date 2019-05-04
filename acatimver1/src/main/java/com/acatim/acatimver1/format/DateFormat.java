@@ -71,6 +71,18 @@ public class DateFormat {
 		return code;
 	}
 	
+	public String RandomKeyConfirm() {
+		Random r = new Random();
+
+	    String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	    String code = "";
+	    for (int i = 0; i < 40; i++) {
+	    	code += alphabet.charAt(r.nextInt(alphabet.length()));
+	    }
+	    
+		return code;
+	}
+	
 	public boolean isNumeric(String str) { 
 		  try {  
 		    Integer.parseInt(str);  

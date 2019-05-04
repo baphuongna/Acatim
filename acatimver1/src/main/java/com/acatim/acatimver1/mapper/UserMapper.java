@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import com.acatim.acatimver1.entity.ConfirmEmail;
 import com.acatim.acatimver1.entity.Role;
 import com.acatim.acatimver1.entity.Student;
 import com.acatim.acatimver1.entity.StudyCenter;
@@ -67,6 +68,15 @@ public class UserMapper implements RowMapper<UserModel> {
 			float rate = rs.getFloat("StudyCenter.rate");
 			studyCenter = new StudyCenter(userName, description, rate);
 			user.setStudyCenter(studyCenter);
+		}catch (Exception e) {
+		}
+		
+		try {
+			ConfirmEmail confirmEmail = new ConfirmEmail();
+			String key = rs.getString("key");
+			boolean status = rs.getBoolean("status");
+			confirmEmail = new ConfirmEmail(userName, key, status);
+			user.setConfirmEmail(confirmEmail);
 		}catch (Exception e) {
 		}
 		
