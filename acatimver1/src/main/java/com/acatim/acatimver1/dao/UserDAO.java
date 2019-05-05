@@ -356,8 +356,7 @@ public class UserDAO extends JdbcDaoSupport {
 					confirmEmail.isStatus());
 			return true;
 		} catch (Exception e) {
-			throw e;
-//			return false;
+			return false;
 		}
 
 	}

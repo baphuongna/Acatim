@@ -51,7 +51,7 @@ public class ManagerUserController {
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
-			@RequestParam(required = false, name = "roleId") String roleId) {
+			@RequestParam(required = false, name = "roleId") String roleId, @ModelAttribute("searchValue") SearchValue search) {
 		ModelAndView modelAndView = new ModelAndView();
 		if (page == null) {
 			page = 1 + "";
@@ -63,11 +63,19 @@ public class ManagerUserController {
 			if (currentPage < 1) {
 				currentPage = 1;
 			}
-			SearchValue searchValue = new SearchValue();
-			searchValue.setRoleId(roleId);
 			
-			int total = userInfoService.getAllUsers(searchValue).size();
+			if (search.getRoleId() != null && search.getRoleId().equals("0") || search.getRoleId() != null && search.getRoleId().trim().length() == 0) {
+				search.setRoleId(null);
+			}else if (search.getRoleId() == null){
+				if (roleId != null && roleId.equals("0") || roleId != null && roleId.trim().length() == 0 ) {
+					search.setRoleId(null);
+				}else {
+					search.setRoleId(roleId);
+				}
+			}
 
+			int total = userInfoService.getAllUsers(search).size();
+			
 			pageableService = new PageableServiceImpl(8, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
@@ -79,10 +87,10 @@ public class ManagerUserController {
 			modelAndView.addObject("last", pageableService.last());
 			modelAndView.addObject("first", pageableService.first());
 
-			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, searchValue));
+			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search));
 			
-			modelAndView.addObject("searchValue", searchValue);
-		} catch (NotFoundException e) {
+			modelAndView.addObject("searchValue", search);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("admin/allUser");
@@ -90,47 +98,10 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.POST)
-	public ModelAndView searchUsers(@RequestParam(required = false, name = "page") String page,
-			@ModelAttribute("searchValue") SearchValue search) {
+	public ModelAndView searchUsers(@ModelAttribute("searchValue") SearchValue search, RedirectAttributes redirectAttributes) {
 		ModelAndView modelAndView = new ModelAndView();
-		if (page == null) {
-			page = 1 + "";
-		}
-		System.out.println(search);
-		try {
-			
-			if (search.getRoleId() != null && search.getRoleId().equals("0")) {
-				search.setRoleId(null);
-			}
-			
-			int currentPage = Integer.parseInt(page);
-
-			if (currentPage < 1) {
-				currentPage = 1;
-			}
-
-			int total = 0;
-
-			total = userInfoService.getAllUsers(search).size();
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
-
-			modelAndView.addObject("allUser", userInfoService.getAllUsersPageable(pageableService, search));
-
-			modelAndView.addObject("totalPages", pageableService.listPage());
-			modelAndView.addObject("currentPage", currentPage);
-			modelAndView.addObject("hasPrevious", pageableService.hasPrevious());
-			modelAndView.addObject("hasNext", pageableService.hasNext());
-			modelAndView.addObject("previous", pageableService.previous());
-			modelAndView.addObject("next", pageableService.next());
-			modelAndView.addObject("last", pageableService.last());
-			modelAndView.addObject("first", pageableService.first());
-
-			modelAndView.addObject("searchValue", search);
-
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		modelAndView.setViewName("admin/allUser");
+		redirectAttributes.addFlashAttribute("searchValue", search);
+		modelAndView.setViewName("redirect:/admin/allUser");
 		return modelAndView;
 	}
 
@@ -376,11 +347,24 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "userStudent" }, method = RequestMethod.POST)
-	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm, Principal principal) {
+	public ModelAndView updateStudent(@ModelAttribute("studentForm") @Validated StudentForm studentForm, Principal principal, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studentForm);
 
 		try {
+			
+			
+			UserModel checkEmail = userInfoService.loadUserbyEmail(studentForm.getEmail());
+
+			if (checkEmail != null) {
+				result.rejectValue("email", "error.email", "Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+			}
+
+			if (result.hasErrors()) {
+				modelAndView.setViewName("admin/edit-student");
+				return modelAndView;
+			}
+			
 
 			StudentForm currentStudent = userInfoService.getUserStudentByUserName(studentForm.getUserName());
 
@@ -418,12 +402,24 @@ public class ManagerUserController {
 	}
 
 	@RequestMapping(value = { "userTeacher" }, method = RequestMethod.POST)
-	public ModelAndView updateTeacher(@ModelAttribute("teacherForm") @Validated TeacherForm teacherForm, Principal principal) {
+	public ModelAndView updateTeacher(@ModelAttribute("teacherForm") @Validated TeacherForm teacherForm, Principal principal, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(teacherForm);
 
 		try {
 
+			UserModel checkEmail = userInfoService.loadUserbyEmail(teacherForm.getEmail());
+
+			if (checkEmail != null) {
+				result.rejectValue("email", "error.email", "Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+			}
+
+			if (result.hasErrors()) {
+				modelAndView.setViewName("admin/editTeacher");
+				return modelAndView;
+			}
+			
+			
 			TeacherForm currentTeacher = userInfoService.getUserTeacherByUserName(teacherForm.getUserName());
 
 			UserModel user = new UserModel(teacherForm.getUserName(), teacherForm.getRole_id(),
@@ -460,11 +456,23 @@ public class ManagerUserController {
 
 	@RequestMapping(value = { "userStudyCenter" }, method = RequestMethod.POST)
 	public ModelAndView updateStudyCenter(
-			@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm, Principal principal) {
+			@ModelAttribute("studyCenterForm") @Validated StudyCenterForm studyCenterForm, Principal principal, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView();
 		System.out.println(studyCenterForm);
 
 		try {
+			
+			
+			UserModel checkEmail = userInfoService.loadUserbyEmail(studyCenterForm.getEmail());
+
+			if (checkEmail != null) {
+				result.rejectValue("email", "error.email", "Eamil này đã tồn tại, vui lòng nhập một địa chỉ Eamil khác !");
+			}
+
+			if (result.hasErrors()) {
+				modelAndView.setViewName("admin/editStudyCenter");
+				return modelAndView;
+			}
 
 			StudyCenterForm currentSt = userInfoService.getUserStudyCenterByUserName(studyCenterForm.getUserName());
 
@@ -498,12 +506,4 @@ public class ManagerUserController {
 		modelAndView.setViewName("redirect:/admin/allUser");
 		return modelAndView;
 	}
-
-	@RequestMapping(value = { "student-profile" }, method = RequestMethod.GET)
-	public ModelAndView studentProfile() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/student-profile");
-		return modelAndView;
-	}
-
 }

@@ -103,13 +103,12 @@
 			<div class="resume">
 				<div class="container">
 
-					<div class="single-pro-review-area mt-t-30 mg-b-15">
+					
             <div class="container-fluid">
-                <div class="container-fluid">
 				<form th:action="@{manager-course}" th:object="${searchValue}" method="POST">
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div >
+							<div class="product-status-wrap drp-lst">
 								<div class="row">
 									<!-- <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 										<div class="chosen-select-single mg-b-20">
@@ -120,11 +119,11 @@
 											</select>
 										</div>
 									</div> -->
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" th:if="${allSubjects != null}">
-										<div class="chosen-select-single">
+									<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12" th:if="${allSubjects != null}">
+										<div class="breadcome-heading">
 											<select style="border: 1px solid #d2d2d2; border-radius: 13px; height: 30px; width: 120px;" class="chosen-select" th:field="*{subjectId}">
 												<option value="0">--Tât Cả--</option>
-												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
+												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
 											</select>
 										</div>
 									</div>
@@ -147,15 +146,20 @@
 							</div>
 						</div>
 					</div>
+					
 				</form>
+				
 				<div class="row">
-                    <div style="margin-top: 20px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div style="margin-top: 20px; min-height: 500px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
                             <h4>Danh Sách Khóa Học</h4>
                             <div class="add-product">
                                 <a class="btn btn-circle btn-primary" th:href="@{/add-course}">Thêm Khóa Học</a>
                             </div>
-                            <div class="asset-inner">
+                             <div class="asset-inner" th:if="${#lists.isEmpty(allCourses) == true}">
+                             	<h2 th:text="'Không Tìm Thấy Khóa Học nào'"></h2>
+                             </div>
+                            <div class="asset-inner" th:if="${#lists.isEmpty(allCourses) == false}">
                                 <table>
 									<tr>
 										<th>#</th>
@@ -170,10 +174,10 @@
 										<th>Trạng Thái</th>
 										<th></th>
 									</tr>
-									<tr th:if="${allCourses != null}" th:each="course : ${allCourses}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}, times = ${new java.text.SimpleDateFormat('HH:mm')}">
+									<tr th:each="course : ${allCourses}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}, times = ${new java.text.SimpleDateFormat('HH:mm')}">
 										<td th:text="${course.courseId}"></td>
 										<td th:text="${course.courseName}"></td>
-										<td th:text="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
+										<td th:utext="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
 										<td th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></td>
@@ -192,30 +196,25 @@
 							 								th:attr="data-target='#'+${course.courseId}+'2'">Mở Khóa</button>
 										</td>
 									</tr>
-									<tr th:if="${allCourses == null}">
-										<td>Không Tìm Thấy Khóa Học nào</td>
-									</tr>
 									
 								</table>
                             </div>
-                            
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
+			            </div>
+			            <div th:if="${#lists.isEmpty(allCourses) == false}" class="search-form" style="visibility: visible; display: flex; justify-content: center; margin-top: 20px; text-align: center;">
                                   <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
                                   <a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
-                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" >Trang trước</a>
+                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" th:text="'<'" ></a>
                                   <div th:each="totalPage : ${totalPages}">
                                        <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${totalPage}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
                                        <a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
                                    </div>
-                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}">Trang Sau</a>
+                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}" th:text="'>'" >Trang Sau</a>
                                    <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
                                    <a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
                             </div>
-            </div>
-			            </div>
 			        </div>
 				</div>
 			</div>

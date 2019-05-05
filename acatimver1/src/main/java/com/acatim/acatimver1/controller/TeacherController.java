@@ -134,7 +134,6 @@ public class TeacherController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		redirectAttributes.addFlashAttribute("searchValue", search);
-		System.out.println(search);
 		modelAndView.setViewName("redirect:/teacher");
 		return modelAndView;
 	}

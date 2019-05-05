@@ -161,13 +161,13 @@
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
                                         	<b>Tên</b>
-                                            <p>Acatim</p>
+                                            <p th:text="${useInfo.fullName}">Acatim</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        	<b>Website</b>
-                                            <p>http://acatim.online</p>
+                                        	<b>Chức vụ</b>
+				                            <p>Giáo viên</p>
                                         </div>
                                     </div>
                                 </div>
@@ -175,13 +175,13 @@
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
                                         	<b>Địa chỉ Email</b>
-                                            <p>acatim@gmail.com</p>
+                                            <p th:text="${useInfo.email}" style="word-wrap: break-word;"></p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
 	                                        <b>Điện thoại</b>
-	                                        <p>1900-666-888</p>
+	                                        <p th:text="${useInfo.phone}">1900-666-888</p>
                                         </div>
                                     </div>
                                 </div>
@@ -189,30 +189,11 @@
                                     <div class="col-lg-12">
                                         <div class="address-hr">
                                         	<b>Địa chỉ</b>
-                                            <p>Đại học FPT - Khu công nghệ cao Hòa Lạc</p>
+                                            <p th:text="${useInfo.address}"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <h3>500</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <h3>900</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <h3>600</h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -251,9 +232,7 @@
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                                         <div class="address-hr biography">
                                                             <b>Chức vụ</b>
-				                                            <p th:if="${roleName == 'Study Center'}">Trung tâm</p>
-				                                            <p th:if="${roleName == 'Teacher'}">Giáo viên</p>
-				                                            <p th:if="${roleName == 'Student'}">Học viên</p>
+				                                            <p>Giáo viên</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -291,7 +270,7 @@
                                                         <div class="row">
 		                                                    <div class="col-lg-12">
 		                                                        <div class="content-profile">
-		                                                        	<p th:text="${teacherInfo.description}"></p>
+		                                                        	<p th:utext="${teacherInfo.description}"></p>
 		                                                        </div>
 		                                                    </div>
 		                                                </div>
@@ -701,9 +680,9 @@
 																<span class="price"><span class="price" th:text="${#numbers.formatCurrency(course.price)}"></span></span>
 															</p>
 															<h3 class="mb-3">
-																<a href="#" th:text="${course.courseName}"></a>
+																<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 															</h3>
-															<p th:text="${course.courseDescription}"></p>
+															<p th:utext="${course.courseDescription}"></p>
 															<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" th:text="'Chi Tiết'"></button></a>
 														</div>
 													</div>

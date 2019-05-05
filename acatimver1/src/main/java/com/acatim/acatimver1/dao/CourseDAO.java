@@ -195,7 +195,6 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " where Course.active = 1 ";
 		}
 		
-		
 		if(search.getSubjectId() != null) {
 			sql += " and Course.subject_id = ? ";
 			params = append(params, search.getSubjectId());
@@ -205,7 +204,6 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " and Subject.category_id = ? ";
 			params = append(params, search.getCategoryId());
 		}
-		
 		
 		
 		if(search.getSearch() != null) {

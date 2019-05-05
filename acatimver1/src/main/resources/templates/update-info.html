@@ -120,6 +120,9 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/admin/css/responsive.css">
+     <!-- summernote CSS -->
+    <link rel="stylesheet" href="admin/admin/css/summernote/summernote.css">
+    
     <!-- modernizr JS
 		============================================ -->
     <script src="admin/admin/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -144,78 +147,19 @@
 
 					<div class="single-pro-review-area mt-t-30 mg-b-15">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                        <div class="profile-info-inner">
-                        	<div class="row">
-		                    	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; margin-bottom: 18px;">
-		                        	<b>Liên hệ với chúng tôi</b>
-		                        </div>
-	                        </div>
-                            <div class="profile-img">
-                                <img src="admin/admin/img/profile/1.jpg" alt="" />
-                            </div>
-                            <div class="profile-details-hr">
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                        	<b>Tên</b>
-                                            <p>Acatim</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-                                        	<b>Website</b>
-                                            <p>http://acatim.edu.vn</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr">
-                                        	<b>Địa chỉ Email</b>
-                                            <p>acatim@gmail.com</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                                        <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
-	                                        <b>Điện thoại</b>
-	                                        <p>1900-666-888</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="address-hr">
-                                        	<b>Địa chỉ</b>
-                                            <p>Đại học FPT - Khu công nghệ cao Hòa Lạc</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <h3>500</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <h3>900</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <h3>600</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            
+            
+            	<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<div class="product-status-wrap drp-lst">
+                            <a class="btn btn-circle btn-primary" th:href="@{/profile}" >Quay Lại Trang Cá Nhân</a>
+						</div>
+					</div>
+				</div>
+            	
+                <div class="row" style="margin-top: 10px;">
+                    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
                                 <li class="active"><a href="#INFORMATION">Cập nhật thông tin</a></li>
@@ -234,7 +178,7 @@
 																		<div class="form-group-inner">
 																			<div class="row">
 																				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-																					<b><span>Tên Tài Khoản :</span></b>
+																					<b><span>Tên Đăng Nhập :</span></b>
 																				</div>
 																				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 																					<b><span th:field="*{userName}"
@@ -344,7 +288,7 @@
 																					<label class="login2">Mô Tả Thêm</label>
 																				</div>
 																				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-																					<textarea th:if="${user.role_id == 2}" name="description"
+																	<!-- 				<textarea th:if="${user.role_id == 2}" name="description"
 																						th:field="*{teacher.description}"
 																						placeholder="Description"
 																						style="width: 100%; height: 100px; padding: 15px;"></textarea>
@@ -352,7 +296,21 @@
 																					<textarea th:if="${user.role_id == 3}" name="description"
 																						th:field="*{studyCenter.description}"
 																						placeholder="Description"
-																						style="width: 100%; height: 100px; padding: 15px;"></textarea>
+																						style="width: 100%; height: 100px; padding: 15px;"></textarea> -->
+
+																					<div th:if="${user.role_id == 2}" class="tinymce-single responsive-mg-b-30">
+																						<textarea id="summernote1"
+																							th:field="*{teacher.description}"></textarea>
+																						<span th:if="${#fields.hasErrors('teacher.description')}"
+																							th:errors="*{teacher.description}">..</span>
+																					</div>
+																					
+																					<div th:if="${user.role_id == 3}" class="tinymce-single responsive-mg-b-30">
+																						<textarea id="summernote1"
+																							th:field="*{studyCenter.description}"></textarea>
+																						<span th:if="${#fields.hasErrors('studyCenter.description')}"
+																							th:errors="*{studyCenter.description}">..</span>
+																					</div>
 																				</div>
 																			</div>
 																		</div>
@@ -448,6 +406,10 @@
 		============================================ -->
     <script src="admin/admin/js/sparkline/jquery.sparkline.min.js"></script>
     <script src="admin/admin/js/sparkline/jquery.charts-sparkline.js"></script>
+    <!-- summernote JS -->
+    <script src="admin/admin/js/summernote/summernote.min.js"></script>
+    <script src="admin/admin/js/summernote/summernote-active.js"></script>
+    
     <!-- calendar JS
 		============================================ -->
     <script src="admin/admin/js/calendar/moment.min.js"></script>

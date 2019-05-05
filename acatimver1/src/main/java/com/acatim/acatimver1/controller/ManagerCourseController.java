@@ -22,7 +22,7 @@ import com.acatim.acatimver1.entity.Course;
 import com.acatim.acatimver1.entity.History;
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.format.DateFormat;
-import com.acatim.acatimver1.service.CategoriesService;
+//import com.acatim.acatimver1.service.CategoriesService;
 import com.acatim.acatimver1.service.CourseService;
 import com.acatim.acatimver1.service.HistoryService;
 import com.acatim.acatimver1.service.PageableService;
@@ -40,8 +40,8 @@ public class ManagerCourseController {
 	@Autowired
 	private SubjectService subjectService;
 
-	@Autowired
-	private CategoriesService categoriesService;
+//	@Autowired
+//	private CategoriesService categoriesService;
 
 	@Autowired
 	private UserInfoService userInfoService;
@@ -55,7 +55,8 @@ public class ManagerCourseController {
 
 	@RequestMapping(value = { "all-courses" }, method = RequestMethod.GET)
 	public ModelAndView allCourses(@RequestParam(required = false, name = "page") String page,
-			@RequestParam(required = false, name = "sortValue") String sortValue,
+			@RequestParam(required = false, name = "subjectId") String subjectId,
+			@RequestParam(required = false, name = "search") String find,
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		ModelAndView modelAndView = new ModelAndView();
@@ -63,13 +64,25 @@ public class ManagerCourseController {
 		if (page == null) {
 			page = 1 + "";
 		}
-
-		if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
-			search.setSubjectId(null);
+		
+		if (search.getSearch() != null && search.getSearch().trim().length() == 0) {
+			search.setSearch(null);
+		}else if (search.getSearch() == null){
+			if (find != null && find.trim().length() == 0 ) {
+				search.setSearch(null);
+			}else if (find != null) {
+				search.setSearch(find);
+			}
 		}
-
-		if (search.getCategoryId() != null && search.getCategoryId().equals("0")) {
-			search.setCategoryId(null);
+		
+		if (search.getSubjectId() != null && search.getSubjectId().equals("0") || search.getSubjectId() != null && search.getSubjectId().trim().length() == 0) {
+			search.setSubjectId(null);
+		}else if (search.getSubjectId() == null){
+			if (subjectId != null && subjectId.equals("0") || subjectId != null && subjectId.trim().length() == 0 ) {
+				search.setSubjectId(null);
+			}else {
+				search.setSubjectId(subjectId);
+			}
 		}
 
 		try {
@@ -81,32 +94,15 @@ public class ManagerCourseController {
 
 			int total = courseService.getAllCourse().size();
 
-			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
 			modelAndView.addObject("allSubjects", subjectService.getListSubject());
 			
-			Sort sort = null;
-
-			if (sortValue != null) {
-				search.setSortValue(sortValue);
-			}
-
-			if (search.getSortValue() != null) {
-				if (!search.getSortValue().equals("0")) {
-					if (search.getSortValue().equals("1")) {
-						sort = Sort.by("courseName").ascending();
-					} else if (search.getSortValue().equals("2")) {
-						sort = Sort.by("create_date").ascending();
-					} else if (search.getSortValue().equals("3")) {
-						sort = Sort.by("price").ascending();
-					} else if (search.getSortValue().equals("4")) {
-						sort = Sort.by("price").descending();
-					}
-				}
-			}
+			Sort sort = Sort.by("Course.create_date").descending();
+			
+//			sort = Sort.by("create_date").ascending();
 
 			total = courseService.getAllCourse(search).size();
 
-			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
+			pageableService = new PageableServiceImpl(4, total, currentPage, sort);
 
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
 			
@@ -132,9 +128,7 @@ public class ManagerCourseController {
 	@RequestMapping(value = { "all-courses" }, method = RequestMethod.POST)
 	public ModelAndView searchCourses(@ModelAttribute("searchValue") SearchValue search,
 			RedirectAttributes redirectAttributes) {
-
 		ModelAndView modelAndView = new ModelAndView();
-
 		redirectAttributes.addFlashAttribute("searchValue", search);
 		modelAndView.setViewName("redirect:/admin/all-courses");
 		return modelAndView;
@@ -261,9 +255,14 @@ public class ManagerCourseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		modelAndView.addObject("course", courseService.getCourseById(courseId));
+		Course course = courseService.getCourseById(courseId);
+		
+		course.setStartDate(dateformat.dateToString(course.getStartDate()));
+		course.setEndDate(dateformat.dateToString(course.getEndDate()));
+		
+		modelAndView.addObject("course", course);
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
-
+		
 		modelAndView.setViewName("admin/edit-course");
 		return modelAndView;
 	}
@@ -272,9 +271,6 @@ public class ManagerCourseController {
 	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course, BindingResult result,
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
-
-		System.out.println(course);
-
 		try {
 			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
 		} catch (Exception e) {
@@ -304,9 +300,10 @@ public class ManagerCourseController {
 
 		try {
 			course.setUpdateDate(dateformat.currentDate());
-			System.out.println(course);
+			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
+			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
 			courseService.updateCourse(course);
-
+			
 			User loginedUser = null;
 			if (principal != null) {
 				loginedUser = (User) ((Authentication) principal).getPrincipal();

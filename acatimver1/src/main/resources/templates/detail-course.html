@@ -159,14 +159,16 @@
                                         </div>
                                         <div class="blog-details blog-sig-details">
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
-                                                <span style="color: black;"><i class="fa fa-user"></i> <b th:text="'Tên Khóa Học: ' + ${course.courseName}"></b></span>
-                                                <span style="color: black;"><i class="fa fa-heart"></i> <b th:text="'Giá Khóa Học: ' + ${#numbers.formatCurrency(course.price)}"></b></span>
-                                                <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-comments-o" ></i> <b style="color: black;" th:text="'Người Tạo: ' + ${creater.fullName}"></b></a></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></span><b> đến </b><span th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></span></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></span><b> đến </b><span th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></span></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-pushpin"></i> <b th:text="'Tên Khóa Học: ' + ${course.courseName}"></b></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-usd"></i> <b th:text="'Giá Khóa Học: ' + ${#numbers.formatCurrency(course.price)}"></b></span>
+                                                <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-user" ></i> <b style="color: black;" th:text="'Người Tạo: ' + ${creater.fullName}"></b></a></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b> <span style="color: black;" th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></span>
+                                                <b> đến </b><span style="color: black;" th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></span></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian bắt đầu học : từ </b> <span style="color: black;" th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></span>
+                                                <b> đến </b><span style="color: black;" th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></span></span>
                                             </div>
-                                            <h1><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
-                                            <p th:text="${course.courseDescription}"></p>
+                                            <h1><i class="glyphicon glyphicon-exclamation-sign"></i><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
+                                            <p th:utext="${course.courseDescription}"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +176,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="lead-head">
-                                        <h3 th:text="'Nếu bạn thích khóa học này, bạn có thể nhận Mã Giảm Giá khi học khóa học này'"></h3>
+                                        <h3 th:text="'Nếu bạn thích khóa học này, bạn có thể nhận Mã Giảm Giá khi đăng ký khóa học này'"></h3>
                                     </div>
                                 </div>
                             </div>

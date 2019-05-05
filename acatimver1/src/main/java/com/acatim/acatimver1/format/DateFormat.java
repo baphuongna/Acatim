@@ -36,7 +36,6 @@ public class DateFormat {
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-		// String dateString = format.format(new Date());
 		Date dateSQL;
 		try {
 			dateSQL = format.parse(date);
@@ -45,6 +44,20 @@ public class DateFormat {
 			return null;
 		}
 		return dateSQL.toString();
+	}
+	
+	public String dateToString(String date) {
+		String formatedDate;
+		try {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date dateSQL = format.parse(date);
+			String initDate = new SimpleDateFormat("MM/dd/yyyy").format(dateSQL);
+			formatedDate = initDate;
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+		return formatedDate;
 	}
 	
 	public String RandomCode() {

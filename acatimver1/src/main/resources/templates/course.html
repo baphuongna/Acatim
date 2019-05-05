@@ -184,7 +184,7 @@
 							<h3 class="mb-3">
 								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 							</h3>
-							<p th:text="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
+							<p th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
 							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
 						</div>
 					</div>
