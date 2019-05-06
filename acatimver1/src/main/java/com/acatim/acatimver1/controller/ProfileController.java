@@ -826,18 +826,26 @@ public class ProfileController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
-
+		
+		
+		if(file.getSize() > 5242880) {//5mb
+			redirectAttributes.addFlashAttribute("message",
+	                "Hình ảnh tải lên không được lớn hơn 5mb, vui lòng chọn ảnh khác!");
+			modelAndView.setViewName("redirect:/upload-avatar");
+			return modelAndView;
+		}
+		
 		this.amazonClient.deleteFolder(curentUserName+"/avatar");
 		
 		String avatar = this.amazonClient.uploadFile(curentUserName+"/avatar" ,file);
 		try {
 			userInfoService.updateAvatar(curentUserName, avatar);
-			redirectAttributes.addFlashAttribute("message",
-	                "Upload Successful file " + file.getOriginalFilename() + "!");
+//			redirectAttributes.addFlashAttribute("message",
+//	                "Upload Successful file " + file.getOriginalFilename() + "!");
 		}catch (Exception e) {
 			e.fillInStackTrace();
-			redirectAttributes.addFlashAttribute("message",
-	                "Could not upload " + file.getOriginalFilename() + "!");
+//			redirectAttributes.addFlashAttribute("message",
+//	                "Could not upload " + file.getOriginalFilename() + "!");
 		}
 		
 	    modelAndView.setViewName("redirect:/profile");

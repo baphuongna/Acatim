@@ -53,6 +53,7 @@ public class ManagerUserController {
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
 			@RequestParam(required = false, name = "roleId") String roleId, @ModelAttribute("searchValue") SearchValue search) {
 		ModelAndView modelAndView = new ModelAndView();
+		search.setAdmin(true);
 		if (page == null) {
 			page = 1 + "";
 		}

@@ -204,15 +204,15 @@
                 </div>
 			            </div>
 			            <div th:if="${#lists.isEmpty(allCourses) == false}" class="search-form" style="visibility: visible; display: flex; justify-content: center; margin-top: 20px; text-align: center;">
-                                  <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+                                  <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${first}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
                                   <a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
-                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, subjectId=${searchValue.subjectId})}" th:text="'<'" ></a>
+                                  <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-course(page=${previous}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}" th:text="'<'" ></a>
                                   <div th:each="totalPage : ${totalPages}">
-                                       <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${totalPage}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+                                       <a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${totalPage}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
                                        <a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
                                    </div>
-                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, subjectId=${searchValue.subjectId})}" th:text="'>'" >Trang Sau</a>
-                                   <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+                                   <a class="btn btn-circle btn-primary" th:if="${hasNext == true}" th:href="@{/manager-course(page=${next}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}" th:text="'>'" >Trang Sau</a>
+                                   <a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/manager-course(page=${last}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
                                    <a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
                             </div>
 			        </div>

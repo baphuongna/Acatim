@@ -42,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
- 
+        mailSender.setDefaultEncoding("UTF-8");
         mailSender.setUsername(MyConstants.MY_EMAIL);
         mailSender.setPassword(MyConstants.MY_PASSWORD);
  

@@ -113,7 +113,11 @@ public class UserDAO extends JdbcDaoSupport {
 				}
 			}
 
-			sql += " Where User.role_id < 4 ";
+			if(search.isAdmin() == false) {
+				sql += " Where User.role_id < 4 and user.active = 1 ";
+			}else {
+				sql += " Where User.role_id < 4 ";
+			}
 
 			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
@@ -128,7 +132,8 @@ public class UserDAO extends JdbcDaoSupport {
 
 			if (search.getValue() == null && search.getSearch() != null) {
 				if (search.getSearch().trim().length() != 0) {
-					sql += " and User.full_name like ? ";
+					sql += " and User.full_name like ? or User.address like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
@@ -180,8 +185,11 @@ public class UserDAO extends JdbcDaoSupport {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
-
-			sql += " Where User.role_id < 4 ";
+			if(search.isAdmin() == false) {
+				sql += " Where User.role_id < 4 and user.active = 1 ";
+			}else {
+				sql += " Where User.role_id < 4 ";
+			}
 
 			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
@@ -196,7 +204,8 @@ public class UserDAO extends JdbcDaoSupport {
 
 			if (search.getValue() == null && search.getSearch() != null) {
 				if (search.getSearch().trim().length() != 0) {
-					sql += " and User.full_name like ? ";
+					sql += " and User.full_name like ? or User.address like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}

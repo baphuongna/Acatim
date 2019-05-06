@@ -105,7 +105,7 @@
 				<form th:action="@{study-center}" th:object="${searchValue}" method="POST" class=" form-inline">
 					<div style="margin: auto;" class="form-group">
 						<input type="text" class="form-control" th:field="*{search}" 
-							placeholder="Gõ tên trung tâm vào đây"
+							placeholder="Gõ tên trung tâm hoặc địa chỉ vào đây"
 							style="width: 100%;">
 						<input type="hidden" th:field="*{subjectId}">
 						<input type="hidden" th:field="*{rateFilter}">
@@ -185,10 +185,10 @@
         		<div class="staff min_height_222">
         			<div class="d-flex mb-4">
         				<div th:if="${studyCenter.avatar == null}" class="img" style="background-image: url(images/person_1.jpg);"></div>
-						<div th:if="${studyCenter.avatar != null}" class="img" th:style="'background:url(' + ${studyCenter.avatar} + ');'"></div>
+						<div th:if="${studyCenter.avatar != null}" class="img" th:style="'background:url(' + ${studyCenter.avatar} + '); background-size: cover; background-position: center center;'"></div>
         				<div class="info ml-4">
         					<h4><a th:href="@{/profileDetail(userName=${studyCenter.userName})}" th:text="${studyCenter.fullName}"></a></h4>
-        					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}"></span>
+        					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}" style="color: black;"></span>
         					<div class="ratingStar">
 									<div class="stars-outer">
 										<p id="a" th:value="${studyCenter.studyCenter.rate}"></p>
@@ -197,6 +197,7 @@
 								</div>
         				</div>
         			</div>
+        			<span class="position" th:text="${studyCenter.address}" style="color: black;"></span>
         			<div style="padding-top: 16px;" class="text">
 						<a th:href="@{/profileDetail(userName=${studyCenter.userName})}"><button type="button" class="btn btn-primary">Xem thêm</button></a>
 					</div>
@@ -207,17 +208,17 @@
 			
 			<div th:if="${#lists.isEmpty(listStudyCenter) == false}" class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${first}, sortValue=${searchValue.sortValue})}">Trang Đầu</a>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${first}, search=${searchValue.search}, sortValue=${searchValue.sortValue})}">Trang Đầu</a>
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
 				
-				<a th:if="${hasPrevious == true}" th:href="@{/study-center(page=${previous}, sortValue=${searchValue.sortValue})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<a th:if="${hasPrevious == true}" th:href="@{/study-center(page=${previous}, search=${searchValue.search}, sortValue=${searchValue.sortValue})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
 				<div th:each="totalPage : ${totalPages}">
-				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${totalPage}, sortValue=${searchValue.sortValue})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${totalPage}, search=${searchValue.search}, sortValue=${searchValue.sortValue})}" th:text="${totalPage}">1</a>
 				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
 				</div>
-				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${next}, sortValue=${searchValue.sortValue})}" th:text="'>>'">Next</a>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${next}, search=${searchValue.search}, sortValue=${searchValue.sortValue})}" th:text="'>>'">Next</a>
 				
-				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${last}, sortValue=${searchValue.sortValue})}">Trang Cuối</a>
+				<a th:if="${currentPage != last}" class="btn btn-circle btn-primary" th:href="@{/study-center(page=${last}, search=${searchValue.search}, sortValue=${searchValue.sortValue})}">Trang Cuối</a>
 				<a th:if="${currentPage == last}" class="btn btn-circle btn-primary" >Trang Cuối</a>
 			</div>
 			

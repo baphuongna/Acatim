@@ -74,7 +74,7 @@ public class ImagesController {
 
 			int total = imagesService.countImagesByUserName(userName);
 
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+			pageableService = new PageableServiceImpl(total, total, currentPage, null);
 
 			List<Images> images = imagesService.getImagesByUserName(pageableService, userName);
 
@@ -128,6 +128,13 @@ public class ImagesController {
 		String curentUserName = null;
 		if (principal != null) {
 			curentUserName = principal.getName();
+		}
+		
+		if(file.getSize() > 5242880) {//5mb
+			redirectAttributes.addFlashAttribute("message",
+	                "Hình ảnh tải lên không được lớn hơn 5mb, vui lòng chọn ảnh khác!");
+			modelAndView.setViewName("redirect:/add-image");
+			return modelAndView;
 		}
 		
 		String image = this.amazonClient.uploadFile(curentUserName+"/images" ,file);

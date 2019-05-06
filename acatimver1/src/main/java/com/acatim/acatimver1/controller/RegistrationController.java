@@ -74,13 +74,18 @@ public class RegistrationController {
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),
 						false);
-				
+				String key = dateformat.RandomKeyConfirm();
+				String content = null;
 				if (data.getRole_id() == 1) {
 					Student newStudent = new Student(data.getUserName(), data.getCreateDate(), data.isGender());
 					System.out.println("student" + newStudent);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudentInfo(newStudent);
 					System.out.println("học sinh thanh cong");
+					content = "Xin Chào, \r\n \r\n"
+				     		+ "Chúng tôi cần xác minh Email đúng hay không. Vui lòng bạn xác nhận Email và bắt đầu sử dụng tài khoản Website chúng tôi.\r\n"
+				     		+ "Click vào địa Chỉ sau : http://acatim.online/confirm-account?userName="+ data.getUserName()+"&email="+ user.getEmail() +"&key=" + key + "\r\n \r\n"
+				     		+ "ACATIM.";
 				}
 				if (data.getRole_id() == 2) {
 					Teacher newTeacher = new Teacher(data.getUserName(), data.getDob(), data.isGender(),
@@ -88,32 +93,43 @@ public class RegistrationController {
 					userInfoService.addUserInfo(user);
 					userInfoService.addTeacherInfo(newTeacher);
 					System.out.println("giáo vien thanh cong");
+					content = "Xin chào,  \r\n \r\n"
+							+ "Cảm ơn bạn đã dùng website của chúng tôi.  \r\n \r\n"
+							+ "Để hoàn tất đăng ký cho bạn lên website Acatim, bạn gửi thông tin xác nhận đến email acatimdev@gmail.com bao gồm:\r\n \r\n"
+							+ "- Hình ảnh chứng minh thư \r\n \r\n"
+							+ "- Hình ảnh chứng thực mình là Giáo Viên.\r\n \r\n"
+							+ "Thông tin sẽ được chúng tôi tiếp nhận và xử lý trong vòng 72h làm việc.\r\n \r\n"
+							+ "ACATIM.";
 				}
 				if (data.getRole_id() == 3) {
 					StudyCenter newStudyCenter = new StudyCenter(data.getUserName(), data.getDescription(), 0);
 					userInfoService.addUserInfo(user);
 					userInfoService.addStudyCenterInfo(newStudyCenter);
 					System.out.println("trung tam thanh cong");
+					content = "Xin chào,  \r\n \r\n"
+							+ "Cảm ơn bạn đã dùng website của chúng tôi.  \r\n \r\n"
+							+ "Để hoàn tất đăng ký cho bạn lên website Acatim, bạn gửi thông tin xác nhận đến email acatimdev@gmail.com bao gồm:\r\n \r\n"
+							+ "- Hình ảnh chứng minh thư \r\n \r\n"
+							+ "- Hình ảnh chứng thực tài khoản này là Trung Tâm.\r\n \r\n"
+							+ "Thông tin sẽ được chúng tôi tiếp nhận và xử lý trong vòng 72h làm việc.\r\n \r\n"
+							+ "ACATIM.";
 				}
 				
-				String key = dateformat.RandomKeyConfirm();
+				
 				
 				if(userInfoService.addConfirm(new ConfirmEmail(data.getUserName(), key, false))) {
 					
 					message.setTo(user.getEmail());
 				    message.setSubject("Xác Nhận Đăng Ký Tài Khoản Acatim");
-				    message.setText("Xin Chào, \r\n \r\n"
-				     		+ "Chúng tôi cần xác minh Email đúng hay không. Vui lòng bạn xác nhận Email và bắt đầu sử dụng tài khoản Website chúng tôi.\r\n"
-				     		+ "Click vào địa Chỉ sau : http://acatim.online/confirm-account?userName="+ data.getUserName()+"&email="+ user.getEmail() +"&key=" + key + "\r\n \r\n"
-				     		+ "ACATIM.");
-				     // Send Message!
+				    message.setText(content);
+			        
 				     this.emailSender.send(message);
 				     redirectAttributes.addAttribute("message", "Chúc mừng bạn đã đăng kí thành công tài khoản. Để Hoàn tất phần đăng ký bạn vào Email "+ data.getUserName() +" để xác minh.");
 				}else {
 					redirectAttributes.addAttribute("message", "Gửi mã xác nhận không thành công, vui lòng kiểm tra lại hoặc liên hệ với chúng tôi!");
 				}
 				
-			} catch (NotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				modelAndView.addObject("erorrMessage", "đăng kí thất bại, vui lòng kiểm tra lại!");
 				modelAndView.setViewName("registration");

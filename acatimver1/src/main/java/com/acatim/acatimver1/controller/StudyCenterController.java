@@ -41,7 +41,7 @@ public class StudyCenterController {
 	public ModelAndView studyCenter(@RequestParam(required = false, name = "page") String page,
 			@RequestParam(required = false, name = "sortValue") String sortValue,
 			@ModelAttribute("searchValue") SearchValue search) {
-
+		search.setAdmin(false);
 		if (page == null) {
 			page = 1 + "";
 		}

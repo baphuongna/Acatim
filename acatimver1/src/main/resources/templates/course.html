@@ -122,7 +122,7 @@
 									aria-haspopup="true" aria-expanded="false" th:text="'-- Chọn Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255); margin-right: 47px; width: 100%;"></button>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" th:field="*{categoryId}">
 									<a class="dropdown-item" th:href="@{/course(categoryId='0')}" th:text="'-- Tất Cả --'"></a>
-									<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{course(categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
+									<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{course(categoryId=${category.categoryId}, search=${searchValue.search})}" th:text="${category.categoryName}"></a>
 								</div>
 							</div>
 	
@@ -179,11 +179,12 @@
 						<div class="text p-4">
 							<p class="category" >
 								<span th:text="${course.subject.subjectName}"></span> 
-								<span class="price"><span class="price" th:text="${#numbers.formatCurrency(course.price)}"></span></span>
+								<span class="price"><span class="price" th:text="${#numbers.formatInteger(course.price ,3,'POINT')}"></span>VND</span>
 							</p>
 							<h3 class="mb-3">
 								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 							</h3>
+							
 							<p th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
 							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
 						</div>
@@ -193,17 +194,17 @@
 			
 			<div th:if="${#lists.isEmpty(allCourses) == false}" class="search-form wow pulse animated" data-wow-delay="0.8s"
 				style="visibility: visible; animation-delay: 0.8s; animation-name: pulse; display: flex; justify-content: center;">
-				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
+				<a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/course(page=${first}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}">Trang Đầu</a>
 				<a th:if="${currentPage == first}" class="btn btn-circle btn-primary" >Trang Đầu</a>
 				
-				<a th:if="${hasPrevious == true}" th:href="@{/course(page=${previous}, subjectId=${searchValue.subjectId})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
+				<a th:if="${hasPrevious == true}" th:href="@{/course(page=${previous}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}" class="btn btn-circle btn-primary" th:text="'<<'">Previous</a>
 				<div th:each="totalPage : ${totalPages}">
-				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/course(page=${totalPage},  subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
+				<a th:if="${currentPage != totalPage}" class="btn btn-circle btn-primary" th:href="@{/course(page=${totalPage}, search=${searchValue.search},  subjectId=${searchValue.subjectId})}" th:text="${totalPage}">1</a>
 				<a th:if="${currentPage == totalPage}" class="btn btn-circle btn-primary" th:text="${totalPage}">1</a>
 				</div>
-				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/course(page=${next}, subjectId=${searchValue.subjectId})}" th:text="'>>'">Next</a>
+				<a th:if="${hasNext == true}" class="btn btn-circle btn-primary" th:href="@{/course(page=${next}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}" th:text="'>>'">Next</a>
 				
-				<a th:if="${currentPage != last}" class="btn btn-primary" th:href="@{/course(page=${last}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
+				<a th:if="${currentPage != last}" class="btn btn-primary" th:href="@{/course(page=${last}, search=${searchValue.search}, subjectId=${searchValue.subjectId})}">Trang Cuối</a>
 				<a  th:if="${currentPage == last}" class="btn btn-primary" >Trang Cuối</a>
 			</div>
 		</div>

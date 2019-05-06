@@ -19,6 +19,8 @@ public class SearchValue {
 	private String sortValue;
 	
 	private String rateFilter;
+	
+	private boolean isAdmin;
 
 	public SearchValue() {
 		super();

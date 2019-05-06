@@ -41,7 +41,7 @@ public class TeacherController {
 			@RequestParam(required = false, name = "sortValue") String sortValue,
 			@RequestParam(required = false, name = "rateFilter") String rateFilter,
 			@ModelAttribute("searchValue") SearchValue search) {
-
+		search.setAdmin(false);
 		if (page == null) {
 			page = 1 + "";
 		}
