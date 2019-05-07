@@ -37,12 +37,14 @@ public class SubjectMapper implements RowMapper<Subject> {
 			String endTime = rs.getString("end_time");
 			String startDate = rs.getString("start_date");
 			String endDate = rs.getString("end_date");
+			String deadline = rs.getString("deadline");
+			String position = rs.getString("position");
 			float price = rs.getFloat("price");
 			String createDate1 = rs.getString("User.create_date");
 			String updateDate1 = rs.getString("User.update_date");
 			boolean active1 = rs.getBoolean("User.active");
 			course = new Course(courseId, subjectId, userName, courseName, courseDescription, startTime, endTime,
-					startDate, endDate, price, createDate1, updateDate1, active1);
+					startDate, endDate, price, createDate1, updateDate1, deadline, position, active1);
 			subject.getCourses().add(course);
 		} catch (Exception e) {
 		}

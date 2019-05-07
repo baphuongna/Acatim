@@ -120,12 +120,14 @@
     <!-- responsive CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/admin/css/responsive.css">
-     <!-- summernote CSS -->
-    <link rel="stylesheet" href="admin/admin/css/summernote/summernote.css">
     
     <!-- modernizr JS
 		============================================ -->
     <script src="admin/admin/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -284,10 +286,10 @@
 
 																		<div class="form-group-inner res-mg-t-15" th:if="${user.role_id == 2 or user.role_id == 3}">
 																			<div class="row">
-																				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+																				<div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
 																					<label class="login2">Mô Tả Thêm</label>
 																				</div>
-																				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+																				<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
 																	<!-- 				<textarea th:if="${user.role_id == 2}" name="description"
 																						th:field="*{teacher.description}"
 																						placeholder="Description"
@@ -299,15 +301,17 @@
 																						style="width: 100%; height: 100px; padding: 15px;"></textarea> -->
 
 																					<div th:if="${user.role_id == 2}" class="tinymce-single responsive-mg-b-30">
-																						<textarea id="summernote1"
-																							th:field="*{teacher.description}"></textarea>
+																						<!-- <textarea id="summernote1"
+																							th:field="*{teacher.description}"></textarea> -->
+																						<textarea id="froala-editor" th:field="*{teacher.description}"></textarea>
 																						<span th:if="${#fields.hasErrors('teacher.description')}"
 																							th:errors="*{teacher.description}">..</span>
 																					</div>
 																					
 																					<div th:if="${user.role_id == 3}" class="tinymce-single responsive-mg-b-30">
-																						<textarea id="summernote1"
-																							th:field="*{studyCenter.description}"></textarea>
+																						<!-- <textarea id="summernote1"
+																							th:field="*{studyCenter.description}"></textarea> -->
+																						<textarea id="froala-editor" th:field="*{studyCenter.description}"></textarea>
 																						<span th:if="${#fields.hasErrors('studyCenter.description')}"
 																							th:errors="*{studyCenter.description}">..</span>
 																					</div>
@@ -361,15 +365,17 @@
 
 	<!-- JavaScripts -->
 
+	<script>
+$(function() {
+  $('textarea#froala-editor').froalaEditor()
+});
+</script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<script src="js/jquery.isotope.min.js"></script>
 	<script src="js/mainProfile.js"></script>
-	<script src="js/rating.js"></script>
-	<!-- Begin Map Script-->
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-	<script src="js/map.js"></script>
+
 	<!-- jquery
 		============================================ -->
     <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
@@ -424,8 +430,10 @@
     <!-- main JS
 		============================================ -->
     <script src="admin/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="admin/admin/js/tawk-chat.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
 </body>
 </html>

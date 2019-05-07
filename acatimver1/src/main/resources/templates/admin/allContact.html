@@ -162,7 +162,10 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
                             <h4>Danh Sách Phản Hồi</h4>
-                            <div class="asset-inner">
+                            <div class="asset-inner" th:if="${#lists.isEmpty(allContact) == true}">
+                            	<h1 th:text="'Không tìm thấy phản hồi nào'"></h1>
+                            </div>
+                            <div class="asset-inner" th:if="${#lists.isEmpty(allContact) == false}">
                                 <table>
 									<tr>
 										<th>Id</th>
@@ -173,18 +176,18 @@
 										<th>Ngày tạo</th>
 
 									</tr>
-									<tr th:each="user : ${allContact}">
+									<tr th:each="user : ${allContact}"  th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}">
 										<td th:text="${user.id}"></td>
 										<td th:text="${user.name}"></td>
 										<td th:text="${user.email}"></td>
 										<td th:text="${user.title}"></td>
 										<td th:text="${user.message}"></td>
-										<td th:text="${user.createDate}"></td>
+										<td th:text="${#dates.format(sdf.parse(user.createDate), 'dd-MM-yyyy')}"></td>
 
 									</tr>
 								</table>
                             </div>
-                            <div class="custom-pagination">
+                            <div class="custom-pagination" th:if="${#lists.isEmpty(allContact) == false}">
                                 <nav aria-label="Page navigation example">
                                     <ul class="pagination" >
                                     	<li class="page-item" >

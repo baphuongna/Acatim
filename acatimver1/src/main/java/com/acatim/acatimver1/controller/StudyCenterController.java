@@ -14,10 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acatim.acatimver1.entity.SearchValue;
 import com.acatim.acatimver1.entity.UserModel;
-import com.acatim.acatimver1.service.CategoriesService;
 import com.acatim.acatimver1.service.PageableService;
 import com.acatim.acatimver1.service.PageableServiceImpl;
-import com.acatim.acatimver1.service.SubjectService;
 import com.acatim.acatimver1.service.UserInfoService;
 
 import javassist.NotFoundException;
@@ -25,12 +23,6 @@ import javassist.NotFoundException;
 @Controller
 @RequestMapping(value = { "" })
 public class StudyCenterController {
-
-	@Autowired
-	private SubjectService subjectService;
-
-	@Autowired
-	private CategoriesService categoriesService;
 	
 	@Autowired
 	private UserInfoService userInfoService;
@@ -40,6 +32,7 @@ public class StudyCenterController {
 	@RequestMapping(value = { "/study-center" }, method = RequestMethod.GET)
 	public ModelAndView studyCenter(@RequestParam(required = false, name = "page") String page,
 			@RequestParam(required = false, name = "sortValue") String sortValue,
+			@RequestParam(required = false, name = "search") String find,
 			@ModelAttribute("searchValue") SearchValue search) {
 		search.setAdmin(false);
 		if (page == null) {
@@ -57,14 +50,16 @@ public class StudyCenterController {
 				currentPage = 1;
 			}
 			
-			if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
-				search.setSubjectId(null);
+			if (search.getSearch() != null && search.getSearch().trim().length() == 0) {
+				search.setSearch(null);
+			}else if (search.getSearch() == null){
+				if (find != null && find.trim().length() == 0 ) {
+					search.setSearch(null);
+				}else if (find != null) {
+					search.setSearch(find);
+				}
 			}
 
-			if (search.getCategoryId() != null && search.getCategoryId().equals("0") || search.getCategoryId() != null && search.getCategoryId().trim().equals("")) {
-				search.setCategoryId(null);
-			}
-			
 			if (search.getRateFilter() != null && search.getRateFilter().equals("0") || search.getRateFilter() != null && search.getRateFilter().trim().equals("")) {
 				search.setRateFilter(null);
 			}
@@ -87,14 +82,6 @@ public class StudyCenterController {
 						sort = Sort.by("rate").descending();
 					}
 				}
-			}
-
-			modelAndView.addObject("allCategories", categoriesService.getAllCategories());
-			
-			if (search.getCategoryId() != null) {
-				modelAndView.addObject("allSubjects", subjectService.getSubjectByCategoryId(search.getCategoryId()));
-			}else {
-				modelAndView.addObject("allSubjects", subjectService.getAllSubject());
 			}
 			
 			search.setRoleId("3");
@@ -121,7 +108,6 @@ public class StudyCenterController {
 		}
 		
 		modelAndView.addObject("searchValue", search);
-		System.out.println(search);
 		modelAndView.addObject("listStudyCenter", listStudyCenter);
 		modelAndView.setViewName("study-center");
 		return modelAndView;
@@ -133,7 +119,6 @@ public class StudyCenterController {
 
 		ModelAndView modelAndView = new ModelAndView();
 		redirectAttributes.addFlashAttribute("searchValue", search);
-		System.out.println(search);
 		modelAndView.setViewName("redirect:/study-center");
 		return modelAndView;
 	}

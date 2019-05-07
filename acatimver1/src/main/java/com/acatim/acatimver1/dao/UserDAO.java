@@ -139,21 +139,21 @@ public class UserDAO extends JdbcDaoSupport {
 			}
 
 			if (search.getValue() != null && search.getValue().equals("userName")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.user_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
 
 			if (search.getValue() != null && search.getValue().equals("fullName")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
 
 			if (search.getValue() != null && search.getValue().equals("email")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
@@ -211,21 +211,21 @@ public class UserDAO extends JdbcDaoSupport {
 			}
 
 			if (search.getValue() != null && search.getValue().equals("userName")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.user_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
 
 			if (search.getValue() != null && search.getValue().equals("fullName")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.full_name like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
 
 			if (search.getValue() != null && search.getValue().equals("email")) {
-				if (search.getSearch().trim().length() != 0) {
+				if (search.getSearch() != null && search.getSearch().trim().length() != 0) {
 					sql += " and User.email like ? ";
 					params = append(params, "%" + search.getSearch() + "%");
 				}

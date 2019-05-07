@@ -176,16 +176,18 @@
 					<div class="course align-self-stretch" style="width: 100%;">
 						<a th:href="@{/detail-course(courseId=${course.courseId})}" class="img"
 							style="background-image: url(images/course-1.jpg)"></a>
-						<div class="text p-4">
+						<div class="text p-4" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}">
 							<p class="category" >
-								<span th:text="${course.subject.subjectName}"></span> 
+								<span th:text="${course.subject.subjectName}" style="color: blue; font-weight: bold;"></span> 
 								<span class="price"><span class="price" th:text="${#numbers.formatInteger(course.price ,3,'POINT')}"></span>VND</span>
 							</p>
 							<h3 class="mb-3">
 								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 							</h3>
 							
-							<p th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
+							<p th:if="${course.courseDescription != null}" th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
+							<p th:utext="'<b>Hạn Đăng Ký :</b> ' + ${#dates.format(sdf.parse(course.deadline), 'dd-MMMMM-yyyy')}" style="color: black;"></p>
+							<p th:utext="'<b>Địa Điểm Học :</b> ' +  ${course.position}" style="color: black;"></p>
 							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>
 						</div>
 					</div>

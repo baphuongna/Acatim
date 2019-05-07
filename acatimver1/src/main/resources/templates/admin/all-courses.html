@@ -194,9 +194,9 @@
 										<td th:utext="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
 										<td th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></td>
-										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></td>
-										<td th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></td>
-										<td th:text="${#numbers.formatCurrency(course.price)}" ></td>
+										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MM-yyyy')}"></td>
+										<td th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MM-yyyy')}"></td>
+										<td th:text="${#numbers.formatInteger(course.price ,3,'POINT')} + 'VND'" ></td>
 										<td th:text="${course.userName}"></td>
 										<td th:text="${#dates.format(sdf.parse(course.createDate), 'dd-MMMMM-yyyy')}"></td>
 										

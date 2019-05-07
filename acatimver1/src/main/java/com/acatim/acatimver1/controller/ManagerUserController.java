@@ -51,7 +51,9 @@ public class ManagerUserController {
 
 	@RequestMapping(value = { "/allUser" }, method = RequestMethod.GET)
 	public ModelAndView allUsers(@RequestParam(required = false, name = "page") String page,
-			@RequestParam(required = false, name = "roleId") String roleId, @ModelAttribute("searchValue") SearchValue search) {
+			@RequestParam(required = false, name = "roleId") String roleId,
+			@RequestParam(required = false, name = "search") String find,
+			@ModelAttribute("searchValue") SearchValue search) {
 		ModelAndView modelAndView = new ModelAndView();
 		search.setAdmin(true);
 		if (page == null) {
@@ -59,6 +61,17 @@ public class ManagerUserController {
 		}
 		
 		try {
+			
+			if (search.getSearch() != null && search.getSearch().trim().length() == 0) {
+				search.setSearch(null);
+			}else if (search.getSearch() == null){
+				if (find != null && find.trim().length() == 0 ) {
+					search.setSearch(null);
+				}else if (find != null) {
+					search.setSearch(find);
+				}
+			}
+			
 			int currentPage = Integer.parseInt(page);
 
 			if (currentPage < 1) {

@@ -66,12 +66,23 @@ public class CourseController {
 	public ModelAndView showAllCourseFull(@RequestParam(required = false, name = "page") String page, Model model,
 			@RequestParam(required = false, name = "sortValue") String sortValue,
 			@RequestParam(required = false, name = "categoryId") String categoryId,
+			@RequestParam(required = false, name = "search") String find,
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		ModelAndView modelAndView = new ModelAndView();
 
 		if (page == null) {
 			page = 1 + "";
+		}
+		
+		if (search.getSearch() != null && search.getSearch().trim().length() == 0) {
+			search.setSearch(null);
+		}else if (search.getSearch() == null){
+			if (find != null && find.trim().length() == 0 ) {
+				search.setSearch(null);
+			}else if (find != null) {
+				search.setSearch(find);
+			}
 		}
 		
 		if (search.getSearch() != null && search.getSearch().trim().equals("")) {
@@ -402,7 +413,13 @@ public class CourseController {
 			return modelAndView;
 		}
 		
-		modelAndView.addObject("course", courseService.getCourseById(courseId));
+		Course course = courseService.getCourseById(courseId);
+		
+		course.setStartDate(dateformat.dateToString(course.getStartDate()));
+		course.setEndDate(dateformat.dateToString(course.getEndDate()));
+		course.setDeadline(dateformat.dateToString(course.getDeadline()));
+		
+		modelAndView.addObject("course", course);
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 
 		modelAndView.setViewName("edit-course");
@@ -438,7 +455,10 @@ public class CourseController {
 
 		try {
 			course.setUpdateDate(dateformat.currentDate());
-
+			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
+			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
+			course.setDeadline(dateformat.StringToDateSQL(course.getDeadline()));
+			
 			courseService.updateCourse(course);
 
 			User loginedUser = null;

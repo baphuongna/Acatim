@@ -144,11 +144,11 @@
 										<th>Trạng Thái</th>
 										<th></th>
 									</tr>
-									<tr th:if="${allCategories != null}" th:each="category : ${allCategories}">
+									<tr th:if="${allCategories != null}" th:each="category : ${allCategories}"  th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}">
 										<td th:text="${category.categoryId}"></td>
 										<td th:text="${category.categoryName}"></td>
-										<td th:text="${category.createDate}"></td>
-										<td th:text="${category.updateDate}"></td>
+										<td th:text="${#dates.format(sdf.parse(category.createDate), 'dd-MM-yyyy')}"></td>
+										<td th:text="${#dates.format(sdf.parse(category.updateDate), 'dd-MM-yyyy')}"></td>
 										
 										<td th:if="${category.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${category.active == false}" style="color: red;" ><b>Blocked</b></td>

@@ -186,13 +186,13 @@
 										<th>Trạng thái</th>
 										<th></th>
 									</tr>
-									<tr th:each="user : ${allUser}">
+									<tr th:each="user : ${allUser}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}">
 										<td th:text="${user.userName}"></td>
 										<td th:text="${user.fullName}"></td>
 										<td th:text="${user.email}"></td>
 										<td th:text="${user.phone}"></td>
 										<td th:text="${user.address}"></td>
-										<td th:text="${user.createDate}"></td>
+										<td th:text="${#dates.format(sdf.parse(user.createDate), 'dd-MM-yyyy')}"></td>
 										
 										<td th:if="${user.role_id == 1}" th:text="${user.role.roleName}"></td>
 										<td th:if="${user.role_id == 2}" th:text="${user.role.roleName}"></td>

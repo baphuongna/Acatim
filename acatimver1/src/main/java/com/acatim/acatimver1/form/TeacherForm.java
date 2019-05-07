@@ -12,6 +12,7 @@ import lombok.Data;
 @Data
 public class TeacherForm {
 
+	@Length(min = 5, message = "*Mật khẩu có độ dài tối thiểu là 5 ký tự")
 	@NotEmpty(message = "*Tên của bạn không được để trống")
 	private String userName;
     

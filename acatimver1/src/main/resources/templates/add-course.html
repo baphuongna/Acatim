@@ -29,7 +29,7 @@
 
 
 <link rel="stylesheet" href="css/icomoon.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" href="css/Menu.css">
 <link
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
@@ -129,9 +129,13 @@
         <!-- datapicker CSS
 		============================================ -->
     <link rel="stylesheet" href="admin/admin/css/datapicker/datepicker3.css">
-    <!-- summernote CSS -->
-    <link rel="stylesheet" href="admin/admin/css/summernote/summernote.css">
+<!--     summernote CSS
+    <link rel="stylesheet" href="css/summernote/summernote.css"> -->
     
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -179,29 +183,29 @@
 											<label>Chọn Môn Học</label> 
 											<select class="chosen-select" th:field="*{subjectId}">
 												<option value="0">--Tât Cả--</option>
-												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}">[[${subject.subjectName}]]</option>
+												<option th:each="subject : ${allSubjects}" th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
 											</select>
-											<div th:if="${errorMessage != null}"
+											<div style="color: red;" th:if="${errorMessage != null}"
            												th:utext="${errorMessage}" class="error">...</div>
 										</div>
 										<div class="form-group">
 											<label>Tên Khóa Học</label> <input type="text"
 												class="form-control" th:field="*{courseName}"
-												placeholder="Tên Khóa Học"> <span id="error"
+												placeholder="Tên Khóa Học"> <span id="error" style="color: red;"
 												th:if="${#fields.hasErrors('courseName')}"
 												th:errors="*{courseName}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Giờ Bắt Đầu</label> <input type="time"
 												class="form-control example1" th:field="*{startTime}"
-												placeholder="startTime"> <span
+												placeholder="startTime"> <span style="color: red;"
 												th:if="${#fields.hasErrors('startTime')}"
 												th:errors="*{startTime}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Giờ Kết thúc</label> <input type="time"
 												class="form-control example1" th:field="*{endTime}"
-												placeholder="endTime"> <span
+												placeholder="endTime"> <span style="color: red;"
 												th:if="${#fields.hasErrors('endTime')}"
 												th:errors="*{endTime}">..</span>
 										</div>
@@ -213,14 +217,29 @@
                                            	 	<input type="text" class="form-control" name="end" th:field="*{endDate}" />
                                            	 	
                                         	</div>
-                                        	<span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">..</span>
+                                        	<span style="color: red;" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}">..</span>
                                         	<br>
-											<span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">..</span>
+											<span style="color: red;" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}">..</span>
+										</div>
+										<div class="form-group data-custon-pick data-custom-mg" id="data_5">
+											<label><b>Hạn Đăng Ký</b></label> 
+											<div class="input-daterange input-group" id="datepicker">
+                                            	<input type="text" class="form-control" name="start" th:field="*{deadline}"/>
+                                        	</div>
+                                        	<span style="color: red;" th:if="${#fields.hasErrors('deadline')}" th:errors="*{deadline}">..</span>
+										</div>
+										<div class="form-group">
+											<label>Địa Điểm Học</label> <input type="text"
+												class="form-control" th:field="*{position}"
+												placeholder="Địa Điểm Học"> 
+												<span id="error" style="color: red;"
+												th:if="${#fields.hasErrors('position')}"
+												th:errors="*{position}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Giá (VND)</label> <input type="text"
 												class="form-control" th:field="*{price}" placeholder="Giá Khóa Học"></input>
-											<span th:if="${#fields.hasErrors('price')}"
+											<span style="color: red;" th:if="${#fields.hasErrors('price')}"
 												th:errors="*{price}">..</span>
 										</div>
 
@@ -233,9 +252,11 @@
 											<div class="alert-title">
 												<label>Thông Tin Khóa Học</label>
 											</div>
-											<textarea id="summernote1" th:field="*{courseDescription}"></textarea>
-											<span th:if="${#fields.hasErrors('courseDescription')}" th:errors="*{courseDescription}">..</span>
+											<!-- <textarea id="summernote1" th:field="*{courseDescription}"></textarea> -->
+											<textarea id="froala-editor" th:field="*{courseDescription}"></textarea>
+											<span style="color: red;" th:if="${#fields.hasErrors('courseDescription')}" th:errors="*{courseDescription}">..</span>
 										</div>
+										
 									</div>
 									
 								</div>
@@ -270,16 +291,16 @@
 	<!-- End Page Wrapper -->
 
 	<!-- JavaScripts -->
-
+	<script>
+$(function() {
+  $('textarea#froala-editor').froalaEditor()
+});
+</script>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.isotope.min.js"></script>
-	<script src="js/mainProfile.js"></script>
-	<script src="js/rating.js"></script>
-	<!-- Begin Map Script-->
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
-	<script src="js/map.js"></script>
+
+
 	<!-- jquery
 		============================================ -->
     <script src="admin/admin/js/vendor/jquery-1.12.4.min.js"></script>
@@ -329,9 +350,9 @@
 		============================================ -->
     <script src="admin/admin/js/datapicker/bootstrap-datepicker.js"></script>
     <script src="admin/admin/js/datapicker/datepicker-active.js"></script>
-    <!-- summernote JS -->
-    <script src="admin/admin/js/summernote/summernote.min.js"></script>
-    <script src="admin/admin/js/summernote/summernote-active.js"></script>
+<!--     summernote JS
+    <script src="js/summernote/summernote.min.js"></script>
+    <script src="js/summernote/summernote-active.js"></script> -->
     
     <!-- select2 JS
 		============================================ -->
@@ -350,8 +371,10 @@
     <!-- main JS
 		============================================ -->
     <script src="admin/admin/js/main.js"></script>
-    <!-- tawk chat JS
-		============================================ -->
-    <script src="admin/admin/js/tawk-chat.js"></script>
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
 </body>
 </html>

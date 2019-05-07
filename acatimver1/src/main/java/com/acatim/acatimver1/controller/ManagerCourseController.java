@@ -259,7 +259,7 @@ public class ManagerCourseController {
 		
 		course.setStartDate(dateformat.dateToString(course.getStartDate()));
 		course.setEndDate(dateformat.dateToString(course.getEndDate()));
-		
+		course.setDeadline(dateformat.dateToString(course.getDeadline()));
 		modelAndView.addObject("course", course);
 		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 		
@@ -302,6 +302,8 @@ public class ManagerCourseController {
 			course.setUpdateDate(dateformat.currentDate());
 			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
 			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
+			course.setDeadline(dateformat.StringToDateSQL(course.getDeadline()));
+			
 			courseService.updateCourse(course);
 			
 			User loginedUser = null;

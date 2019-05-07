@@ -29,13 +29,15 @@ public class CourseMapper implements RowMapper<Course> {
 		String endTime = rs.getString("end_time");
 		String startDate = rs.getString("start_date");
 		String endDate = rs.getString("end_date");
+		String deadline = rs.getString("deadline");
+		String position = rs.getString("position");
 		float price = rs.getFloat("price");
 		String createDate = rs.getString("create_date");
 		String updateDate = rs.getString("update_date");
 		boolean active = rs.getBoolean("active");
 
 		course = new Course(courseId, subjectId, userName, courseName, courseDescription, startTime, endTime, startDate,
-				endDate, price, createDate, updateDate, active);
+				endDate, price, createDate, updateDate, deadline, position, active);
 
 		try {
 			if (subjectId != null) {

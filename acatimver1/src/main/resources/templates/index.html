@@ -48,7 +48,7 @@
 					<h1 class="mb-4" th:text="${T(com.acatim.acatimver1.constants.Constants).chao_mung}"></h1>
 					<p th:if="${#request.userPrincipal == null}"  th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text}"></p>
 					<p sec:authorize="hasAnyAuthority('Teacher', 'Study Center')" th:text="${T(com.acatim.acatimver1.constants.Constants).index_header_text_teacher_studyCenter}"></p>
-					<p th:if="${#request.userPrincipal == null}">
+					<p>
 						<a href="course.html" th:href="@{/course}" class="btn btn-primary px-4 py-3" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_tim_khoa_hoc}"></a>
 					</p>
 					<p sec:authorize="hasAnyAuthority('Teacher', 'Study Center')">
@@ -59,9 +59,6 @@
 
 
 					<!-- Show popup dialog -->
-	
-					 
-
 					<!-- module login -->
 
 					<div class="container" th:if="${#request.userPrincipal == null}">
@@ -230,20 +227,14 @@
 					<div class="staff">
 						<div class="d-flex mb-4">
 							<div class="img"
-								style="background-image: url(images/person_1.jpg);"></div>
+								style="background-image: url(images/phong.jpg);"></div>
 							<div class="info ml-4">
 								<h3>
 									<a href="teacher-single.html">PhongVV</a>
 								</h3>
 								<span class="position">Developer</span>
 								<p class="ftco-social d-flex">
-									<a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-twitter"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-facebook"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-instagram"></span></a>
+									<a href="https://www.facebook.com/phong.phuphang.39" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
 								</p>
 							</div>
 						</div>
@@ -253,20 +244,14 @@
 					<div class="staff">
 						<div class="d-flex mb-4">
 							<div class="img"
-								style="background-image: url(images/person_2.jpg);"></div>
+								style="background-image: url(images/p.jpg);"></div>
 							<div class="info ml-4">
 								<h3>
 									<a href="teacher-single.html">PhuongNB</a>
 								</h3>
 								<span class="position">Developer</span>
 								<p class="ftco-social d-flex">
-									<a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-twitter"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-facebook"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-instagram"></span></a>
+									<a href="https://www.facebook.com/Mjsse" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
 								</p>
 							</div>
 						</div>
@@ -276,20 +261,48 @@
 					<div class="staff">
 						<div class="d-flex mb-4">
 							<div class="img"
-								style="background-image: url(images/person_3.jpg);"></div>
+								style="background-image: url(images/duy.jpg);"></div>
+							<div class="info ml-4">
+								<h3>
+									<a href="teacher-single.html">DUYNV</a>
+								</h3>
+								<span class="position">Developer</span>
+								<p class="ftco-social d-flex">
+									<a href="https://www.facebook.com/duy.nguyenviet.98" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-sm-4 ftco-animate">
+					<div class="staff">
+						<div class="d-flex mb-4">
+							<div class="img"
+								style="background-image: url(images/khanh.jpg);"></div>
 							<div class="info ml-4">
 								<h3>
 									<a href="teacher-single.html">KhanhNN</a>
 								</h3>
 								<span class="position">Developer</span>
 								<p class="ftco-social d-flex">
-									<a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-twitter"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-facebook"></span></a> <a href="#"
-										class="d-flex justify-content-center align-items-center"><span
-										class="icon-instagram"></span></a>
+									<a href="https://www.facebook.com/namkhanh.5297" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 mb-sm-4 ftco-animate">
+					<div class="staff">
+						<div class="d-flex mb-4">
+							<div class="img"
+								style="background-image: url(images/hieu.jpg);"></div>
+							<div class="info ml-4">
+								<h3>
+									<a href="teacher-single.html">HIEUTV</a>
+								</h3>
+								<span class="position">Developer</span>
+								<p class="ftco-social d-flex">
+									<a href="https://www.facebook.com/baletran09" class="d-flex justify-content-center align-items-center"><span class="icon-facebook"></span></a>
 								</p>
 							</div>
 						</div>
@@ -320,76 +333,6 @@
 			</div>
 		</div>
 	</section>
-
-	<!-- <section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center mb-5 pb-3">
-				<div class="col-md-7 heading-section ftco-animate text-center">
-					<h2 class="mb-4">Một số khóa học của chúng tôi</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4 d-flex ftco-animate" th:each="course : ${listCourse}">
-					<div class="course align-self-stretch">
-						<a href="#" class="img"
-							style="background-image: url(images/course-1.jpg)"></a>
-						<div class="text p-4">
-							<p class="category">
-								<span th:text="${course.subject.subjectName}"></span>
-							</p>
-							<h3 class="mb-3">
-								<a href="#" th:text="${course.courseName}"></a>
-							</h3>
-							<p th:text="${course.courseDescription}"></p>
-							<p>
-								<a href="#" class="btn btn-primary" th:text="${T(com.acatim.acatimver1.constants.Constants).btn_course_detail}"></a>
-							</p>
-						</div>
-					</div>
-				</div>
-				
-			</div>
-			<div class="row justify-content-center mt-5">
-				<div class="col-md-10 ftco-animate">
-					<p>
-						<strong>Khi cô đến những ngọn đồi đầu tiên của dãy núi
-							Italic, cô đã có một cái nhìn cuối cùng về đường chân trời của
-							quê hương Bookmarksgrove, tiêu đề của Làng Bảng chữ cái và đường
-							phụ của con đường của riêng cô, Đường Lane. Đáng tiếc một câu hỏi
-							hóc búa chạy qua má cô, rồi cô tiếp tục con đường của mình. 
-					</p>
-					<p>
-						<span>Chỉ duyệt?</span><a href="course.html"> Xem tất cả các
-							khóa học</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</section> -->
-
-	<!-- <section class="ftco-section-parallax">
-		<div class="parallax-img d-flex align-items-center">
-			<div class="container">
-				<div class="row d-flex justify-content-center">
-					<div
-						class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<h2>Theo dõi bản tin của chúng tôi</h2>
-						<div class="row d-flex justify-content-center mt-5">
-							<div class="col-md-8">
-								<form action="#" class="subscribe-form">
-									<div class="form-group d-flex">
-										<input type="text" class="form-control"
-											placeholder="Enter email address"> <input
-											type="submit" value="Subscribe" class="submit px-3">
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section> -->
 
 	<div th:replace="footer :: footer"></div>
 

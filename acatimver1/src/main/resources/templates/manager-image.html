@@ -152,7 +152,7 @@
 										<th>Trạng Thái</th>
 										<th></th>
 									</tr>
-									<tr th:if="${images != null}" th:each="image : ${images}">
+									<tr th:each="image : ${images}">
 										<td th:text="${image.id}"></td>
 										<td> <img th:src="${image.linkimage}"></td>
 										<td th:text="${image.description}"></td>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
+                <div th:if="${#lists.isEmpty(images) == false}" class="search-form wow pulse animated" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 1.8s; animation-name: pulse; display: flex; justify-content: center; margin-top: 30px;">
                                   <a th:if="${currentPage != first}" class="btn btn-circle btn-primary" th:href="@{/manager-image(page=${first})}" th:text="'Trang Đầu'"></a>
                                   <a th:if="${currentPage == first}" class="btn btn-circle btn-primary"  th:text="'Trang Đầu'"></a>
                                   <a class="btn btn-circle btn-primary" th:if="${hasPrevious == true}" th:href="@{/manager-image(page=${previous})}" th:text="'<'"></a>

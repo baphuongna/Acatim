@@ -2,6 +2,7 @@ package com.acatim.acatimver1.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,11 +33,20 @@ public class Course {
 	@NotEmpty(message = "*Thời Gian kết thúc khóa học không được để trống")
 	private String endTime;
 	
+	@Pattern(regexp = "(\\d{1,2}[/]\\d{1,2}[/]\\d{4})", message="*Ngày không đúng (Phải đúng định dạng dd/MM/yyyy)")
 	@NotEmpty(message = "*Ngày bắt đầu khóa học không được để trống")
 	private String startDate;
 	
+	@Pattern(regexp = "(\\d{1,2}[/]\\d{1,2}[/]\\d{4})", message="*Ngày không đúng (Phải đúng định dạng dd/MM/yyyy)")
 	@NotEmpty(message = "*ngày kết thúc khóa học không được để trống")
 	private String endDate;
+	
+	@Pattern(regexp = "(\\d{1,2}[/]\\d{1,2}[/]\\d{4})", message="*Ngày không đúng (Phải đúng định dạng dd/MM/yyyy)")
+	@NotEmpty(message = "*Hạn đăng ký khóa học không được để trống")
+	private String deadline;
+	
+	@NotEmpty(message = "*Địa Điểm học không được để trống")
+	private String position;
 	
 	private float price;
 	
@@ -60,7 +70,7 @@ public class Course {
 
 	public Course(String courseId, String subjectId, String userName, String courseName, String courseDescription,
 			String startTime, String endTime, String startDate, String endDate, float price, String createDate,
-			String updateDate, boolean active) {
+			String updateDate, String deadline, String position, boolean active) {
 		super();
 		this.courseId = courseId;
 		this.subjectId = subjectId;
@@ -71,6 +81,8 @@ public class Course {
 		this.endTime = endTime;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.deadline = deadline;
+		this.position = position;
 		this.price = price;
 		this.createDate = createDate;
 		this.updateDate = updateDate;

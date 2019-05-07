@@ -125,6 +125,10 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                         <div class="profile-info-inner">
+                        	<div class="profile-img">
+                                <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
+                                <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />
+                            </div>
                             <div class="profile-img">
                                 <img th:if="${useInfo.avatar == null}" src="admin/admin/img/profile/1.jpg" alt="" />
                                 <img th:if="${useInfo.avatar != null}" th:src="${useInfo.avatar}" alt="" />

@@ -76,12 +76,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		// Trang /userInfo yêu cầu phải login với vai trò ROLE_USER hoặc ROLE_ADMIN.
 		// Nếu chưa login, nó sẽ redirect tới trang /login.
-
+		// Trang chỉ dành cho ADMIN Manage
 		http.authorizeRequests().antMatchers("/admin/*").hasAnyAuthority("Admin", "Manager");
-		//
-		// http.authorizeRequests().antMatchers("/profileS").access("hasRole('Student')");
-		// Trang chỉ dành cho ADMIN
-//        http.authorizeRequests().antMatchers("/admin").access("hasRole('Admin')");
+
 		http.authorizeRequests().antMatchers("/profile").hasAnyAuthority("Student", "Teacher", "Study Center");
 		http.authorizeRequests().antMatchers("/manager-course", "/add-course", "/manager-images", "/add-image").hasAnyAuthority("Teacher", "Study Center");
 		http.authorizeRequests().antMatchers("/change-password", "/update-info", "/upload-avatar").hasAnyAuthority("Student", "Teacher", "Study Center", "Admin", "Manager");

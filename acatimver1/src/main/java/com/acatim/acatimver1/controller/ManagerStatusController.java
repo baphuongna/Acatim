@@ -46,7 +46,7 @@ public class ManagerStatusController {
 		if (search.getSearch() != null && search.getSearch().trim().equals("")) {
 			search.setSearch(null);
 		}
-		System.out.println(search);
+
 		try {
 			int currentPage = Integer.parseInt(page);
 

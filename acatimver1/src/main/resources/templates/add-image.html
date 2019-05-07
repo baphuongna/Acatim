@@ -8,7 +8,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="author" content="M_Adnan" />
 <!-- Document Title -->
-<title th:text="'Acatim - Thay Đổi Mật Khẩu'"></title>
+<title th:text="'Acatim - Thêm Hình Ảnh'"></title>
 <link rel="shortcut icon" type="image/x-icon" href="admin/admin/img/favicon.ico">
 <!-- StyleSheets -->
 
@@ -146,8 +146,8 @@
             	<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="product-status-wrap drp-lst">
-							<a class="btn btn-circle btn-primary" th:href="@{/manager-images}" th:text="'Quay Lại Quản Lý Khóa Học'"></a>
-                            <a class="btn btn-circle btn-primary" th:href="@{/profile}" style="float: right;">Quay Lại Trang Cá Nhân</a>
+							<a class="btn btn-circle btn-primary" th:href="@{/manager-images}" th:text="'Quay Lại Quản Lý Ảnh'"></a>
+                            <a class="btn btn-circle btn-primary" th:href="@{/profile}" style="float: right;" th:text="'Quay Lại Trang Cá Nhân'"></a>
 						</div>
 					</div>
 				</div>
@@ -182,7 +182,7 @@
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
                                         <div class="address-hr">
                                         	<b>Địa chỉ Email</b>
-                                            <p>acatim@gmail.com</p>
+                                            <p>acatimDev@gmail.com</p>
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
@@ -200,37 +200,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <h3>500</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <h3>900</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <h3>600</h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                         <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
                             <ul id="myTabedu1" class="tab-review-design">
-                                <li class="active"><a href="#description" th:text="'Thay Đổi Hình Đại Diện'"></a></li>
+                                <li class="active"><a href="#description" th:text="'Thêm Hình Ảnh Vào Kho Ảnh'"></a></li>
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
-                                	<a th:href="@{/manager-images}" style="margin-left: 1%;"><button type="button" class="btn btn-primary" th:text="'Quản Lý ảnh của Bạn'"></button></a>
+                                	<p th:if="${message != null}" th:text="${message}"></p>
                                 	<form method="POST" th:action="@{/add-image}" enctype="multipart/form-data">
 												<div class="row">
 													<div class="sparkline11-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -246,7 +227,7 @@
 																<div class="form-group">
 																	<input type='file' name="file" onchange="readURL(this);" />
 																</div>
-																<p th:if="${message != null}" th:text="${message}"></p>
+																
 															</div>
 														</div>
 														<div class="sparkline11-graph">
