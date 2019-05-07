@@ -844,8 +844,8 @@ public class ProfileController {
 //	                "Upload Successful file " + file.getOriginalFilename() + "!");
 		}catch (Exception e) {
 			e.fillInStackTrace();
-//			redirectAttributes.addFlashAttribute("message",
-//	                "Could not upload " + file.getOriginalFilename() + "!");
+			redirectAttributes.addFlashAttribute("message",
+	                "Could not upload " + file.getOriginalFilename() + "!");
 		}
 		
 	    modelAndView.setViewName("redirect:/profile");

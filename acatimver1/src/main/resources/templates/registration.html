@@ -120,8 +120,9 @@ input[type="date"]:valid::before {
 									<div class="note">
 										<p>
 											* Mời bạn chọn loại người dùng trước khi điền các thông tin khác. </br> </br>
-											* Mật khẩu có độ dài ít nhất là 6 kí tự.</br></br>
-											* Số điện thoại có độ dài tối đa là 11 số.</br></br>
+											* Các Thông tin có dấu  *  là bắt buộc phải nhập vào.</br></br>
+											* Mật khẩu có độ dài ít nhất là 5 kí tự.</br></br>
+											* Số điện thoại có độ dài tối đa là 10 đến 11 chữ số..</br></br>
 											* Mọi thắc mắc cũng như ý kiến đóng góp xin bạn gửi về <a href="contact" style="color: blue;">Đây</a>
 										</p>
 									</div>
@@ -176,7 +177,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11">
 														<label th:text="'Tên đăng nhập'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{userName}"
-															placeholder="Tên đăng nhập" class="form-control" /> <label
+															placeholder="Tên đăng nhập" class="form-control" pattern="[A-Za-z0-9]+" title="Chỉ được nhập A-Z, a-z, 0-9 và không được nhập các ký tự đặc biệt"/> <label
 															th:if="${#fields.hasErrors('userName')}"
 															th:errors="*{userName}" class="validation-message"></label>
 													</div>
@@ -186,7 +187,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<label th:text="'Tên đầy đủ'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{fullName}"
-															placeholder="Tên đầy đủ" class="form-control" /> <label
+															placeholder="Tên đầy đủ" class="form-control"  pattern=".*\S+.*" title="Tên không được để trống!"/> <label
 															th:if="${#fields.hasErrors('fullName')}"
 															th:errors="*{fullName}" class="validation-message"></label>
 													</div>
@@ -196,7 +197,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<label th:text="'Email'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{email}" placeholder="Email"
-															class="form-control" /> <label
+															class="form-control"/> <label
 															th:if="${#fields.hasErrors('email')}"
 															th:errors="*{email}" class="validation-message"></label>
 													</div>
@@ -222,7 +223,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<label th:text="'Số điện thoại'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{phone}"
-															placeholder="Số điện thoại" class="form-control" /> <label
+															placeholder="Số điện thoại" class="form-control"/> <label
 															th:if="${#fields.hasErrors('phone')}"
 															th:errors="*{phone}" class="validation-message"></label>
 													</div>
@@ -233,7 +234,7 @@ input[type="date"]:valid::before {
 															<label th:text="'Địa chỉ (có gợi ý )'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 															<input id="autocomplete"
 																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()" required=""
-																type="text" class="form-control" name="address" />
+																type="text" class="form-control" name="address" pattern=".*\S+.*" title="Địa chỉ không được để trống!"/>
 														</div>
 													</div>
 												</div>
@@ -280,9 +281,9 @@ input[type="date"]:valid::before {
 														</select>
 													</div>
 												</div>
-												<div class="form-actions" style="text-align: center;">
+												<!-- <div class="form-actions" style="text-align: center;">
 													<label th:text="' Các Thông tin có dấu  *  là bắt buộc phải nhập vào.'" style="color: red; font-size: 15px;"></label>
-												</div>
+												</div> -->
 												<div class="form-actions" style="text-align: center;">
 													<button type="submit" class="btn btn-primary btn-lg"
 														style="margin-right: 65px; margin-bottom: 30px;" th:text="'Đăng kí'"></button>

@@ -46,7 +46,7 @@ public class ObjectUser {
     private String createDate;
     
 //    @Digits(fraction = 0, integer = 11, message ="Số điện thoại có độ dài tối đa là 11")
-    @Pattern(regexp = "[0-9]{10,11}", message="*Số điện thoại có độ dài tối đa là 10 đến 11 ký tự")
+    @Pattern(regexp = "[0-9]{10,11}", message="*Số điện thoại có độ dài tối đa là 10 đến 11 chữ số.")
     @NotEmpty(message = "*Số điện thoại không được bỏ trống")
     private String phone;
     
