@@ -70,6 +70,9 @@ public class RegistrationController {
 		} else {
 			try {
 				data.setCreateDate(dateformat.currentDate());
+				if(data.getDob() == null || data.getDob() != null && data.getDob().trim().length() == 0) {
+					data.setDob(dateformat.currentDate());
+				}
 				
 				UserModel user = new UserModel(data.getUserName(), data.getRole_id(), data.getFullName(),
 						data.getEmail(), data.getPassword(), data.getCreateDate(), data.getPhone(), data.getAddress(),

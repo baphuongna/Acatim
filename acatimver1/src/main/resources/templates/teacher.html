@@ -175,8 +175,8 @@
 									th:text="${T(com.acatim.acatimver1.constants.Constants).role_teacher}" style="color: black;"></span>
 								<div class="ratingStar">
 									<div class="stars-outer">
-										<p id="a" th:value="${teacher.teacher.rate}"></p>
-										<div class="stars-inner"></div>
+										<p class="a" th:id="${teacher.userName}" th:value="${teacher.teacher.rate}"></p>
+										<div class="stars-inner" th:id="${teacher.userName} + '1'" ></div>
 									</div>
 								</div>
 								

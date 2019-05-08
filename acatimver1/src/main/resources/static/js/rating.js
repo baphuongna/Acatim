@@ -1,6 +1,16 @@
 // Initial Ratings
-var b = document.querySelectorAll("#a");
-var c = b[0].getAttribute('value');
+// Initial Ratings
+var b = document.querySelectorAll(".a");
+
+var i;
+for (i = 0; i < b.length; i++) { 
+  
+  let idd = "#" + b[i].getAttribute('id');
+  let idd1 = b[i].getAttribute('id') + "1";
+  let idd2 = b[i].getAttribute('id') + "2";
+  var k = document.querySelectorAll(idd);
+  
+  var c = k[0].getAttribute('value');
     const ratings = {
       ratingStar: c
     }
@@ -19,14 +29,18 @@ var c = b[0].getAttribute('value');
     let product;
 
     // Product select change
+  if(productSelect != null){
     productSelect.addEventListener('change', (e) => {
       product = e.target.value;
       // Enable rating control
       ratingControl.disabled = false;
       ratingControl.value = ratings[product];
     });
+  }
+    
 
     // Rating control change
+  if(ratingControl != null){
     ratingControl.addEventListener('blur', (e) => {
       const rating = e.target.value;
 
@@ -41,8 +55,9 @@ var c = b[0].getAttribute('value');
 
       getRatings();
     });
-
-    // Get ratings
+  }
+    
+   // Get ratings
     function getRatings() {
       for (let rating in ratings) {
         // Get percentage
@@ -52,12 +67,15 @@ var c = b[0].getAttribute('value');
         const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
 
         // Set width of stars-inner to percentage
-        document.querySelector(`.${rating} .stars-inner`).style.width = starPercentageRounded;
+      
+        document.querySelector(`.${rating} #${idd1}`).style.width = starPercentageRounded;
 
         // Add number rating
-        document.querySelector(`.${rating} .number-rating`).innerHTML = ratings[rating];
+        document.querySelector(`.${rating} #${idd2}`).innerHTML = ratings[rating];
       }
     }
+}
+
     
     
     var slideIndex = 1;

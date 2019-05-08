@@ -302,9 +302,9 @@
 														                        <h1 th:text="${rateAverage}" class="rating-num"></h1>
 																							<div class="ratingStar">
 																								<div class="stars-outer">
-																									<p id="a"
+																									<p class="a" th:id="${useInfo.userName}"
 																										th:value="${teacherInfo.rate}"></p>
-																									<div class="stars-inner"></div>
+																									<div class="stars-inner" th:id="${useInfo.userName} + '1'"></div>
 																								</div>
 																							</div>
 																							<div>

@@ -160,7 +160,7 @@
                                         <div class="blog-details blog-sig-details">
                                             <div class="details-blog-dt blog-sig-details-dt courses-info mobile-sm-d-n">
                                                 <span style="color: black;"><i class="glyphicon glyphicon-pushpin"></i> <b th:text="'Tên Khóa Học: ' + ${course.courseName}"></b></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-usd"></i> <b th:text="'Giá Khóa Học: ' + ${#numbers.formatCurrency(course.price)}"></b></span>
+                                                <span style="color: black;"><i class="glyphicon glyphicon-usd"></i> <b th:text="'Giá Khóa Học: ' + ${#numbers.formatInteger(course.price ,3,'POINT')} + 'VND'"></b></span>
                                                 <span><a th:href="@{/profileDetail(userName=${creater.userName})}"><i class="fa fa-user" ></i> <b style="color: black;" th:text="'Người Tạo: ' + ${creater.fullName}"></b></a></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Thời gian: từ </b>
                                                 <span style="color: black;" th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></span>
@@ -170,12 +170,12 @@
                                                 <span style="color: black;" th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></span>
                                                 <b> đến </b>
                                                 <span style="color: black;" th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></span></span>
-                                                <span style="color: black;"><i class="glyphicon glyphicon-time"></i><b>Hạn Đăng Ký :  </b>
+                                                <span style="color: black;  width: 100%;"><i class="glyphicon glyphicon-time"></i><b>Hạn Đăng Ký :  </b>
                                                 <span style="color: black;" th:text="${#dates.format(sdf.parse(course.deadline), 'dd-MMMMM-yyyy')}"></span></span>
                                                 <span style="color: black;"><i class="glyphicon glyphicon-home"></i><b>Địa Điểm Học :  </b>
                                                 <span style="color: black;" th:text="${course.position}"></span></span>
                                             </div>
-                                            <h1><i class="glyphicon glyphicon-exclamation-sign"></i><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
+                                            <h1><i class="glyphicon glyphicon-exclamation-sign" style="color: #006DF0;"></i><a class="blog-ht" th:text="'Thông Tin Khóa Học'"></a></h1>
                                             <p th:utext="${course.courseDescription}"></p>
                                         </div>
                                     </div>
