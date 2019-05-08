@@ -68,7 +68,7 @@ public class ManagerCategoryController {
 
 			int total = subjectService.getListSubject().size();
 
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+			pageableService = new PageableServiceImpl(9, total, currentPage, null);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

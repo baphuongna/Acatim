@@ -108,7 +108,7 @@ public class ManagerCourseController {
 			total = courseService.getAllCourse(search).size();
 
 			pageableService = new PageableServiceImpl(4, total, currentPage, sort);
-
+			System.out.println(search);
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
 			
 			modelAndView.addObject("allCourses", Courses);

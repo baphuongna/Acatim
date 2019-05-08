@@ -6,7 +6,7 @@ import java.security.Principal;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -95,7 +95,9 @@ public class ManagerUserController {
 
 			int total = userInfoService.getAllUsers(search).size();
 			
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+			Sort sort = Sort.by("User.create_date").descending();
+			
+			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);

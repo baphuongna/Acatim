@@ -144,7 +144,7 @@ public class CourseDAO extends JdbcDaoSupport {
 			params = append(params, search.getUserName());
 		}else {
 			if(search.isAdmin()) {
-				sql += " where Course.active = 1 or Course.active = 0 ";
+				sql += " where Course.active < 2 ";
 			}else {
 				sql += " where Course.active = 1 ";
 			}
@@ -152,8 +152,7 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		if(search.getSearch() != null) {
 			if(search.getSearch().trim().length() != 0) {
-				sql += " and Course.courseName like ? or Course.position like ? ";
-				params = append(params, "%"+search.getSearch()+"%");
+				sql += " and Course.courseName like ? ";
 				params = append(params, "%"+search.getSearch()+"%");
 			}
 		}
@@ -167,7 +166,7 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " and Subject.category_id = ? ";
 			params = append(params, search.getCategoryId());
 		}
-		
+
 		CourseMapper mapper = new CourseMapper();
 		try {
 			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -191,7 +190,7 @@ public class CourseDAO extends JdbcDaoSupport {
 			params = append(params, search.getUserName());
 		}else {
 			if(search.isAdmin()) {
-				sql += " where Course.active = 1 or Course.active = 0 ";
+				sql += " where Course.active < 2 ";
 			}else {
 				sql += " where Course.active = 1 ";
 			}
@@ -199,8 +198,7 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		if(search.getSearch() != null) {
 			if(search.getSearch().trim().length() != 0) {
-				sql += " and Course.courseName like ? or Course.position like ? ";
-				params = append(params, "%"+search.getSearch()+"%");
+				sql += " and Course.courseName like ? ";
 				params = append(params, "%"+search.getSearch()+"%");
 			}
 		}
@@ -225,7 +223,7 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		params = append(params, pageable.getOffset());
 		params = append(params, pageable.getPageSize());
-		
+
 		CourseMapper mapper = new CourseMapper();
 		try {
 			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);

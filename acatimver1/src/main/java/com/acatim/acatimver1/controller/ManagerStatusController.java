@@ -1,6 +1,7 @@
 package com.acatim.acatimver1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +61,8 @@ public class ManagerStatusController {
 			}
 
 			int total = statusService.countAllHistory(search);
-
-			pageableService = new PageableServiceImpl(8, total, currentPage, null);
+			Sort sort = Sort.by("history.date_change").descending();
+			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
 
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
