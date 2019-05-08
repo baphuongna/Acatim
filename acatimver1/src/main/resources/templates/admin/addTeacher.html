@@ -128,27 +128,27 @@
 										<div class="form-group">
 											<label>Tên tài Khoản</label> <input type="text"
 												class="form-control" th:field="*{userName}"
-												placeholder="Tên Tài Khoản"> <span id="error"
+												placeholder="Tên Tài Khoản" pattern="[A-Za-z0-9]+" title="Chỉ được nhập A-Z, a-z, 0-9 và không được nhập các ký tự đặc biệt" maxlength="45"> <span id="error"
 												th:if="${#fields.hasErrors('userName')}"
 												th:errors="*{userName}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Mật Khẩu</label> <input type="password"
 												class="form-control example1" th:field="*{password}"
-												placeholder="Password"> <span
+												placeholder="Password" maxlength="80"> <span
 												th:if="${#fields.hasErrors('password')}"
 												th:errors="*{password}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Họ Và tên</label> <input name="firstname" type="text"
 												th:field="*{fullName}" class="form-control"
-												placeholder="Họ và Tên"> <span
+												placeholder="Họ và Tên" maxlength="80"> <span
 												th:if="${#fields.hasErrors('fullName')}"
 												th:errors="*{fullName}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Địa Chỉ Email</label> <input type="text"
-												class="form-control" th:field="*{email}" placeholder="Email"></input>
+												class="form-control" th:field="*{email}" placeholder="Email" maxlength="95"></input>
 											<span th:if="${#fields.hasErrors('email')}"
 												th:errors="*{email}">..</span>
 										</div>
@@ -163,7 +163,7 @@
 										</div>
 										<div class="form-group">
 											<label>Địa Chỉ</label> 
-											<input name="address" type="text" class="form-control" th:field="*{address}" placeholder="Địa chỉ">
+											<input name="address" type="text" class="form-control" th:field="*{address}" placeholder="Địa chỉ" maxlength="450">
 											<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
 										</div>
 										<div class="form-group">
