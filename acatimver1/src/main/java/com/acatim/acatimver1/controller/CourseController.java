@@ -7,8 +7,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -70,7 +68,7 @@ public class CourseController {
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		ModelAndView modelAndView = new ModelAndView();
-
+		search.setAdmin(false);
 		if (page == null) {
 			page = 1 + "";
 		}
@@ -84,11 +82,7 @@ public class CourseController {
 				search.setSearch(find);
 			}
 		}
-		
-		if (search.getSearch() != null && search.getSearch().trim().equals("")) {
-			search.setSearch(null);
-		}
-		
+
 		if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
 			search.setSubjectId(null);
 		}
@@ -97,9 +91,13 @@ public class CourseController {
 			search.setCategoryId(null);
 		}
 		
-		System.out.println(search);
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -153,7 +151,7 @@ public class CourseController {
 			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
 			
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
-			
+
 			modelAndView.addObject("allCourses", Courses);
 			
 			modelAndView.addObject("totalPages", pageableService.listPage());
@@ -225,6 +223,7 @@ public class CourseController {
 	public ModelAndView managerCourse(@RequestParam(required = false, name = "page") String page, Principal principal,
 			@ModelAttribute("searchValue") SearchValue search) throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
+		search.setAdmin(false);
 		String userName = null;
 		if (principal != null) {
 			userName = principal.getName();
@@ -242,7 +241,12 @@ public class CourseController {
 		}
 
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -404,7 +408,7 @@ public class CourseController {
 		return modelAndView;
 	}
 	
-	@RequestMapping(value = { "edit-course" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "update-course" }, method = RequestMethod.GET)
 	public ModelAndView editCourse(@RequestParam("courseId") String courseId, Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 
@@ -426,7 +430,7 @@ public class CourseController {
 		return modelAndView;
 	}
 
-	@RequestMapping(value = { "edit-course" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "update-course" }, method = RequestMethod.POST)
 	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course, BindingResult result,
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -437,7 +441,7 @@ public class CourseController {
 			modelAndView.setViewName("redirect:/index");
 			return modelAndView;
 		}
-		
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 		course.setUserName(userName);
 
 		if (result.hasErrors()) {
@@ -458,21 +462,9 @@ public class CourseController {
 			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
 			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
 			course.setDeadline(dateformat.StringToDateSQL(course.getDeadline()));
-			
+			System.out.println(course);
 			courseService.updateCourse(course);
-
-			User loginedUser = null;
-			if (principal != null) {
-				loginedUser = (User) ((Authentication) principal).getPrincipal();
-			}
-
-			History history = new History();
-			history.setIdChange(course.getCourseId());
-			history.setValueChanged("Infomation");
-			history.setDateChange(dateformat.currentDate());
-			history.setBy(loginedUser.getUsername());
-			historyService.addHistory(history);
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

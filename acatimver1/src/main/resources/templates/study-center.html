@@ -107,9 +107,6 @@
 						<input type="text" class="form-control" th:field="*{search}" 
 							placeholder="Gõ tên trung tâm hoặc địa chỉ vào đây"
 							style="width: 100%;">
-						<input type="hidden" th:field="*{subjectId}">
-						<input type="hidden" th:field="*{rateFilter}">
-						<input type="hidden" th:field="*{sortValue}">
 					</div>
 					<input type="submit" class="btn btn-primary" value="Tìm kiếm"
 						style="width: 100px; height: 57px; margin: auto;">
@@ -122,40 +119,21 @@
 				<div class="panel-heading accordion-head" style="width: 100%;">
 					<h4 class="panel-title">
 						<span class="glyphicon glyphicon-filter"></span> Bộ lọc
+						<span th:if="${sortName != null}" th:text="' - Sắp Xếp theo :' + ${sortName}" style="color: black; font-weight: bold;"></span>
 					</h4>
 
 					<form th:action="@{study-center}" th:object="${searchValue}"
 						method="POST" class=" form-inline" style="padding-top: 10px;">
-						
-						<!-- <div class="dropdown" style="margin: auto; height: 58px;">
-							<button class="btn dropdown-toggle" type="button"
-								id="dropdownMenuButton" data-toggle="dropdown"
-								aria-haspopup="true" aria-expanded="false" th:text="'-- Lọc Theo Thể loại --'" style="height: 58px; background-color: rgb(255, 255, 255);"></button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton" th:field="*{categoryId}">
-								<a class="dropdown-item" th:href="@{/study-center(categoryId='0')}" th:text="'-- Tất Cả --'"></a>
-								<a class="dropdown-item" th:each="category : ${allCategories}" th:href="@{study-center(categoryId=${category.categoryId})}" th:text="${category.categoryName}"></a>
-							</div>
-						</div>
-
-						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
-							<div class="chosen-select-single mg-b-20">
-								<select class="form-control" th:field="*{subjectId}">
-									<option value="0" th:text="'-- Lọc Theo Môn Học --'"></option>
-									<option th:if="${allSubjects != null}"
-										th:each="subject : ${allSubjects}"
-										th:value="${subject.subjectId}" th:text="${subject.subjectName}"></option>
-								</select>
-							</div>
-						</div> -->
+						<input type="hidden" th:field="*{search}">
 						<div class="d-flex ftco-animate" style="justify-content: center; margin: auto;">
 							<div class="chosen-select-single mg-b-20">
 								<select class="form-control" th:field="*{rateFilter}">
 									<option value="0" th:text="'-- Lọc Theo Đánh Giá --'"></option>
-									<option value="1" th:text="'1 Sao'"></option>
-									<option value="2" th:text="'2 Sao'"></option>
-									<option value="3" th:text="'3 Sao'"></option>
-									<option value="4" th:text="'4 Sao'"></option>
-									<option value="5" th:text="'5 Sao'"></option>
+									<option value="1" th:text="'0 - 1 Sao'"></option>
+									<option value="2" th:text="'1 - 2 Sao'"></option>
+									<option value="3" th:text="'2 - 3 Sao'"></option>
+									<option value="4" th:text="'3 - 4 Sao'"></option>
+									<option value="5" th:text="'4 - 5 Sao'"></option>
 								</select>
 							</div>
 						</div>
@@ -191,7 +169,7 @@
         					<span class="position" th:text = "${T(com.acatim.acatimver1.constants.Constants).role_study_center}" style="color: black;"></span>
         					<div class="ratingStar">
 									<div class="stars-outer">
-										<p id="a"  th:id="${studyCenter.userName}" th:value="${studyCenter.studyCenter.rate}"></p>
+										<p class="a" th:id="${studyCenter.userName}" th:value="${studyCenter.studyCenter.rate}"></p>
 										<div class="stars-inner" th:id="${studyCenter.userName} + '1'"></div>
 									</div>
 								</div>

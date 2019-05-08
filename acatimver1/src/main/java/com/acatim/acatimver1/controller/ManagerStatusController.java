@@ -48,7 +48,12 @@ public class ManagerStatusController {
 		}
 
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;

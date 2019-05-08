@@ -2,7 +2,12 @@ package com.acatim.acatimver1.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +54,7 @@ public class ImagesController {
 
 	@RequestMapping(value = "/manager-images", method = RequestMethod.GET)
 	public ModelAndView managerCourse(@RequestParam(required = false, name = "page") String page, Principal principal,
+			@RequestParam(required = false, name = "message") String message,
 			@ModelAttribute("searchValue") SearchValue search) throws NotFoundException {
 		ModelAndView modelAndView = new ModelAndView();
 		String userName = null;
@@ -64,7 +70,12 @@ public class ImagesController {
 		}
 
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -79,7 +90,7 @@ public class ImagesController {
 			List<Images> images = imagesService.getImagesByUserName(pageableService, userName);
 
 			modelAndView.addObject("images", images);
-
+			modelAndView.addObject("message", message);
 			modelAndView.addObject("totalPages", pageableService.listPage());
 			modelAndView.addObject("currentPage", currentPage);
 			modelAndView.addObject("hasPrevious", pageableService.hasPrevious());
@@ -129,6 +140,17 @@ public class ImagesController {
 		if (principal != null) {
 			curentUserName = principal.getName();
 		}
+
+		
+		ImageInputStream iis = ImageIO.createImageInputStream(file.getInputStream());
+		Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
+		while (!readers.hasNext()) {
+			redirectAttributes.addFlashAttribute("message",
+					"Hình ảnh Phải là hình ảnh .JPG hoặc .PNG !");
+			modelAndView.setViewName("redirect:/add-image");
+			return modelAndView;
+		}
+			
 		
 		if(file.getSize() > 5242880) {//5mb
 			redirectAttributes.addFlashAttribute("message",
@@ -146,17 +168,19 @@ public class ImagesController {
 			images.setLinkimage(image);
 			images.setActive(true);
 			images.setCreateDate(dateformat.currentDate());
-			System.out.println(file.getOriginalFilename() + " " +images);
+
 			imagesService.addImage(images);
 			redirectAttributes.addFlashAttribute("message",
-	                "Upload Successful file " + file.getOriginalFilename() + "!");
+	                "Thành Công tải lên hình ảnh " + file.getOriginalFilename() + "!");
 		}catch (Exception e) {
 			e.fillInStackTrace();
 			redirectAttributes.addFlashAttribute("message",
-	                "Could not upload " + file.getOriginalFilename() + "!");
+	                "Không Thể tải lên hình ảnh " + file.getOriginalFilename() + "!");
+			modelAndView.setViewName("redirect:/add-image");
+			return modelAndView;
 		}
 		
-		modelAndView.setViewName("redirect:/add-image");
+		modelAndView.setViewName("redirect:/manager-images");
 		return modelAndView;
 	}
 	

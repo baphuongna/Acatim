@@ -2,8 +2,12 @@ package com.acatim.acatimver1.controller;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -214,7 +218,12 @@ public class ProfileController {
 			return modelAndView;
 
 		} else {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -294,7 +303,12 @@ public class ProfileController {
 
 		} else {
 			
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -425,7 +439,12 @@ public class ProfileController {
 			page = 1 + "";
 		}
 		
-		int currentPage = Integer.parseInt(page);
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(page);
+		}catch (Exception e) {
+			currentPage = 1;
+		}
 
 		if (currentPage < 1) {
 			currentPage = 1;
@@ -529,7 +548,12 @@ public class ProfileController {
 			page = 1 + "";
 		}
 		
-		int currentPage = Integer.parseInt(page);
+		int currentPage = 1;
+		try {
+			currentPage = Integer.parseInt(page);
+		}catch (Exception e) {
+			currentPage = 1;
+		}
 
 		if (currentPage < 1) {
 			currentPage = 1;
@@ -827,6 +851,14 @@ public class ProfileController {
 			curentUserName = principal.getName();
 		}
 		
+		ImageInputStream iis = ImageIO.createImageInputStream(file.getInputStream());
+		Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
+		while (!readers.hasNext()) {
+			redirectAttributes.addFlashAttribute("message",
+					"Hình ảnh Phải là hình ảnh .JPG hoặc .PNG !");
+			modelAndView.setViewName("redirect:/upload-avatar");
+			return modelAndView;
+		}
 		
 		if(file.getSize() > 5242880) {//5mb
 			redirectAttributes.addFlashAttribute("message",
@@ -845,7 +877,9 @@ public class ProfileController {
 		}catch (Exception e) {
 			e.fillInStackTrace();
 			redirectAttributes.addFlashAttribute("message",
-	                "Could not upload " + file.getOriginalFilename() + "!");
+	                "Không Thể tải lên hình ảnh " + file.getOriginalFilename() + "!");
+			modelAndView.setViewName("redirect:/upload-avatar");
+			return modelAndView;
 		}
 		
 	    modelAndView.setViewName("redirect:/profile");

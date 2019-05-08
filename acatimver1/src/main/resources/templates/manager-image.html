@@ -110,20 +110,6 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="product-status-wrap drp-lst">
-								<div class="row">
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-										<div class="breadcome-heading">
-											<input type="text" th:field="*{search}" placeholder="Tìm Kiếm" style="width: 100%; height: 34px; border: 1px solid #d4d4d4; padding-left: 10px; padding-right: 10px; border-radius: 40px;"
-												class="search-int">
-										</div>
-									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-										<div class="breadcome-heading">
-											<button type="submit"
-												class="btn btn-primary waves-effect waves-light">Tìm Kiếm</button>
-										</div>
-									</div>
-								</div>
 								<div class="add-product">
                                 	<a class="btn btn-circle btn-primary" th:href="@{/profile}">Quay Lại Trang Cá Nhân</a>
                             	</div>
@@ -131,6 +117,7 @@
 						</div>
 					</div>
 				</form>
+				
 				<div class="row">
                     <div style="margin-top: 20px;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-status-wrap drp-lst">
@@ -149,7 +136,7 @@
 										<th>Hình Ảnh</th>
 										<th>Thông Tin Ảnh</th>
 										<th>Ngày Tạo</th>
-										<th>Trạng Thái</th>
+<!-- 										<th>Trạng Thái</th> -->
 										<th></th>
 									</tr>
 									<tr th:each="image : ${images}">
@@ -158,13 +145,13 @@
 										<td th:text="${image.description}"></td>
 										<td th:text="${image.createDate}"></td>
 										
-										<td th:if="${image.active == true}" style="color: green;"><b>Active</b></td>
-										<td th:if="${image.active == false}" style="color: red;" ><b>Blocked</b></td>
+										<!-- <td th:if="${image.active == true}" style="color: green;"><b>Active</b></td>
+										<td th:if="${image.active == false}" style="color: red;" ><b>Blocked</b></td> -->
 										<td>
-							 			<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${image.active == true}"
+							 			<!-- <button type="button" class="btn btn-danger" data-toggle="modal" th:if="${image.active == true}"
 							 								th:attr="data-target='#'+${image.id}+'1'"  th:text="'Khóa'"></button>
 							 			<button type="button" class="btn btn-success" data-toggle="modal" th:if="${image.active == false}"
-							 								th:attr="data-target='#'+${image.id}+'2'" th:text="'Mở Khóa'"></button>
+							 								th:attr="data-target='#'+${image.id}+'2'" th:text="'Mở Khóa'"></button> -->
 							 			<button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#'+${image.id}+'3'" th:text="'Xóa'"></button>
 										</td>
 									</tr>

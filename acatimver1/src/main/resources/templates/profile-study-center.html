@@ -707,9 +707,9 @@
 																<span class="price"><span class="price" th:text="${#numbers.formatInteger(course.price ,3,'POINT')}"></span>VND</span>
 															</p>
 															<h3 class="mb-3">
-																<a href="#" th:text="${course.courseName}"></a>
+																<a href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 															</h3>
-															<p th:utext="${course.courseDescription}"></p>
+															<p th:if="${course.courseDescription != null and #strings.length(course.courseDescription) > 45}" th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
 															<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary" th:text="'Chi Tiết'"></button></a>
 														</div>
 													</div>

@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/admin/*").hasAnyAuthority("Admin", "Manager");
 
 		http.authorizeRequests().antMatchers("/profile").hasAnyAuthority("Student", "Teacher", "Study Center");
-		http.authorizeRequests().antMatchers("/manager-course", "/add-course", "/manager-images", "/add-image").hasAnyAuthority("Teacher", "Study Center");
+		http.authorizeRequests().antMatchers("/manager-course", "/add-course", "/manager-images", "/add-image", "/edit-course").hasAnyAuthority("Teacher", "Study Center");
 		http.authorizeRequests().antMatchers("/change-password", "/update-info", "/upload-avatar").hasAnyAuthority("Student", "Teacher", "Study Center", "Admin", "Manager");
 		// Khi người dùng đã login, với vai trò XX.
 		// Nhưng truy cập vào trang yêu cầu vai trò YY,

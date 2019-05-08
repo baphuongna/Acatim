@@ -177,7 +177,8 @@
 									<tr th:each="course : ${allCourses}" th:with="sdf = ${new java.text.SimpleDateFormat('yyyy-MM-dd')}, times = ${new java.text.SimpleDateFormat('HH:mm')}">
 										<td th:text="${course.courseId}"></td>
 										<td th:text="${course.courseName}"></td>
-										<td th:utext="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
+										<td th:if="${course.courseDescription != null and #strings.length(course.courseDescription) > 50}" th:utext="${#strings.substring(course.courseDescription,0,50)} + '...'"></td>
+										<td th:if="${#strings.length(course.courseDescription) < 50}" th:utext="${course.courseDescription)}"></td>
 										<td th:text="${#dates.format(times.parse(course.startTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></td>
@@ -188,7 +189,7 @@
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
 										<td th:if="${course.active == false}" style="color: red;" ><b>Blocked</b></td>
 										<td>
-										<a th:href="@{/edit-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
+										<a th:href="@{/update-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Thay Đổi</button></a>
 										<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Xem thêm</button></a>
 							 						<button type="button" class="btn btn-danger" data-toggle="modal" th:if="${course.active == true}"
 							 								th:attr="data-target='#'+${course.courseId}+'1'">Khóa</button>

@@ -119,22 +119,27 @@ public class UserDAO extends JdbcDaoSupport {
 				sql += " Where User.role_id < 4 ";
 			}
 
+			if (search.getValue() == null && search.getSearch() != null) {
+				if (search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? or User.address like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+			
 			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
 			}
 
 			if (search.getRateFilter() != null) {
-				sql += " and rate >= ? and rate < ?";
-				params = append(params, search.getRateFilter());
-				params = append(params, Integer.parseInt(search.getRateFilter()) + 1);
-			}
-
-			if (search.getValue() == null && search.getSearch() != null) {
-				if (search.getSearch().trim().length() != 0) {
-					sql += " and User.full_name like ? or User.address like ? ";
-					params = append(params, "%" + search.getSearch() + "%");
-					params = append(params, "%" + search.getSearch() + "%");
+				if(Integer.parseInt(search.getRateFilter()) == 5) {
+					sql += " and rate >= ? ";
+					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
+				}else {
+					sql += " and rate >= ? and rate < ?";
+					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
+					params = append(params, search.getRateFilter());
 				}
 			}
 
@@ -191,22 +196,27 @@ public class UserDAO extends JdbcDaoSupport {
 				sql += " Where User.role_id < 4 ";
 			}
 
+			if (search.getValue() == null && search.getSearch() != null) {
+				if (search.getSearch().trim().length() != 0) {
+					sql += " and User.full_name like ? or User.address like ? ";
+					params = append(params, "%" + search.getSearch() + "%");
+					params = append(params, "%" + search.getSearch() + "%");
+				}
+			}
+
 			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
 			}
 
 			if (search.getRateFilter() != null) {
-				sql += " and rate >= ? and rate < ?";
-				params = append(params, search.getRateFilter());
-				params = append(params, Integer.parseInt(search.getRateFilter()) + 1);
-			}
-
-			if (search.getValue() == null && search.getSearch() != null) {
-				if (search.getSearch().trim().length() != 0) {
-					sql += " and User.full_name like ? or User.address like ? ";
-					params = append(params, "%" + search.getSearch() + "%");
-					params = append(params, "%" + search.getSearch() + "%");
+				if(Integer.parseInt(search.getRateFilter()) == 5) {
+					sql += " and rate >= ? ";
+					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
+				}else {
+					sql += " and rate >= ? and rate < ?";
+					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
+					params = append(params, search.getRateFilter());
 				}
 			}
 

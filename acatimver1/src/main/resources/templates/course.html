@@ -96,7 +96,7 @@
 				<form th:action="@{course}" th:object="${searchValue}" method="POST" class=" form-inline">
 					<div style="margin: auto;" class="form-group">
 						<input type="text" th:field="*{search}" class="form-control"
-							placeholder="Gõ tên khóa học cần tìm vào đây"
+							placeholder="Tìm Kiếm tên khóa học Hoặc Địa điểm Học cần tìm vào đây"
 							style="width: 100%;">
 					</div>
 					<input type="submit" class="btn btn-primary" value="Tìm kiếm"
@@ -164,7 +164,7 @@
 			</div>
 			
 			<div th:if="${searchValue.search != null}" class="search-form wow pulse animated" style="justify-content: center; text-align: center;">
-				<span th:text="'Tìm kiếm Tên khóa học ('" style="color: black; font-size: 30px;"></span>
+				<span th:text="'Tìm kiếm Tên khóa học Hoặc Địa điểm Học('" style="color: black; font-size: 30px;"></span>
 				<span th:text="${searchValue.search}" style="color: green; font-size: 30px;"></span>
 				<span th:text="') Tìm thấy ('" style="color: black; font-size: 30px;"></span>
 				<span th:text="${total}" style="color: green; font-size: 30px;"></span>
@@ -185,7 +185,7 @@
 								<a th:href="@{/detail-course(courseId=${course.courseId})}" th:text="${course.courseName}"></a>
 							</h3>
 							
-							<p th:if="${course.courseDescription != null}" th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
+							<p th:if="${course.courseDescription != null and #strings.length(course.courseDescription) > 45}" th:utext="${#strings.substring(course.courseDescription,0,45)} + '...'"></p>
 							<p th:utext="'<b>Hạn Đăng Ký :</b> ' + ${#dates.format(sdf.parse(course.deadline), 'dd-MMMMM-yyyy')}" style="color: black;"></p>
 							<p th:utext="'<b>Địa Điểm Học :</b> ' +  ${course.position}" style="color: black;"></p>
 							<a th:href="@{/detail-course(courseId=${course.courseId})}"><button type="button" class="btn btn-primary">Chi Tiết</button></a>

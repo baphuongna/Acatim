@@ -60,7 +60,7 @@ public class ManagerCourseController {
 			@ModelAttribute("searchValue") SearchValue search) {
 
 		ModelAndView modelAndView = new ModelAndView();
-
+		search.setAdmin(true);
 		if (page == null) {
 			page = 1 + "";
 		}
@@ -86,7 +86,12 @@ public class ManagerCourseController {
 		}
 
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -271,6 +276,7 @@ public class ManagerCourseController {
 	public ModelAndView updateCourse(@Valid @ModelAttribute("course") Course course, BindingResult result,
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("allSubjects", subjectService.getListSubject());
 		try {
 			modelAndView.addObject("allTeacherSC", userInfoService.getAllTeacherST());
 		} catch (Exception e) {
@@ -323,13 +329,6 @@ public class ManagerCourseController {
 		}
 
 		modelAndView.setViewName("redirect:/admin/all-courses");
-		return modelAndView;
-	}
-
-	@RequestMapping(value = { "course-info" }, method = RequestMethod.GET)
-	public ModelAndView courseInfo() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("admin/course-info");
 		return modelAndView;
 	}
 

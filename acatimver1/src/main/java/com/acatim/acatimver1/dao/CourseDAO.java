@@ -136,15 +136,26 @@ public class CourseDAO extends JdbcDaoSupport {
 		
 		Object[] params = new Object[] {};
 		
-		if(search.getCategoryId() != null) {
-			sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
-		}
+		sql += " INNER JOIN Subject ON Course.subject_id = Subject.subject_id ";
+		
 		
 		if(search.getUserName() != null) {
 			sql += " where Course.user_name = ?";
 			params = append(params, search.getUserName());
 		}else {
-			sql += " where Course.active = 1 ";
+			if(search.isAdmin()) {
+				sql += " where Course.active = 1 or Course.active = 0 ";
+			}else {
+				sql += " where Course.active = 1 ";
+			}
+		}
+		
+		if(search.getSearch() != null) {
+			if(search.getSearch().trim().length() != 0) {
+				sql += " and Course.courseName like ? or Course.position like ? ";
+				params = append(params, "%"+search.getSearch()+"%");
+				params = append(params, "%"+search.getSearch()+"%");
+			}
 		}
 		
 		if(search.getSubjectId() != null) {
@@ -157,18 +168,6 @@ public class CourseDAO extends JdbcDaoSupport {
 			params = append(params, search.getCategoryId());
 		}
 		
-//		if(search.getUserName() != null) {
-//			sql += " and Course.user_name = ?";
-//			params = append(params, search.getUserName());
-//		}
-
-		if(search.getSearch() != null) {
-			if(search.getSearch().trim().length() != 0) {
-				sql += " and Course.courseName like ? ";
-				params = append(params, "%"+search.getSearch()+"%");
-			}
-		}
-
 		CourseMapper mapper = new CourseMapper();
 		try {
 			List<Course> courses = this.getJdbcTemplate().query(sql, params, mapper);
@@ -176,7 +175,6 @@ public class CourseDAO extends JdbcDaoSupport {
 		}catch (Exception e) {
 			return null;
 		}
-		
 	}
 	
 	
@@ -192,7 +190,19 @@ public class CourseDAO extends JdbcDaoSupport {
 			sql += " where Course.user_name = ?";
 			params = append(params, search.getUserName());
 		}else {
-			sql += " where Course.active = 1 ";
+			if(search.isAdmin()) {
+				sql += " where Course.active = 1 or Course.active = 0 ";
+			}else {
+				sql += " where Course.active = 1 ";
+			}
+		}
+		
+		if(search.getSearch() != null) {
+			if(search.getSearch().trim().length() != 0) {
+				sql += " and Course.courseName like ? or Course.position like ? ";
+				params = append(params, "%"+search.getSearch()+"%");
+				params = append(params, "%"+search.getSearch()+"%");
+			}
 		}
 		
 		if(search.getSubjectId() != null) {
@@ -203,14 +213,6 @@ public class CourseDAO extends JdbcDaoSupport {
 		if(search.getCategoryId() != null) {
 			sql += " and Subject.category_id = ? ";
 			params = append(params, search.getCategoryId());
-		}
-		
-		
-		if(search.getSearch() != null) {
-			if(search.getSearch().trim().length() != 0) {
-				sql += " and Course.courseName like ? ";
-				params = append(params, "%"+search.getSearch()+"%");
-			}
 		}
 		
 		if(pageable.sort() != null) {
@@ -260,21 +262,21 @@ public class CourseDAO extends JdbcDaoSupport {
 	/* _______________________________________ */
 	
 	public void addCourse(Course course) {
-		String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date)\r\n"
+		String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date, deadline, position, active)\r\n"
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		this.getJdbcTemplate().update(sql, course.getCourseId(), course.getSubjectId(), course.getUserName(), course.getCourseName(),
 				course.getCourseDescription(), course.getStartTime(), course.getEndTime(), course.getStartDate(),
-				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate());
+				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate(), course.getDeadline(), course.getPosition(), course.isActive());
 	}
 
 	public void updateCourse(Course course) {
 		String sql = "UPDATE Course\r\n"
 				+ "SET subject_id = ?, user_name = ?, courseName = ?, courseDescription = ?, start_time = ?,\r\n"
-				+ "end_time = ?, start_date = ?, end_date = ?, price = ?, create_date = ?, update_date = ?\r\n"
+				+ "end_time = ?, start_date = ?, end_date = ?, price = ?, create_date = ?, update_date = ?, deadline = ?, position = ?\r\n"
 				+ "WHERE course_id = ?;";
 		this.getJdbcTemplate().update(sql, course.getSubjectId(), course.getUserName(), course.getCourseName(),
 				course.getCourseDescription(), course.getStartTime(), course.getEndTime(), course.getStartDate(),
-				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate() , course.getCourseId());
+				course.getEndDate(), course.getPrice(), course.getCreateDate(), course.getUpdateDate(), course.getDeadline(), course.getPosition() , course.getCourseId());
 	}
 
 	public void removeCourse(String courseId, boolean active) {

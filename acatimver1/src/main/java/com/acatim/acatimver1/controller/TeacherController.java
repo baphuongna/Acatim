@@ -43,7 +43,12 @@ public class TeacherController {
 		List<UserModel> listTeacher = null;
 
 		try {
-			int currentPage = Integer.parseInt(page);
+			int currentPage = 1;
+			try {
+				currentPage = Integer.parseInt(page);
+			}catch (Exception e) {
+				currentPage = 1;
+			}
 
 			if (currentPage < 1) {
 				currentPage = 1;
@@ -70,19 +75,27 @@ public class TeacherController {
 				search.setSortValue(sortValue);
 			}
 			
+			String sortName = null;
+			
 			if (search.getSortValue() != null) {
 				if (!search.getSortValue().equals("0")) {
 					if (search.getSortValue().equals("1")) {
 						sort = Sort.by("full_name").ascending();
+						sortName = "Tên Giáo Viên";
 					} else if (search.getSortValue().equals("2")) {
 						sort = Sort.by("create_date").ascending();
+						sortName = "Ngày cập nhật";
 					} else if (search.getSortValue().equals("3")) {
 						sort = Sort.by("rate").ascending();
+						sortName = "Đánh Giá Tăng Dần";
 					} else if (search.getSortValue().equals("4")) {
 						sort = Sort.by("rate").descending();
+						sortName = "Đánh Giá Giảm Dần";
 					}
 				}
 			}
+			
+			modelAndView.addObject("sortName", sortName);
 			
 			search.setRoleId("2");
 			

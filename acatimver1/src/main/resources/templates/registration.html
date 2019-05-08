@@ -177,7 +177,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11">
 														<label th:text="'Tên đăng nhập'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{userName}"
-															placeholder="Tên đăng nhập" class="form-control" pattern="[A-Za-z0-9]+" title="Chỉ được nhập A-Z, a-z, 0-9 và không được nhập các ký tự đặc biệt"/> <label
+															placeholder="Tên đăng nhập" class="form-control" pattern="[A-Za-z0-9]+" title="Chỉ được nhập A-Z, a-z, 0-9 và không được nhập các ký tự đặc biệt"/ maxlength="45"> <label
 															th:if="${#fields.hasErrors('userName')}"
 															th:errors="*{userName}" class="validation-message"></label>
 													</div>
@@ -187,7 +187,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<label th:text="'Tên đầy đủ'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{fullName}"
-															placeholder="Tên đầy đủ" class="form-control"  pattern=".*\S+.*" title="Tên không được để trống!"/> <label
+															placeholder="Tên đầy đủ" class="form-control"  pattern=".*\S+.*" title="Tên không được để trống!" maxlength="100"/> <label
 															th:if="${#fields.hasErrors('fullName')}"
 															th:errors="*{fullName}" class="validation-message"></label>
 													</div>
@@ -197,7 +197,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 														<label th:text="'Email'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="text" th:field="*{email}" placeholder="Email"
-															class="form-control"/> <label
+															class="form-control" maxlength="95"/> <label
 															th:if="${#fields.hasErrors('email')}"
 															th:errors="*{email}" class="validation-message"></label>
 													</div>
@@ -207,7 +207,7 @@ input[type="date"]:valid::before {
 													<div class="col-sm-11" style="margin-left: 30px;">
 													<label th:text="'Mật khẩu'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 														<input type="password" th:field="*{password}" id="pass"
-															placeholder="Mật khẩu" class="form-control" style="margin-bottom: 0px !important;" /> <label
+															placeholder="Mật khẩu" class="form-control" style="margin-bottom: 0px !important;" maxlength="80"/> <label
 															th:if="${#fields.hasErrors('password')}"
 															th:errors="*{password}" class="validation-message"></label>
 													</div>
@@ -233,8 +233,8 @@ input[type="date"]:valid::before {
 														<div id="locationField">
 															<label th:text="'Địa chỉ (có gợi ý )'"></label><label th:text="'*'" style="color: red; font-size: 20px;"></label>
 															<input id="autocomplete"
-																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()" required=""
-																type="text" class="form-control" name="address" pattern=".*\S+.*" title="Địa chỉ không được để trống!"/>
+																placeholder="Địa chỉ (có gợi ý ) " onFocus="geolocate()" required
+																type="text" class="form-control" name="address" pattern=".*\S+.*" title="Địa chỉ không được để trống!" maxlength="450"/>
 														</div>
 													</div>
 												</div>
@@ -258,7 +258,7 @@ input[type="date"]:valid::before {
 														<textarea
 															style="height: 120px; width: 100%; border-radius: 10px; padding: 15px;"
 															id="description" oninput='textwrite()'
-															placeholder="Mô tả về bạn"></textarea>
+															placeholder="Mô tả về bạn" maxlength="5000"></textarea>
 													</div>
 												</div>
 

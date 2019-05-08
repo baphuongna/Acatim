@@ -176,7 +176,7 @@
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="Course">
                                     <div class="row">
-                                    	<form th:action="@{/add-course}" th:object="${course}" method="POST" style="width: 100%; margin-left: 2%; margin-right: 2%;">
+                                    	<form th:action="@{update-course}" th:object="${course}" method="POST" style="width: 100%; margin-left: 2%; margin-right: 2%;">
 								<div class="row">
 									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<div class="form-group">
@@ -187,6 +187,13 @@
 											</select>
 											<div style="color: red;" th:if="${errorMessage != null}"
            												th:utext="${errorMessage}" class="error">...</div>
+										</div>
+										<div class="form-group" hidden="true">
+											<label>ID Khóa học</label> <input type="text"
+												class="form-control" th:field="*{courseId}"
+												placeholder="Tên Khóa Học"> <span id="error"
+												th:if="${#fields.hasErrors('courseId')}"
+												th:errors="*{courseId}">..</span>
 										</div>
 										<div class="form-group">
 											<label>Tên Khóa Học</label> <input type="text"
@@ -208,6 +215,13 @@
 												placeholder="endTime"> <span style="color: red;"
 												th:if="${#fields.hasErrors('endTime')}"
 												th:errors="*{endTime}">..</span>
+										</div>
+										<div class="form-group" hidden="true">
+											<label>Ngày Tạo</label> <input type="text"
+												class="form-control" th:field="*{createDate}"
+												placeholder="Tên Khóa Học"> <span id="error"
+												th:if="${#fields.hasErrors('createDate')}"
+												th:errors="*{createDate}">..</span>
 										</div>
 										<div class="form-group data-custon-pick data-custom-mg" id="data_5">
 											<label><b>Thời Gian Học Từ Ngày</b></label> 

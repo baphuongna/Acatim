@@ -190,26 +190,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <h3>500</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <h3>900</h3>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                                        <div class="address-hr">
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <h3>600</h3>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -220,6 +201,7 @@
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
+                                	<p th:if="${message != null}" th:text="${message}" style="color: red; font-size: 25px;"></p>
                                 	<form method="POST" th:action="@{/upload-avatar}" enctype="multipart/form-data">
 												<div class="row">
 													<div class="sparkline11-list col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -237,7 +219,7 @@
 																<div class="form-group">
 																	<input type='file' name="file" onchange="readURL(this);" />
 																</div>
-																<p th:if="${message != null}" th:text="${message}"></p>
+																
 															</div>
 														</div>
 														<button type="submit" class="btn btn-primary waves-effect waves-light" th:text="'Thay Đổi'">Send</button>

@@ -211,7 +211,7 @@
                             </ul>
                             <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
                                 <div class="product-tab-list tab-pane fade active in" id="description">
-                                	<p th:if="${message != null}" th:text="${message}"></p>
+                                	<p th:if="${message != null}" th:text="${message}" style="color: red; font-size: 25px;"></p>
                                 	<form method="POST" th:action="@{/add-image}" enctype="multipart/form-data">
 												<div class="row">
 													<div class="sparkline11-list col-lg-12 col-md-12 col-sm-12 col-xs-12">

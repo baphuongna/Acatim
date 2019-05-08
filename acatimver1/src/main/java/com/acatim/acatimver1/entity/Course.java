@@ -1,8 +1,11 @@
 package com.acatim.acatimver1.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +24,8 @@ public class Course {
 	
 	private String userName;
 	
+	@Length(min = 5, message = "*Tên khóa học có ít nhất là 5 ký tự")
+	@NotBlank(message = "*Tên khóa học không được để Khoảng trắng")
 	@NotEmpty(message = "*Tên khóa học không được để trống")
 	private String courseName;
 	
