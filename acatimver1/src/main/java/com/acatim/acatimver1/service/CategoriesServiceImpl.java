@@ -22,22 +22,22 @@ public class CategoriesServiceImpl implements CategoriesService{
 		return this.categoriesDAO.getCategoriesByCategoryId(categoryId);
 	}
 	
-	public void addCategories(Categories categories) {
-		this.categoriesDAO.addCategories(categories);
+	public boolean addCategories(Categories categories) {
+		return this.categoriesDAO.addCategories(categories);
 	}
 	
-	public void updateCategories(Categories categories) {
-		this.categoriesDAO.updateCategories(categories);
+	public boolean updateCategories(Categories categories) {
+		return this.categoriesDAO.updateCategories(categories);
 	}
 	
-	public void removeCategories(String categoryId) {
+	public boolean removeCategories(String categoryId) {
 		boolean active = false;
-		this.categoriesDAO.removeCategories(categoryId, active);
+		return this.categoriesDAO.removeCategories(categoryId, active);
 	}
 	
-	public void unlockCategories(String categoryId) {
+	public boolean unlockCategories(String categoryId) {
 		boolean active = true;
-		this.categoriesDAO.removeCategories(categoryId, active);
+		return this.categoriesDAO.removeCategories(categoryId, active);
 	}
 	
 }

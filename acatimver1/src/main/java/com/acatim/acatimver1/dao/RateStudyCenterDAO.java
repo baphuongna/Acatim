@@ -30,22 +30,32 @@ public class RateStudyCenterDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addRateStudyCenter(RateStudyCenter rateStudyCenter) {
-		String sql = "INSERT INTO RateStudyCenter (rate_id, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality, checkSCNull)\r\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, rateStudyCenter.getRateId(), rateStudyCenter.getEquipmentQuality(),
-				rateStudyCenter.getStaffAttitude(), rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(),
-				rateStudyCenter.getSafety(), rateStudyCenter.getInternet(), rateStudyCenter.getLocation(),
-				rateStudyCenter.getTeachingQuality(), rateStudyCenter.getCheckSCNull());
+	public boolean addRateStudyCenter(RateStudyCenter rateStudyCenter) {
+		try {
+			String sql = "INSERT INTO RateStudyCenter (rate_id, equipmentQuality, staffAttitude, reputation, happiness, safety, internet, location, teachingQuality, checkSCNull)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, rateStudyCenter.getRateId(), rateStudyCenter.getEquipmentQuality(),
+					rateStudyCenter.getStaffAttitude(), rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(),
+					rateStudyCenter.getSafety(), rateStudyCenter.getInternet(), rateStudyCenter.getLocation(),
+					rateStudyCenter.getTeachingQuality(), rateStudyCenter.getCheckSCNull());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateRateStudyCenter(RateStudyCenter rateStudyCenter) {
-		String sql = "UPDATE RateStudyCenter\r\n"
-				+ "SET equipmentQuality = ?, staffAttitude = ?, reputation =?, happiness = ?, safety = ?, internet = ?, location = ?, teachingQuality = ?\r\n"
-				+ "WHERE rate_id = ?;";
-		this.getJdbcTemplate().update(sql, rateStudyCenter.getEquipmentQuality(), rateStudyCenter.getStaffAttitude(),
-				rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(), rateStudyCenter.getSafety(),
-				rateStudyCenter.getInternet(), rateStudyCenter.getLocation(), rateStudyCenter.getTeachingQuality(),
-				rateStudyCenter.getRateId());
+	public boolean updateRateStudyCenter(RateStudyCenter rateStudyCenter) {
+		try {
+			String sql = "UPDATE RateStudyCenter\r\n"
+					+ "SET equipmentQuality = ?, staffAttitude = ?, reputation =?, happiness = ?, safety = ?, internet = ?, location = ?, teachingQuality = ?\r\n"
+					+ "WHERE rate_id = ?;";
+			this.getJdbcTemplate().update(sql, rateStudyCenter.getEquipmentQuality(),
+					rateStudyCenter.getStaffAttitude(), rateStudyCenter.getReputation(), rateStudyCenter.getHappiness(),
+					rateStudyCenter.getSafety(), rateStudyCenter.getInternet(), rateStudyCenter.getLocation(),
+					rateStudyCenter.getTeachingQuality(), rateStudyCenter.getRateId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

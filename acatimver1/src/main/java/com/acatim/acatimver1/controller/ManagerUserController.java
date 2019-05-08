@@ -144,7 +144,7 @@ public class ManagerUserController {
 			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
-		} catch (NotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("redirect:/admin/allUser");
@@ -169,7 +169,7 @@ public class ManagerUserController {
 			history.setDateChange(dateformat.currentDate());
 			history.setBy(loginedUser.getUsername());
 			historyService.addHistory(history);
-		} catch (NotFoundException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		modelAndView.setViewName("redirect:/admin/allUser");

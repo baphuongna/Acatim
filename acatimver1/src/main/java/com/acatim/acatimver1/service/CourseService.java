@@ -10,13 +10,13 @@ public interface CourseService {
 	
 	List<Course> getAllCourse();
 
-	void addCourse(Course course);
+	boolean addCourse(Course course);
 	
-	void updateCourse(Course course);
+	boolean updateCourse(Course course);
 
-	void removeCourse(String courseId);
+	boolean removeCourse(String courseId);
 	
-	void unlockCourse(String courseId);
+	boolean unlockCourse(String courseId);
 	
 	Course getCourseById(String courseId);
 

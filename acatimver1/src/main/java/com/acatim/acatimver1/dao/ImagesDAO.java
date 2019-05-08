@@ -93,26 +93,46 @@ public class ImagesDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addImage(Images images) {
-		String sql = "INSERT INTO images (user_name,linkimage,description, create_date, update_date,active) VALUES (?,?,?,?,?,?);";
-		this.getJdbcTemplate().update(sql, images.getUserName(), images.getLinkimage(), images.getDescription(),
-				images.getCreateDate(), images.getUpdateDate(), images.isActive());
+	public boolean addImage(Images images) {
+		try {
+			String sql = "INSERT INTO images (user_name,linkimage,description, create_date, update_date,active) VALUES (?,?,?,?,?,?);";
+			this.getJdbcTemplate().update(sql, images.getUserName(), images.getLinkimage(), images.getDescription(),
+					images.getCreateDate(), images.getUpdateDate(), images.isActive());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateImages(Images images) {
-		String sql = "UPDATE images SET linkimage = ?, description = ?, update_date = ? WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, images.getLinkimage(), images.getDescription(), images.getUpdateDate(),
-				images.getId());
+	public boolean updateImages(Images images) {
+		try {
+			String sql = "UPDATE images SET linkimage = ?, description = ?, update_date = ? WHERE id = ?;";
+			this.getJdbcTemplate().update(sql, images.getLinkimage(), images.getDescription(), images.getUpdateDate(),
+					images.getId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void activeImages(String id, boolean active) {
-		String sql = "UPDATE images SET active = ? WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, active, id);
+	public boolean activeImages(String id, boolean active) {
+		try {
+			String sql = "UPDATE images SET active = ? WHERE id = ?;";
+			this.getJdbcTemplate().update(sql, active, id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void deleteImages(String id) {
-		String sql = "DELETE FROM images WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, id);
+	public boolean deleteImages(String id) {
+		try {
+			String sql = "DELETE FROM images WHERE id = ?;";
+			this.getJdbcTemplate().update(sql, id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

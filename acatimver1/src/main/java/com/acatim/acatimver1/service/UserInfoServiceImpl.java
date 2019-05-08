@@ -68,54 +68,54 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public void addUserInfo(UserModel user) throws NotFoundException {
+	public boolean addUserInfo(UserModel user) {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		this.UserDAO.addUser(user);
+		return this.UserDAO.addUser(user);
 
 	}
 
 	@Override
-	public void addTeacherInfo(Teacher teacher) throws NotFoundException {
-		this.TeacherDAO.addTeacherInfo(teacher);
+	public boolean addTeacherInfo(Teacher teacher) {
+		return this.TeacherDAO.addTeacherInfo(teacher);
 
 	}
 
 	@Override
-	public void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException {
-		this.StudyCenterDAO.addStudyCenterInfo(studyCenter);
+	public boolean addStudyCenterInfo(StudyCenter studyCenter) {
+		return this.StudyCenterDAO.addStudyCenterInfo(studyCenter);
 	}
 
 	@Override
-	public void addStudentInfo(Student student) throws NotFoundException {
-		this.StudentDAO.addStudentInfo(student);
-
-	}
-
-	@Override
-	public void updateUserInfo(UserModel user) throws NotFoundException {
-		this.UserDAO.updateUser(user);
+	public boolean addStudentInfo(Student student) {
+		return this.StudentDAO.addStudentInfo(student);
 
 	}
 
 	@Override
-	public void removeUser(String userName) throws NotFoundException {
+	public boolean updateUserInfo(UserModel user) {
+		return this.UserDAO.updateUser(user);
+
+	}
+
+	@Override
+	public boolean removeUser(String userName) {
 		boolean active = false;
-		this.UserDAO.removeUser(userName, active);
+		return this.UserDAO.removeUser(userName, active);
 	}
 
 	@Override
-	public void unlockUser(String userName) throws NotFoundException {
+	public boolean unlockUser(String userName) {
 		boolean active = true;
-		this.UserDAO.removeUser(userName, active);
+		return this.UserDAO.removeUser(userName, active);
 
 	}
 
 	@Override
-	public void changePassword(String userName, String password) throws NotFoundException {
+	public boolean changePassword(String userName, String password) throws NotFoundException {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 		password = bCryptPasswordEncoder.encode(password);
-		this.UserDAO.changePassword(userName, password);
+		return this.UserDAO.changePassword(userName, password);
 
 	}
 	
@@ -138,20 +138,20 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public void updateTeacherInfo(Teacher teacher) throws NotFoundException {
-		this.TeacherDAO.updateTeacherInfo(teacher);
+	public boolean updateTeacherInfo(Teacher teacher) {
+		return this.TeacherDAO.updateTeacherInfo(teacher);
 
 	}
 
 	@Override
-	public void updateStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException {
-		this.StudyCenterDAO.updateStudyCenterInfo(studyCenter);
+	public boolean updateStudyCenterInfo(StudyCenter studyCenter) {
+		return this.StudyCenterDAO.updateStudyCenterInfo(studyCenter);
 
 	}
 
 	@Override
-	public void updateStudentInfo(Student student) throws NotFoundException {
-		this.StudentDAO.updateStudentInfo(student);
+	public boolean updateStudentInfo(Student student) {
+		return this.StudentDAO.updateStudentInfo(student);
 
 	}
 
@@ -182,15 +182,15 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	
 	@Override
-	public void removeContact(String userName) throws NotFoundException {
+	public boolean removeContact(String userName) throws NotFoundException {
 		boolean active = false;
-		this.UserDAO.removeContact(userName, active);
+		return this.UserDAO.removeContact(userName, active);
 	}
 
 	@Override
-	public void unlockContact(String userName) throws NotFoundException {
+	public boolean unlockContact(String userName) throws NotFoundException {
 		boolean active = true;
-		this.UserDAO.removeContact(userName, active);
+		return this.UserDAO.removeContact(userName, active);
 
 	}
 
@@ -240,8 +240,8 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public void updateAvatar(String userName, String avatar) {
-		this.UserDAO.updateAvatar(userName, avatar);
+	public boolean updateAvatar(String userName, String avatar) {
+		return this.UserDAO.updateAvatar(userName, avatar);
 	}
 
 	@Override

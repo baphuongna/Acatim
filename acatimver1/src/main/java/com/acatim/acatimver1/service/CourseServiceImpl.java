@@ -20,23 +20,23 @@ public class CourseServiceImpl implements CourseService{
 		return this.courseDAO.getAllCourse();
 	}
 
-	public void addCourse(Course course) {
+	public boolean addCourse(Course course) {
 		course.setActive(true);
-		this.courseDAO.addCourse(course);
+		return this.courseDAO.addCourse(course);
 	}
 
-	public void updateCourse(Course course) {
-		this.courseDAO.updateCourse(course);
+	public boolean updateCourse(Course course) {
+		return this.courseDAO.updateCourse(course);
 	}
 
-	public void removeCourse(String courseId) {
+	public boolean removeCourse(String courseId) {
 		boolean active = false;
-		this.courseDAO.removeCourse(courseId, active);
+		return this.courseDAO.removeCourse(courseId, active);
 	}
 	
-	public void unlockCourse(String courseId) {
+	public boolean unlockCourse(String courseId) {
 		boolean active = true;
-		this.courseDAO.removeCourse(courseId, active);
+		return this.courseDAO.removeCourse(courseId, active);
 	}
 	
 	public Course getCourseById(String courseId) {

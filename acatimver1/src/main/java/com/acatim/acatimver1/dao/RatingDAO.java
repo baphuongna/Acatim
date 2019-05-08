@@ -128,22 +128,37 @@ public class RatingDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addRating(Rating rating) {
-		String sql = "INSERT INTO Rating (rate_id, user_name, reciever_name, create_date, update_date, rate, comment, active)\r\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, rating.getRateId(), rating.getUserName(), rating.getRecieverName(),
-				rating.getCreateDate(), rating.getUpdateDate(), rating.getRate(), rating.getComment(),
-				rating.isActive());
+	public boolean addRating(Rating rating) {
+		try {
+			String sql = "INSERT INTO Rating (rate_id, user_name, reciever_name, create_date, update_date, rate, comment, active)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, rating.getRateId(), rating.getUserName(), rating.getRecieverName(),
+					rating.getCreateDate(), rating.getUpdateDate(), rating.getRate(), rating.getComment(),
+					rating.isActive());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void removeRating(String rateId, boolean active) {
-		String sql = "UPDATE Rating SET active = ? WHERE rate_id = ?;";
-		this.getJdbcTemplate().update(sql, active, rateId);
+	public boolean removeRating(String rateId, boolean active) {
+		try {
+			String sql = "UPDATE Rating SET active = ? WHERE rate_id = ?;";
+			this.getJdbcTemplate().update(sql, active, rateId);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateRating(Rating rating) {
-		String sql = "UPDATE Rating SET update_date = ?, rate = ?, comment = ? WHERE rate_id = ?;";
-		this.getJdbcTemplate().update(sql, rating.getUpdateDate(), rating.getRate(), rating.getComment(),
-				rating.getRateId());
+	public boolean updateRating(Rating rating) {
+		try {
+			String sql = "UPDATE Rating SET update_date = ?, rate = ?, comment = ? WHERE rate_id = ?;";
+			this.getJdbcTemplate().update(sql, rating.getUpdateDate(), rating.getRate(), rating.getComment(),
+					rating.getRateId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

@@ -113,9 +113,9 @@ public class UserDAO extends JdbcDaoSupport {
 				}
 			}
 
-			if(search.isAdmin() == false) {
+			if (search.isAdmin() == false) {
 				sql += " Where User.role_id < 4 and user.active = 1 ";
-			}else {
+			} else {
 				sql += " Where User.role_id < 4 ";
 			}
 
@@ -126,17 +126,17 @@ public class UserDAO extends JdbcDaoSupport {
 					params = append(params, "%" + search.getSearch() + "%");
 				}
 			}
-			
+
 			if (search.getRoleId() != null) {
 				sql += " and User.role_id = ? ";
 				params = append(params, search.getRoleId());
 			}
 
 			if (search.getRateFilter() != null) {
-				if(Integer.parseInt(search.getRateFilter()) == 5) {
+				if (Integer.parseInt(search.getRateFilter()) == 5) {
 					sql += " and rate >= ? ";
 					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
-				}else {
+				} else {
 					sql += " and rate >= ? and rate < ?";
 					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
 					params = append(params, search.getRateFilter());
@@ -190,9 +190,9 @@ public class UserDAO extends JdbcDaoSupport {
 					sql += " INNER JOIN StudyCenter ON User.user_name = StudyCenter.user_name ";
 				}
 			}
-			if(search.isAdmin() == false) {
+			if (search.isAdmin() == false) {
 				sql += " Where User.role_id < 4 and user.active = 1 ";
-			}else {
+			} else {
 				sql += " Where User.role_id < 4 ";
 			}
 
@@ -210,10 +210,10 @@ public class UserDAO extends JdbcDaoSupport {
 			}
 
 			if (search.getRateFilter() != null) {
-				if(Integer.parseInt(search.getRateFilter()) == 5) {
+				if (Integer.parseInt(search.getRateFilter()) == 5) {
 					sql += " and rate >= ? ";
 					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
-				}else {
+				} else {
 					sql += " and rate >= ? and rate < ?";
 					params = append(params, Integer.parseInt(search.getRateFilter()) - 1);
 					params = append(params, search.getRateFilter());
@@ -327,38 +327,64 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addUser(UserModel user) {
-		String sql = "INSERT INTO User (user_name,role_id,full_name,email,password,create_date,phone,address,active) VALUES (?,?,?,?,?,?,?,?,?);";
-		this.getJdbcTemplate().update(sql, user.getUserName(), user.getRole_id(), user.getFullName(), user.getEmail(),
-				user.getPassword(), user.getCreateDate(), user.getPhone(), user.getAddress(), user.isActive());
+	public boolean addUser(UserModel user) {
+		try {
+			String sql = "INSERT INTO User (user_name,role_id,full_name,email,password,create_date,phone,address,active) VALUES (?,?,?,?,?,?,?,?,?);";
+			this.getJdbcTemplate().update(sql, user.getUserName(), user.getRole_id(), user.getFullName(),
+					user.getEmail(), user.getPassword(), user.getCreateDate(), user.getPhone(), user.getAddress(),
+					user.isActive());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void removeUser(String userName, boolean active) {
-		String sql = "UPDATE User SET active = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, active, userName);
+	public boolean removeUser(String userName, boolean active) {
+		try {
+			String sql = "UPDATE User SET active = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, active, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateUser(UserModel user) {
-		String sql = "UPDATE User SET full_name = ?, email = ?, phone = ?, address = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getPhone(), user.getAddress(),
-				user.getUserName());
+	public boolean updateUser(UserModel user) {
+		try {
+			String sql = "UPDATE User SET full_name = ?, email = ?, phone = ?, address = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, user.getFullName(), user.getEmail(), user.getPhone(), user.getAddress(),
+					user.getUserName());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateAvatar(String userName, String avatar) {
-		String sql = "UPDATE User SET avatar = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, avatar, userName);
+	public boolean updateAvatar(String userName, String avatar) {
+		try {
+			String sql = "UPDATE User SET avatar = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, avatar, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void changePassword(String userName, String password) {
-		String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, password, userName);
+	public boolean changePassword(String userName, String password) {
+		try {
+			String sql = "UPDATE User SET password = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, password, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public UserModel findAccConfirm(String userName, String email) {
 		String sql = "Select * From User "
 				+ " INNER JOIN confirmemail ON User.user_name = confirmemail.user_name where User.user_name = ? and User.email = ?;";
 
-		Object[] params = new Object[] { userName , email};
+		Object[] params = new Object[] { userName, email };
 		UserMapper mapper = new UserMapper();
 		try {
 			UserModel userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
@@ -390,9 +416,14 @@ public class UserDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void removeContact(String userName, boolean active) {
-		String sql = "UPDATE ContactUs SET isActive = ? WHERE id = ?;";
-		this.getJdbcTemplate().update(sql, active, userName);
+	public boolean removeContact(String userName, boolean active) {
+		try {
+			String sql = "UPDATE ContactUs SET isActive = ? WHERE id = ?;";
+			this.getJdbcTemplate().update(sql, active, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

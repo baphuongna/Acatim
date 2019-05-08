@@ -57,13 +57,23 @@ public class StudentDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void updateStudentInfo(Student student) {
-		String sql = "UPDATE Student SET DOB = ?, gender = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(), student.getUserName());
+	public boolean updateStudentInfo(Student student) {
+		try {
+			String sql = "UPDATE Student SET DOB = ?, gender = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, student.getDob(), student.isGender(), student.getUserName());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void addStudentInfo(Student student) {
-		String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + "VALUES (?, ?, ?);";
-		this.getJdbcTemplate().update(sql, student.getUserName(), student.getDob(), student.isGender());
+	public boolean addStudentInfo(Student student) {
+		try {
+			String sql = "INSERT INTO Student (user_name, DOB, gender)\r\n" + "VALUES (?, ?, ?);";
+			this.getJdbcTemplate().update(sql, student.getUserName(), student.getDob(), student.isGender());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

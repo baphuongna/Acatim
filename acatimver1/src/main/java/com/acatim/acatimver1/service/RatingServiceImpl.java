@@ -63,19 +63,19 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public void addRating(Rating rating) {
-		this.ratingDAO.addRating(rating);
+	public boolean addRating(Rating rating) {
+		return this.ratingDAO.addRating(rating);
 	}
 
 	@Override
-	public void removeRating(String rateId) {
+	public boolean removeRating(String rateId) {
 		boolean active = false;
-		this.ratingDAO.removeRating(rateId, active);
+		return this.ratingDAO.removeRating(rateId, active);
 	}
 
 	@Override
-	public void updateRating(Rating rating) {
-		this.ratingDAO.updateRating(rating);
+	public boolean updateRating(Rating rating) {
+		return this.ratingDAO.updateRating(rating);
 	}
 
 	@Override
@@ -84,13 +84,13 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public void addRateTeacher(RateTeacher rateTeacher) {
-		this.rateTeacherDAO.addRateTeacher(rateTeacher);
+	public boolean addRateTeacher(RateTeacher rateTeacher) {
+		return this.rateTeacherDAO.addRateTeacher(rateTeacher);
 	}
 
 	@Override
-	public void updateRateTeacher(RateTeacher rateTeacher) {
-		this.rateTeacherDAO.updateRateTeacher(rateTeacher);
+	public boolean updateRateTeacher(RateTeacher rateTeacher) {
+		return this.rateTeacherDAO.updateRateTeacher(rateTeacher);
 	}
 
 	@Override
@@ -99,13 +99,13 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public void addRateStudyCenter(RateStudyCenter rateStudyCenter) {
-		this.rateStudyCenterDAO.addRateStudyCenter(rateStudyCenter);
+	public boolean addRateStudyCenter(RateStudyCenter rateStudyCenter) {
+		return this.rateStudyCenterDAO.addRateStudyCenter(rateStudyCenter);
 	}
 
 	@Override
-	public void updateRateStudyCenter(RateStudyCenter rateStudyCenter) {
-		this.rateStudyCenterDAO.updateRateStudyCenter(rateStudyCenter);
+	public boolean updateRateStudyCenter(RateStudyCenter rateStudyCenter) {
+		return this.rateStudyCenterDAO.updateRateStudyCenter(rateStudyCenter);
 	}
 
 	public CountRate countRatingTeacher(String userName) {
@@ -324,13 +324,13 @@ public class RatingServiceImpl implements RatingService {
 	}
 
 	@Override
-	public void updateRateTeacher(float rate, String userName) {
-		this.TeacherDAO.updateRateTeacher(rate, userName);
+	public boolean updateRateTeacher(float rate, String userName) {
+		return this.TeacherDAO.updateRateTeacher(rate, userName);
 	}
 
 	@Override
-	public void updateRateStudyCenter(float rate, String userName) {
-		this.StudyCenterDAO.updateRateStudyCenter(rate, userName);
+	public boolean updateRateStudyCenter(float rate, String userName) {
+		return this.StudyCenterDAO.updateRateStudyCenter(rate, userName);
 	}
 
 	@Override

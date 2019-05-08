@@ -10,11 +10,11 @@ public interface CategoriesService {
 	
 	Categories getCategoriesByCategoryId(String categoryId);
 	
-	void addCategories(Categories categories);
+	boolean addCategories(Categories categories);
 	
-	void updateCategories(Categories categories);
+	boolean updateCategories(Categories categories);
 	
-	void removeCategories(String categoryId);
+	boolean removeCategories(String categoryId);
 	
-	void unlockCategories(String categoryId);
+	boolean unlockCategories(String categoryId);
 }

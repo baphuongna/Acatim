@@ -60,19 +60,34 @@ public class StudyCenterDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void updateStudyCenterInfo(StudyCenter studyCenter) {
-		String sql = "UPDATE StudyCenter SET description = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getUserName());
+	public boolean updateStudyCenterInfo(StudyCenter studyCenter) {
+		try {
+			String sql = "UPDATE StudyCenter SET description = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, studyCenter.getDescription(), studyCenter.getUserName());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateRateStudyCenter(float rate, String userName) {
-		String sql = "UPDATE StudyCenter SET rate = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, rate, userName);
+	public boolean updateRateStudyCenter(float rate, String userName) {
+		try {
+			String sql = "UPDATE StudyCenter SET rate = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, rate, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void addStudyCenterInfo(StudyCenter studyCenter) {
-		String sql = "INSERT INTO StudyCenter (user_name, description, rate)\r\n" + "VALUES (?, ?, ?);";
-		this.getJdbcTemplate().update(sql, studyCenter.getUserName(), studyCenter.getDescription(),
-				studyCenter.getRate());
+	public boolean addStudyCenterInfo(StudyCenter studyCenter) {
+		try {
+			String sql = "INSERT INTO StudyCenter (user_name, description, rate)\r\n" + "VALUES (?, ?, ?);";
+			this.getJdbcTemplate().update(sql, studyCenter.getUserName(), studyCenter.getDescription(),
+					studyCenter.getRate());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

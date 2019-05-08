@@ -30,19 +30,29 @@ public class RateTeacherDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addRateTeacher(RateTeacher rateTeacher) {
-		String sql = "INSERT INTO RateTeacher (rate_id, easyLevel, examDifficulty, textbookUse, helpfulLevel, clarityLevel, knowledgeable, checkTeaNull)\r\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, rateTeacher.getRateId(), rateTeacher.getEasyLevel(),
-				rateTeacher.getExamDifficulty(), rateTeacher.getTextbookUse(), rateTeacher.getHelpfulLevel(),
-				rateTeacher.getClarityLevel(), rateTeacher.getKnowledgeable(), rateTeacher.getCheckTeaNull());
+	public boolean addRateTeacher(RateTeacher rateTeacher) {
+		try {
+			String sql = "INSERT INTO RateTeacher (rate_id, easyLevel, examDifficulty, textbookUse, helpfulLevel, clarityLevel, knowledgeable, checkTeaNull)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, rateTeacher.getRateId(), rateTeacher.getEasyLevel(),
+					rateTeacher.getExamDifficulty(), rateTeacher.getTextbookUse(), rateTeacher.getHelpfulLevel(),
+					rateTeacher.getClarityLevel(), rateTeacher.getKnowledgeable(), rateTeacher.getCheckTeaNull());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateRateTeacher(RateTeacher rateTeacher) {
-		String sql = "UPDATE RateTeacher SET easyLevel = ?, examDifficulty = ?, textbookUse = ?, helpfulLevel = ?, clarityLevel = ?, knowledgeable = ?\r\n"
-				+ "WHERE rate_id = ?;";
-		this.getJdbcTemplate().update(sql, rateTeacher.getEasyLevel(), rateTeacher.getExamDifficulty(),
-				rateTeacher.getTextbookUse(), rateTeacher.getHelpfulLevel(), rateTeacher.getClarityLevel(),
-				rateTeacher.getKnowledgeable(), rateTeacher.getRateId());
+	public boolean updateRateTeacher(RateTeacher rateTeacher) {
+		try {
+			String sql = "UPDATE RateTeacher SET easyLevel = ?, examDifficulty = ?, textbookUse = ?, helpfulLevel = ?, clarityLevel = ?, knowledgeable = ?\r\n"
+					+ "WHERE rate_id = ?;";
+			this.getJdbcTemplate().update(sql, rateTeacher.getEasyLevel(), rateTeacher.getExamDifficulty(),
+					rateTeacher.getTextbookUse(), rateTeacher.getHelpfulLevel(), rateTeacher.getClarityLevel(),
+					rateTeacher.getKnowledgeable(), rateTeacher.getRateId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

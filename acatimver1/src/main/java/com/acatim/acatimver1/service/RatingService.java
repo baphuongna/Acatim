@@ -22,23 +22,23 @@ public interface RatingService {
 
 	List<Rating> getAllRating();
 
-	void addRating(Rating rating);
+	boolean addRating(Rating rating);
 
-	void removeRating(String rateId);
+	boolean removeRating(String rateId);
 
-	void updateRating(Rating rating);
+	boolean updateRating(Rating rating);
 
 	RateTeacher getRateTeacherByUserName(String rateId);
 
-	void addRateTeacher(RateTeacher rateTeacher);
+	boolean addRateTeacher(RateTeacher rateTeacher);
 
-	void updateRateTeacher(RateTeacher rateTeacher);
+	boolean updateRateTeacher(RateTeacher rateTeacher);
 
 	RateStudyCenter getRateStudyCenterByUserName(String rateId);
 	
-	void addRateStudyCenter(RateStudyCenter rateStudyCenter);
+	boolean addRateStudyCenter(RateStudyCenter rateStudyCenter);
 
-	void updateRateStudyCenter(RateStudyCenter rateStudyCenter);
+	boolean updateRateStudyCenter(RateStudyCenter rateStudyCenter);
 	
 	CountRate countRatingTeacher(String userName);
 	
@@ -52,9 +52,9 @@ public interface RatingService {
 	
 	float updateTotalRateStudyCenter(List<Rating> ratings);
 	
-	void updateRateTeacher(float rate, String userName);
+	boolean updateRateTeacher(float rate, String userName);
 	
-	void updateRateStudyCenter(float rate, String userName);
+	boolean updateRateStudyCenter(float rate, String userName);
 	
 	String genRatingId();
 	

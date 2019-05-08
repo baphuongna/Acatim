@@ -26,22 +26,22 @@ public class SubjectServiceImpl implements SubjectService {
 		return this.subjectDAO.getSubjectBySubjectId(subjectId);
 	}
 	
-	public void addSubject(Subject subject) {
-		this.subjectDAO.addSubject(subject);
+	public boolean addSubject(Subject subject) {
+		return this.subjectDAO.addSubject(subject);
 	}
 	
-	public void updateSubject(Subject subject) {
-		this.subjectDAO.updateSubject(subject);
+	public boolean updateSubject(Subject subject) {
+		return this.subjectDAO.updateSubject(subject);
 	}
 	
-	public void removeSubject(String subjectId) {
+	public boolean removeSubject(String subjectId) {
 		boolean active = false;
-		this.subjectDAO.removeSubject(subjectId, active);
+		return this.subjectDAO.removeSubject(subjectId, active);
 	}
 	
-	public void unlockSubject(String subjectId) {
+	public boolean unlockSubject(String subjectId) {
 		boolean active = true;
-		this.subjectDAO.removeSubject(subjectId, active);
+		return this.subjectDAO.removeSubject(subjectId, active);
 	}
 	
 	public List<Subject> getSubjectByCategoryId(String categoryId) {

@@ -15,23 +15,23 @@ import com.acatim.acatimver1.mapper.CategoriesMapper;
 @Repository
 @Transactional
 public class CategoriesDAO extends JdbcDaoSupport {
-	
+
 	@Autowired
 	public CategoriesDAO(DataSource dataSource) {
 		this.setDataSource(dataSource);
 	}
-	
+
 	public List<Categories> getAllCategories() {
 		try {
 			String sql = CategoriesMapper.BASE_SQL;
 			CategoriesMapper mapper = new CategoriesMapper();
 			List<Categories> userList = this.getJdbcTemplate().query(sql, mapper);
 			return userList;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	public Categories getCategoriesByCategoryId(String categoryId) {
 		try {
 			String sql = "SELECT * FROM Categories Where category_id = ?;";
@@ -39,25 +39,43 @@ public class CategoriesDAO extends JdbcDaoSupport {
 			CategoriesMapper mapper = new CategoriesMapper();
 			Categories categories = this.getJdbcTemplate().queryForObject(sql, params, mapper);
 			return categories;
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	
-	public void addCategories(Categories categories) {
-		String sql = "INSERT INTO Categories (category_id, category_name, create_date, update_date, active)\r\n" + 
-				"VALUES (?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, categories.getCategoryId(), categories.getCategoryName(), categories.getCreateDate(), categories.getUpdateDate(), categories.isActive());
+
+	public boolean addCategories(Categories categories) {
+		try {
+			String sql = "INSERT INTO Categories (category_id, category_name, create_date, update_date, active)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, categories.getCategoryId(), categories.getCategoryName(),
+					categories.getCreateDate(), categories.getUpdateDate(), categories.isActive());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
-	public void updateCategories(Categories categories) {
-		String sql = "UPDATE Categories SET category_name = ?, create_date = ?, update_date = ?, active = ?\r\n" + 
-				"WHERE category_id = ?;";
-		this.getJdbcTemplate().update(sql, categories.getCategoryName(), categories.getCreateDate(), categories.getUpdateDate(), categories.isActive(), categories.getCategoryId());
+	public boolean updateCategories(Categories categories) {
+		try {
+			String sql = "UPDATE Categories SET category_name = ?, create_date = ?, update_date = ?, active = ?\r\n"
+					+ "WHERE category_id = ?;";
+			this.getJdbcTemplate().update(sql, categories.getCategoryName(), categories.getCreateDate(),
+					categories.getUpdateDate(), categories.isActive(), categories.getCategoryId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void removeCategories(String categoryId, boolean active) {
-		String sql = "UPDATE Categories SET active = ? WHERE category_id = ?;";
-		this.getJdbcTemplate().update(sql, active, categoryId);
+	public boolean removeCategories(String categoryId, boolean active) {
+		try {
+			String sql = "UPDATE Categories SET active = ? WHERE category_id = ?;";
+			this.getJdbcTemplate().update(sql, active, categoryId);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

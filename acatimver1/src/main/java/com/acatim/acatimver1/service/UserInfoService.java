@@ -21,18 +21,18 @@ public interface UserInfoService {
 	Teacher loadTeacherByUsername(String username) throws NotFoundException;
 	StudyCenter loadStudyCenterByUsername(String username) throws NotFoundException;
 	Student loadStudentByUsername(String username) throws NotFoundException;
-	void addUserInfo(UserModel user) throws NotFoundException;
-	void addTeacherInfo(Teacher teacher) throws NotFoundException;
-	void addStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
-	void addStudentInfo(Student student) throws NotFoundException;
-	void updateUserInfo(UserModel user) throws NotFoundException;
-	void updateTeacherInfo(Teacher teacher) throws NotFoundException;
-	void updateStudyCenterInfo(StudyCenter studyCenter) throws NotFoundException;
-	void updateStudentInfo(Student student) throws NotFoundException;
-	void removeUser(String userName) throws NotFoundException;
-	void unlockUser(String userName) throws NotFoundException;
+	boolean addUserInfo(UserModel user);
+	boolean addTeacherInfo(Teacher teacher);
+	boolean addStudyCenterInfo(StudyCenter studyCenter);
+	boolean addStudentInfo(Student student);
+	boolean updateUserInfo(UserModel user);
+	boolean updateTeacherInfo(Teacher teacher);
+	boolean updateStudyCenterInfo(StudyCenter studyCenter);
+	boolean updateStudentInfo(Student student);
+	boolean removeUser(String userName);
+	boolean unlockUser(String userName);
 	
-	void changePassword(String userName, String password) throws NotFoundException;
+	boolean changePassword(String userName, String password) throws NotFoundException;
 	boolean checkPassword(String userName, String password);
 
 	boolean checkUserExist(String userName) throws NotFoundException;
@@ -45,8 +45,8 @@ public interface UserInfoService {
 	List<UserModel> getAllUsersPageable(PageableService pageable, SearchValue Search) throws NotFoundException;
 	List<UserModel> getAllUsers(SearchValue search);
 	
-	void removeContact(String userName) throws NotFoundException;
-	void unlockContact(String userName) throws NotFoundException;
+	boolean removeContact(String userName) throws NotFoundException;
+	boolean unlockContact(String userName) throws NotFoundException;
 	List<UserModel> getAllTeacherST() throws NotFoundException;
 	
 	List<UserModel> getAllManager() throws NotFoundException;
@@ -59,7 +59,7 @@ public interface UserInfoService {
 	int countStudent();
 	int countStudyCenter();
 	
-	void updateAvatar(String userName, String avatar);
+	boolean updateAvatar(String userName, String avatar);
 	
 	UserModel findAccConfirm(String userName, String email);
 	boolean addConfirm(ConfirmEmail confirmEmail);

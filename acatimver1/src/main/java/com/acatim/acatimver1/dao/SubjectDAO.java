@@ -87,23 +87,38 @@ public class SubjectDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void addSubject(Subject subject) {
-		String sql = "INSERT INTO Subject (subject_id, category_id, subject_name, create_date, update_date, active)\r\n"
-				+ "VALUES (?, ?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, subject.getSubjectId(), subject.getCategoryId(), subject.getSubjectName(),
-				subject.getCreateDate(), subject.getUpdateDate(), subject.isActive());
+	public boolean addSubject(Subject subject) {
+		try {
+			String sql = "INSERT INTO Subject (subject_id, category_id, subject_name, create_date, update_date, active)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, subject.getSubjectId(), subject.getCategoryId(),
+					subject.getSubjectName(), subject.getCreateDate(), subject.getUpdateDate(), subject.isActive());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateSubject(Subject subject) {
-		String sql = "UPDATE Subject\r\n" + "SET category_id = ?, subject_name = ?, update_date = ?\r\n"
-				+ "WHERE subject_id = ?;";
-		this.getJdbcTemplate().update(sql, subject.getCategoryId(), subject.getSubjectName(), subject.getUpdateDate(),
-				subject.getSubjectId());
+	public boolean updateSubject(Subject subject) {
+		try {
+			String sql = "UPDATE Subject\r\n" + "SET category_id = ?, subject_name = ?, update_date = ?\r\n"
+					+ "WHERE subject_id = ?;";
+			this.getJdbcTemplate().update(sql, subject.getCategoryId(), subject.getSubjectName(),
+					subject.getUpdateDate(), subject.getSubjectId());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void removeSubject(String subjectId, boolean active) {
-		String sql = "UPDATE Subject SET active = ? WHERE subject_id = ?;";
-		this.getJdbcTemplate().update(sql, active, subjectId);
+	public boolean removeSubject(String subjectId, boolean active) {
+		try {
+			String sql = "UPDATE Subject SET active = ? WHERE subject_id = ?;";
+			this.getJdbcTemplate().update(sql, active, subjectId);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

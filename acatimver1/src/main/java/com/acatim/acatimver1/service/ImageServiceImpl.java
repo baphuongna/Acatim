@@ -35,23 +35,23 @@ public class ImageServiceImpl implements ImagesService {
 	}
 
 	@Override
-	public void addImage(Images images) {
-		this.imagesDAO.addImage(images);
+	public boolean addImage(Images images) {
+		return this.imagesDAO.addImage(images);
 	}
 
 	@Override
-	public void updateImages(Images images) {
-		this.imagesDAO.updateImages(images);
+	public boolean updateImages(Images images) {
+		return this.imagesDAO.updateImages(images);
 	}
 
 	@Override
-	public void activeImages(String id, boolean active) {
-		this.imagesDAO.activeImages(id, active);
+	public boolean activeImages(String id, boolean active) {
+		return this.imagesDAO.activeImages(id, active);
 	}
 
 	@Override
-	public void deleteImages(String id) {
-		this.imagesDAO.deleteImages(id);
+	public boolean deleteImages(String id) {
+		return this.imagesDAO.deleteImages(id);
 	}
 
 }

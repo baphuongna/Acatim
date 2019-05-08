@@ -60,20 +60,36 @@ public class TeacherDAO extends JdbcDaoSupport {
 		}
 	}
 
-	public void updateTeacherInfo(Teacher teacher) {
-		String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(),
-				teacher.getUserName());
+	public boolean updateTeacherInfo(Teacher teacher) {
+		try {
+			String sql = "UPDATE Teacher SET DOB = ?, gender = ?, description = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, teacher.getDob(), teacher.isGender(), teacher.getDescription(),
+					teacher.getUserName());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void updateRateTeacher(float rate, String userName) {
-		String sql = "UPDATE Teacher SET rate = ? WHERE user_name = ?;";
-		this.getJdbcTemplate().update(sql, rate, userName);
+	public boolean updateRateTeacher(float rate, String userName) {
+		try {
+			String sql = "UPDATE Teacher SET rate = ? WHERE user_name = ?;";
+			this.getJdbcTemplate().update(sql, rate, userName);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
-	public void addTeacherInfo(Teacher teacher) {
-		String sql = "INSERT INTO Teacher (user_name, DOB, gender, description, rate)\r\n" + "VALUES (?, ?, ?, ?, ?);";
-		this.getJdbcTemplate().update(sql, teacher.getUserName(), teacher.getDob(), teacher.isGender(),
-				teacher.getDescription(), teacher.getRate());
+	public boolean addTeacherInfo(Teacher teacher) {
+		try {
+			String sql = "INSERT INTO Teacher (user_name, DOB, gender, description, rate)\r\n"
+					+ "VALUES (?, ?, ?, ?, ?);";
+			this.getJdbcTemplate().update(sql, teacher.getUserName(), teacher.getDob(), teacher.isGender(),
+					teacher.getDescription(), teacher.getRate());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }

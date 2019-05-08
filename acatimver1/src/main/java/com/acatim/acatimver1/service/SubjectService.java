@@ -14,13 +14,13 @@ public interface SubjectService {
 	
 	Subject getSubjectBySubjectId(String subjectId);
 	
-	void addSubject(Subject subject);
+	boolean addSubject(Subject subject);
 	
-	void updateSubject(Subject subject);
+	boolean updateSubject(Subject subject);
 	
-	void removeSubject(String subjectId);
+	boolean removeSubject(String subjectId);
 	
-	void unlockSubject(String subjectId);
+	boolean unlockSubject(String subjectId);
 	
 	List<Subject> getSubjectByCategoryId(String categoryId);
 	

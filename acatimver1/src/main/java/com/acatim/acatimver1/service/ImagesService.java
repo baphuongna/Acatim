@@ -13,12 +13,12 @@ public interface ImagesService {
 	
 	Images getImagesById(String id);
 	
-	void addImage(Images images);
+	boolean addImage(Images images);
 	
-	 void updateImages(Images images);
+	boolean updateImages(Images images);
 	 
-	 void activeImages(String id, boolean active);
+	boolean activeImages(String id, boolean active);
 	 
-	 void deleteImages(String id);
+	boolean deleteImages(String id);
 	
 }
