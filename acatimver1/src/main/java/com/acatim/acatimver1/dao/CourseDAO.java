@@ -254,13 +254,14 @@ public class CourseDAO extends JdbcDaoSupport {
 	public boolean addCourse(Course course) {
 		try {
 			String sql = "INSERT INTO Course (course_id, subject_id, user_name, courseName, courseDescription, start_time, end_time, start_date, end_date, price, create_date, update_date, deadline, position, active)\r\n"
-					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			this.getJdbcTemplate().update(sql, course.getCourseId(), course.getSubjectId(), course.getUserName(),
 					course.getCourseName(), course.getCourseDescription(), course.getStartTime(), course.getEndTime(),
 					course.getStartDate(), course.getEndDate(), course.getPrice(), course.getCreateDate(),
 					course.getUpdateDate(), course.getDeadline(), course.getPosition(), course.isActive());
 			return true;
 		} catch (Exception e) {
+			System.out.println(e);
 			return false;
 		}
 	}

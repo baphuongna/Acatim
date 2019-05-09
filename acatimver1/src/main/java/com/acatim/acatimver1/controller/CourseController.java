@@ -83,7 +83,7 @@ public class CourseController {
 			}
 		}
 
-		if (search.getSubjectId() != null && search.getSubjectId().equals("0")) {
+		if (search.getSubjectId() != null && search.getSubjectId().equals("0") || search.getSubjectId() != null && search.getSubjectId().trim().equals("")) {
 			search.setSubjectId(null);
 		}
 
@@ -148,7 +148,7 @@ public class CourseController {
 			
 			total = courseService.getAllCourse(search).size();
 			
-			pageableService = new PageableServiceImpl(8, total, currentPage, sort);
+			pageableService = new PageableServiceImpl(9, total, currentPage, sort);
 			
 			List<Course> Courses = courseService.getAllCoursePaging(pageableService, search);
 
@@ -347,6 +347,7 @@ public class CourseController {
 			course.setUserName(userName);
 			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
 			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
+			course.setDeadline(dateformat.StringToDateSQL(course.getDeadline()));
 			course.setActive(true);
 			System.out.println(course);
 			courseService.addCourse(course);

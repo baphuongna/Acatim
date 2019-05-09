@@ -5,6 +5,8 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.validator.constraints.Length;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class Subject {
 
 	private int categoryId;
 	
+	@Length(min = 5, message = "*Tên Môn Học có độ dài tối thiểu là 5 ký tự")
 	@NotEmpty(message = "*Tên Môn Học không được để trống")
 	private String subjectName;
 

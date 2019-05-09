@@ -125,6 +125,10 @@ public class ManagerCategoryController {
 			modelAndView.setViewName("admin/add-subject");
 			return modelAndView;
 		}
+		
+		if (subject.getSubjectName() != null && subject.getSubjectName().trim().length() < 5) {
+			result.rejectValue("subjectName", "error.subjectName", "Tên Môn Học có độ dài tối thiểu là 5 ký tự !");
+		}
 
 		if (result.hasErrors()) {
 			modelAndView.setViewName("admin/add-subject");
@@ -142,6 +146,7 @@ public class ManagerCategoryController {
 		subject.setActive(true);
 		
 		try {
+			
 			subjectService.addSubject(subject);
 			System.out.println("Success");
 		} catch (Exception e) {
@@ -239,7 +244,15 @@ public class ManagerCategoryController {
 			BindingResult result, final RedirectAttributes redirectAttributes) throws NotFoundException {
 
 		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(category);
+		
+		if (category.getCategoryName() != null && category.getCategoryName().trim().length() < 5) {
+			result.rejectValue("categoryName", "error.categoryName", "Tên Thể Loại có độ dài tối thiểu là 5 ký tự !");
+		}
+		
+		if (result.hasErrors()) {
+			modelAndView.setViewName("admin/add-category");
+			return modelAndView;
+		}
 
 		Date date = new Date();
 		long time = date.getTime();

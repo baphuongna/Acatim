@@ -239,10 +239,11 @@ public class ManagerCourseController {
 
 			course.setStartDate(dateformat.StringToDateSQL(course.getStartDate()));
 			course.setEndDate(dateformat.StringToDateSQL(course.getEndDate()));
-
+			course.setDeadline(dateformat.StringToDateSQL(course.getDeadline()));
+			course.setActive(true);
 			System.out.println(course);
-			courseService.addCourse(course);
-
+			/* courseService.addCourse(course); */
+			System.out.println(courseService.addCourse(course));
 		} catch (Exception e) {
 			modelAndView.setViewName("admin/add-course");
 			return modelAndView;

@@ -183,7 +183,7 @@
 										<td th:text="${#dates.format(times.parse(course.endTime), 'HH:mm a')}"></td>
 										<td th:text="${#dates.format(sdf.parse(course.startDate), 'dd-MMMMM-yyyy')}"></td>
 										<td th:text="${#dates.format(sdf.parse(course.endDate), 'dd-MMMMM-yyyy')}"></td>
-										<td th:text="${#numbers.formatCurrency(course.price)}" ></td>
+										<td th:text="${#numbers.formatInteger(course.price ,3,'POINT')} + 'VND'" ></td>
 										<td th:text="${#dates.format(sdf.parse(course.createDate), 'dd-MMMMM-yyyy')}"></td>
 										
 										<td th:if="${course.active == true}" style="color: green;"><b>Active</b></td>
